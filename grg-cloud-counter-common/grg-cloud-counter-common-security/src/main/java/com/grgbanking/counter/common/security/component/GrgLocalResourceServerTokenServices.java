@@ -17,7 +17,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.stereotype.Service;
 
 /**
- * @date 2020/9/29
+ * @date 2021/9/29
  */
 @Primary
 @Service

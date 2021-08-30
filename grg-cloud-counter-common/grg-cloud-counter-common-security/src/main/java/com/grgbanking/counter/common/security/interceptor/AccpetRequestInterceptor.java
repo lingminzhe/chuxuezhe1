@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 /**
- * @date 2020/4/29
+ * @date 2021/4/29
  * <p>
  * 传递accpet 请求头,避免 请求返回 XML
  */

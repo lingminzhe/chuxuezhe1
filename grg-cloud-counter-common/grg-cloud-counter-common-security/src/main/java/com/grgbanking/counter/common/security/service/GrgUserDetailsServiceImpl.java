@@ -80,14 +80,7 @@ public class GrgUserDetailsServiceImpl implements GrgUserDetailsService {
             throw new UsernameNotFoundException("用户不存在");
         }
 
-        Set<String> dbAuthsSet = new HashSet<>();
-        if (ArrayUtil.isNotEmpty(info.getAuthorities())) {
-//			// 获取角色
-//			Arrays.stream(info.getRoles()).forEach(roleId -> dbAuthsSet.add(SecurityConstants.ROLE + roleId));
-//			// 获取资源
-            dbAuthsSet.addAll(info.getAuthorities());
-        }
-        Collection<? extends GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(dbAuthsSet.toArray(new String[0]));
+        Collection<? extends GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(info.getAuthorities().toArray(new String[0]));
         SysUserBo user = info.getUserBo();
         boolean lock = !StrUtil.equals(user.getIsLocked(), CommonConstants.STATUS_NORMAL);
         // 构造security用户

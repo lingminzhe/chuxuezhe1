@@ -11,7 +11,7 @@ import java.util.Date;
  * 系统区域用户关系表
  *
  * @author cyfeng2
- * @date 2020-12-15
+ * @date 2021-12-15
  */
 @Data
 @TableName("SYS_AREA_USER")

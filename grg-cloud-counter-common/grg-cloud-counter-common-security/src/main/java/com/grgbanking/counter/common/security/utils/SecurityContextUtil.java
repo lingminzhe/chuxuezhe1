@@ -118,8 +118,8 @@ public class SecurityContextUtil {
         return !hasAdminRole(getUserInfo());
     }
 
-    public static String isExistUser(String username){
-        if(StringUtils.isEmpty(username)) {
+    public static String isExistUser(String username) {
+        if (StringUtils.isEmpty(username)) {
             username = SecurityContextUtil.getUsername();
         }
         return username;

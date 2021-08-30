@@ -20,11 +20,11 @@ import java.security.NoSuchAlgorithmException;
  * 
  * @author Sandy
  * 
- * @date 2017年6月19日 下午1:31:11
+ * @date 2021年6月19日 下午1:31:11
  *
- * @version 1.0 2017年6月19日 Created
+ * @version 1.0 2021年6月19日 Created
  * 
- * @copyright Copyright © 2017 广电运通 All rights reserved.
+ * @copyright Copyright © 2021 广电运通 All rights reserved.
  */
 public class EncryptUtil {
 

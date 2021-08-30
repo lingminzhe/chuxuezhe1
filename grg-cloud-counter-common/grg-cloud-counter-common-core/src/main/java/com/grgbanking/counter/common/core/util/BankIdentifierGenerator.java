@@ -3,7 +3,7 @@ package com.grgbanking.counter.common.core.util;
 
 /**
  * @Author:mcyang
- * @Date:2020/12/3 8:41 上午
+ * @Date:2021/08/3 8:41 上午
  */
 public class BankIdentifierGenerator {
 

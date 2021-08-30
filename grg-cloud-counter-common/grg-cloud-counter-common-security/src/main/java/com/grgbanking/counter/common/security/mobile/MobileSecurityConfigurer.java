@@ -20,26 +20,26 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Setter
 public class MobileSecurityConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
 
-	@Autowired
-	private ObjectMapper objectMapper;
+    @Autowired
+    private ObjectMapper objectMapper;
 
-	@Autowired
-	private AuthenticationSuccessHandler mobileLoginSuccessHandler;
+    @Autowired
+    private AuthenticationSuccessHandler mobileLoginSuccessHandler;
 
-	@Autowired
-	private GrgUserDetailsService userDetailsService;
+    @Autowired
+    private GrgUserDetailsService userDetailsService;
 
-	@Override
-	public void configure(HttpSecurity http) {
-		MobileAuthenticationFilter mobileAuthenticationFilter = new MobileAuthenticationFilter();
-		mobileAuthenticationFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
-		mobileAuthenticationFilter.setAuthenticationSuccessHandler(mobileLoginSuccessHandler);
-		mobileAuthenticationFilter.setAuthenticationEntryPoint(new GrgCommenceAuthExceptionEntryPoint(objectMapper));
+    @Override
+    public void configure(HttpSecurity http) {
+        MobileAuthenticationFilter mobileAuthenticationFilter = new MobileAuthenticationFilter();
+        mobileAuthenticationFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
+        mobileAuthenticationFilter.setAuthenticationSuccessHandler(mobileLoginSuccessHandler);
+        mobileAuthenticationFilter.setAuthenticationEntryPoint(new GrgCommenceAuthExceptionEntryPoint(objectMapper));
 
-		MobileAuthenticationProvider mobileAuthenticationProvider = new MobileAuthenticationProvider();
-		mobileAuthenticationProvider.setUserDetailsService(userDetailsService);
-		http.authenticationProvider(mobileAuthenticationProvider).addFilterAfter(mobileAuthenticationFilter,
-				UsernamePasswordAuthenticationFilter.class);
-	}
+        MobileAuthenticationProvider mobileAuthenticationProvider = new MobileAuthenticationProvider();
+        mobileAuthenticationProvider.setUserDetailsService(userDetailsService);
+        http.authenticationProvider(mobileAuthenticationProvider).addFilterAfter(mobileAuthenticationFilter,
+                UsernamePasswordAuthenticationFilter.class);
+    }
 
 }

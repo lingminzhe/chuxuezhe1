@@ -24,7 +24,7 @@ import java.io.PrintWriter;
 /**
  * 异常处理 {@link AuthenticationException } 不同细化异常处理
  *
- * @date 2020-06-14
+ * @date 2021-06-14
  */
 @Slf4j
 @Component

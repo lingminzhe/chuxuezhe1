@@ -18,7 +18,7 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import java.util.Locale;
 
 /**
- * @date 2020-06-20 OAutH Server 异常处理,重写oauth 默认实现
+ * @date 2021-06-20 OAutH Server 异常处理,重写oauth 默认实现
  */
 @Slf4j
 public class GrgWebResponseExceptionTranslator implements WebResponseExceptionTranslator {

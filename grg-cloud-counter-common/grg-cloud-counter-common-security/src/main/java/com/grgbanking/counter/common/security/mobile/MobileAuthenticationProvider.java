@@ -38,15 +38,13 @@ public class MobileAuthenticationProvider implements AuthenticationProvider {
 		if (userDetails == null) {
 			log.debug("Authentication failed: no credentials provided");
 
-			throw new BadCredentialsException(messages
-					.getMessage("AbstractUserDetailsAuthenticationProvider.noopBindAccount", "Noop Bind Account"));
+			throw new BadCredentialsException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.noopBindAccount", "Noop Bind Account"));
 		}
 
 		// 检查账号状态
 		detailsChecker.check(userDetails);
 
-		MobileAuthenticationToken authenticationToken = new MobileAuthenticationToken(userDetails,
-				userDetails.getAuthorities());
+		MobileAuthenticationToken authenticationToken = new MobileAuthenticationToken(userDetails, userDetails.getAuthorities());
 		authenticationToken.setDetails(mobileAuthenticationToken.getDetails());
 		return authenticationToken;
 	}

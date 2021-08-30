@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * id生成
  * @Author:mcyang
- * @Date:2020/12/3 8:40 上午
+ * @Date:2021/8/3 8:40 上午
  */
 @Slf4j
 public class BankSequence {

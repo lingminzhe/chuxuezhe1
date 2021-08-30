@@ -6,11 +6,11 @@ import java.util.List;
 public class DESUtil {
 
 	public static String decodeUserLoggingMsg(String msg) {
-		return strDecode(msg, "feelview", "grgbking", "20160601");
+		return strDecode(msg, "feelview", "grgbking", "20210601");
 	}
 
 	public static String encodeUserLoggingMsg(String msg) {
-		return strEncode(msg, "feelview", "grgbking", "20160601");
+		return strEncode(msg, "feelview", "grgbking", "20210601");
 	}
 
 	/**

@@ -5,11 +5,11 @@ import java.util.UUID;
 /**
  * UUID生成
  *
- * @date 2016年10月25日 下午5:04:17
+ * @date 2021年10月25日 下午5:04:17
  *
- * @version 1.0 2016年10月25日 Tom create
+ * @version 1.0 2021年10月25日 Tom create
  * 
- * @copyright Copyright © 2016 广电运通 All rights reserved.
+ * @copyright Copyright © 2021 广电运通 All rights reserved.
  */
 public class UUIDUtils {
 

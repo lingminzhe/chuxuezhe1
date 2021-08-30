@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author lggui1
  * @email xx@grgbanking.com
- * @date 2020-04-11 12:32:55
+ * @date 2021-04-11 12:32:55
  */
 @Mapper
 public interface SysOrgUserDao extends BaseMapper<SysOrgUserEntity> {

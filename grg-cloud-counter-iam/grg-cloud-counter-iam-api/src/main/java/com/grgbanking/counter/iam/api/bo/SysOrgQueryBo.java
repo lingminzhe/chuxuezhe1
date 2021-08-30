@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @ClassName: SysOrgBo
  * @Description: 机构传输对象
- * @Date: 2020/11/6 16:09
+ * @Date: 2021/8/6 16:09
  * @Author: lggui1
  * @Version: 1.0
  */

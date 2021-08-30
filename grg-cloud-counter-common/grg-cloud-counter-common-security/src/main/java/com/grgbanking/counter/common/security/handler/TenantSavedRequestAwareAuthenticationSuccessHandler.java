@@ -42,9 +42,7 @@ public class TenantSavedRequestAwareAuthenticationSuccessHandler extends SimpleU
 			super.onAuthenticationSuccess(request, response, authentication);
 		} else {
 			this.clearAuthenticationAttributes(request);
-			// 增加租户信息
 			assert savedRequest != null;
-
 			this.getRedirectStrategy().sendRedirect(request, response, savedRequest.getRedirectUrl());
 		}
 	}

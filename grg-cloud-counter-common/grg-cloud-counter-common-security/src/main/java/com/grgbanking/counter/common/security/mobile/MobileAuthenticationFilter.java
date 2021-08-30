@@ -21,73 +21,71 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class MobileAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
-	private static final String SPRING_SECURITY_FORM_MOBILE_KEY = "mobile";
+    private static final String SPRING_SECURITY_FORM_MOBILE_KEY = "mobile";
 
-	@Getter
-	@Setter
-	private String mobileParameter = SPRING_SECURITY_FORM_MOBILE_KEY;
+    @Getter
+    @Setter
+    private String mobileParameter = SPRING_SECURITY_FORM_MOBILE_KEY;
 
-	@Getter
-	@Setter
-	private boolean postOnly = true;
+    @Getter
+    @Setter
+    private boolean postOnly = true;
 
-	@Getter
-	@Setter
-	private AuthenticationEntryPoint authenticationEntryPoint;
+    @Getter
+    @Setter
+    private AuthenticationEntryPoint authenticationEntryPoint;
 
-	public MobileAuthenticationFilter() {
-		super(new AntPathRequestMatcher(SecurityConstants.MOBILE_TOKEN_URL, "POST"));
-	}
+    public MobileAuthenticationFilter() {
+        super(new AntPathRequestMatcher(SecurityConstants.MOBILE_TOKEN_URL, "POST"));
+    }
 
-	@Override
-	@SneakyThrows
-	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
-		if (postOnly && !request.getMethod().equals(HttpMethod.POST.name())) {
-			throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
-		}
+    @Override
+    @SneakyThrows
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
+        if (postOnly && !request.getMethod().equals(HttpMethod.POST.name())) {
+            throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
+        }
 
-		String mobile = obtainMobile(request);
+        String mobile = obtainMobile(request);
 
-		if (mobile == null) {
-			mobile = "";
-		}
+        if (mobile == null) {
+            mobile = "";
+        }
 
-		mobile = mobile.trim();
+        mobile = mobile.trim();
 
-		MobileAuthenticationToken mobileAuthenticationToken = new MobileAuthenticationToken(mobile);
+        MobileAuthenticationToken mobileAuthenticationToken = new MobileAuthenticationToken(mobile);
 
-		setDetails(request, mobileAuthenticationToken);
+        setDetails(request, mobileAuthenticationToken);
 
-		Authentication authResult = null;
-		try {
-			authResult = this.getAuthenticationManager().authenticate(mobileAuthenticationToken);
+        Authentication authResult = null;
+        try {
+            authResult = this.getAuthenticationManager().authenticate(mobileAuthenticationToken);
 
-			logger.debug("Authentication success: " + authResult);
-			SecurityContextHolder.getContext().setAuthentication(authResult);
+            logger.debug("Authentication success: " + authResult);
+            SecurityContextHolder.getContext().setAuthentication(authResult);
 
-		}
-		catch (Exception failed) {
-			SecurityContextHolder.clearContext();
-			logger.debug("Authentication request failed: " + failed);
+        } catch (Exception failed) {
+            SecurityContextHolder.clearContext();
+            logger.debug("Authentication request failed: " + failed);
 
-			try {
-				authenticationEntryPoint.commence(request, response,
-						new UsernameNotFoundException(failed.getMessage(), failed));
-			}
-			catch (Exception e) {
-				logger.error("authenticationEntryPoint handle error:{}", failed);
-			}
-		}
+            try {
+                authenticationEntryPoint.commence(request, response,
+                        new UsernameNotFoundException(failed.getMessage(), failed));
+            } catch (Exception e) {
+                logger.error("authenticationEntryPoint handle error:{}", failed);
+            }
+        }
 
-		return authResult;
-	}
+        return authResult;
+    }
 
-	private String obtainMobile(HttpServletRequest request) {
-		return request.getParameter(mobileParameter);
-	}
+    private String obtainMobile(HttpServletRequest request) {
+        return request.getParameter(mobileParameter);
+    }
 
-	private void setDetails(HttpServletRequest request, MobileAuthenticationToken authRequest) {
-		authRequest.setDetails(authenticationDetailsSource.buildDetails(request));
-	}
+    private void setDetails(HttpServletRequest request, MobileAuthenticationToken authRequest) {
+        authRequest.setDetails(authenticationDetailsSource.buildDetails(request));
+    }
 
 }

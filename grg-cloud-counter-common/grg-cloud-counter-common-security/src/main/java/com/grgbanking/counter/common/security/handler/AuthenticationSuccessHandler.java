@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @date 2020/03/25 token 发放成功处理
+ * @date 2021/03/25 token 发放成功处理
  */
 public interface AuthenticationSuccessHandler {
 

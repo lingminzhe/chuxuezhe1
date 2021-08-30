@@ -34,14 +34,12 @@ public class AuthenticationLogoutSuccessEventListener implements ApplicationList
 					.getRequestAttributes();
 			HttpServletRequest request = requestAttributes.getRequest();
 			HttpServletResponse response = requestAttributes.getResponse();
-
 			logoutHandler.handle(authentication, request, response);
 		}
 	}
 
 	private boolean isUserAuthentication(Authentication authentication) {
-		return authentication.getPrincipal() instanceof GrgUser
-				|| CollUtil.isNotEmpty(authentication.getAuthorities());
+		return authentication.getPrincipal() instanceof GrgUser || CollUtil.isNotEmpty(authentication.getAuthorities());
 	}
 
 }
