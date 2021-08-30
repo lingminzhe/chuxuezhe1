@@ -16,7 +16,7 @@ import lombok.Data;
  * @date 2021-01-05 18:44:06
  */
 @Data
-@TableName("SYS_AREA")
+@TableName("sys_area")
 public class SysAreaEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

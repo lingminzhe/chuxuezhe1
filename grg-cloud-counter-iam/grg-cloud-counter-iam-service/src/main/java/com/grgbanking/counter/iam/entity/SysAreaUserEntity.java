@@ -14,7 +14,7 @@ import java.util.Date;
  * @date 2021-12-15
  */
 @Data
-@TableName("SYS_AREA_USER")
+@TableName("sys_area_user")
 public class SysAreaUserEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

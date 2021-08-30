@@ -11,7 +11,7 @@ import java.util.Date;
  * 系统多语言维护信息表
  */
 @Data
-@TableName("SYS_I18N")
+@TableName("sys_i18n")
 public class SysI18nEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

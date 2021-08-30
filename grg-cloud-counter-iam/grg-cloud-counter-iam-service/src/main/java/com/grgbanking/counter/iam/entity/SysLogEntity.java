@@ -12,7 +12,7 @@ import lombok.Data;
  *
  */
 @Data
-@TableName("SYS_LOG")
+@TableName("sys_log")
 public class SysLogEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

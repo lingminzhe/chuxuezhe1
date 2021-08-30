@@ -14,7 +14,7 @@ import lombok.Data;
  * @author lggui1
  */
 @Data
-@TableName("SYS_ROLE")
+@TableName("sys_role")
 public class SysRoleEntity implements Serializable {
 
     private static final long serialVersionUID = -2042124112858903056L;

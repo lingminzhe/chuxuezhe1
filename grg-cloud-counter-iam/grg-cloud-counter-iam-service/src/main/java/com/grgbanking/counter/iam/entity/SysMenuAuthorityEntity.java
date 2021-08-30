@@ -9,7 +9,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-@TableName("SYS_MENU_AUTHORITY")
+@TableName("sys_menu_authority")
 public class SysMenuAuthorityEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

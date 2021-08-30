@@ -14,7 +14,7 @@ import java.util.Date;
  * @date 2021年1月7日
  */
 @Data
-@TableName("SYS_ORG_USER")
+@TableName("sys_org_user")
 public class SysOrgUserEntity implements Serializable {
 
     private static final long serialVersionUID = -2039898896361938824L;

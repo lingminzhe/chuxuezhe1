@@ -13,7 +13,7 @@ import lombok.Data;
  *
  */
 @Data
-@TableName("SYS_ROLE_USER")
+@TableName("sys_role_user")
 public class SysRoleUserEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

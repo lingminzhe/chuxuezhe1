@@ -11,7 +11,7 @@ import java.util.Date;
  * 系统业务配置表
  */
 @Data
-@TableName("SYS_BIZ_CONF")
+@TableName("sys_biz_conf")
 public class SysBizConfEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

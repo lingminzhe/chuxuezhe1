@@ -12,7 +12,7 @@ import java.util.Date;
  *
  */
 @Data
-@TableName("SYS_AUTHORITY")
+@TableName("sys_authority")
 public class SysAuthorityEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

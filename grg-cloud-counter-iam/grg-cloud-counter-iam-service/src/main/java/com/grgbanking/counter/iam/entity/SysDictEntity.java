@@ -16,7 +16,7 @@ import lombok.Data;
  * @date 2021年1月14日18:39:26
  */
 @Data
-@TableName("SYS_DICT")
+@TableName("sys_dict")
 public class SysDictEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -12,7 +12,7 @@ import lombok.Data;
  *
  */
 @Data
-@TableName("SYS_MENU")
+@TableName("sys_menu")
 public class SysMenuEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;

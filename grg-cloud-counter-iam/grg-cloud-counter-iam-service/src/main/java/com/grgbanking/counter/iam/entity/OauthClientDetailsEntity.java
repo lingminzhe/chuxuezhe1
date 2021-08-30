@@ -11,7 +11,7 @@ import java.util.Date;
  * 系统客户端资源列表
  */
 @Data
-@TableName("OAUTH_CLIENT_DETAILS")
+@TableName("oauth_client_details")
 public class OauthClientDetailsEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

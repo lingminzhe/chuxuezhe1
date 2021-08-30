@@ -16,7 +16,7 @@ import lombok.Data;
  * @date 2021-01-12 13:58:41
  */
 @Data
-@TableName("SYS_USER")
+@TableName("sys_user")
 public class SysUserEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
