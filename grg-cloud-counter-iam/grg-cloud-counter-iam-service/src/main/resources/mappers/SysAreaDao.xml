@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.grgbanking.counter.iam.dao.SysAreaDao">
+
+    <resultMap type="com.grgbanking.counter.iam.entity.SysAreaEntity" id="sysAreaMap">
+        <result property="id" column="ID"/>
+        <result property="areaPath" column="AREA_PATH"/>
+        <result property="i18nCode" column="I18N_CODE"/>
+        <result property="areaCode" column="AREA_CODE"/>
+        <result property="parentCode" column="PARENT_CODE"/>
+        <result property="name" column="NAME"/>
+        <result property="description" column="DESCRIPTION"/>
+        <result property="isEnabled" column="IS_ENABLED"/>
+        <result property="createdBy" column="CREATED_BY"/>
+        <result property="creationDate" column="CREATION_DATE"/>
+        <result property="lastUpdatedBy" column="LAST_UPDATED_BY"/>
+        <result property="lastUpdateDate" column="LAST_UPDATE_DATE"/>
+        <result property="operationId" column="OPERATION_ID"/>
+
+    </resultMap>
+
+    <select id="getMaxAreaPath" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT
+            MAX (t.AREA_PATH)
+        FROM
+            SYS_AREA t
+        WHERE
+          t.AREA_PATH LIKE #{parentAreaPath,jdbcType=VARCHAR}
+      </select>
+
+    <!--<select id="getListByUsername" parameterType="java.lang.String" resultType="SysAreaEntity">
+        SELECT
+	        *
+        FROM
+        	SYS_AREA A
+        WHERE
+	        A ."ID" IN (
+		SELECT
+			au. ID
+		FROM
+			SYS_AREA_USER au
+		WHERE
+			AU.USER_ID = (
+				SELECT
+					U ."ID"
+				FROM
+					SYS_USER U
+				WHERE
+					U ."USERNAME" = #{userName,jdbcType=VARCHAR}
+			)
+	    )
+      </select>-->
+
+    <!--<select id="getListByUserId" parameterType="java.lang.Long" resultType="SysAreaEntity">
+        SELECT
+	        *
+        FROM
+        	SYS_AREA A
+        WHERE
+	        A ."ID" IN (
+		SELECT
+			au. ID
+		FROM
+			SYS_AREA_USER au
+		WHERE
+			AU.USER_ID = #{userId,jdbcType=NUMBER}
+	    )
+      </select>-->
+
+</mapper>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.grgbanking.counter</groupId>
+    <artifactId>grg-cloud-counter-common-bom</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <description>云柜台 公共版本控制</description>
+
+    <properties>
+        <!-- 业务模块沿用本依赖，业务模块需要更多的其他依赖，则在业务模块根项目添加更多的依赖，云柜台项目的业务模块根项目：云柜台-biz-parent -->
+        <mybatis-plus.version>3.4.3.2</mybatis-plus.version>
+        <mysql.connector.version>8.0.23</mysql.connector.version>
+        <fastjson.version>1.2.75</fastjson.version>
+        <hutool.version>5.7.3</hutool.version>
+        <redisson.version>3.16.1</redisson.version>
+        <knife4j.version>3.0.3</knife4j.version>
+        <kaptcha.version>0.0.9</kaptcha.version>
+        <jsoup.version>1.14.2</jsoup.version>
+        <commons-pool2.version>2.11.1</commons-pool2.version>
+        <s3.version>1.12.56</s3.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- 公共模块统一管理版本 -->
+            <dependency>
+                <groupId>com.grgbanking.counter</groupId>
+                <artifactId>grg-cloud-counter-common-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.grgbanking.counter</groupId>
+                <artifactId>grg-cloud-counter-common-data</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.grgbanking.counter</groupId>
+                <artifactId>grg-cloud-counter-common-log</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.grgbanking.counter</groupId>
+                <artifactId>grg-cloud-counter-common-security</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.grgbanking.counter</groupId>
+                <artifactId>grg-cloud-counter-common-sentinel</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.grgbanking.counter</groupId>
+                <artifactId>grg-cloud-counter-common-swagger</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.grgbanking.counter</groupId>
+                <artifactId>grg-cloud-counter-common-lock</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.grgbanking.counter</groupId>
+                <artifactId>grg-cloud-counter-common-cache</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.grgbanking.counter</groupId>
+                <artifactId>grg-cloud-counter-common-mq</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.grgbanking.counter</groupId>
+                <artifactId>grg-cloud-counter-common-xss</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- 公共模块其他依赖统一管理版本 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>${commons-pool2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+
+<!--            <dependency>-->
+<!--                <groupId>org.springframework.security.oauth</groupId>-->
+<!--                <artifactId>spring-security-oauth2</artifactId>-->
+<!--                <version>${security.oauth.version}</version>-->
+<!--            </dependency>-->
+
+            <!--mybatis plus extension,包含了mybatis plus core-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-extension</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <!--mybatis-plus-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <!--mysql 驱动-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.connector.version}</version>
+            </dependency>
+            <!--fastjson-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <!--swagger 依赖-->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+
+            <!--kaptcha验证码依赖-->
+            <dependency>
+                <groupId>com.github.axet</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>${kaptcha.version}</version>
+            </dependency>
+            <!-- OSS -->
+            <dependency>
+                <groupId>com.amazonaws</groupId>
+                <artifactId>aws-java-sdk-s3</artifactId>
+                <version>${s3.version}</version>
+            </dependency>
+
+            <!--jsoup html 解析组件-->
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsoup.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>3.4</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <fork>true</fork>
+                    <verbose>true</verbose>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

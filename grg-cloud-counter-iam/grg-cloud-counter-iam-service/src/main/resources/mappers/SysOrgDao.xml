@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.grgbanking.counter.iam.dao.SysOrgDao">
+
+    <resultMap type="com.grgbanking.counter.iam.entity.SysOrgEntity" id="systemOrgMap">
+        <result property="id" column="ID"/>
+        <result property="parentCode" column="PARENT_CODE"/>
+        <result property="orgPath" column="ORG_PATH"/>
+        <result property="i18nCode" column="I18N_CODE"/>
+        <result property="name" column="NAME"/>
+        <result property="orgCode" column="ORG_CODE"/>
+        <result property="fullname" column="FULLNAME"/>
+        <result property="areaId" column="AREA_ID"/>
+        <result property="isEnabled" column="IS_ENABLED"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="description" column="DESCRIPTION"/>
+        <result property="createdBy" column="CREATED_BY"/>
+        <result property="creationDate" column="CREATION_DATE"/>
+        <result property="lastUpdatedBy" column="LAST_UPDATED_BY"/>
+        <result property="lastUpdateDate" column="LAST_UPDATE_DATE"/>
+        <result property="operationId" column="OPERATION_ID"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    ID,PARENT_CODE,ORG_PATH,NAME,ORG_CODE,CREATION_DATE,LAST_UPDATE_DATE,ADDRESS,description,ORG_PATH,I18N_CODE,FULLNAME,IS_ENABLED,CREATED_BY,LAST_UPDATED_BY,OPERATION_ID
+    </sql>
+
+    <select id="getOrgPathsByParent" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT
+        MAX (t.ORG_PATH)
+        FROM
+        SYS_ORG t
+        WHERE
+        t.ORG_PATH LIKE #{path,jdbcType=VARCHAR}
+    </select>
+    <update id="updateChildPath">
+         UPDATE SYS_ORG SET ORG_PATH = REPLACE(ORG_PATH,#{oldPath},#{newPath})
+         WHERE ID IN (SELECT ID FROM SYS_ORG WHERE ORG_PATH LIKE CONCAT(#{oldPath ,jdbcType=VARCHAR}, '_%'))
+    </update>
+
+    <select id="childList" resultType="com.grgbanking.counter.iam.entity.SysOrgEntity">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM SYS_ORG WHERE ORG_PATH LIKE CONCAT(#{orgPath ,jdbcType=VARCHAR}, '%')
+        <if test="isEnabled != null and isEnabled != ''">
+            AND IS_ENABLED=#{isEnabled}
+        </if>
+        <if test="userId !=null and isEnabled != ''">
+            AND ID IN ( SELECT ORG_ID FROM SYS_ORG_USER WHERE USER_ID = #{userId} )
+        </if>
+
+    </select>
+
+    <select id="querByOrglist" resultType="com.grgbanking.counter.iam.entity.SysOrgEntity">
+        SELECT
+        G.ID,G.PARENT_CODE,G.ORG_PATH,G.I18N_CODE,
+        G.ORG_CODE,G.FIN_CODE,G.NAME,G.FULLNAME,
+        G.AREA_ID,G.IS_ENABLED,G.ADDRESS,
+        G.DESCRIPTION,G.CREATED_BY,
+        G.CREATION_DATE,G.LAST_UPDATED_BY,
+        G.LAST_UPDATE_DATE,
+        G.OPERATION_ID,
+        A.NAME AREA_NAME FROM SYS_ORG G INNER JOIN
+        SYS_AREA A ON G.AREA_ID=A.ID
+        <where>
+            <if test="userId!=null">
+                EXISTS
+                ( SELECT 1 FROM SYS_ORG_USER R WHERE R.ORG_ID=G.ID
+                AND R.USER_ID=#{userId}
+                <if test="isLeader!=null and isLeader!=''">
+                    AND R.IS_LEADER=#{isLeader}
+                </if>
+                )
+            </if>
+            <if test="org.finCode != null and org.finCode!= ''">
+                AND upper(G.FIN_CODE) like upper(CONCAT('%',CONCAT(#{org.finCode},'%')))
+            </if>
+            <if test="org.orgCode != null and org.orgCode!= ''">
+                AND upper(G.ORG_CODE) like upper(CONCAT('%',CONCAT(#{org.orgCode},'%')))
+            </if>
+            <if test="org.name != null and org.name!= ''">
+                AND G.name LIKE CONCAT(CONCAT('%',#{org.name ,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="org.i18nCode != null and org.i18nCode!= ''">
+                AND G.I18N_CODE like CONCAT('%',CONCAT(#{org.i18nCode},'%'))
+            </if>
+            <if test="org.isEnabled != null and org.isEnabled != ''">
+                AND G.IS_ENABLED=#{org.isEnabled }
+            </if>
+            <if test="org.orgPath != null and org.orgPath != ''">
+                AND G.ORG_PATH LIKE CONCAT(#{org.orgPath ,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="org.areaIdList != null and org.areaIdList != ''">
+                AND G.AREA_ID IN
+                <foreach collection="org.areaIdList" item="code" index="index" open="(" close=")"
+                         separator=",">
+                    #{code}
+                </foreach>
+            </if>
+        </where>
+    </select>
+    <select id="childListForAdmin" resultType="com.grgbanking.counter.iam.entity.SysOrgEntity">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM SYS_ORG WHERE ORG_PATH LIKE CONCAT(#{orgPath ,jdbcType=VARCHAR}, '%')
+        <if test="isEnabled != null and isEnabled != ''">
+            AND IS_ENABLED=#{isEnabled}
+        </if>
+    </select>
+    <select id="queryOrgPathsByUserId" resultType="java.lang.String">
+        select T.org_PATH from SYS_ORG T,
+        SYS_ORG_USER T2
+        where T.id = T2.org_id
+        <if test="userId != null ">
+            and T2.user_id = #{userId}
+        </if>
+        <if test="isLeader != null and isLeader!='' ">
+            and T2.IS_LEADER = #{isLeader}
+        </if>
+    </select>
+    <!-- 查询用户关联部门 -->
+    <select id="queryOrgList" parameterType="com.grgbanking.counter.iam.api.bo.SysOrgQueryBo"
+            resultType="com.grgbanking.counter.iam.entity.SysOrgEntity">
+        select * from SYS_ORG where 1 = 1
+        <if test="bo.orgPathList != null and bo.orgPathList.size > 0">
+            and (
+            <foreach collection="bo.orgPathList" item="deptPath" separator=" OR " index="index">org_path like
+                concat(#{ deptPath,jdbcType=VARCHAR},'%')
+            </foreach>
+            )
+        </if>
+
+        <if test="bo.name != null and bo.name != ''">
+            and upper(name) like upper('%${bo.name}%')
+        </if>
+        <if test="bo.orgCode != null and bo.orgCode != ''">
+            and org_code like '%${bo.orgCode}%'
+        </if>
+        <if test="bo.orgIds != null and bo.orgIds.size > 0">
+            AND ID IN
+            <foreach collection="bo.orgIds" item="deptId" index="index" open="(" close=")">
+                <if test="index != 0">
+                    <choose>
+                        <when test="index % 1000 == 999">) OR ID IN (</when>
+                        <otherwise>,</otherwise>
+                    </choose>
+                </if>
+                #{deptId}
+            </foreach>
+        </if>
+        <if test="bo.isEnabled != null and bo.isEnabled != ''">
+            and is_Enabled = '${bo.isEnabled}'
+        </if>
+        order by ORG_PATH
+    </select>
+
+</mapper>

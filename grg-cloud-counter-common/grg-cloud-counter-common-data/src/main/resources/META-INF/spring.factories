@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.grgbanking.counter.common.data.mybatis.MybatisPlusConfiguration,\
+    com.grgbanking.counter.common.data.resolver.WebMvcConfig

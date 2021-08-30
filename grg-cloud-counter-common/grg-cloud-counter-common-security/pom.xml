@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.grgbanking.counter</groupId>
+        <artifactId>grg-cloud-counter-common</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>grg-cloud-counter-common-security</artifactId>
+    <packaging>jar</packaging>
+    <description>云柜台安全工具类</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.grgbanking.counter</groupId>
+            <artifactId>grg-cloud-counter-common-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.grgbanking.counter</groupId>
+            <artifactId>grg-cloud-counter-iam-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!--安全模块 -->
+        <dependency>
+            <groupId>org.springframework.security.oauth.boot</groupId>
+            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-dubbo</artifactId>
+        </dependency>
+        <!--aop-->
+<!--        <dependency>-->
+<!--            <groupId>org.aspectj</groupId>-->
+<!--            <artifactId>aspectjweaver</artifactId>-->
+<!--        </dependency>-->
+    </dependencies>
+
+
+</project>

@@ -1,0 +1,12 @@
+version: '3'
+services:
+  grgms-gateway-service:
+    container_name: grgms-gateway-service
+    network_mode: "host"
+    image: 10.1.7.60:9001/grgms-gateway-service:latest
+    volumes:
+      - ./bootstrap.yml:/application/bootstrap.yml
+      - ./agent.config:/agent/config/agent.config:rw
+      - /home/iBankPro/logs:/application/logs:rw
+    ports:
+      - 8081:8081

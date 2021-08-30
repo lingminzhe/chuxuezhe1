@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.grgbanking.counter.common.cache.config.RedisTemplateConfig

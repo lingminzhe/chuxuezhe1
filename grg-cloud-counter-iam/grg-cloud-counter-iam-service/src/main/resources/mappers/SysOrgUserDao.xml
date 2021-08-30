@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.grgbanking.counter.iam.dao.SysOrgUserDao">
+    <sql id="Base_Column_List">
+        U.ID,
+        U.ORG_ID,
+        U.USER_ID,
+        U.IS_LEADER,
+        U.CREATED_BY,
+        U.CREATION_DATE,
+        U.LAST_UPDATED_BY,
+        U.LAST_UPDATE_DATE,
+        U.OPERATION_ID
+    </sql>
+
+    <delete id="delOrgUserByUserId">
+        delete from SYS_ORG_USER where
+        user_id in
+        <foreach collection="userIds" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        <if test="isLeader!=null and isLeader!=''">
+            AND IS_LEADER=#{isLeader}
+        </if>
+    </delete>
+
+    <select id="queryOrgUserForOrgId" resultType="com.grgbanking.counter.iam.entity.SysOrgUserEntity">
+
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM SYS_ORG_USER U INNER JOIN SYS_USER R ON U.USER_ID=R.ID
+        WHERE U.ORG_ID=#{orgId}
+        <if test="status!=null">
+            AND R.IS_ENABLED=#{status}
+        </if>
+
+    </select>
+
+    <select id="queryMangeOrgbyUserAndPath"
+            resultType="Long">
+
+        SELECT
+        ORG_ID
+        FROM
+        SYS_ORG_USER
+        WHERE
+        USER_ID =#{userId}
+        AND IS_LEADER = '1'
+        AND ORG_ID IN (
+        SELECT ID FROM SYS_ORG
+        <if test="orgPath !=null and orgPath!=''">
+            WHERE ORG_PATH LIKE CONCAT( #{orgPath}, '%' )
+        </if>
+            )
+    </select>
+
+</mapper>

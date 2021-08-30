@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grgbanking.counter.iam.dao.SysMenuAuthorityDao">
+    <sql id="common_sql">
+        `ID`,
+        `AUTHORITY_ID`,
+        `MENU_ID`
+    </sql>
+    <resultMap id="result_map" type="com.grgbanking.counter.iam.entity.SysMenuAuthorityEntity">
+        <result column="ID" property="id"/>
+        <result column="AUTHORITY_ID" property="authorityId"/>
+        <result column="MENU_ID" property="menuId"/>
+    </resultMap>
+
+    <insert id="add" parameterType="com.grgbanking.counter.iam.entity.SysMenuAuthorityEntity">
+        INSERT INTO `sys_menu_authority`(`ID`, `AUTHORITY_ID`, `MENU_ID`)
+        VALUES (#{bean.id}, #{bean.authorityId}, #{bean.menuId})
+    </insert>
+
+    <update id="update" parameterType="com.grgbanking.counter.iam.entity.SysMenuAuthorityEntity">
+        UPDATE `sys_menu_authority`
+        SET
+        `ID` = #{bean.id},
+        `AUTHORITY_ID` = #{bean.authorityId},
+        `MENU_ID` = #{bean.menuId}
+        <where>
+            `ID` = #{bean.id}
+        </where>
+    </update>
+
+    <insert id="save" parameterType="com.grgbanking.counter.iam.entity.SysMenuAuthorityEntity">
+        INSERT INTO `sys_menu_authority`(`ID`, `AUTHORITY_ID`, `MENU_ID`)
+        VALUES (#{bean.id}, #{bean.authorityId}, #{bean.menuId})
+        ON DUPLICATE KEY UPDATE
+        `ID` = #{bean.id},
+        `AUTHORITY_ID` = #{bean.authorityId},
+        `MENU_ID` = #{bean.menuId}
+    </insert>
+
+    <delete id="delById">
+        DELETE FROM `sys_menu_authority`
+        <where>
+            `ID` = #{id}
+        </where>
+    </delete>
+
+    <select id="getById" parameterType="java.lang.String" resultMap="result_map">
+        SELECT
+        <include refid="common_sql"/>
+        FROM `sys_menu_authority`
+        <where>
+            `ID` = #{id}
+        </where>
+    </select>
+
+    <select id="getList" parameterType="com.grgbanking.counter.iam.entity.SysMenuAuthorityEntity"
+            resultMap="result_map">
+        SELECT
+        <include refid="common_sql"/>
+        FROM `sys_menu_authority`
+        <where>
+            1=1
+            <if test="null != param.id">
+                AND `ID` = #{param.id}
+            </if>
+            <if test="null != param.authorityId">
+                AND `AUTHORITY_ID` = #{param.authorityId}
+            </if>
+            <if test="null != param.menuId">
+                AND `MENU_ID` = #{param.menuId}
+            </if>
+        </where>
+    </select>
+
+</mapper>

@@ -1,0 +1,13 @@
+version: '3'
+services:
+  grg-cloud-counter-iam:
+    container_name: grg-cloud-counter-iam-1.1.2
+    network_mode: "host"
+    image: 10.1.7.60:9001/grg-cloud-counter-iam:1.1.2
+    volumes:
+      - ./bootstrap.yml:/application/bootstrap.yml
+      - ./agent.config:/agent/config/agent.config:rw
+      - /home/iBankPro/logs:/application/logs:rw
+      - ./logback-spring.xml:/application/logback-spring.xml
+    ports:
+      - 9090:9090

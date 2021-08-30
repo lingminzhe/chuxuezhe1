@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.grgbanking.counter</groupId>
+        <artifactId>grg-cloud-counter</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>grg-cloud-counter-video</artifactId>
+    <packaging>pom</packaging>
+    <description>视频服务</description>
+
+    <modules>
+        <module>grg-cloud-counter-video-api</module>
+        <module>grg-cloud-counter-video-service</module>
+    </modules>
+
+</project>

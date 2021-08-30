@@ -1,0 +1,11 @@
+version: '3'
+services:
+  grgms-register-service:
+    container_name: grgms-register-service
+    image: 10.1.7.60:9001/grgms-register-service:show
+    # 目录挂载映射
+    volumes:
+      - ./application.properties:/application/application.properties
+      - ./nacos:/root/nacos:rw
+    ports:
+      - 8848:8848

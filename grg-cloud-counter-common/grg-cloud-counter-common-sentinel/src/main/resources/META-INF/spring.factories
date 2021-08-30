@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.grgbanking.counter.common.sentinel.SentinelAutoConfiguration,\
+    com.grgbanking.counter.common.sentinel.handle.GlobalExceptionHandlerResolver

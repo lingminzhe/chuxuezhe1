@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.grgbanking.counter</groupId>
+        <artifactId>grg-cloud-counter</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>grg-cloud-counter-common</artifactId>
+    <packaging>pom</packaging>
+
+    <description>公共模块聚合</description>
+
+    <modules>
+        <module>grg-cloud-counter-common-bom</module>
+        <module>grg-cloud-counter-common-core</module>
+        <module>grg-cloud-counter-common-data</module>
+        <module>grg-cloud-counter-common-log</module>
+        <module>grg-cloud-counter-common-security</module>
+        <module>grg-cloud-counter-common-swagger</module>
+        <module>grg-cloud-counter-common-sentinel</module>
+        <module>grg-cloud-counter-common-lock</module>
+        <module>grg-cloud-counter-common-mq</module>
+        <module>grg-cloud-counter-common-cache</module>
+        <module>grg-cloud-counter-common-xss</module>
+        <module>grg-cloud-counter-common-oss</module>
+    </modules>
+
+</project>

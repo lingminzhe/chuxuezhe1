@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.grgbanking.counter.common.core.config.JacksonConfig,\
+  com.grgbanking.counter.common.core.config.RestTemplateConfig
