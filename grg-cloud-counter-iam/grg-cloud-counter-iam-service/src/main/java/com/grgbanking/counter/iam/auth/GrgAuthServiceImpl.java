@@ -46,10 +46,9 @@ public class GrgAuthServiceImpl implements GrgAuthService {
         result.setUserBo(userBo);
 
         List<String> authorityList = new ArrayList<>();
-        authorityList.add(sysUserEntity.getUsername() + ":" + sysUserEntity.getId());
         if (!CollectionUtils.isEmpty(authorities)) {
             for (SysAuthorityEntity sysAuthorityEntity : authorities) {
-                authorityList.add(sysAuthorityEntity.getAppName() + ":" + sysAuthorityEntity.getAuthority());
+                authorityList.add(sysAuthorityEntity.getAuthority());
             }
         }
         result.setAuthorities(authorityList);
