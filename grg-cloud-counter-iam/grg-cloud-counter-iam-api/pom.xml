@@ -19,10 +19,6 @@
             <groupId>com.grgbanking.counter</groupId>
             <artifactId>grg-cloud-counter-common-data</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.grgbanking.counter</groupId>
-            <artifactId>grg-cloud-counter-common-log</artifactId>
-        </dependency>
         <!-- swagger -->
         <dependency>
             <groupId>com.grgbanking.counter</groupId>

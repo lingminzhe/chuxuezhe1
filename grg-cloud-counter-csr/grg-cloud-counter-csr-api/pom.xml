@@ -15,6 +15,10 @@
     <description>坐席服务对外接口</description>
 
     <dependencies>
-
+        <!-- swagger -->
+        <dependency>
+            <groupId>com.grgbanking.counter</groupId>
+            <artifactId>grg-cloud-counter-common-swagger</artifactId>
+        </dependency>
     </dependencies>
 </project>

@@ -1,13 +1,12 @@
 package com.grgbanking.counter.common.security.service;
 
-import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import com.grgbanking.counter.common.core.constant.CacheConstants;
 import com.grgbanking.counter.common.core.constant.CommonConstants;
 import com.grgbanking.counter.common.security.base.GrgUser;
 import com.grgbanking.counter.iam.api.bo.SysUserBo;
 import com.grgbanking.counter.iam.api.bo.UserData;
-import com.grgbanking.counter.iam.api.dubbo.GrgAuthService;
+import com.grgbanking.counter.iam.api.dubbo.AuthRemoteService;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
@@ -20,8 +19,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * 用户详细信息
@@ -30,7 +27,7 @@ import java.util.Set;
 public class GrgUserDetailsServiceImpl implements GrgUserDetailsService {
 
     @DubboReference
-    private GrgAuthService grgAuthService;
+    private AuthRemoteService authRemoteService;
 
     @Autowired
     private CacheManager cacheManager;
@@ -50,7 +47,7 @@ public class GrgUserDetailsServiceImpl implements GrgUserDetailsService {
             return cache.get(username, GrgUser.class);
         }
 
-        UserData result = grgAuthService.info(username);
+        UserData result = authRemoteService.info(username);
         UserDetails userDetails = getUserDetails(result);
         cache.put(username, userDetails);
         return userDetails;

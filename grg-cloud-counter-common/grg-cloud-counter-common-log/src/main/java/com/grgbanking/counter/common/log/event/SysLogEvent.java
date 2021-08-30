@@ -1,6 +1,6 @@
 package com.grgbanking.counter.common.log.event;
 
-import com.grgbanking.counter.common.log.bo.SysLogBo;
+import com.grgbanking.counter.iam.api.bo.SysLogBo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

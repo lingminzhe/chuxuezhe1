@@ -1,4 +1,4 @@
-package com.grgbanking.counter.common.log.bo;
+package com.grgbanking.counter.iam.api.bo;
 
 import lombok.Data;
 

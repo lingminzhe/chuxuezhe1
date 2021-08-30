@@ -1,10 +1,10 @@
-package com.grgbanking.counter.iam.auth;
+package com.grgbanking.counter.iam.dubbo;
 
 import com.grgbanking.counter.common.core.constant.CommonConstants;
 import com.grgbanking.counter.common.core.exception.CheckedException;
 import com.grgbanking.counter.iam.api.bo.SysUserBo;
 import com.grgbanking.counter.iam.api.bo.UserData;
-import com.grgbanking.counter.iam.api.dubbo.GrgAuthService;
+import com.grgbanking.counter.iam.api.dubbo.AuthRemoteService;
 import com.grgbanking.counter.iam.constans.RespI18nConstants;
 import com.grgbanking.counter.iam.entity.SysAuthorityEntity;
 import com.grgbanking.counter.iam.entity.SysUserEntity;
@@ -22,7 +22,7 @@ import java.util.List;
  * 用户登录时查询用户信息的接口实现类
  */
 @DubboService
-public class GrgAuthServiceImpl implements GrgAuthService {
+public class AuthRemoteServiceImpl implements AuthRemoteService {
 
     @Autowired
     private SysUserService sysUserService;

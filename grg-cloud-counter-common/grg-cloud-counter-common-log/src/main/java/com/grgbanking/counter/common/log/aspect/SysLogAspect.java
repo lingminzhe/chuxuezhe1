@@ -2,9 +2,9 @@ package com.grgbanking.counter.common.log.aspect;
 
 import cn.hutool.extra.servlet.ServletUtil;
 import com.grgbanking.counter.common.log.annotation.SysLog;
-import com.grgbanking.counter.common.log.bo.SysLogBo;
 import com.grgbanking.counter.common.log.event.SysLogEvent;
 import com.grgbanking.counter.common.log.util.SysLogUtils;
+import com.grgbanking.counter.iam.api.bo.SysLogBo;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +38,7 @@ public class SysLogAspect {
 
         String strClassName = point.getTarget().getClass().getName();
         String strMethodName = point.getSignature().getName();
-        log.debug("[类名]:{},[方法]:{}", strClassName, strMethodName);
+        log.info("[类名]:{},[方法]:{}", strClassName, strMethodName);
         HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
         SysLogBo sysLogBo = new SysLogBo();
         sysLogBo.setCreatedBy(SysLogUtils.getUsername());
