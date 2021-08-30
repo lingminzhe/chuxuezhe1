@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="10 seconds" debug="false">
-    <property name="APP_NAME" value="grg-cloud-counter-gateway"/>
+    <property name="APP_NAME" value="${project.artifactId}"/>
     <property name="OUTPUT_FORMAT" value="%d{yyyy-MM-dd HH:mm:ss.SSS} | ${APP_NAME} | %-5level | %logger{100}:%line | %msg%n"/>
     <property name="LOG_PATH" value="../logs"/>
     <property name="LOG_BACK_PATH" value="${LOG_PATH}/backup"/>

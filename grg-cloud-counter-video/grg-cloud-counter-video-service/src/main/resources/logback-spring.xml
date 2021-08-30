@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="10 seconds" debug="false">
-    <property name="APP_NAME" value="grg-cloud-counter-video"/>
+    <property name="APP_NAME" value="${project.artifactId}"/>
     <!-- 输出日志格式 -->
-    <property name="OUTPUT_FORMAT"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSS} | ${APP_NAME} | %-5level | %logger{100}:%line | %msg%n"/>
+    <property name="OUTPUT_FORMAT" value="%d{yyyy-MM-dd HH:mm:ss.SSS} | ${APP_NAME} | %-5level | %logger{100}:%line | %msg%n"/>
     <!-- 日志保存路径，当前目录下的logs文件夹 -->
     <property name="LOG_PATH" value="../logs"/>
     <!-- 备份的日志文件路径 -->
     <property name="LOG_BACK_PATH" value="${LOG_PATH}/backup"/>
-
 
     <!--控制台日志-->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
