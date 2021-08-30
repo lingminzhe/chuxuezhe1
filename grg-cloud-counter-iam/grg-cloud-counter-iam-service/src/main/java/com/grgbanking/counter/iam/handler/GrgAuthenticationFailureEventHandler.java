@@ -22,10 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 @AllArgsConstructor
 public class GrgAuthenticationFailureEventHandler implements AuthenticationFailureHandler {
 
-//	private final RemoteLogService logService;
-
-//	private final KeyStrResolver tenantKeyStrResolver;
-
 	/**
 	 * 异步处理，登录失败方法
 	 * <p>
@@ -51,7 +47,7 @@ public class GrgAuthenticationFailureEventHandler implements AuthenticationFailu
 //
 //		logService.saveLog(sysLog, SecurityConstants.FROM_IN);
 
-		log.info("用户：{} 登录失败，异常：{}", username, authenticationException.getLocalizedMessage());
+		log.error("用户：{} 登录失败", username, authenticationException);
 	}
 
 }

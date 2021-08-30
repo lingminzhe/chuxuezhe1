@@ -44,8 +44,7 @@ public class GrgLocalResourceServerTokenServices implements ResourceServerTokenS
 		// 根据 username 查询 spring cache 最新的值 并返回
 		GrgUser GrgUser = (GrgUser) oAuth2Authentication.getPrincipal();
 		UserDetails userDetails = userDetailsService.loadUserByUsername(GrgUser.getUsername());
-		Authentication userAuthentication = new UsernamePasswordAuthenticationToken(userDetails, "N/A",
-				userDetails.getAuthorities());
+		Authentication userAuthentication = new UsernamePasswordAuthenticationToken(userDetails, "N/A", userDetails.getAuthorities());
 		OAuth2Authentication authentication = new OAuth2Authentication(oAuth2Request, userAuthentication);
 		authentication.setAuthenticated(true);
 		return authentication;

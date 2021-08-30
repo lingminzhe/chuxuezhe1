@@ -46,20 +46,17 @@ public class GrgCommenceAuthExceptionEntryPoint implements AuthenticationEntryPo
 
 		if (authException instanceof CredentialsExpiredException
 				|| authException instanceof InsufficientAuthenticationException) {
-			String msg = GrgSecurityMessageSourceUtil.getAccessor().getMessage(
-					"AbstractUserDetailsAuthenticationProvider.credentialsExpired", authException.getMessage());
+			String msg = GrgSecurityMessageSourceUtil.getAccessor().getMessage("AbstractUserDetailsAuthenticationProvider.credentialsExpired", authException.getMessage());
 			result.setMsg(msg);
 		}
 
 		if (authException instanceof UsernameNotFoundException) {
-			String msg = GrgSecurityMessageSourceUtil.getAccessor().getMessage(
-					"AbstractUserDetailsAuthenticationProvider.noopBindAccount", authException.getMessage());
+			String msg = GrgSecurityMessageSourceUtil.getAccessor().getMessage("AbstractUserDetailsAuthenticationProvider.noopBindAccount", authException.getMessage());
 			result.setMsg(msg);
 		}
 
 		if (authException instanceof BadCredentialsException) {
-			String msg = GrgSecurityMessageSourceUtil.getAccessor().getMessage(
-					"AbstractUserDetailsAuthenticationProvider.badClientCredentials", authException.getMessage());
+			String msg = GrgSecurityMessageSourceUtil.getAccessor().getMessage("AbstractUserDetailsAuthenticationProvider.badClientCredentials", authException.getMessage());
 			result.setMsg(msg);
 		}
 

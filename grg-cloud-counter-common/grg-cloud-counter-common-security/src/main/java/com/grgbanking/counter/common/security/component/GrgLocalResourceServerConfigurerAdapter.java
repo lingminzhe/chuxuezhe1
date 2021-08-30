@@ -12,8 +12,7 @@ import org.springframework.security.oauth2.provider.token.ResourceServerTokenSer
 import org.springframework.security.web.AuthenticationEntryPoint;
 
 /**
- * <p>
- * 支持本地模式 [不仅过认证中 CheckToken]的的资源服务器配置
+ * 资源服务器配置
  */
 @Slf4j
 public class GrgLocalResourceServerConfigurerAdapter extends ResourceServerConfigurerAdapter {

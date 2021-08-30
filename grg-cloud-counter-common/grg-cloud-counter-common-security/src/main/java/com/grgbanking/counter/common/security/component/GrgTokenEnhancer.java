@@ -34,7 +34,7 @@ public class GrgTokenEnhancer implements TokenEnhancer {
 		final Map<String, Object> additionalInfo = new HashMap<>(8);
 		GrgUser grgUser = (GrgUser) authentication.getUserAuthentication().getPrincipal();
 		additionalInfo.put(SecurityConstants.DETAILS_USER, grgUser);
-		additionalInfo.put(SecurityConstants.DETAILS_LICENSE, SecurityConstants.IBANK_LICENSE);
+		additionalInfo.put(SecurityConstants.DETAILS_LICENSE, SecurityConstants.GRG_LICENSE);
 		additionalInfo.put(SecurityConstants.ACTIVE, Boolean.TRUE);
 		((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
 		return accessToken;

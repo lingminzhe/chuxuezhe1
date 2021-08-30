@@ -44,7 +44,7 @@ public interface SecurityConstants {
 	/**
 	 * 项目的license
 	 */
-	String IBANK_LICENSE = "made by grgbanking";
+	String GRG_LICENSE = "made by grgbanking";
 
 	/**
 	 * 内部

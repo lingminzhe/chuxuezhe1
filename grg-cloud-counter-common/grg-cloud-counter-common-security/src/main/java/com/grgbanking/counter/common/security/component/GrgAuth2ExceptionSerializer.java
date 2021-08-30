@@ -9,7 +9,6 @@ import lombok.SneakyThrows;
 
 /**
  * @date 2021/11/16
- * <p>
  * OAuth2 异常格式化
  */
 public class GrgAuth2ExceptionSerializer extends StdSerializer<GrgAuth2Exception> {
