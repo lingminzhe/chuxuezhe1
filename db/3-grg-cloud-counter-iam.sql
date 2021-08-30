@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : 10.252.21.20
  Source Server Type    : MySQL
- Source Server Version : 50731
- Source Host           : localhost:3306
+ Source Server Version : 50732
+ Source Host           : 10.252.21.20:3306
  Source Schema         : grg-cloud-counter-iam
 
  Target Server Type    : MySQL
- Target Server Version : 50731
+ Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 30/08/2021 10:42:52
+ Date: 30/08/2021 14:27:37
 */
 
 SET NAMES utf8mb4;
@@ -33,7 +33,7 @@ CREATE TABLE `oauth_client_details` (
   `refresh_token_validity` int(11) DEFAULT NULL COMMENT '设定客户端的refresh_token的有效时间值(单位:秒)',
   `additional_information` varchar(4096) DEFAULT NULL COMMENT '这是一个预留的字段,在Oauth的流程中没有实际的使用,可选,但若设置值,必须是JSON格式的数据',
   `autoapprove` varchar(256) DEFAULT NULL COMMENT '设置用户是否自动Approval操作',
-  PRIMARY KEY (`client_id`)
+  PRIMARY KEY (`client_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
@@ -61,8 +61,8 @@ CREATE TABLE `sys_area` (
   `LAST_UPDATED_BY` varchar(50) DEFAULT NULL COMMENT '修改人',
   `LAST_UPDATE_DATE` datetime DEFAULT NULL COMMENT '修改时间',
   `OPERATION_ID` varchar(16) DEFAULT NULL COMMENT '操作序号',
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='系统区域表';
+  PRIMARY KEY (`ID`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='系统区域表';
 
 -- ----------------------------
 -- Records of sys_area
@@ -84,8 +84,8 @@ CREATE TABLE `sys_area_user` (
   `CREATION_DATE` datetime DEFAULT NULL COMMENT '创建时间',
   `LAST_UPDATED_BY` varchar(32) DEFAULT NULL COMMENT '修改人',
   `LAST_UPDATE_DATE` datetime DEFAULT NULL COMMENT '修改时间',
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=1395565163988627459 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='系统区域用户关系表';
+  PRIMARY KEY (`ID`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1395565163988627459 DEFAULT CHARSET=utf8mb4 COMMENT='系统区域用户关系表';
 
 -- ----------------------------
 -- Records of sys_area_user
@@ -116,8 +116,8 @@ CREATE TABLE `sys_authority` (
   `LAST_UPDATED_BY` varchar(50) DEFAULT NULL COMMENT '修改人',
   `LAST_UPDATE_DATE` datetime DEFAULT NULL COMMENT '修改时间',
   `OPERATION_ID` varchar(16) DEFAULT NULL COMMENT '操作序号',
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=1395275444776890370 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='权限标识';
+  PRIMARY KEY (`ID`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1393175301122453506 DEFAULT CHARSET=utf8mb4 COMMENT='权限标识';
 
 -- ----------------------------
 -- Records of sys_authority
@@ -180,8 +180,8 @@ CREATE TABLE `sys_biz_conf` (
   `LAST_UPDATE_DATE` datetime DEFAULT NULL COMMENT '修改时间',
   `OPERATION_ID` varchar(16) DEFAULT NULL COMMENT '操作序号',
   `IS_ENABLED` char(1) NOT NULL COMMENT '启用状态',
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='业务配置表';
+  PRIMARY KEY (`ID`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='业务配置表';
 
 -- ----------------------------
 -- Records of sys_biz_conf
@@ -208,7 +208,7 @@ CREATE TABLE `sys_dict` (
   `LAST_UPDATE_DATE` datetime DEFAULT NULL COMMENT '修改时间',
   `OPERATION_ID` varchar(16) DEFAULT NULL COMMENT '操作序号',
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1391051630975152131 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='系统字典码表';
+) ENGINE=InnoDB AUTO_INCREMENT=1391051630975152131 DEFAULT CHARSET=utf8mb4 COMMENT='系统字典码表';
 
 -- ----------------------------
 -- Records of sys_dict
@@ -306,7 +306,7 @@ CREATE TABLE `sys_i18n` (
   `LAST_UPDATE_DATE` datetime DEFAULT NULL COMMENT '修改时间',
   `OPERATION_ID` varchar(16) DEFAULT NULL COMMENT '操作序号',
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1397815341156954114 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='系统多语言维护信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=1397815341156954114 DEFAULT CHARSET=utf8mb4 COMMENT='系统多语言维护信息表';
 
 -- ----------------------------
 -- Records of sys_i18n
@@ -871,7 +871,7 @@ CREATE TABLE `sys_log` (
   `OPERATION_ID` varchar(16) DEFAULT NULL COMMENT '操作序号',
   `TIME` bigint(22) DEFAULT NULL COMMENT '执行时长',
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='操作日志表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='操作日志表';
 
 -- ----------------------------
 -- Records of sys_log
@@ -905,7 +905,7 @@ CREATE TABLE `sys_menu` (
   `LAST_UPDATE_DATE` datetime DEFAULT NULL COMMENT '修改时间',
   `OPERATION_ID` varchar(16) DEFAULT NULL COMMENT '操作序号',
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1393133328562941955 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='系统菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=1393107758202515458 DEFAULT CHARSET=utf8mb4 COMMENT='系统菜单表';
 
 -- ----------------------------
 -- Records of sys_menu
@@ -987,7 +987,7 @@ CREATE TABLE `sys_menu_authority` (
   `LAST_UPDATE_DATE` datetime DEFAULT NULL COMMENT '修改时间',
   `OPERATION_ID` varchar(16) DEFAULT NULL COMMENT '操作序号',
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1399242803081588739 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='系统菜单授权表';
+) ENGINE=InnoDB AUTO_INCREMENT=1397812542926102530 DEFAULT CHARSET=utf8mb4 COMMENT='系统菜单授权表';
 
 -- ----------------------------
 -- Records of sys_menu_authority
@@ -1046,7 +1046,7 @@ CREATE TABLE `sys_org` (
   `LAST_UPDATE_DATE` datetime DEFAULT NULL COMMENT '修改时间',
   `OPERATION_ID` varchar(16) DEFAULT NULL COMMENT '操作序号',
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='机构表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='机构表';
 
 -- ----------------------------
 -- Records of sys_org
@@ -1070,7 +1070,7 @@ CREATE TABLE `sys_org_user` (
   `LAST_UPDATE_DATE` datetime DEFAULT NULL COMMENT '修改时间',
   `OPERATION_ID` varchar(16) DEFAULT NULL COMMENT '操作序号',
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1395565163976044547 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='系统机构用户关系表';
+) ENGINE=InnoDB AUTO_INCREMENT=1395565163976044547 DEFAULT CHARSET=utf8mb4 COMMENT='系统机构用户关系表';
 
 -- ----------------------------
 -- Records of sys_org_user
@@ -1098,7 +1098,7 @@ CREATE TABLE `sys_role` (
   `LAST_UPDATE_DATE` datetime DEFAULT NULL COMMENT '修改时间',
   `OPERATION_ID` varchar(16) DEFAULT NULL COMMENT '操作序号',
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1395541917012484098 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='系统角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=1395541917012484098 DEFAULT CHARSET=utf8mb4 COMMENT='系统角色表';
 
 -- ----------------------------
 -- Records of sys_role
@@ -1126,7 +1126,7 @@ CREATE TABLE `sys_role_menu` (
   `OPERATION_ID` varchar(16) DEFAULT NULL COMMENT '操作序号',
   `IS_ENABLED` char(1) NOT NULL COMMENT '启用状态：0停用，1启用',
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1399963969173786979 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='角色与菜单对应关系表';
+) ENGINE=InnoDB AUTO_INCREMENT=1399963969173786727 DEFAULT CHARSET=utf8mb4 COMMENT='角色与菜单对应关系表';
 
 -- ----------------------------
 -- Records of sys_role_menu
@@ -1370,7 +1370,7 @@ CREATE TABLE `sys_role_user` (
   `LAST_UPDATE_DATE` datetime DEFAULT NULL COMMENT '修改时间',
   `OPERATION_ID` varchar(16) DEFAULT NULL COMMENT '操作序号',
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1399963969450610690 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='角色用户关系表';
+) ENGINE=InnoDB AUTO_INCREMENT=1399963969450610690 DEFAULT CHARSET=utf8mb4 COMMENT='角色用户关系表';
 
 -- ----------------------------
 -- Records of sys_role_user
@@ -1413,7 +1413,7 @@ CREATE TABLE `sys_user` (
   `LAST_UPDATE_DATE` datetime DEFAULT NULL COMMENT '修改时间',
   `OPERATION_ID` varchar(16) DEFAULT NULL COMMENT '操作序号',
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1395565163565002755 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='系统用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=1395565163565002755 DEFAULT CHARSET=utf8mb4 COMMENT='系统用户表';
 
 -- ----------------------------
 -- Records of sys_user
