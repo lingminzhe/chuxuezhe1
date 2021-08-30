@@ -11,7 +11,7 @@
  Target Server Version : 50731
  File Encoding         : 65001
 
- Date: 30/08/2021 08:15:13
+ Date: 30/08/2021 10:42:52
 */
 
 SET NAMES utf8mb4;
@@ -22,33 +22,25 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `oauth_client_details`;
 CREATE TABLE `oauth_client_details` (
-  `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT 'ID(主键)',
   `client_id` varchar(256) NOT NULL COMMENT '客户端id',
-  `resource_ids` varchar(255) DEFAULT NULL COMMENT '客户端所能访问的资源id集合,多个资源时用逗号(,)分隔',
-  `client_secret` varchar(255) DEFAULT NULL COMMENT '用于指定客户端(client)的访问密匙',
-  `scope` varchar(255) DEFAULT NULL COMMENT '指定客户端申请的权限范围',
-  `authorized_grant_types` varchar(255) DEFAULT NULL COMMENT '指定客户端支持的grant_type',
-  `web_server_redirect_uri` varchar(255) DEFAULT NULL COMMENT '客户端的重定向URI',
-  `authorities` varchar(255) DEFAULT NULL COMMENT '指定客户端所拥有的Spring Security的权限值',
-  `access_token_validity` int(65) DEFAULT NULL COMMENT '设定客户端的access_token的有效时间值(单位:秒),',
+  `resource_ids` varchar(256) DEFAULT NULL COMMENT '客户端所能访问的资源id集合,多个资源时用逗号(,)分隔',
+  `client_secret` varchar(256) DEFAULT NULL COMMENT '用于指定客户端(client)的访问密匙',
+  `scope` varchar(256) DEFAULT NULL COMMENT '指定客户端申请的权限范围',
+  `authorized_grant_types` varchar(256) DEFAULT NULL COMMENT '指定客户端支持的grant_type',
+  `web_server_redirect_uri` varchar(256) DEFAULT NULL COMMENT '客户端的重定向URI',
+  `authorities` varchar(256) DEFAULT NULL COMMENT '指定客户端所拥有的Spring Security的权限值',
+  `access_token_validity` int(11) DEFAULT NULL COMMENT '设定客户端的access_token的有效时间值(单位:秒)',
   `refresh_token_validity` int(11) DEFAULT NULL COMMENT '设定客户端的refresh_token的有效时间值(单位:秒)',
-  `additional_information` text COMMENT '这是一个预留的字段,在Oauth的流程中没有实际的使用,可选,但若设置值,必须是JSON格式的数据',
-  `autoapprove` varchar(255) DEFAULT NULL COMMENT '设置用户是否自动Approval操作',
-  `created_by` varchar(50) DEFAULT NULL COMMENT '创建人',
-  `creation_date` datetime DEFAULT NULL COMMENT '创建时间',
-  `last_updated_by` varchar(50) DEFAULT NULL COMMENT '修改人',
-  `last_update_date` datetime DEFAULT NULL COMMENT '修改时间',
-  `operation_id` varchar(16) DEFAULT NULL COMMENT '操作序号',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='系统客户端资源列表';
+  `additional_information` varchar(4096) DEFAULT NULL COMMENT '这是一个预留的字段,在Oauth的流程中没有实际的使用,可选,但若设置值,必须是JSON格式的数据',
+  `autoapprove` varchar(256) DEFAULT NULL COMMENT '设置用户是否自动Approval操作',
+  PRIMARY KEY (`client_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of oauth_client_details
 -- ----------------------------
 BEGIN;
-INSERT INTO `oauth_client_details` VALUES (1, 'ibankpro-client', 'ibankpro-client,admin-service,fileserver-service', '$2a$10$uV/VUTBZgPyHX16GSP21pO.ArPPohUXrtXgDS17EXyOL3CAl7W1q6', 'all', 'authorization_code,password,client_credentials,implicit,refresh_token', NULL, NULL, NULL, NULL, NULL, 'true', 'admin', '2021-01-15 15:38:15', NULL, NULL, NULL);
-INSERT INTO `oauth_client_details` VALUES (2, 'ibankpro-mobile-client', 'ibankpro-client,admin-service,fileserver-service', '$2a$10$zi4SEi7reiZIlzyzClZvIOOlsy2dvFr1V83dds9N8Fiq9mtpc5Nlm', 'all', 'authorization_code,password,client_credentials,implicit,refresh_token', NULL, NULL, NULL, NULL, NULL, 'true', 'admin', '2021-01-15 15:38:16', NULL, NULL, NULL);
-INSERT INTO `oauth_client_details` VALUES (3, 'ibankpro-pad-client', 'ibankpro-client,admin-service,fileserver-service', '$2a$10$zi4SEi7reiZIlzyzClZvIOOlsy2dvFr1V83dds9N8Fiq9mtpc5Nlm', 'all', 'authorization_code,password,client_credentials,implicit,refresh_token', NULL, NULL, NULL, NULL, NULL, 'true', 'admin', '2021-01-15 15:38:16', NULL, NULL, NULL);
+INSERT INTO `oauth_client_details` VALUES ('web-client', NULL, '$2a$10$uV/VUTBZgPyHX16GSP21pO.ArPPohUXrtXgDS17EXyOL3CAl7W1q6', 'all', 'authorization_code,password,refresh_token,implicit,client_credentials', NULL, NULL, NULL, NULL, NULL, 'true');
 COMMIT;
 
 -- ----------------------------
