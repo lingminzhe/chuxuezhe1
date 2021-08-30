@@ -4,6 +4,5 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.grgbanking.counter.common.security.serializer.GrgTokenStoreAutoConfiguration,\
   com.grgbanking.counter.common.security.listener.AuthenticationFailureEventListener,\
   com.grgbanking.counter.common.security.listener.AuthenticationSuccessEventListener,\
-  com.grgbanking.counter.common.security.listener.AuthenticationLogoutSuccessEventListener,\
-  com.grgbanking.counter.common.security.component.GrgLocalResourceServerConfigurerAdapter
+  com.grgbanking.counter.common.security.listener.AuthenticationLogoutSuccessEventListener
 

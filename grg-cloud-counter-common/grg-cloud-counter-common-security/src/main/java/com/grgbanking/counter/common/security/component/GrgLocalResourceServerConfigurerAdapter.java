@@ -10,14 +10,12 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 import org.springframework.security.oauth2.provider.authentication.TokenExtractor;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.stereotype.Component;
 
 /**
  * <p>
  * 支持本地模式 [不仅过认证中 CheckToken]的的资源服务器配置
  */
 @Slf4j
-@Component
 public class GrgLocalResourceServerConfigurerAdapter extends ResourceServerConfigurerAdapter {
 
 	@Autowired
