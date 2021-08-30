@@ -118,7 +118,6 @@ public class SysUserController {
     /**
      * 查询
      */
-    @SysLog("用户列表查询")
     @ApiOperation(value = "用户列表", notes = "根据机构编码、用户账号、启用状态、姓名、锁定状态查询当前登录用户管理机构下的用户列表")
     @GetMapping("/query/list")
     public Resp list(Page page, SysUserQueryBo bo) {
@@ -149,7 +148,6 @@ public class SysUserController {
     /**
      * 根据用户帐户查询用户信息
      */
-    @SysLog("根据用户帐户查询用户信息")
     @GetMapping("/query/{username}")
     @ApiOperation(value = "根据用户账号查询用户信息", notes = "用户详情")
     @ApiImplicitParam(paramType = "path", name = "username", value = "用户账号", dataType = "String")
@@ -158,7 +156,6 @@ public class SysUserController {
         return Resp.ok(userInfo);
     }
 
-    @SysLog("根据用户账号获取导航菜单和可使用权限标识")
     @GetMapping("/nav/{username}")
     @ApiOperation(value = "根据用户账号获取导航菜单和可使用权限标识", notes = "根据用户账号获取导航菜单和可使用权限标识")
     @ApiImplicitParam(paramType = "path", name = "username", value = "用户账号", dataType = "String")

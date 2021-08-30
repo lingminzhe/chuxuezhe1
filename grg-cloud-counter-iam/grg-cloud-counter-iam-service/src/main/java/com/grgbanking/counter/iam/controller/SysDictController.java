@@ -47,7 +47,6 @@ public class SysDictController {
     /**
      * 根据应用类别、代码类型、代码值、代码值名称、国际化编码、启用状态查数据字典列表
      */
-    @SysLog("根据应用类别、代码类型、代码值、代码值名称、国际化编码、启用状态查数据字典列表")
     @GetMapping("/query/list")
     @ApiOperation(value = "根据应用类别、代码类型、代码值、代码值名称、国际化编码、启用状态查数据字典列表", notes = "根据应用类别、代码类型、代码值、代码值名称、国际化编码、启用状态查数据字典列表")
     public Resp<IPage<SysDictVo>> queryList(Page page, SysDictBo sysDictBo) {
@@ -59,7 +58,6 @@ public class SysDictController {
     /**
      * 根据数据字典id查询数据字典信息
      */
-    @SysLog("根据数据字典id查询数据字典信息")
     @GetMapping("/query/{id}")
     @ApiOperation(value = "根据数据字典id查询数据字典信息")
     @ApiImplicitParams({
@@ -142,7 +140,6 @@ public class SysDictController {
     /**
      * 根据应用类别获取数据字典信息列表
      */
-    @SysLog("根据应用类别(appType)获取数据字典信息列表")
     @GetMapping("/list/{appType}")
     @ApiOperation(value = "根据应用类别(appType)获取数据字典信息列表")
     @ApiImplicitParams({
@@ -160,7 +157,6 @@ public class SysDictController {
     /**
      * 根据代码类型获取数据字典信息列表（默认获取所有语言类型）
      */
-    @SysLog("根据代码类型获取数据字典信息列表（默认获取所有语言类型）")
     @GetMapping("/code/list/{codeType}")
     @ApiOperation(value = "根据代码类型获取数据字典信息列表（默认获取所有语言类型）")
     @ApiImplicitParams({

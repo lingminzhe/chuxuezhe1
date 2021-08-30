@@ -49,7 +49,6 @@ public class SysRoleController {
     /**
      * 角色列表
      */
-    @SysLog("角色列表查询")
     @GetMapping("/query/list")
     @ApiOperation(value = "角色列表", notes = "列表")
     public Resp<IPage<SysRoleVo>> list(Page page, SysRoleListBo sysRoleListBo) {
@@ -129,7 +128,6 @@ public class SysRoleController {
         return Resp.error();
     }
 
-    @SysLog("根据角色ID查询角色信息")
     @GetMapping("/query/{id}")
     @ApiOperation(value = "根据角色id查询角色信息", notes = "根据角色id查询角色信息", httpMethod = "GET")
     public Resp queryOne(@PathVariable("id") Long id) {
@@ -137,7 +135,6 @@ public class SysRoleController {
         return Resp.ok(sysRoleVo);
     }
 
-    @SysLog("根据用户账户查询角色")
     @GetMapping("/list/{username}")
     @ApiOperation(value = "用户帐号查询用户角色", notes = "根据用户账号获取当前用户拥有的角色列", httpMethod = "GET")
     public Resp queryRoleList(@PathVariable("username") String username) {

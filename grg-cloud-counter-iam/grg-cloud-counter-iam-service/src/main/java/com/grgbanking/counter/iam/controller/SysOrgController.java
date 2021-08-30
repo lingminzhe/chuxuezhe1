@@ -117,7 +117,6 @@ public class SysOrgController {
     /**
      * 首页查询机构列表
      */
-    @SysLog("机构管理首页查询")
     @GetMapping("/query/list")
     @ApiOperation(value = "机构管理首页查询", notes = "查询", httpMethod = "GET")
     @ApiImplicitParams({
@@ -165,7 +164,6 @@ public class SysOrgController {
     /**
      * 查询用户管理机构列表（启用状态的）
      */
-    @SysLog("查询用户管理机构列表（启用状态的）")
     @GetMapping("/tree/{username}")
     @ApiOperation(value = "查询用户管理机构列表（启用状态的）", notes = "查询用户管理机构列表（启用状态的）", httpMethod = "GET")
     public Resp<List<SysOrgVo>> queryListTree(@PathVariable(value = "username", required = false) String username) {
@@ -196,7 +194,6 @@ public class SysOrgController {
     /**
      * 查询用户管理机构列表（启用状态的）
      */
-    @SysLog("查询用户管理机构列表（启用状态的）")
     @PostMapping("/tree/area")
     @ApiOperation(value = "查询用户管理机构列表（启用状态的）", notes = "查询", httpMethod = "POST")
     public Resp<List<SysOrgVo>> queryListTreeByArea(@RequestBody(required =false) List<Long> areaIdList,
@@ -219,7 +216,6 @@ public class SysOrgController {
     /**
      * 查询单个信息
      */
-    @SysLog("查询单个信息")
     @GetMapping("/query/{id}")
     @ApiOperation(value = "查询单个信息", notes = "查询", httpMethod = "GET")
     public Resp<SysOrgOneVo> queryById(@PathVariable("id") Long id) {

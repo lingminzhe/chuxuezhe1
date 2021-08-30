@@ -30,7 +30,6 @@ public class SysLogController {
     /**
      * 查询操作日志
      */
-    @SysLog("查询操作日志")
     @GetMapping("/query/list")
     @ApiOperation(value = "查询操作日志", notes = "查询操作日志", httpMethod = "GET")
     @ApiImplicitParams({

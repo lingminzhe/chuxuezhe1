@@ -46,7 +46,6 @@ public class SysBizConfController {
     /**
      * 根据id查询业务配置信息
      */
-    @SysLog("根据id查询业务配置信息")
     @ApiOperation(value = "根据id查询业务配置信息")
     @GetMapping("/query/{id}")
     public Resp<SysBizConfVo> info(@PathVariable("id") Long id) {
@@ -57,7 +56,6 @@ public class SysBizConfController {
     /**
      * 根据应用类型与业务编号模糊查询业务配置信息
      */
-    @SysLog("根据应用类型与业务编号模糊查询业务配置信息")
     @ApiOperation(value = "根据应用类型与业务编号模糊查询业务配置信息")
     @GetMapping("/query/bizNo")
     public Resp<List<SysBizConfVo>> queryListByLikeBizNo(String appType,String bizNo) {

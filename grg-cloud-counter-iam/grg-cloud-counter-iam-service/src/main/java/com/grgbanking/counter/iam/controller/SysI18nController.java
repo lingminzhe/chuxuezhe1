@@ -38,7 +38,6 @@ public class SysI18nController {
     /**
      * 根据应用类别和语言类型获取国际化信息列表
      */
-    @SysLog("根据应用类别和语言类型获取国际化信息列表")
     @ApiOperation(value = "根据应用类别和语言类型获取国际化信息列表")
     @GetMapping("/list")
     public Resp<List<SysI18nDataTypeVo>> list(@RequestParam(value = "appType", required = true) String appType, @RequestParam(value = "i18nLanguageType", required = true) String i18nLanguageType) {
@@ -48,7 +47,6 @@ public class SysI18nController {
     /**
      * 根据应用类别、数据类型、国际化编码、国际化值、语言类型查国际化列表
      */
-    @SysLog("根据应用类别、数据类型、国际化编码、国际化值、语言类型查国际化列表")
     @ApiOperation(value = "根据应用类别、数据类型、国际化编码、国际化值、语言类型查国际化列表")
     @GetMapping("/query/list")
     public Resp<IPage<SysI18nEntity>> listI18n(Page page, SysI18nBo sysI18nBo) {
@@ -59,7 +57,6 @@ public class SysI18nController {
     /**
      * 根据应用类型、数据类型、国际化编码查询国际化信息
      */
-    @SysLog("根据应用类型、数据类型、国际化编码查询国际化信息")
     @ApiOperation(value = "根据应用类型、数据类型、国际化编码查询国际化信息")
     @GetMapping("/query")
     @ApiImplicitParams({
@@ -76,7 +73,6 @@ public class SysI18nController {
     /**
      * 查询国际化详情
      */
-    @SysLog("查询国际化详情")
     @ApiOperation(value = "查询国际化详情")
     @GetMapping("/info/{id}")
     public Resp<SysI18nEntity> info(@PathVariable("id") Long id) {

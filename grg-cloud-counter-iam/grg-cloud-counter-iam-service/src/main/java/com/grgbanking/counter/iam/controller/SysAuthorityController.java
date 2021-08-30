@@ -33,7 +33,6 @@ public class SysAuthorityController {
     /**
      * 根据所属服务名、所属模块名、授权标识、所属类名、所属方法名、启用状态查询权限标识列表
      */
-    @SysLog("根据所属服务名、所属模块名、授权标识、所属类名、所属方法名、启用状态查询权限标识列表")
     @ApiOperation(value = "根据所属服务名、所属模块名、授权标识、所属类名、所属方法名、启用状态查询权限标识列表")
     @GetMapping("/query/list")
     public Resp<IPage<SysAuthorityEntity>> queryList(Page page, SysAuthorityBo sysAuthorityBo) {
@@ -44,7 +43,6 @@ public class SysAuthorityController {
     /**
      * 根据所属服务名、所属模块名、授权标识、所属类名、所属方法名查询权限标识列表
      */
-    @SysLog("根据所属服务名、所属模块名、授权标识、所属类名、所属方法名查询权限标识列表")
     @ApiOperation(value = "根据所属服务名、所属模块名、授权标识、所属类名、所属方法名查询权限标识列表")
     @GetMapping("/enabled/list")
     public Resp<IPage<SysAuthorityEntity>> queryEnabledList(Page page, SysAuthorityBo sysAuthorityBo) {
@@ -56,7 +54,6 @@ public class SysAuthorityController {
     /**
      * 根据权限标识id查询权限标识信息
      */
-    @SysLog("根据权限标识id查询权限标识信息")
     @ApiOperation(value = "根据权限标识id查询权限标识信息")
     @GetMapping("/query/{id}")
     public Resp<SysAuthorityEntity> info(@PathVariable("id") Long id) {

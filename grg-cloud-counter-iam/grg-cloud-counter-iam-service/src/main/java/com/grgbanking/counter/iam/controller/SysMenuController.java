@@ -44,7 +44,6 @@ public class SysMenuController {
     /**
      * 根据应用类型、名称、资源类型、启用状态查询菜单列表
      */
-    @SysLog("根据应用类型、名称、资源类型、启用状态查询菜单列表")
     @ApiOperation(value = "根据应用类型、名称、资源类型、启用状态查询菜单列表")
     @GetMapping("/query/list")
     @ApiImplicitParams({
@@ -62,7 +61,6 @@ public class SysMenuController {
     /**
      * 根据菜单id查询菜单信息
      */
-    @SysLog("根据菜单id查询菜单信息")
     @ApiOperation(value = "根据菜单id查询菜单信息")
     @GetMapping("/query/{id}")
     @ApiImplicitParam(name = "id", value = "菜单id", required = true, paramType = "path", dataType = "Long")
@@ -74,7 +72,6 @@ public class SysMenuController {
     /**
      * 根据用户名查询启用状态中的可分配菜单的权限标识列表
      */
-    @SysLog("根据用户名查询启用状态中的可分配菜单的权限标识列表")
     @ApiOperation(value = "根据用户名查询启用状态中的可分配菜单的权限标识列表")
     @GetMapping("/authority/alloc/{username}")
     public Resp<List<SysAuthorityEntity>> allocAuthorityList(@PathVariable("username") String username) {
@@ -85,7 +82,6 @@ public class SysMenuController {
     /**
      * 根据用户名查询启用状态中的可分配菜单树
      */
-    @SysLog("根据用户名查询启用状态中的可分配菜单树")
     @ApiOperation(value = "根据用户名查询启用状态中的可分配菜单树")
     @GetMapping("/tree/alloc/{username}")
     @ApiImplicitParam(name = "username", value = "用户名", required = true, paramType = "path", dataType = "String")
@@ -122,7 +118,6 @@ public class SysMenuController {
     /**
      * 根据用户名查询启用状态中的可使用菜单树
      */
-    @SysLog("根据用户名查询启用状态中的可使用菜单树")
     @ApiOperation(value = "根据用户名查询启用状态中的可使用菜单树")
     @GetMapping("/tree/use/{username}")
     @ApiImplicitParam(name = "username", value = "用户名", required = false, paramType = "path", dataType = "String")

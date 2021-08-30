@@ -39,7 +39,6 @@ public class SysAreaController {
     /**
      * 列表树
      */
-    @SysLog("区域列表树")
     @GetMapping("/query/list")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name", value = "区域名称", paramType = "query", dataType = "String"),
@@ -64,7 +63,6 @@ public class SysAreaController {
     /**
      * 根据用户名查询管理区域树
      */
-    @SysLog("根据用户名查询管理区域树")
     @GetMapping("/tree")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "username", value = "用户名", paramType = "query", dataType = "String")
@@ -84,7 +82,6 @@ public class SysAreaController {
     /**
      * 根据区域id查询区域信息
      */
-    @SysLog("根据区域id查询区域信息")
     @GetMapping("/query/{id}")
     @ApiOperation(value = "区域详情", notes = "详情", httpMethod = "GET")
     public Resp<SysAreaEntity> info(@PathVariable("id") Long id) {

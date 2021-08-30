@@ -37,7 +37,6 @@ public class SysLoginController {
     /**
      * 获得当前登录用户信息
      */
-    @SysLog("获得当前登录用户信息")
     @ApiOperation(value = "获得当前用户的信息", notes = "获得当前用户的信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "username", value = "登录账号", required = false, dataType = "String", paramType = "query")
