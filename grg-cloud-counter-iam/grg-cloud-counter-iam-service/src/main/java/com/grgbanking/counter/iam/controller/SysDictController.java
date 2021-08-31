@@ -17,9 +17,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +35,7 @@ import java.util.List;
  * @email
  * @date 2021年1月14日16:59:01
  */
+@Slf4j
 @RestController
 @RequestMapping("/sys/dict")
 @Api(value = "字典管理接口", tags = "字典管理接口")
@@ -43,6 +46,15 @@ public class SysDictController {
 
     @Autowired
     private SysDictRedisService sysDictRedisService;
+
+    @Value("${server.port}")
+    private int port;
+
+    @GetMapping("test")
+    public int test(){
+        log.info("端口：{}",port);
+        return port;
+    }
 
     /**
      * 根据应用类别、代码类型、代码值、代码值名称、国际化编码、启用状态查数据字典列表

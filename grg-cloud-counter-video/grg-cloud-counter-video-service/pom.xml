@@ -20,10 +20,10 @@
             <artifactId>grg-cloud-counter-common-xss</artifactId>
         </dependency>
         <!-- spring security、oauth2依赖 -->
-        <dependency>
-            <groupId>com.grgbanking.counter</groupId>
-            <artifactId>grg-cloud-counter-common-security</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.grgbanking.counter</groupId>-->
+<!--            <artifactId>grg-cloud-counter-common-security</artifactId>-->
+<!--        </dependency>-->
         <!-- sentinel 依赖 -->
 <!--        <dependency>-->
 <!--            <groupId>com.grgbanking.counter</groupId>-->
