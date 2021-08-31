@@ -18,14 +18,12 @@
 	<properties>
 		<mybatis-plus.version>3.4.1</mybatis-plus.version>
 		<mysql8.version>8.0.23</mysql8.version>
-		<oracle.version>11.2.0.3</oracle.version>
-		<sql-server.version>6.2.2.jre8</sql-server.version>
 		<slf4j.version>1.7.26</slf4j.version>
 		<velocity.version>2.2</velocity.version>
 		<freemarker.version>2.3.30</freemarker.version>
 		<beetl.version>3.1.6.RELEASE</beetl.version>
 		<api-result.version>2.4.0</api-result.version>
-		<JavaLib.version>2.1.2</JavaLib.version>
+		<JavaLib.version>2.1.4</JavaLib.version>
 	</properties>
 
 	<dependencies>
@@ -64,10 +62,11 @@
 
 
 		<!-- 添加 SQL Server 支持 -->
+		<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>
-			<version>${sql-server.version}</version>
+			<version>9.4.0.jre16</version>
 		</dependency>
 
 		<dependency>
