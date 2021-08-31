@@ -1,0 +1,371 @@
+2021-08-31 11:27:01,921 [restartedMain] INFO  [com.grgbanking.counter.codegen.CodeGenApplication] StartupInfoLogger.java:55 - Starting CodeGenApplication using Java 1.8.0_202 on calon with PID 25041 (/Users/calon/Codes/grg-cloud-counter/grg-cloud-counter-codegen/target/classes started by calon in /Users/calon/Codes/grg-cloud-counter)
+2021-08-31 11:27:01,925 [restartedMain] INFO  [com.grgbanking.counter.codegen.CodeGenApplication] SpringApplication.java:659 - No active profile set, falling back to default profiles: default
+2021-08-31 11:27:01,994 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:255 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-08-31 11:27:01,996 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:255 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-08-31 11:27:03,034 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 8080 (http)
+2021-08-31 11:27:03,041 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2021-08-31 11:27:03,042 [restartedMain] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2021-08-31 11:27:03,042 [restartedMain] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/9.0.52]
+2021-08-31 11:27:03,131 [restartedMain] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2021-08-31 11:27:03,132 [restartedMain] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:290 - Root WebApplicationContext: initialization completed in 1135 ms
+2021-08-31 11:27:03,578 [restartedMain] INFO  [o.s.b.d.autoconfigure.OptionalLiveReloadServer] OptionalLiveReloadServer.java:58 - LiveReload server is running on port 35729
+2021-08-31 11:27:03,596 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Starting ProtocolHandler ["http-nio-8080"]
+2021-08-31 11:27:03,629 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2021-08-31 11:27:03,639 [restartedMain] INFO  [com.grgbanking.counter.codegen.CodeGenApplication] StartupInfoLogger.java:61 - Started CodeGenApplication in 2.605 seconds (JVM running for 4.487)
+2021-08-31 11:29:30,985 [restartedMain] INFO  [com.grgbanking.counter.codegen.CodeGenApplication] StartupInfoLogger.java:55 - Starting CodeGenApplication using Java 1.8.0_202 on calon with PID 25131 (/Users/calon/Codes/grg-cloud-counter/grg-cloud-counter-codegen/target/classes started by calon in /Users/calon/Codes/grg-cloud-counter)
+2021-08-31 11:29:30,991 [restartedMain] INFO  [com.grgbanking.counter.codegen.CodeGenApplication] SpringApplication.java:659 - No active profile set, falling back to default profiles: default
+2021-08-31 11:29:31,159 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:255 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-08-31 11:29:31,160 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:255 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-08-31 11:29:32,345 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 8080 (http)
+2021-08-31 11:29:32,372 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2021-08-31 11:29:32,374 [restartedMain] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2021-08-31 11:29:32,375 [restartedMain] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/9.0.52]
+2021-08-31 11:29:32,451 [restartedMain] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2021-08-31 11:29:32,451 [restartedMain] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:290 - Root WebApplicationContext: initialization completed in 1290 ms
+2021-08-31 11:29:32,857 [restartedMain] INFO  [o.s.b.d.autoconfigure.OptionalLiveReloadServer] OptionalLiveReloadServer.java:58 - LiveReload server is running on port 35729
+2021-08-31 11:29:32,871 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Starting ProtocolHandler ["http-nio-8080"]
+2021-08-31 11:29:32,898 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2021-08-31 11:29:32,908 [restartedMain] INFO  [com.grgbanking.counter.codegen.CodeGenApplication] StartupInfoLogger.java:61 - Started CodeGenApplication in 2.968 seconds (JVM running for 5.274)
+2021-08-31 11:31:59,192 [restartedMain] INFO  [o.s.boot.devtools.restart.ChangeableUrls] DeferredLog.java:255 - The Class-Path manifest attribute in /Users/calon/.m2/repository/com/oracle/database/jdbc/ojdbc10/19.12.0.0/ojdbc10-19.12.0.0.jar referenced one or more files that do not exist: file:/Users/calon/.m2/repository/com/oracle/database/jdbc/ojdbc10/19.12.0.0/oraclepki.jar
+2021-08-31 11:31:59,200 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:255 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-08-31 11:31:59,809 [restartedMain] INFO  [com.grgbanking.counter.codegen.CodeGenApplication] SpringApplication.java:659 - No active profile set, falling back to default profiles: default
+2021-08-31 11:32:00,749 [restartedMain] INFO  [o.springframework.cloud.context.scope.GenericScope] GenericScope.java:283 - BeanFactory id=212ab858-503b-31d9-a45c-b8cf149168a8
+2021-08-31 11:32:01,429 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 7070 (http)
+2021-08-31 11:32:01,456 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Initializing ProtocolHandler ["http-nio-7070"]
+2021-08-31 11:32:01,457 [restartedMain] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2021-08-31 11:32:01,458 [restartedMain] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/9.0.52]
+2021-08-31 11:32:01,877 [restartedMain] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2021-08-31 11:32:01,879 [restartedMain] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:290 - Root WebApplicationContext: initialization completed in 2053 ms
+2021-08-31 11:32:02,359 [restartedMain] INFO  [o.s.b.d.autoconfigure.OptionalLiveReloadServer] OptionalLiveReloadServer.java:58 - LiveReload server is running on port 35729
+2021-08-31 11:32:02,445 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Starting ProtocolHandler ["http-nio-7070"]
+2021-08-31 11:32:02,607 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 7070 (http) with context path ''
+2021-08-31 11:32:02,620 [restartedMain] INFO  [com.grgbanking.counter.codegen.CodeGenApplication] StartupInfoLogger.java:61 - Started CodeGenApplication in 4.691 seconds (JVM running for 7.394)
+2021-08-31 11:32:06,341 [http-nio-7070-exec-1] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-08-31 11:32:06,343 [http-nio-7070-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:525 - Initializing Servlet 'dispatcherServlet'
+2021-08-31 11:32:06,345 [http-nio-7070-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:547 - Completed initialization in 1 ms
+2021-08-31 11:32:06,603 [http-nio-7070-exec-1] ERROR [org.thymeleaf.TemplateEngine] TemplateEngine.java:1136 - [THYMELEAF][http-nio-7070-exec-1] Exception processing template "index": Error resolving template [index], template might not exist or might not be accessible by any of the configured Template Resolvers
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [index], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:366)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:190)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1397)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1142)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1081)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:655)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1726)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+2021-08-31 11:32:06,607 [http-nio-7070-exec-1] ERROR [o.a.c.c.C.[.[localhost].[/].[dispatcherServlet]] DirectJDKLog.java:175 - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.thymeleaf.exceptions.TemplateInputException: Error resolving template [index], template might not exist or might not be accessible by any of the configured Template Resolvers] with root cause
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [index], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:366)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:190)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1397)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1142)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1081)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:655)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1726)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+2021-08-31 12:56:08,211 [http-nio-7070-exec-2] ERROR [org.thymeleaf.TemplateEngine] TemplateEngine.java:1136 - [THYMELEAF][http-nio-7070-exec-2] Exception processing template "index": Error resolving template [index], template might not exist or might not be accessible by any of the configured Template Resolvers
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [index], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:366)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:190)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1397)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1142)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1081)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:655)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1726)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+2021-08-31 12:56:08,216 [http-nio-7070-exec-2] ERROR [o.a.c.c.C.[.[localhost].[/].[dispatcherServlet]] DirectJDKLog.java:175 - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.thymeleaf.exceptions.TemplateInputException: Error resolving template [index], template might not exist or might not be accessible by any of the configured Template Resolvers] with root cause
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [index], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:366)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:190)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1397)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1142)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1081)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:655)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1726)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+2021-08-31 12:56:31,161 [restartedMain] INFO  [com.grgbanking.counter.codegen.CodeGenApplication] StartupInfoLogger.java:55 - Starting CodeGenApplication using Java 1.8.0_202 on calon with PID 26242 (/Users/calon/Codes/grg-cloud-counter/grg-cloud-counter-codegen/target/classes started by calon in /Users/calon/Codes/grg-cloud-counter)
+2021-08-31 12:56:31,165 [restartedMain] INFO  [com.grgbanking.counter.codegen.CodeGenApplication] SpringApplication.java:659 - No active profile set, falling back to default profiles: default
+2021-08-31 12:56:31,236 [restartedMain] INFO  [o.s.boot.devtools.restart.ChangeableUrls] DeferredLog.java:255 - The Class-Path manifest attribute in /Users/calon/.m2/repository/com/oracle/database/jdbc/ojdbc10/19.12.0.0/ojdbc10-19.12.0.0.jar referenced one or more files that do not exist: file:/Users/calon/.m2/repository/com/oracle/database/jdbc/ojdbc10/19.12.0.0/oraclepki.jar
+2021-08-31 12:56:31,238 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:255 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-08-31 12:56:31,238 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:255 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-08-31 12:56:32,731 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 8080 (http)
+2021-08-31 12:56:32,746 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2021-08-31 12:56:32,746 [restartedMain] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2021-08-31 12:56:32,747 [restartedMain] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/9.0.52]
+2021-08-31 12:56:32,836 [restartedMain] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2021-08-31 12:56:32,836 [restartedMain] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:290 - Root WebApplicationContext: initialization completed in 1597 ms
+2021-08-31 12:56:33,278 [restartedMain] INFO  [o.s.b.a.web.servlet.WelcomePageHandlerMapping] WelcomePageHandlerMapping.java:57 - Adding welcome page template: index
+2021-08-31 12:56:33,432 [restartedMain] INFO  [o.s.b.d.autoconfigure.OptionalLiveReloadServer] OptionalLiveReloadServer.java:58 - LiveReload server is running on port 35729
+2021-08-31 12:56:33,447 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Starting ProtocolHandler ["http-nio-8080"]
+2021-08-31 12:56:33,477 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 8080 (http) with context path ''
+2021-08-31 12:56:33,496 [restartedMain] INFO  [com.grgbanking.counter.codegen.CodeGenApplication] StartupInfoLogger.java:61 - Started CodeGenApplication in 3.198 seconds (JVM running for 4.915)
+2021-08-31 12:57:37,021 [restartedMain] INFO  [o.s.boot.devtools.restart.ChangeableUrls] DeferredLog.java:255 - The Class-Path manifest attribute in /Users/calon/.m2/repository/com/oracle/database/jdbc/ojdbc10/19.12.0.0/ojdbc10-19.12.0.0.jar referenced one or more files that do not exist: file:/Users/calon/.m2/repository/com/oracle/database/jdbc/ojdbc10/19.12.0.0/oraclepki.jar
+2021-08-31 12:57:37,029 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:255 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-08-31 12:57:37,788 [restartedMain] INFO  [com.grgbanking.counter.codegen.CodeGenApplication] SpringApplication.java:659 - No active profile set, falling back to default profiles: default
+2021-08-31 12:57:38,357 [restartedMain] INFO  [o.springframework.cloud.context.scope.GenericScope] GenericScope.java:283 - BeanFactory id=212ab858-503b-31d9-a45c-b8cf149168a8
+2021-08-31 12:57:38,878 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 7070 (http)
+2021-08-31 12:57:38,888 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Initializing ProtocolHandler ["http-nio-7070"]
+2021-08-31 12:57:38,889 [restartedMain] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2021-08-31 12:57:38,889 [restartedMain] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/9.0.52]
+2021-08-31 12:57:38,967 [restartedMain] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2021-08-31 12:57:38,967 [restartedMain] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:290 - Root WebApplicationContext: initialization completed in 1165 ms
+2021-08-31 12:57:39,333 [restartedMain] INFO  [o.s.b.a.web.servlet.WelcomePageHandlerMapping] WelcomePageHandlerMapping.java:57 - Adding welcome page template: index
+2021-08-31 12:57:39,453 [restartedMain] INFO  [o.s.b.d.autoconfigure.OptionalLiveReloadServer] OptionalLiveReloadServer.java:58 - LiveReload server is running on port 35729
+2021-08-31 12:57:39,550 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Starting ProtocolHandler ["http-nio-7070"]
+2021-08-31 12:57:39,681 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 7070 (http) with context path ''
+2021-08-31 12:57:39,694 [restartedMain] INFO  [com.grgbanking.counter.codegen.CodeGenApplication] StartupInfoLogger.java:61 - Started CodeGenApplication in 5.198 seconds (JVM running for 8.247)
+2021-08-31 12:57:44,242 [http-nio-7070-exec-1] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-08-31 12:57:44,244 [http-nio-7070-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:525 - Initializing Servlet 'dispatcherServlet'
+2021-08-31 12:57:44,249 [http-nio-7070-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:547 - Completed initialization in 5 ms
+2021-08-31 12:59:08,538 [restartedMain] INFO  [o.s.boot.devtools.restart.ChangeableUrls] DeferredLog.java:255 - The Class-Path manifest attribute in /Users/calon/.m2/repository/com/oracle/database/jdbc/ojdbc10/19.12.0.0/ojdbc10-19.12.0.0.jar referenced one or more files that do not exist: file:/Users/calon/.m2/repository/com/oracle/database/jdbc/ojdbc10/19.12.0.0/oraclepki.jar
+2021-08-31 12:59:08,542 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:255 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-08-31 12:59:08,884 [restartedMain] INFO  [com.grgbanking.counter.codegen.CodeGenApplication] SpringApplication.java:659 - No active profile set, falling back to default profiles: default
+2021-08-31 12:59:09,419 [restartedMain] INFO  [o.springframework.cloud.context.scope.GenericScope] GenericScope.java:283 - BeanFactory id=212ab858-503b-31d9-a45c-b8cf149168a8
+2021-08-31 12:59:09,892 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 7070 (http)
+2021-08-31 12:59:09,906 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Initializing ProtocolHandler ["http-nio-7070"]
+2021-08-31 12:59:09,907 [restartedMain] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2021-08-31 12:59:09,908 [restartedMain] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/9.0.52]
+2021-08-31 12:59:09,992 [restartedMain] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2021-08-31 12:59:09,992 [restartedMain] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:290 - Root WebApplicationContext: initialization completed in 1095 ms
+2021-08-31 12:59:10,266 [restartedMain] INFO  [o.s.b.a.web.servlet.WelcomePageHandlerMapping] WelcomePageHandlerMapping.java:57 - Adding welcome page template: index
+2021-08-31 12:59:10,380 [restartedMain] INFO  [o.s.b.d.autoconfigure.OptionalLiveReloadServer] OptionalLiveReloadServer.java:58 - LiveReload server is running on port 35729
+2021-08-31 12:59:10,460 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Starting ProtocolHandler ["http-nio-7070"]
+2021-08-31 12:59:10,633 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 7070 (http) with context path ''
+2021-08-31 12:59:10,648 [restartedMain] INFO  [com.grgbanking.counter.codegen.CodeGenApplication] StartupInfoLogger.java:61 - Started CodeGenApplication in 3.04 seconds (JVM running for 5.421)
+2021-08-31 12:59:13,210 [http-nio-7070-exec-1] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-08-31 12:59:13,212 [http-nio-7070-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:525 - Initializing Servlet 'dispatcherServlet'
+2021-08-31 12:59:13,228 [http-nio-7070-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:547 - Completed initialization in 16 ms
+2021-08-31 12:59:36,267 [restartedMain] INFO  [o.s.boot.devtools.restart.ChangeableUrls] DeferredLog.java:255 - The Class-Path manifest attribute in /Users/calon/.m2/repository/com/oracle/database/jdbc/ojdbc10/19.12.0.0/ojdbc10-19.12.0.0.jar referenced one or more files that do not exist: file:/Users/calon/.m2/repository/com/oracle/database/jdbc/ojdbc10/19.12.0.0/oraclepki.jar
+2021-08-31 12:59:36,275 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:255 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-08-31 12:59:36,668 [restartedMain] INFO  [com.grgbanking.counter.codegen.CodeGenApplication] SpringApplication.java:659 - No active profile set, falling back to default profiles: default
+2021-08-31 12:59:37,256 [restartedMain] INFO  [o.springframework.cloud.context.scope.GenericScope] GenericScope.java:283 - BeanFactory id=212ab858-503b-31d9-a45c-b8cf149168a8
+2021-08-31 12:59:37,770 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 7070 (http)
+2021-08-31 12:59:37,779 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Initializing ProtocolHandler ["http-nio-7070"]
+2021-08-31 12:59:37,780 [restartedMain] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2021-08-31 12:59:37,780 [restartedMain] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/9.0.52]
+2021-08-31 12:59:37,851 [restartedMain] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2021-08-31 12:59:37,852 [restartedMain] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:290 - Root WebApplicationContext: initialization completed in 1169 ms
+2021-08-31 12:59:38,131 [restartedMain] INFO  [o.s.b.a.web.servlet.WelcomePageHandlerMapping] WelcomePageHandlerMapping.java:57 - Adding welcome page template: index
+2021-08-31 12:59:38,244 [restartedMain] INFO  [o.s.b.d.autoconfigure.OptionalLiveReloadServer] OptionalLiveReloadServer.java:58 - LiveReload server is running on port 35729
+2021-08-31 12:59:38,330 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Starting ProtocolHandler ["http-nio-7070"]
+2021-08-31 12:59:38,468 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 7070 (http) with context path ''
+2021-08-31 12:59:38,480 [restartedMain] INFO  [com.grgbanking.counter.codegen.CodeGenApplication] StartupInfoLogger.java:61 - Started CodeGenApplication in 3.659 seconds (JVM running for 5.695)
+2021-08-31 12:59:54,141 [http-nio-7070-exec-1] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-08-31 12:59:54,142 [http-nio-7070-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:525 - Initializing Servlet 'dispatcherServlet'
+2021-08-31 12:59:54,143 [http-nio-7070-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:547 - Completed initialization in 1 ms
+2021-08-31 13:00:13,953 [restartedMain] INFO  [o.s.boot.devtools.restart.ChangeableUrls] DeferredLog.java:255 - The Class-Path manifest attribute in /Users/calon/.m2/repository/com/oracle/database/jdbc/ojdbc10/19.12.0.0/ojdbc10-19.12.0.0.jar referenced one or more files that do not exist: file:/Users/calon/.m2/repository/com/oracle/database/jdbc/ojdbc10/19.12.0.0/oraclepki.jar
+2021-08-31 13:00:13,957 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:255 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-08-31 13:00:14,390 [restartedMain] INFO  [com.grgbanking.counter.codegen.CodeGenApplication] SpringApplication.java:659 - No active profile set, falling back to default profiles: default
+2021-08-31 13:00:15,467 [restartedMain] INFO  [o.springframework.cloud.context.scope.GenericScope] GenericScope.java:283 - BeanFactory id=212ab858-503b-31d9-a45c-b8cf149168a8
+2021-08-31 13:00:16,092 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 7070 (http)
+2021-08-31 13:00:16,101 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Initializing ProtocolHandler ["http-nio-7070"]
+2021-08-31 13:00:16,102 [restartedMain] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2021-08-31 13:00:16,103 [restartedMain] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/9.0.52]
+2021-08-31 13:00:16,181 [restartedMain] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2021-08-31 13:00:16,181 [restartedMain] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:290 - Root WebApplicationContext: initialization completed in 1766 ms
+2021-08-31 13:00:16,552 [restartedMain] INFO  [o.s.b.a.web.servlet.WelcomePageHandlerMapping] WelcomePageHandlerMapping.java:57 - Adding welcome page template: index
+2021-08-31 13:00:16,743 [restartedMain] INFO  [o.s.b.d.autoconfigure.OptionalLiveReloadServer] OptionalLiveReloadServer.java:58 - LiveReload server is running on port 35729
+2021-08-31 13:00:16,862 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Starting ProtocolHandler ["http-nio-7070"]
+2021-08-31 13:00:17,042 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 7070 (http) with context path ''
+2021-08-31 13:00:17,095 [restartedMain] INFO  [com.grgbanking.counter.codegen.CodeGenApplication] StartupInfoLogger.java:61 - Started CodeGenApplication in 4.515 seconds (JVM running for 6.344)
+2021-08-31 13:00:19,846 [http-nio-7070-exec-1] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-08-31 13:00:19,847 [http-nio-7070-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:525 - Initializing Servlet 'dispatcherServlet'
+2021-08-31 13:00:19,848 [http-nio-7070-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:547 - Completed initialization in 1 ms
+2021-08-31 13:00:45,110 [http-nio-7070-exec-1] WARN  [org.apache.velocity.deprecation] DeprecationAwareExtProperties.java:62 - configuration key 'file.resource.loader.unicode' has been deprecated in favor of 'resource.loader.file.unicode'
+2021-08-31 13:00:45,114 [http-nio-7070-exec-1] WARN  [org.apache.velocity.deprecation] DeprecationAwareExtProperties.java:62 - configuration key 'file.resource.loader.class' has been deprecated in favor of 'resource.loader.file.class'
+2021-08-31 13:01:59,741 [restartedMain] INFO  [o.s.boot.devtools.restart.ChangeableUrls] DeferredLog.java:255 - The Class-Path manifest attribute in /Users/calon/.m2/repository/com/oracle/database/jdbc/ojdbc10/19.12.0.0/ojdbc10-19.12.0.0.jar referenced one or more files that do not exist: file:/Users/calon/.m2/repository/com/oracle/database/jdbc/ojdbc10/19.12.0.0/oraclepki.jar
+2021-08-31 13:01:59,745 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:255 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-08-31 13:02:00,227 [restartedMain] INFO  [com.grgbanking.counter.codegen.CodeGenApplication] SpringApplication.java:659 - No active profile set, falling back to default profiles: default
+2021-08-31 13:02:01,058 [restartedMain] INFO  [o.springframework.cloud.context.scope.GenericScope] GenericScope.java:283 - BeanFactory id=212ab858-503b-31d9-a45c-b8cf149168a8
+2021-08-31 13:02:01,636 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 7070 (http)
+2021-08-31 13:02:01,648 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Initializing ProtocolHandler ["http-nio-7070"]
+2021-08-31 13:02:01,649 [restartedMain] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2021-08-31 13:02:01,650 [restartedMain] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/9.0.52]
+2021-08-31 13:02:01,723 [restartedMain] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2021-08-31 13:02:01,723 [restartedMain] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:290 - Root WebApplicationContext: initialization completed in 1479 ms
+2021-08-31 13:02:02,331 [restartedMain] INFO  [o.s.b.a.web.servlet.WelcomePageHandlerMapping] WelcomePageHandlerMapping.java:57 - Adding welcome page template: index
+2021-08-31 13:02:02,477 [restartedMain] INFO  [o.s.b.d.autoconfigure.OptionalLiveReloadServer] OptionalLiveReloadServer.java:58 - LiveReload server is running on port 35729
+2021-08-31 13:02:02,572 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Starting ProtocolHandler ["http-nio-7070"]
+2021-08-31 13:02:02,717 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 7070 (http) with context path ''
+2021-08-31 13:02:02,729 [restartedMain] INFO  [com.grgbanking.counter.codegen.CodeGenApplication] StartupInfoLogger.java:61 - Started CodeGenApplication in 4.194 seconds (JVM running for 6.068)
+2021-08-31 13:02:11,188 [http-nio-7070-exec-1] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-08-31 13:02:11,188 [http-nio-7070-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:525 - Initializing Servlet 'dispatcherServlet'
+2021-08-31 13:02:11,189 [http-nio-7070-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:547 - Completed initialization in 1 ms
+2021-08-31 13:03:11,015 [restartedMain] INFO  [o.s.boot.devtools.restart.ChangeableUrls] DeferredLog.java:255 - The Class-Path manifest attribute in /Users/calon/.m2/repository/com/oracle/database/jdbc/ojdbc10/19.12.0.0/ojdbc10-19.12.0.0.jar referenced one or more files that do not exist: file:/Users/calon/.m2/repository/com/oracle/database/jdbc/ojdbc10/19.12.0.0/oraclepki.jar
+2021-08-31 13:03:11,018 [restartedMain] INFO  [o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor] DeferredLog.java:255 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-08-31 13:03:11,692 [restartedMain] INFO  [com.grgbanking.counter.codegen.CodeGenApplication] SpringApplication.java:659 - No active profile set, falling back to default profiles: default
+2021-08-31 13:03:12,632 [restartedMain] INFO  [o.springframework.cloud.context.scope.GenericScope] GenericScope.java:283 - BeanFactory id=212ab858-503b-31d9-a45c-b8cf149168a8
+2021-08-31 13:03:13,449 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:108 - Tomcat initialized with port(s): 7070 (http)
+2021-08-31 13:03:13,459 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Initializing ProtocolHandler ["http-nio-7070"]
+2021-08-31 13:03:13,460 [restartedMain] INFO  [org.apache.catalina.core.StandardService] DirectJDKLog.java:173 - Starting service [Tomcat]
+2021-08-31 13:03:13,460 [restartedMain] INFO  [org.apache.catalina.core.StandardEngine] DirectJDKLog.java:173 - Starting Servlet engine: [Apache Tomcat/9.0.52]
+2021-08-31 13:03:13,560 [restartedMain] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring embedded WebApplicationContext
+2021-08-31 13:03:13,561 [restartedMain] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] ServletWebServerApplicationContext.java:290 - Root WebApplicationContext: initialization completed in 1840 ms
+2021-08-31 13:03:13,949 [restartedMain] INFO  [o.s.b.a.web.servlet.WelcomePageHandlerMapping] WelcomePageHandlerMapping.java:57 - Adding welcome page template: index
+2021-08-31 13:03:14,239 [restartedMain] INFO  [o.s.b.d.autoconfigure.OptionalLiveReloadServer] OptionalLiveReloadServer.java:58 - LiveReload server is running on port 35729
+2021-08-31 13:03:14,799 [restartedMain] INFO  [org.apache.coyote.http11.Http11NioProtocol] DirectJDKLog.java:173 - Starting ProtocolHandler ["http-nio-7070"]
+2021-08-31 13:03:15,098 [restartedMain] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] TomcatWebServer.java:220 - Tomcat started on port(s): 7070 (http) with context path ''
+2021-08-31 13:03:15,125 [restartedMain] INFO  [com.grgbanking.counter.codegen.CodeGenApplication] StartupInfoLogger.java:61 - Started CodeGenApplication in 5.839 seconds (JVM running for 7.78)
+2021-08-31 13:03:18,191 [http-nio-7070-exec-1] INFO  [o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]] DirectJDKLog.java:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-08-31 13:03:18,192 [http-nio-7070-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:525 - Initializing Servlet 'dispatcherServlet'
+2021-08-31 13:03:18,193 [http-nio-7070-exec-1] INFO  [org.springframework.web.servlet.DispatcherServlet] FrameworkServlet.java:547 - Completed initialization in 1 ms

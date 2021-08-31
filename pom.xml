@@ -34,6 +34,7 @@
         <module>grg-cloud-counter-monitor</module>
         <module>grg-cloud-counter-csr</module>
         <module>grg-cloud-counter-video</module>
+        <module>grg-cloud-counter-codegen</module>
     </modules>
 
     <dependencies>

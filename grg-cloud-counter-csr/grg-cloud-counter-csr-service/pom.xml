@@ -19,7 +19,11 @@
             <groupId>com.grgbanking.counter</groupId>
             <artifactId>grg-cloud-counter-common-xss</artifactId>
         </dependency>
-
+        <!-- Swagger -->
+        <dependency>
+            <groupId>com.grgbanking.counter</groupId>
+            <artifactId>grg-cloud-counter-common-swagger</artifactId>
+        </dependency>
         <!-- spring security、oauth2依赖 -->
 <!--        <dependency>-->
 <!--            <groupId>com.grgbanking.counter</groupId>-->
