@@ -1,5 +1,7 @@
 package com.grgbanking.counter.common.security.base;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,76 +19,37 @@ public class GrgUser extends User implements Serializable{
      * 用户ID
      */
     @Getter
-    @Setter
     private Long userId;
-    /**
-     * 用户名称
-     */
-    @Getter
-    @Setter
-    private String name;
-    /**
-     * 启用情况  0：未启用   1：启用
-     */
-    @Getter
-    @Setter
-    private String isEnabled;
-    /**
-     * 锁定情况  0：未锁定   1：锁定
-     */
-    @Getter
-    @Setter
-    private String isLocked;
 
     /**
-     * 所属机构id
+     * 部门ID
      */
     @Getter
-    @Setter
-    private Long joinOrgId;
-    /**
-     * 所属机构code
-     */
-    @Getter
-    @Setter
-    private String joinOrgCode;
-    /**
-     * 所属机构名称
-     */
-    @Getter
-    @Setter
-    private String joinOrgName;
+    private Long deptId;
 
-    /**
-     * 角色id列表
-     */
-    @Getter
-    @Setter
-    private List<Long> roleIdList;
     /**
      * 手机号
      */
     @Getter
-    @Setter
     private String phone;
-    /**
-     * 邮箱
-     */
-    @Getter
-    @Setter
-    private String email;
-    /**
-     * 头像文件id
-     */
-    @Getter
-    @Setter
-    private String avatarId;
 
-    public GrgUser(Long userId,String username, String password,String phone, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
-        super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
+    /**
+     * 头像
+     */
+    @Getter
+    private String avatar;
+
+    @JsonCreator
+    public GrgUser(@JsonProperty("userId") Long userId, @JsonProperty("deptId") Long deptId,
+                    @JsonProperty("phone") String phone, @JsonProperty("avatar") String avatar,
+                    @JsonProperty("username") String userName, @JsonProperty("password") String password,
+                    @JsonProperty("enabled") boolean enabled, @JsonProperty("accountNonExpired") boolean accountNonExpired,
+                    @JsonProperty("credentialsNonExpired") boolean credentialsNonExpired, @JsonProperty("accountNonLocked") boolean accountNonLocked,
+                    @JsonProperty("authorities") Collection<? extends GrantedAuthority> authorities) {
+        super(userName, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
         this.userId = userId;
-        this.name = username;
+        this.deptId = deptId;
         this.phone = phone;
+        this.avatar = avatar;
     }
-
 }

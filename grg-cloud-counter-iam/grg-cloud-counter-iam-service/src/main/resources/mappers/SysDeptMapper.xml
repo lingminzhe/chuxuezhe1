@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grgbanking.counter.iam.dao.SysDeptDao">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.grgbanking.counter.iam.api.entity.SysDeptEntity">
+        <id column="dept_id" property="deptId" />
+        <result column="name" property="name" />
+        <result column="sort" property="sort" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="enabled" property="enabled" />
+        <result column="parent_id" property="parentId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        dept_id, name, sort, create_time, update_time, enabled, parent_id
+    </sql>
+
+</mapper>

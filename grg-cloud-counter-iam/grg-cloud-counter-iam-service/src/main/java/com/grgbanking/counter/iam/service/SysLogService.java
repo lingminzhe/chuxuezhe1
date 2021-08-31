@@ -1,20 +1,16 @@
 package com.grgbanking.counter.iam.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.grgbanking.counter.iam.api.bo.SysLogBo;
-import com.grgbanking.counter.iam.entity.SysLogEntity;
+import com.grgbanking.counter.iam.api.entity.SysLogEntity;
 
 /**
- * 系统日志
+ * <p>
+ * 日志表 服务类
+ * </p>
  *
- * @author MARK xx@grgbanking.com
+ * @author <a href="https://grgbanking.com">grgbanking</a>
+ * @since 2021-08-31
  */
 public interface SysLogService extends IService<SysLogEntity> {
-
-    IPage<SysLogEntity> queryList(Page page, String username, String ip, String startDate, String endDate);
-
-    Boolean saveSysLog(SysLogBo sysLogBo);
 
 }

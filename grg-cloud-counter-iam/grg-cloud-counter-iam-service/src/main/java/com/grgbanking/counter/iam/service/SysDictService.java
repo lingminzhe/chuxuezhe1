@@ -1,33 +1,16 @@
 package com.grgbanking.counter.iam.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.grgbanking.counter.iam.api.entity.SysDictEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.grgbanking.counter.iam.api.bo.SysDictBo;
-import com.grgbanking.counter.iam.api.vo.SysDictVo;
-import com.grgbanking.counter.iam.entity.SysDictEntity;
-import java.util.List;
 
 /**
- * 数据字典
+ * <p>
+ * 字典表 服务类
+ * </p>
+ *
+ * @author <a href="https://grgbanking.com">grgbanking</a>
+ * @since 2021-08-31
  */
 public interface SysDictService extends IService<SysDictEntity> {
 
-    IPage<SysDictVo> querySysDictList(Page page, SysDictBo sysDictBo);
-
-    boolean enable(Long id);
-
-    boolean disable(Long id);
-
-    void save(SysDictBo sysDictBo);
-
-    void update(SysDictBo sysDictBo);
-
-    void deleteBatch(Long[] codes);
-
-    List<SysDictVo> getListByAppType(String appType);
-
-    List<SysDictVo> getListByCodeType(String codeType);
-
 }
-

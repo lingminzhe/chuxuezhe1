@@ -21,7 +21,7 @@ public interface CommonConstants {
 	/**
 	 * 正常
 	 */
-	String STATUS_NORMAL = "1";
+	String STATUS_NORMAL = "0";
 
 	/**
 	 * 锁定

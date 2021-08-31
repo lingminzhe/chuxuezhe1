@@ -1,6 +1,6 @@
 package com.grgbanking.counter.common.log.event;
 
-import com.grgbanking.counter.iam.api.bo.SysLogBo;
+import com.grgbanking.counter.iam.api.dto.SysLogDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,6 +11,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public class SysLogEvent {
 
-	private final SysLogBo sysLog;
+	private final SysLogDTO sysLog;
 
 }

@@ -21,6 +21,7 @@
         <jsoup.version>1.14.2</jsoup.version>
         <commons-pool2.version>2.11.1</commons-pool2.version>
         <s3.version>1.12.56</s3.version>
+        <security.oauth.version>2.3.8.RELEASE</security.oauth.version>
     </properties>
 
     <dependencyManagement>
@@ -94,11 +95,11 @@
                 <version>${redisson.version}</version>
             </dependency>
 
-<!--            <dependency>-->
-<!--                <groupId>org.springframework.security.oauth</groupId>-->
-<!--                <artifactId>spring-security-oauth2</artifactId>-->
-<!--                <version>${security.oauth.version}</version>-->
-<!--            </dependency>-->
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>${security.oauth.version}</version>
+            </dependency>
 
             <!--mybatis plus extension,包含了mybatis plus core-->
             <dependency>

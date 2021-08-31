@@ -1,12 +1,10 @@
 package com.grgbanking.counter.common.security.service;
 
-import cn.hutool.core.util.StrUtil;
 import com.grgbanking.counter.common.core.constant.CacheConstants;
-import com.grgbanking.counter.common.core.constant.CommonConstants;
 import com.grgbanking.counter.common.security.base.GrgUser;
-import com.grgbanking.counter.iam.api.bo.SysUserBo;
-import com.grgbanking.counter.iam.api.bo.UserData;
-import com.grgbanking.counter.iam.api.dubbo.AuthRemoteService;
+import com.grgbanking.counter.iam.api.dto.UserInfo;
+import com.grgbanking.counter.iam.api.dubbo.RemoteUserService;
+import com.grgbanking.counter.iam.api.entity.SysUserEntity;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
@@ -27,7 +25,7 @@ import java.util.Collection;
 public class GrgUserDetailsServiceImpl implements GrgUserDetailsService {
 
     @DubboReference
-    private AuthRemoteService authRemoteService;
+    private RemoteUserService remoteUserService;
 
     @Autowired
     private CacheManager cacheManager;
@@ -47,7 +45,7 @@ public class GrgUserDetailsServiceImpl implements GrgUserDetailsService {
             return cache.get(username, GrgUser.class);
         }
 
-        UserData result = authRemoteService.info(username);
+        UserInfo result = remoteUserService.info(username);
         UserDetails userDetails = getUserDetails(result);
         cache.put(username, userDetails);
         return userDetails;
@@ -72,16 +70,17 @@ public class GrgUserDetailsServiceImpl implements GrgUserDetailsService {
      *
      * @return
      */
-    private UserDetails getUserDetails(UserData info) {
+    private UserDetails getUserDetails(UserInfo info) {
         if (info == null) {
             throw new UsernameNotFoundException("用户不存在");
         }
 
-        Collection<? extends GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(info.getAuthorities().toArray(new String[0]));
-        SysUserBo user = info.getUserBo();
-        boolean lock = !StrUtil.equals(user.getIsLocked(), CommonConstants.STATUS_NORMAL);
+        Collection<? extends GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(info.getPermissions());
+        SysUserEntity user = info.getSysUser();
+        boolean enabled = user.getEnabled() == 1;
+        boolean lock = user.getLockFlag() == 0;
         // 构造security用户
-        return new GrgUser(user.getId(), user.getUsername(), user.getPassword(), user.getMobileTelephone(), lock,true, true, true, authorities);
+        return new GrgUser(user.getUserId(), user.getDeptId(), user.getPhone(), user.getAvatar(),user.getUsername(),user.getPassword(), enabled, true, true, lock, authorities);
     }
 
 }

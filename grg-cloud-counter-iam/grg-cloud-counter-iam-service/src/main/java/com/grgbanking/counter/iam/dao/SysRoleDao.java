@@ -1,30 +1,27 @@
 package com.grgbanking.counter.iam.dao;
 
+import com.grgbanking.counter.iam.api.entity.SysRoleEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.grgbanking.counter.iam.entity.SysRoleEntity;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 /**
- * 角色管理
+ * <p>
+ * 系统角色表 Mapper 接口
+ * </p>
  *
- * @author MARK xx@grgbanking.com
+ * @author <a href="https://grgbanking.com">grgbanking</a>
+ * @since 2021-08-31
  */
 @Mapper
 public interface SysRoleDao extends BaseMapper<SysRoleEntity> {
 
     /**
-     * 查询用户创建的角色ID列表
-     */
-    List<SysRoleEntity> queryRoleIdList(String createUserId);
-
-    /**
-     * 查找当前用户有权限查看的用户又是是属于该角色的用户
-     *
+     * 通过用户ID，查询角色信息
      * @param userId
      * @return
      */
-    List<Long> queryRoleUserIdByCurrentUser(@Param("userId") Long userId, @Param("roleId") Long roleId);
+    List<SysRoleEntity> listRolesByUserId(Long userId);
+
 }
