@@ -6,8 +6,6 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @author lengleng
- * @date 2017/11/11
  */
 @Data
 public class UserInfo implements Serializable {

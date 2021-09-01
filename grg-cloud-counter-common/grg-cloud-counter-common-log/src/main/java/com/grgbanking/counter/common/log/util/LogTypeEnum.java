@@ -2,7 +2,6 @@ package com.grgbanking.counter.common.log.util;
 
 /**
  *
- * @author lengleng
  * @date 2021/1/13
  */
 
@@ -10,7 +9,6 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * @author lengleng
  * @date 2020/7/30
  * <p>
  * 日志类型
