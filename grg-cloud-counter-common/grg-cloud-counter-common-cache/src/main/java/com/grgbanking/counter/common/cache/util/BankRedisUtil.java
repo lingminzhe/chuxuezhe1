@@ -29,7 +29,7 @@ public class BankRedisUtil {
      *
      * @param
      * @return list ：返回模糊匹配的keys
-     * @author Jesson
+     *
      * @date 2021/11/28 11:12
      */
     public static List<String> getScanList(int count, String pattern) {
@@ -94,7 +94,7 @@ public class BankRedisUtil {
      *
      * @param args 为 "且" 关系
      * @return
-     * @author Jesson
+     *
      * @date 2021/9/4 16:47
      */
 
