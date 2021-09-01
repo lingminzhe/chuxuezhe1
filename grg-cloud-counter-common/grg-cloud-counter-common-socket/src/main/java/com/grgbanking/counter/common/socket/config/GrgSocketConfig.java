@@ -74,7 +74,7 @@ public class GrgSocketConfig {
 	 */
 	@Bean
 	public SocketIOServer socketIOServer() {
-		log.info("启用socket服务：{}",this.toString());
+		log.info("启用socketio的服务");
 		SocketConfig socketConfig = new SocketConfig();
 		socketConfig.setTcpNoDelay(true);
 		socketConfig.setSoLinger(0);
