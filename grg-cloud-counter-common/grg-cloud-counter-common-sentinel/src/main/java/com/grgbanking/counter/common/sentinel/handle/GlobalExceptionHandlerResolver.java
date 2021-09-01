@@ -40,20 +40,20 @@ public class GlobalExceptionHandlerResolver {
     @ExceptionHandler(CheckedException.class)
     public Resp handleCheckedException(CheckedException e) {
         log.error("统一异常处理拦截到异常CheckedException", e);
-        return Resp.error(HttpStatus.BAD_REQUEST.value(), e.getMessage());
+        return Resp.failed(HttpStatus.BAD_REQUEST.value(), e.getMessage());
     }
 
 
     @ExceptionHandler(ValidateCodeException.class)
     public Resp handleValidateCodeException(ValidateCodeException e) {
         log.error("统一异常处理拦截到异常ValidateCodeException");
-        return Resp.error(e.getMessage());
+        return Resp.failed(e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
     public Resp exception(Exception e) {
         log.error("统一异常处理拦截到异常Exception:{}", e.getMessage(), e);
-        return Resp.error();
+        return Resp.failed();
     }
 
 }

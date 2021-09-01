@@ -24,7 +24,7 @@ public class UrlBlockHandler implements BlockExceptionHandler {
 		log.error("UrlBlockHandler，Sentinel Feign 降级。APP:{}，资源名称：{}", e.getRuleLimitApp(),e.getRule().getResource(), e);
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType(ContentType.JSON.toString());
-		response.getWriter().print(JSONUtil.toJsonStr(Resp.error(HttpStatus.TOO_MANY_REQUESTS.value(),"应用-触发系统保护")));
+		response.getWriter().print(JSONUtil.toJsonStr(Resp.failed(HttpStatus.TOO_MANY_REQUESTS.value(),"应用-触发系统保护")));
 	}
 
 }
