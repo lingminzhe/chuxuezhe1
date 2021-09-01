@@ -36,6 +36,7 @@
         <module>grg-cloud-counter-video</module>
         <module>grg-cloud-counter-codegen</module>
         <module>grg-cloud-counter-app</module>
+        <module>grg-cloud-counter-oss</module>
     </modules>
 
     <dependencies>
