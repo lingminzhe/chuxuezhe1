@@ -1,3 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.grgbanking.counter.common.socket.SocketAutoConfiguration,\
-  com.grgbanking.counter.common.socket.server.SocketServer
+  com.grgbanking.counter.common.socket.SocketAutoConfiguration

@@ -81,11 +81,6 @@
             <artifactId>spring-cloud-starter-dubbo</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.grgbanking.counter</groupId>
-            <artifactId>grg-cloud-counter-common-socket</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 
     <build>

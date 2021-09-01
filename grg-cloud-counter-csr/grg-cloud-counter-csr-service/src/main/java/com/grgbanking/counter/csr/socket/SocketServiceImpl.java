@@ -1,4 +1,4 @@
-package com.grgbanking.counter.iam.service.impl;
+package com.grgbanking.counter.csr.socket;
 
 import com.corundumstudio.socketio.SocketIOClient;
 import com.grgbanking.counter.common.core.util.Resp;
