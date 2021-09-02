@@ -27,15 +27,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandlerResolver {
 
-//    @Getter
-//    @AllArgsConstructor
-//    public enum RespI18nConstants {
-//        AccessDenied("exception.AccessDenied", "全局访问拒绝"),
-//        InvalidToken("exception.InvalidToken", "全局无效令牌"),
-//        ;
-//        private String code;
-//        private String value;
-//    }
 
     @ExceptionHandler(CheckedException.class)
     public Resp handleCheckedException(CheckedException e) {

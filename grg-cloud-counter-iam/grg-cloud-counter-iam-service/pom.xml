@@ -39,10 +39,10 @@
             <artifactId>grg-cloud-counter-common-swagger</artifactId>
         </dependency>
         <!-- sentinel 依赖 -->
-<!--        <dependency>-->
-<!--            <groupId>com.grgbanking.counter</groupId>-->
-<!--            <artifactId>grg-cloud-counter-common-sentinel</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.grgbanking.counter</groupId>
+            <artifactId>grg-cloud-counter-common-sentinel</artifactId>
+        </dependency>
         <!-- 平台管理api层依赖 -->
         <dependency>
             <groupId>com.grgbanking.counter</groupId>
