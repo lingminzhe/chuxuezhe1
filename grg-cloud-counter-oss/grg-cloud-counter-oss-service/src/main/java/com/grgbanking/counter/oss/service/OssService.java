@@ -12,10 +12,9 @@ public interface OssService {
 
     /**
      * 上传文件
-     * @param file
      * @return
      */
-    Map<String,Object> upload(MultipartFile file);
+    Map<String, Object> upload(byte[] fileByte,String md5, String original, long size, String contentType);
 
     /**
      * 查询列表

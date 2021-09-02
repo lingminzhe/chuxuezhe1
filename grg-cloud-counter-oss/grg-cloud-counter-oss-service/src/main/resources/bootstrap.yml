@@ -1,5 +1,5 @@
 server:
-  port: 7654
+  port: 8765
 spring:
   application:
     name: grg-cloud-counter-oss

@@ -35,24 +35,20 @@ public class OssServiceImpl implements OssService {
     private AmazonS3 amazonS3;
 
     // TODO 同时保存相关信息到数据库
-    @SneakyThrows
     @Override
-    public Map<String, Object> upload(MultipartFile file) {
+    public Map<String, Object> upload(byte[] fileByte,String md5, String original, long size, String contentType) {
         Map<String, Object> result = new HashMap<>();
-        String original = file.getOriginalFilename();
-        String md5 = FileUtil.getFileMd5(file);
         String fileName = FileUtil.randomFileName();
-        String fileSize = FileUtil.getPrintSize(file.getSize());
+        String fileSize = FileUtil.getPrintSize(size);
 
         result.put("original", original);
         result.put("md5", md5);
         result.put("fileName", fileName);
         result.put("size", fileSize);
-        byte[] bytes = IOUtils.toByteArray(file.getInputStream());
         ObjectMetadata objectMetadata = new ObjectMetadata();
-        objectMetadata.setContentLength(file.getSize());
-        objectMetadata.setContentType(file.getContentType());
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
+        objectMetadata.setContentLength(size);
+        objectMetadata.setContentType(contentType);
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(fileByte);
         amazonS3.putObject(ossProperties.getBucketName(), fileName, byteArrayInputStream, objectMetadata);
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, 7); // url有效期最多7天
