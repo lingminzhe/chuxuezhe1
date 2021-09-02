@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xmlns="http://maven.apache.org/POM/4.0.0"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.grgbanking.counter</groupId>
+		<artifactId>grg-cloud-counter-common</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>grg-cloud-counter-common-socket</artifactId>
+	<packaging>jar</packaging>
+
+	<description>socket公共模块</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.grgbanking.counter</groupId>
+			<artifactId>grg-cloud-counter-common-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.corundumstudio.socketio</groupId>
+			<artifactId>netty-socketio</artifactId>
+		</dependency>
+
+	</dependencies>
+</project>
