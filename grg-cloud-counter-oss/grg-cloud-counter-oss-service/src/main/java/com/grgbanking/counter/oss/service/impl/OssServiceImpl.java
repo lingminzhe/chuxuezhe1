@@ -9,21 +9,17 @@ import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.util.IOUtils;
 import com.grgbanking.counter.common.core.util.FileUtil;
+import com.grgbanking.counter.oss.api.dto.FileDTO;
 import com.grgbanking.counter.oss.config.OssProperties;
 import com.grgbanking.counter.oss.service.OssService;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 import java.io.ByteArrayInputStream;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
 @Slf4j
 @Service
@@ -36,15 +32,15 @@ public class OssServiceImpl implements OssService {
 
     // TODO 同时保存相关信息到数据库
     @Override
-    public Map<String, Object> upload(byte[] fileByte,String md5, String original, long size, String contentType) {
-        Map<String, Object> result = new HashMap<>();
+    public FileDTO upload(byte[] fileByte,String md5, String original, long size, String contentType) {
+        FileDTO fileDTO = new FileDTO();
         String fileName = FileUtil.randomFileName();
         String fileSize = FileUtil.getPrintSize(size);
-
-        result.put("original", original);
-        result.put("md5", md5);
-        result.put("fileName", fileName);
-        result.put("size", fileSize);
+        fileDTO.setOriginal(original);
+        fileDTO.setMd5(fileName);
+        fileDTO.setFileName(fileName);
+        fileDTO.setSize(size);
+        fileDTO.setContentType(contentType);
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setContentLength(size);
         objectMetadata.setContentType(contentType);
@@ -53,25 +49,24 @@ public class OssServiceImpl implements OssService {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, 7); // url有效期最多7天
         String url = amazonS3.generatePresignedUrl(ossProperties.getBucketName(), fileName, calendar.getTime()).toString();
-        result.put("url", url);
-        return result;
+        fileDTO.setUrl(url);
+        return fileDTO;
     }
 
     // TODO 从数据库查询
     @Override
-    public Map<String, Object> list(String fileType, String userId) {
-        Map<String, Object> result = new HashMap<>();
-        return result;
+    public FileDTO list(String fileType, String userId) {
+        return null;
     }
 
     // TODO 从数据库查询
     @Override
-    public Map<String, Object> queryFileInfo(String fileName) {
-        Map<String, Object> result = new HashMap<>();
+    public FileDTO queryFileInfo(String fileName) {
+        FileDTO result = new FileDTO();
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, 7); // url有效期最多7天
         String url = amazonS3.generatePresignedUrl(ossProperties.getBucketName(), fileName, calendar.getTime()).toString();
-        result.put("url", url);
+        result.setUrl(url);
         return result;
     }
 

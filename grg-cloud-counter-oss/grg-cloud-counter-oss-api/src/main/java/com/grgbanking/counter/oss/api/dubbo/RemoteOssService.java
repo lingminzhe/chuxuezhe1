@@ -1,6 +1,6 @@
 package com.grgbanking.counter.oss.api.dubbo;
 
-import java.util.Map;
+import com.grgbanking.counter.oss.api.dto.FileDTO;
 
 public interface RemoteOssService {
 
@@ -9,6 +9,6 @@ public interface RemoteOssService {
      *
      * @return
      */
-    Map<String, Object> upload(byte[] fileByte, String md5, String original, long size, String contentType);
+    FileDTO upload(byte[] fileByte, String md5, String original, long size, String contentType);
 
 }

@@ -20,7 +20,6 @@ public class OssController {
 	@DubboReference
 	private RemoteOssService remoteOssService;
 
-
 	/**
      * 上传文件
 	 * @param file

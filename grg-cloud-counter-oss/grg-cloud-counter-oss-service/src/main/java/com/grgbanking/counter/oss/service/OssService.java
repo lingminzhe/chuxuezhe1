@@ -1,5 +1,6 @@
 package com.grgbanking.counter.oss.service;
 
+import com.grgbanking.counter.oss.api.dto.FileDTO;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
@@ -14,22 +15,20 @@ public interface OssService {
      * 上传文件
      * @return
      */
-    Map<String, Object> upload(byte[] fileByte,String md5, String original, long size, String contentType);
+    FileDTO upload(byte[] fileByte, String md5, String original, long size, String contentType);
 
     /**
      * 查询列表
      * @param fileType
      * @param userId
      */
-    // TODO 完善返回值对象
-    Map<String, Object> list(String fileType, String userId);
+    FileDTO list(String fileType, String userId);
 
     /**
      * 查询单个文件信息
      * @param fileName
      */
-    // TODO 完善返回值对象
-    Map<String,Object> queryFileInfo(String fileName);
+    FileDTO queryFileInfo(String fileName);
 
 
     /**
