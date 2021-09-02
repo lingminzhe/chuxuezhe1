@@ -37,6 +37,7 @@
         <module>grg-cloud-counter-codegen</module>
         <module>grg-cloud-counter-app</module>
         <module>grg-cloud-counter-oss</module>
+        <module>grg-cloud-counter-bank</module>
     </modules>
 
     <dependencies>
