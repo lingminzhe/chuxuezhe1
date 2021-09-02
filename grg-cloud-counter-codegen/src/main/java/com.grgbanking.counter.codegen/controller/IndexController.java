@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
  * @author grgbanking
  * @since 2021-07-12
  */
-@RestController
+@Controller
 public class IndexController {
 
     @Autowired

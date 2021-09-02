@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grgbanking.counter.bank.dao.GrgAccountDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.grgbanking.counter.bank.entity.GrgAccountEntity">
+        <id column="id" property="id" />
+        <result column="customer_id" property="customerId" />
+        <result column="card_no" property="cardNo" />
+        <result column="card_pwd" property="cardPwd" />
+        <result column="card_certificate_type" property="cardCertificateType" />
+        <result column="account_sign_type" property="accountSignType" />
+        <result column="account_status" property="accountStatus" />
+        <result column="lock_status" property="lockStatus" />
+        <result column="create_date" property="createDate" />
+        <result column="card_level" property="cardLevel" />
+        <result column="create_by" property="createBy" />
+        <result column="update_date" property="updateDate" />
+        <result column="update_by" property="updateBy" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, customer_id, card_no, card_pwd, card_certificate_type, account_sign_type, account_status, lock_status, create_date, card_level, create_by, update_date, update_by
+    </sql>
+
+</mapper>

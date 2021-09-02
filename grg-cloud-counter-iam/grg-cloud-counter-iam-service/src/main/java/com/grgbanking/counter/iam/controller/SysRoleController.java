@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-08-31
  */
 @RestController
-@RequestMapping("/role")
+@RequestMapping("/sys/role")
 public class SysRoleController {
 
 }
