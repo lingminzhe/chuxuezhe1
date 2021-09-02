@@ -1,7 +1,8 @@
-package com.grgbanking.counter.common.oss;
+package com.grgbanking.counter.oss.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * aws 配置信息
@@ -12,6 +13,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * bucket 设置公共读权限
  */
 @Data
+@Configuration
 @ConfigurationProperties(prefix = "oss")
 public class OssProperties {
 
@@ -55,11 +57,11 @@ public class OssProperties {
 	/**
 	 * 默认的存储桶名称
 	 */
-	private String bucketName = "payerp";
+	private String bucketName = "grg-cloud-counter";
 
 	/**
 	 * 最大线程数，默认： 100
 	 */
-	private Integer maxConnections = 100;
+	private Integer maxConnections = 1000;
 
 }

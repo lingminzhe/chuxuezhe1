@@ -1,6 +1,7 @@
 package com.grgbanking.counter.csr.socket;
 
 import com.corundumstudio.socketio.SocketIOClient;
+import com.corundumstudio.socketio.SocketIOServer;
 import com.grgbanking.counter.common.core.util.Resp;
 import com.grgbanking.counter.common.socket.server.SocketServer;
 import com.grgbanking.counter.common.socket.service.SocketAbstractService;
@@ -13,6 +14,11 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class SocketServiceImpl extends SocketAbstractService {
+
+    @Override
+    public void addListener(SocketIOServer socketIOServer) {
+
+    }
 
     /**
      * 连接成功回调，进行redis的相关操作，比如客户端和服务器的关联关系的绑定等

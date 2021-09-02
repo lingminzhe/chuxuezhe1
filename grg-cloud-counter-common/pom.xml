@@ -25,7 +25,6 @@
         <module>grg-cloud-counter-common-mq</module>
         <module>grg-cloud-counter-common-cache</module>
         <module>grg-cloud-counter-common-xss</module>
-        <module>grg-cloud-counter-common-oss</module>
         <module>grg-cloud-counter-common-socket</module>
     </modules>
 

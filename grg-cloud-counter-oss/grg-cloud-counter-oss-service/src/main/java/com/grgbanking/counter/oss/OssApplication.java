@@ -1,4 +1,4 @@
-package com.grgbanking.counter.app;
+package com.grgbanking.counter.oss;
 
 
 import org.springframework.boot.SpringApplication;
@@ -10,10 +10,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 //@EnableGrgResourceServer
 @SpringBootApplication
 @EnableDiscoveryClient
-public class AppApplication {
+public class OssApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AppApplication.class, args);
+        SpringApplication.run(OssApplication.class, args);
     }
 
 }

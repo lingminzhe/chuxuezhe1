@@ -78,6 +78,12 @@ public class SocketServer {
                 socketService.receiveMessage(Resp.success(data),socketService.getClientId(client));
             }
         });
+
+        /**
+         * 添加自定义监听器
+         */
+        socketService.addListener(socketIOServer);
+
         socketIOServer.start();
     }
 

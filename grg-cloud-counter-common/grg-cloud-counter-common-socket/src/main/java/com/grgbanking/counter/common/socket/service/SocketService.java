@@ -2,9 +2,16 @@ package com.grgbanking.counter.common.socket.service;
 
 
 import com.corundumstudio.socketio.SocketIOClient;
+import com.corundumstudio.socketio.SocketIOServer;
 import com.grgbanking.counter.common.core.util.Resp;
 
 public interface SocketService {
+
+    /**
+     * 添加自定义监听器以及其他处理
+     * @param socketIOServer
+     */
+    void addListener(SocketIOServer socketIOServer);
 
     /**
      * 客户端连接上来了
