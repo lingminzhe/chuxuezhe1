@@ -18,7 +18,7 @@ public interface CacheConstants {
 	/**
 	 * 验证码前缀
 	 */
-	String PLATFORM_LOGIN_CAPTCHA = "grg-cloud-counter:platform:login:captcha:";
+	String DEFAULT_CODE_KEY = "DEFAULT_CODE_KEY:";
 
 	/**
 	 * 菜单信息缓存
@@ -31,6 +31,11 @@ public interface CacheConstants {
 	String USER_DETAILS = "user_details";
 
 	/**
+	 * 角色信息缓存
+	 */
+	String ROLE_DETAILS = "role_details";
+
+	/**
 	 * 字典信息缓存
 	 */
 	String DICT_DETAILS = "dict_details";
@@ -38,27 +43,22 @@ public interface CacheConstants {
 	/**
 	 * oauth 客户端信息
 	 */
-	String CLIENT_DETAILS_KEY = "ibank_oauth:client:details";
+	String CLIENT_DETAILS_KEY = "grg_oauth:client:details";
 
 	/**
 	 * spring boot admin 事件key
 	 */
-	String EVENT_KEY = "event_key";
+	String EVENT_KEY = GLOBALLY + "event_key";
 
 	/**
-	 * 路由存放
+	 * 公众号 reload
 	 */
-	String ROUTE_KEY = "gateway_route_key";
+	String MP_REDIS_RELOAD_TOPIC = "mp_redis_reload_topic";
 
 	/**
-	 * redis reload 事件
+	 * 支付 reload 事件
 	 */
-	String ROUTE_REDIS_RELOAD_TOPIC = "gateway_redis_route_reload_topic";
-
-	/**
-	 * 内存reload 时间
-	 */
-	String ROUTE_JVM_RELOAD_TOPIC = "gateway_jvm_route_reload_topic";
+	String PAY_REDIS_RELOAD_TOPIC = "pay_redis_reload_topic";
 
 	/**
 	 * 参数缓存
@@ -66,14 +66,15 @@ public interface CacheConstants {
 	String PARAMS_DETAILS = "params_details";
 
 	/**
-	 * 终端信息属性缓存
+	 * 租户缓存 (不区分租户)
 	 */
-	String DEVICE_INFO_COLUMN = "device:info:column";
+	String TENANT_DETAILS = GLOBALLY + "tenant_details";
 
 	/**
-	 * 终端信息
+	 * 客户端配置缓存
 	 */
-	String DEVICE_INFO_LIST = "device:info:list";
+	String CLIENT_FLAG = "client_config_flag";
+
 
 
 }

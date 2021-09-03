@@ -8,7 +8,6 @@ import com.grgbanking.counter.common.security.exception.GrgAuth2Exception;
 import lombok.SneakyThrows;
 
 /**
- * @date 2021/11/16
  * OAuth2 异常格式化
  */
 public class GrgAuth2ExceptionSerializer extends StdSerializer<GrgAuth2Exception> {

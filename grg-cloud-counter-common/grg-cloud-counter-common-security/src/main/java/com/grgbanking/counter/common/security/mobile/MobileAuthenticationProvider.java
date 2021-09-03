@@ -15,7 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsChecker;
 
 /**
- * @date 2021/8/5 手机登录校验逻辑 验证码登录、社交登录
+ * 手机登录校验逻辑 验证码登录、社交登录
  */
 @Slf4j
 public class MobileAuthenticationProvider implements AuthenticationProvider {
@@ -32,12 +32,10 @@ public class MobileAuthenticationProvider implements AuthenticationProvider {
 	@SneakyThrows
 	public Authentication authenticate(Authentication authentication) {
 		MobileAuthenticationToken mobileAuthenticationToken = (MobileAuthenticationToken) authentication;
-
 		String principal = mobileAuthenticationToken.getPrincipal().toString();
 		UserDetails userDetails = userDetailsService.loadUserBySocial(principal);
 		if (userDetails == null) {
 			log.debug("Authentication failed: no credentials provided");
-
 			throw new BadCredentialsException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.noopBindAccount", "Noop Bind Account"));
 		}
 

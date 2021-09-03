@@ -1,7 +1,6 @@
 package com.grgbanking.counter.common.security.component;
 
 import com.grgbanking.counter.common.core.constant.SecurityConstants;
-import com.grgbanking.counter.common.security.annotation.EnableGrgResourceServer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
@@ -25,9 +24,8 @@ public class GrgSecurityBeanDefinitionRegistrar implements ImportBeanDefinitionR
 			return;
 		}
 		GenericBeanDefinition beanDefinition = new GenericBeanDefinition();
-		beanDefinition.setBeanClass(GrgLocalResourceServerConfigurerAdapter.class);
+		beanDefinition.setBeanClass(GrgResourceServerConfigurer.class);
 		registry.registerBeanDefinition(SecurityConstants.RESOURCE_SERVER_CONFIGURER, beanDefinition);
-
 	}
 
 }

@@ -4,7 +4,7 @@ package com.grgbanking.counter.common.security.utils;
 
 import cn.hutool.core.util.StrUtil;
 import com.grgbanking.counter.common.core.constant.SecurityConstants;
-import com.grgbanking.counter.common.security.base.GrgUser;
+import com.grgbanking.counter.common.security.service.GrgUser;
 import lombok.experimental.UtilityClass;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

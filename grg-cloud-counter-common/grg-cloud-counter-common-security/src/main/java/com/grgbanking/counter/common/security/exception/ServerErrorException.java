@@ -5,7 +5,6 @@ import com.grgbanking.counter.common.security.component.GrgAuth2ExceptionSeriali
 import org.springframework.http.HttpStatus;
 
 /**
- * @date 2021/7/8
  */
 @JsonSerialize(using = GrgAuth2ExceptionSerializer.class)
 public class ServerErrorException extends GrgAuth2Exception {

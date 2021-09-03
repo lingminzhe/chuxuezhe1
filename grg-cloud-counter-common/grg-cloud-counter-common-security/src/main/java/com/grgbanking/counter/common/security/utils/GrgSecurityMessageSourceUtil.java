@@ -6,8 +6,6 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import java.util.Locale;
 
 /**
- * @date 2021/9/4
- * <p>
  * @see org.springframework.security.core.SpringSecurityMessageSource  框架自身异常处理，
  * 建议所有异常都使用此工具类型 避免无法复写 SpringSecurityMessageSource
  */

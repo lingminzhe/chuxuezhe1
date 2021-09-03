@@ -1,7 +1,7 @@
 package com.grgbanking.counter.common.security.service;
 
 import com.grgbanking.counter.common.core.constant.CacheConstants;
-import com.grgbanking.counter.common.security.base.GrgUser;
+import com.grgbanking.counter.common.security.service.GrgUser;
 import com.grgbanking.counter.iam.api.dto.UserInfo;
 import com.grgbanking.counter.iam.api.dubbo.RemoteUserService;
 import com.grgbanking.counter.iam.api.entity.SysUserEntity;

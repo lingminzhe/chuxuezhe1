@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @date 2021/03/25 认证失败事件监听器
+ *  认证失败事件监听器
  */
 public class AuthenticationFailureEventListener implements ApplicationListener<AbstractAuthenticationFailureEvent> {
 

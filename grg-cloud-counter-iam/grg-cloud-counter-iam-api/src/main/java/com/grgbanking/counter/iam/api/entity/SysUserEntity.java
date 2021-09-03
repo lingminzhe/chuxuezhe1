@@ -18,7 +18,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author <a href="https://grgbanking.com">grgbanking</a>
- * @since 2021-08-31
+ * @since 2021-09-03
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -34,7 +34,7 @@ public class SysUserEntity extends Model<SysUserEntity> {
     @TableId(value = "user_id", type = IdType.AUTO)
     private Long userId;
 
-//    @TableField("username")
+    @TableField("username")
     private String username;
 
     @TableField("password")
@@ -64,9 +64,15 @@ public class SysUserEntity extends Model<SysUserEntity> {
     @TableField("update_time")
     private LocalDateTime updateTime;
 
+    /**
+     * 0-未锁定，1-已锁定
+     */
     @TableField("lock_flag")
     private Integer lockFlag;
 
+    /**
+     * 1-可用；0-禁用
+     */
     @TableField("enabled")
     private Integer enabled;
 

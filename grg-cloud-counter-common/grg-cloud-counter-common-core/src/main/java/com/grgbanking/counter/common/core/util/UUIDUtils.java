@@ -5,7 +5,6 @@ import java.util.UUID;
 /**
  * UUID生成
  *
- * @date 2021年10月25日 下午5:04:17
  *
  * @version 1.0 2021年10月25日 Tom create
  * 

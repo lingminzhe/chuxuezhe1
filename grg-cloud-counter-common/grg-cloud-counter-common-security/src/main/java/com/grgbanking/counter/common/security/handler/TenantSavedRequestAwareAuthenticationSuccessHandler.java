@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @date 2021/2/7
  *
  * 增强成功回调增加租户上下文避免极端情况下丢失问题
  * @see SavedRequestAwareAuthenticationSuccessHandler

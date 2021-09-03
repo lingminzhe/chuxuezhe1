@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 02/09/2021 14:33:32
+ Date: 03/09/2021 16:25:46
 */
 
 SET NAMES utf8mb4;
@@ -625,25 +625,30 @@ INSERT INTO `sys_role_menu` VALUES (1, 9006);
 COMMIT;
 
 -- ----------------------------
--- Table structure for sys_social_user
+-- Table structure for sys_social_auth_user
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_social_user`;
-CREATE TABLE `sys_social_user` (
+DROP TABLE IF EXISTS `sys_social_auth_user`;
+CREATE TABLE `sys_social_auth_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `customer_id` int(11) DEFAULT NULL COMMENT '客户id',
   `login_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '登录方式',
   `login_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '登录账号',
-  `create_date` datetime NOT NULL,
+  `lock_flag` int(1) DEFAULT '0' COMMENT '0-未锁定，1-已锁定',
+  `enabled` int(1) DEFAULT '1' COMMENT '1-可用；0-禁用',
+  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '头像',
+  `create_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `create_by` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
   `update_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `update_by` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='客户社交账户认证信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='客户社交账户认证信息表';
 
 -- ----------------------------
--- Records of sys_social_user
+-- Records of sys_social_auth_user
 -- ----------------------------
 BEGIN;
+INSERT INTO `sys_social_auth_user` VALUES (1, NULL, 123, 'SMS', '18302040699', 0, 1, NULL, '2021-09-03 09:57:42', NULL, NULL, NULL);
 COMMIT;
 
 -- ----------------------------
@@ -659,8 +664,8 @@ CREATE TABLE `sys_user` (
   `dept_id` bigint(20) DEFAULT NULL COMMENT '部门ID',
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `lock_flag` int(1) DEFAULT '0',
-  `enabled` int(1) DEFAULT '1',
+  `lock_flag` int(1) DEFAULT '0' COMMENT '0-未锁定，1-已锁定',
+  `enabled` int(1) DEFAULT '1' COMMENT '1-可用；0-禁用',
   PRIMARY KEY (`user_id`) USING BTREE,
   KEY `user_idx1_username` (`username`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
@@ -669,7 +674,7 @@ CREATE TABLE `sys_user` (
 -- Records of sys_user
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_user` VALUES (1, 'admin', '$2a$10$H3p/ptZ9U8LoR1kwF5CF/eGn92yFTPO6ma0jgeOhVJMsw/oFyez.6', '17034642888', '/admin/sys-file/lengleng/c5a85e0770cd4fe78bc14b63b3bd05ae.jpg', 1, '2018-04-20 07:15:18', '2021-08-31 15:02:35', 0, 1);
+INSERT INTO `sys_user` VALUES (1, 'admin', '$2a$10$H3p/ptZ9U8LoR1kwF5CF/eGn92yFTPO6ma0jgeOhVJMsw/oFyez.6', '13800138000', '', 1, '2018-04-20 07:15:18', '2021-09-03 15:57:07', 0, 1);
 COMMIT;
 
 -- ----------------------------

@@ -24,7 +24,6 @@ import java.io.PrintWriter;
 /**
  * 异常处理 {@link AuthenticationException } 不同细化异常处理
  *
- * @date 2021-06-14
  */
 @Slf4j
 @Component
@@ -44,8 +43,7 @@ public class GrgCommenceAuthExceptionEntryPoint implements AuthenticationEntryPo
 		result.setData(authException.getMessage());
 		result.setCode(CommonConstants.FAIL);
 
-		if (authException instanceof CredentialsExpiredException
-				|| authException instanceof InsufficientAuthenticationException) {
+		if (authException instanceof CredentialsExpiredException || authException instanceof InsufficientAuthenticationException) {
 			String msg = GrgSecurityMessageSourceUtil.getAccessor().getMessage("AbstractUserDetailsAuthenticationProvider.credentialsExpired", authException.getMessage());
 			result.setMsg(msg);
 		}

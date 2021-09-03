@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 02/09/2021 14:34:43
+ Date: 03/09/2021 16:26:18
 */
 
 SET NAMES utf8mb4;
@@ -33,7 +33,7 @@ CREATE TABLE `grg_account` (
   `create_date` datetime NOT NULL,
   `card_level` tinyint(1) DEFAULT NULL COMMENT '卡片等级（1： 一类卡； 2：二类卡）',
   `create_by` varchar(64) DEFAULT NULL,
-  `update_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `update_date` datetime DEFAULT NULL,
   `update_by` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='银行卡详细表';
@@ -42,7 +42,7 @@ CREATE TABLE `grg_account` (
 -- Records of grg_account
 -- ----------------------------
 BEGIN;
-INSERT INTO `grg_account` VALUES (3, 1, '12345678', '123456', '身份证', NULL, NULL, NULL, '2021-09-01 15:03:12', NULL, NULL, '2021-09-01 15:03:12', NULL);
+INSERT INTO `grg_account` VALUES (1, 1, '12345678', '123456', '身份证', NULL, NULL, NULL, '2021-09-01 15:03:12', NULL, NULL, '2021-09-01 15:03:12', NULL);
 COMMIT;
 
 -- ----------------------------
@@ -65,6 +65,9 @@ CREATE TABLE `grg_account_record` (
 -- Records of grg_account_record
 -- ----------------------------
 BEGIN;
+INSERT INTO `grg_account_record` VALUES (1, 1, '1236541', 2, '2021-09-03 15:59:32', NULL, '2021-09-03 15:59:36', NULL);
+INSERT INTO `grg_account_record` VALUES (2, 2, '99999', 1, '2021-09-03 16:03:21', NULL, '2021-09-03 16:03:24', NULL);
+INSERT INTO `grg_account_record` VALUES (3, 2, '9999', 1, '2021-09-03 16:08:49', NULL, '2021-09-03 16:08:51', NULL);
 COMMIT;
 
 -- ----------------------------
@@ -116,6 +119,7 @@ CREATE TABLE `grg_customer` (
 -- Records of grg_customer
 -- ----------------------------
 BEGIN;
+INSERT INTO `grg_customer` VALUES ('1', '1', '1997', '旭旭宝宝', '大马猴', NULL, NULL, NULL, '本科', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
