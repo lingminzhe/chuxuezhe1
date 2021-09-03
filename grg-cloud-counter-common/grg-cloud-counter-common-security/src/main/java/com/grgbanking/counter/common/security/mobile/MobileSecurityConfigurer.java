@@ -14,7 +14,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
- * @date 2021/8/5 手机号登录配置入口
+ * 手机号登录配置入口
  */
 @Getter
 @Setter
@@ -38,8 +38,7 @@ public class MobileSecurityConfigurer extends SecurityConfigurerAdapter<DefaultS
 
         MobileAuthenticationProvider mobileAuthenticationProvider = new MobileAuthenticationProvider();
         mobileAuthenticationProvider.setUserDetailsService(userDetailsService);
-        http.authenticationProvider(mobileAuthenticationProvider).addFilterAfter(mobileAuthenticationFilter,
-                UsernamePasswordAuthenticationFilter.class);
+        http.authenticationProvider(mobileAuthenticationProvider).addFilterAfter(mobileAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
 }

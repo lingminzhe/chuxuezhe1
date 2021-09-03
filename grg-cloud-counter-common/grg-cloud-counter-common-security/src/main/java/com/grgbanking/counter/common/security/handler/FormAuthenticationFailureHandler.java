@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @date 2021-08-20
- * <p>
  * 表单登录失败处理逻辑
  */
 @Slf4j

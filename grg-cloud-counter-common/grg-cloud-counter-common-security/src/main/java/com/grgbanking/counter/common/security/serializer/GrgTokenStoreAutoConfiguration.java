@@ -11,8 +11,6 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 /**
- * @date 2021/9/29
- * <p>
  * redis token store 自动配置
  */
 @RequiredArgsConstructor
@@ -25,12 +23,12 @@ public class GrgTokenStoreAutoConfiguration {
 	public TokenStore tokenStore() {
 		RedisTokenStore tokenStore = new RedisTokenStore(connectionFactory);
 		tokenStore.setPrefix(SecurityConstants.GRG_PREFIX + SecurityConstants.OAUTH_PREFIX);
-//		tokenStore.setAuthenticationKeyGenerator(new DefaultAuthenticationKeyGenerator() {
-//			@Override
-//			public String extractKey(OAuth2Authentication authentication) {
-//				return super.extractKey(authentication);
-//			}
-//		});
+		tokenStore.setAuthenticationKeyGenerator(new DefaultAuthenticationKeyGenerator() {
+			@Override
+			public String extractKey(OAuth2Authentication authentication) {
+				return super.extractKey(authentication);
+			}
+		});
 		return tokenStore;
 	}
 

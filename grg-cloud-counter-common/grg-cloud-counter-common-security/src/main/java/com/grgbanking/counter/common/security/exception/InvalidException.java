@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.grgbanking.counter.common.security.component.GrgAuth2ExceptionSerializer;
 
 /**
- * @date 2021/7/8
  */
 @JsonSerialize(using = GrgAuth2ExceptionSerializer.class)
 public class InvalidException extends GrgAuth2Exception {

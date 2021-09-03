@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetailsChecker;
 
 /**
  * 手机登录校验逻辑 验证码登录、社交登录使用到此类
- * @date 2021-01-02
  */
 @Slf4j
 public class GrgPreAuthenticationChecks implements UserDetailsChecker {

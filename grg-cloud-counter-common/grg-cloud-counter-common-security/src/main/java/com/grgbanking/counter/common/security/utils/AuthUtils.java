@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 
 /**
- * @date 2021/5/13 认证授权相关工具类
+ * 认证授权相关工具类
  */
 @Slf4j
 @UtilityClass

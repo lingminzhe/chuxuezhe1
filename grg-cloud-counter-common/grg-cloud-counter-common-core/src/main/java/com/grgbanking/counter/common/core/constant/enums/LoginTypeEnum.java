@@ -20,8 +20,17 @@ public enum LoginTypeEnum {
 	/**
 	 * 验证码登录
 	 */
-	SMS("SMS", "验证码登录");
+	SMS("SMS", "验证码登录"),
 
+	/**
+	 * 微信登录
+	 */
+	WECHAT("WX", "微信登录"),
+
+	/**
+	 * 微信小程序
+	 */
+	MINI_APP("MINI", "微信小程序");
 
 	/**
 	 * 类型

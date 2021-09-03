@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @date 2021/10/6
- * <p>
  * sso 退出功能 ，根据客户端传入跳转
  */
 public class SsoLogoutSuccessHandler implements LogoutSuccessHandler {

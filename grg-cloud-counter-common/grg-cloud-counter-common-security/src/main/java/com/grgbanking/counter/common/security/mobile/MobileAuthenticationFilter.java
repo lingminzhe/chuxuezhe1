@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @date 2021/1/9 手机号登录验证filter
+ *  手机号登录验证filter
  */
 public class MobileAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 

@@ -40,7 +40,6 @@ public class StringUtil {
      * @param
      * @return
      *
-     * @date 2021/9/5 8:37
      */
     public static String subString(String str, String strStart, String strEnd) {
         /** 找出指定的2个字符在 该字符串里面的 位置 */
@@ -65,7 +64,6 @@ public class StringUtil {
      * @param
      * @return
      *
-     * @date 2021/10/9 9:32
      */
     public static String map2StringBySeparator(String sep, Map<Integer, String> map) {
         StringBuffer stringBuffer = new StringBuffer();
@@ -83,7 +81,6 @@ public class StringUtil {
      * @param
      * @return
      *
-     * @date 2021/10/10 11:27
      */
     public static String map2StringBySeparator(String sep, int count, TreeMap<Integer, String> map) {
         StringBuffer stringBuffer = new StringBuffer();
@@ -108,7 +105,6 @@ public class StringUtil {
      * @param
      * @return
      *
-     * @date 2021/9/7 9:35
      */
     public static synchronized String getJointString(String separator, String... str) {
         StringBuffer sb = new StringBuffer();

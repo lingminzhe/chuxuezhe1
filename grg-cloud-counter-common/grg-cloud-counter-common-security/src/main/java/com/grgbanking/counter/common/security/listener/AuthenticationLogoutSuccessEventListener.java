@@ -1,7 +1,7 @@
 package com.grgbanking.counter.common.security.listener;
 
 import cn.hutool.core.collection.CollUtil;
-import com.grgbanking.counter.common.security.base.GrgUser;
+import com.grgbanking.counter.common.security.service.GrgUser;
 import com.grgbanking.counter.common.security.handler.AuthenticationLogoutHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @date 2021/06/22 退出事件监听器
+ * 退出事件监听器
  */
 public class AuthenticationLogoutSuccessEventListener implements ApplicationListener<LogoutSuccessEvent> {
 

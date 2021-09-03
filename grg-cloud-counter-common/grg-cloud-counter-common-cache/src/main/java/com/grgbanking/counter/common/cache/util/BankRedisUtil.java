@@ -30,7 +30,6 @@ public class BankRedisUtil {
      * @param
      * @return list ：返回模糊匹配的keys
      *
-     * @date 2021/11/28 11:12
      */
     public static List<String> getScanList(int count, String pattern) {
         ScanOptions scanOptions = ScanOptions.scanOptions().match("*"+pattern+"*").count(count).build();
@@ -95,7 +94,6 @@ public class BankRedisUtil {
      * @param args 为 "且" 关系
      * @return
      *
-     * @date 2021/9/4 16:47
      */
 
     public static Set<String> getKeySet(String condition, String... args) {

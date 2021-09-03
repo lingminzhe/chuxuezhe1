@@ -6,7 +6,7 @@ import lombok.Getter;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 
 /**
- * @date 2021/7/8 自定义OAuth2Exception
+ * 自定义OAuth2Exception
  */
 @JsonSerialize(using = GrgAuth2ExceptionSerializer.class)
 public class GrgAuth2Exception extends OAuth2Exception {

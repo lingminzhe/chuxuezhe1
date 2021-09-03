@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * @date 2021/8/5 手机号登录成功，返回oauth token
+ * 手机号登录成功，返回oauth token
  */
 @Slf4j
 public class MobileLoginSuccessHandler implements AuthenticationSuccessHandler {
@@ -55,8 +55,7 @@ public class MobileLoginSuccessHandler implements AuthenticationSuccessHandler {
      * @param authentication the <tt>Authentication</tt> object which was created during
      */
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                                        Authentication authentication) {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         String header = request.getHeader(HttpHeaders.AUTHORIZATION);
 
         if (header == null || !header.startsWith(BASIC_)) {
@@ -76,8 +75,7 @@ public class MobileLoginSuccessHandler implements AuthenticationSuccessHandler {
 
             }
 
-            TokenRequest tokenRequest = new TokenRequest(MapUtil.newHashMap(), clientId, clientDetails.getScope(),
-                    "mobile");
+            TokenRequest tokenRequest = new TokenRequest(MapUtil.newHashMap(), clientId, clientDetails.getScope(), "mobile");
 
             // 校验scope
             new DefaultOAuth2RequestValidator().validateScope(tokenRequest, clientDetails);

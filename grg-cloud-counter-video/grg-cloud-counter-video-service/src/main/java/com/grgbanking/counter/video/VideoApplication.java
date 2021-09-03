@@ -6,8 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
- * <p>@date : 2020/4/7</p>
- * <p>@description : </p>
  */
 //@EnableGrgResourceServer
 @SpringBootApplication

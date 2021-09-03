@@ -5,7 +5,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
- * @date 2021/8/15
  */
 public interface GrgUserDetailsService extends UserDetailsService {
 
