@@ -21,7 +21,7 @@ import java.util.List;
  * @since 2021-08-31
  */
 @RestController
-@RequestMapping("/dept")
+@RequestMapping("/sys/dept")
 public class SysDeptController {
 
     @Autowired

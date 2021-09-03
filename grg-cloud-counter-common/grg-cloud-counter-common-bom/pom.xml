@@ -23,6 +23,7 @@
         <s3.version>1.12.56</s3.version>
         <security.oauth.version>2.3.8.RELEASE</security.oauth.version>
         <socket.io.version>1.7.19</socket.io.version>
+        <captcha.version>1.2.7</captcha.version>
     </properties>
 
     <dependencyManagement>
@@ -152,13 +153,19 @@
                 <artifactId>jsoup</artifactId>
                 <version>${jsoup.version}</version>
             </dependency>
-
+            <!-- socket.io -->
             <dependency>
                 <groupId>com.corundumstudio.socketio</groupId>
                 <artifactId>netty-socketio</artifactId>
                 <version>${socket.io.version}</version>
             </dependency>
 
+            <!--验证码-->
+            <dependency>
+                <groupId>com.github.anji-plus</groupId>
+                <artifactId>captcha-spring-boot-starter</artifactId>
+                <version>${captcha.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

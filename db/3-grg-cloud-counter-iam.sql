@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 02/09/2021 14:03:59
+ Date: 02/09/2021 14:33:32
 */
 
 SET NAMES utf8mb4;
@@ -622,6 +622,28 @@ INSERT INTO `sys_role_menu` VALUES (1, 9003);
 INSERT INTO `sys_role_menu` VALUES (1, 9004);
 INSERT INTO `sys_role_menu` VALUES (1, 9005);
 INSERT INTO `sys_role_menu` VALUES (1, 9006);
+COMMIT;
+
+-- ----------------------------
+-- Table structure for sys_social_user
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_social_user`;
+CREATE TABLE `sys_social_user` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) DEFAULT NULL COMMENT '客户id',
+  `login_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '登录方式',
+  `login_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '登录账号',
+  `create_date` datetime NOT NULL,
+  `create_by` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `update_by` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='客户社交账户认证信息表';
+
+-- ----------------------------
+-- Records of sys_social_user
+-- ----------------------------
+BEGIN;
 COMMIT;
 
 -- ----------------------------

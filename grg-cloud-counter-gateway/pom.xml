@@ -35,53 +35,21 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>com.grgbanking.counter</groupId>-->
-        <!--            <artifactId>grg-cloud-counter-common-cache</artifactId>-->
-        <!--        </dependency>-->
         <!--限流降级模块-->
-        <!--        <dependency>-->
-        <!--            <groupId>com.grgbanking.counter</groupId>-->
-        <!--            <artifactId>grg-cloud-counter-common-sentinel</artifactId>-->
-        <!--        </dependency>-->
-        <!-- 网关公共模块 -->
-        <!--        <dependency>-->
-        <!--            <groupId>com.grgbanking.counter</groupId>-->
-        <!--            <artifactId>grg-cloud-counter-common-gateway</artifactId>-->
-        <!--        </dependency>-->
-
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.cloud</groupId>-->
-        <!--            <artifactId>spring-cloud-starter-gateway</artifactId>-->
-        <!--            <version>3.0.3</version>-->
-        <!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.springframework.cloud</groupId>-->
-<!--                    <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
-<!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.cloud</groupId>-->
-        <!--            <artifactId>spring-cloud-starter-loadbalancer</artifactId>-->
-        <!--        </dependency>-->
-        <!--spring-cloud-config客户端依赖-->
-
-        <!--kaptcha验证码依赖-->
-<!--        <dependency>-->
-<!--            <groupId>com.github.axet</groupId>-->
-<!--            <artifactId>kaptcha</artifactId>-->
-<!--        </dependency>-->
-
+        <dependency>
+            <groupId>com.grgbanking.counter</groupId>
+            <artifactId>grg-cloud-counter-common-sentinel</artifactId>
+        </dependency>
+        <!-- 验证码 -->
+        <dependency>
+            <groupId>com.github.anji-plus</groupId>
+            <artifactId>captcha-spring-boot-starter</artifactId>
+        </dependency>
         <!--  限流降级 -->
-        <!--        <dependency>-->
-        <!--            <groupId>com.alibaba.cloud</groupId>-->
-        <!--            <artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>-->
-        <!--        </dependency>-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
+        </dependency>
         <!--        <dependency>-->
         <!--            <groupId>com.alibaba.csp</groupId>-->
         <!--            <artifactId>sentinel-spring-cloud-gateway-adapter</artifactId>-->

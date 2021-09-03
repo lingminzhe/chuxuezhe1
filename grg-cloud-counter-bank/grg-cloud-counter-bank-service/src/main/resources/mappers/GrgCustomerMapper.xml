@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grgbanking.counter.bank.dao.GrgCustomerDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.grgbanking.counter.bank.entity.GrgCustomerEntity">
+        <id column="id" property="id" />
+        <result column="gender" property="gender" />
+        <result column="cusbirthday" property="cusbirthday" />
+        <result column="name" property="name" />
+        <result column="nickname" property="nickname" />
+        <result column="csource" property="csource" />
+        <result column="language" property="language" />
+        <result column="marriage" property="marriage" />
+        <result column="education" property="education" />
+        <result column="identifytype" property="identifytype" />
+        <result column="identifynumber" property="identifynumber" />
+        <result column="idcardexpiredate" property="idcardexpiredate" />
+        <result column="occupation" property="occupation" />
+        <result column="email" property="email" />
+        <result column="emailalt" property="emailalt" />
+        <result column="mobileno" property="mobileno" />
+        <result column="mobilealt" property="mobilealt" />
+        <result column="phone" property="phone" />
+        <result column="extension" property="extension" />
+        <result column="familyphone" property="familyphone" />
+        <result column="fax" property="fax" />
+        <result column="country" property="country" />
+        <result column="province" property="province" />
+        <result column="city" property="city" />
+        <result column="address" property="address" />
+        <result column="postcode" property="postcode" />
+        <result column="weixin" property="weixin" />
+        <result column="weixinname" property="weixinname" />
+        <result column="weixinid" property="weixinid" />
+        <result column="touchtime" property="touchtime" />
+        <result column="datastatus" property="datastatus" />
+        <result column="create_by" property="createBy" />
+        <result column="create_date" property="createDate" />
+        <result column="update_by" property="updateBy" />
+        <result column="update_date" property="updateDate" />
+        <result column="remarks" property="remarks" />
+        <result column="del_flag" property="delFlag" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, gender, cusbirthday, name, nickname, csource, language, marriage, education, identifytype, identifynumber, idcardexpiredate, occupation, email, emailalt, mobileno, mobilealt, phone, extension, familyphone, fax, country, province, city, address, postcode, weixin, weixinname, weixinid, touchtime, datastatus, create_by, create_date, update_by, update_date, remarks, del_flag
+    </sql>
+
+</mapper>
