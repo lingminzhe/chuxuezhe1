@@ -1,18 +1,17 @@
 package com.grgbanking.counter.bank.dao;
 
-import com.grgbanking.counter.bank.entity.GrgCustomerEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.grgbanking.counter.bank.entity.GrgCustomerEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * <p>
- * 客户详情表 Mapper 接口
- * </p>
- *
- * @author <a href="https://grgbanking.com">grgbanking</a>
- * @since 2021-09-02
+ * 客户详情表
+ * 
+ * @author GRGBanking
+ * @email ${email}
+ * @date 2021-09-03 13:43:56
  */
 @Mapper
 public interface GrgCustomerDao extends BaseMapper<GrgCustomerEntity> {
-
+	
 }

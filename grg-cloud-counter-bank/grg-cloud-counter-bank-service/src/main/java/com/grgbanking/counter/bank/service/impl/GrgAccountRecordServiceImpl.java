@@ -1,20 +1,47 @@
 package com.grgbanking.counter.bank.service.impl;
 
-import com.grgbanking.counter.bank.entity.GrgAccountRecordEntity;
-import com.grgbanking.counter.bank.dao.GrgAccountRecordDao;
-import com.grgbanking.counter.bank.service.GrgAccountRecordService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.grgbanking.counter.bank.dao.GrgAccountRecordDao;
+import com.grgbanking.counter.bank.entity.GrgAccountRecordEntity;
+import com.grgbanking.counter.bank.service.GrgAccountRecordService;
+import com.grgbanking.counter.common.data.util.PageUtils;
+import com.grgbanking.counter.common.data.util.Query;
 import org.springframework.stereotype.Service;
 
-/**
- * <p>
- * 银行卡业务操作记录表 服务实现类
- * </p>
- *
- * @author <a href="https://grgbanking.com">grgbanking</a>
- * @since 2021-09-02
- */
-@Service
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+
+@Service("grgAccountRecordService")
 public class GrgAccountRecordServiceImpl extends ServiceImpl<GrgAccountRecordDao, GrgAccountRecordEntity> implements GrgAccountRecordService {
+
+    @Override
+    public PageUtils queryPage(Map<String, Object> params) {
+        IPage<GrgAccountRecordEntity> page = this.page(
+                new Query<GrgAccountRecordEntity>().getPage(params),
+                new QueryWrapper<GrgAccountRecordEntity>()
+        );
+
+        return new PageUtils(page);
+    }
+
+    /**
+     * 根据传入的Account ID  查找相关的流水记录
+     * @param id
+     * @return
+     */
+    @Override
+    public List<GrgAccountRecordEntity> getByCustomerId(Integer id) {
+        List<GrgAccountRecordEntity> entities = baseMapper.selectList(null);
+        List<GrgAccountRecordEntity> list = entities.stream().filter(grgAccountRecordEntity ->
+                grgAccountRecordEntity.getAccountId().equals(id)
+        ).collect(Collectors.toList());
+
+        return list;
+
+    }
 
 }
