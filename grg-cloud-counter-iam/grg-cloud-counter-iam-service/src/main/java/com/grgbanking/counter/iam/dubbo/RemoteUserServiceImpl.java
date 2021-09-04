@@ -2,8 +2,8 @@ package com.grgbanking.counter.iam.dubbo;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.grgbanking.counter.common.core.constant.enums.LoginTypeEnum;
 import com.grgbanking.counter.iam.api.dto.UserInfo;
 import com.grgbanking.counter.iam.api.dubbo.RemoteUserService;
 import com.grgbanking.counter.iam.api.entity.SysMenuEntity;
@@ -62,10 +62,7 @@ public class RemoteUserServiceImpl implements RemoteUserService {
     }
 
     @Override
-    public UserInfo social(String inStr) {
-        String[] inStrs = inStr.split(StringPool.AT);
-        String type = inStrs[0];
-        String loginStr = inStrs[1];
-        return loginHandlerMap.get(type).handle(loginStr);
+    public UserInfo social(LoginTypeEnum loginTypeEnum, String code) {
+        return loginHandlerMap.get(loginTypeEnum.getType()).handle(code);
     }
 }

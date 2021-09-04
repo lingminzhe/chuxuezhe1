@@ -1,5 +1,7 @@
 package com.grgbanking.counter.common.security.mobile;
 
+import com.baomidou.mybatisplus.core.toolkit.StringPool;
+import com.grgbanking.counter.common.core.constant.enums.LoginTypeEnum;
 import com.grgbanking.counter.common.security.component.GrgPreAuthenticationChecks;
 import com.grgbanking.counter.common.security.service.GrgUserDetailsService;
 import com.grgbanking.counter.common.security.utils.GrgSecurityMessageSourceUtil;
@@ -32,10 +34,10 @@ public class MobileAuthenticationProvider implements AuthenticationProvider {
 	@SneakyThrows
 	public Authentication authenticate(Authentication authentication) {
 		MobileAuthenticationToken mobileAuthenticationToken = (MobileAuthenticationToken) authentication;
-		String principal = mobileAuthenticationToken.getPrincipal().toString();
-		UserDetails userDetails = userDetailsService.loadUserBySocial(principal);
+		String[] principal = mobileAuthenticationToken.getPrincipal().toString().split(StringPool.AT);
+		UserDetails userDetails = userDetailsService.loadUserBySocial(LoginTypeEnum.valueOf(principal[0]),principal[1]);
 		if (userDetails == null) {
-			log.debug("Authentication failed: no credentials provided");
+			log.error("Authentication failed: no credentials provided");
 			throw new BadCredentialsException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.noopBindAccount", "Noop Bind Account"));
 		}
 

@@ -9,12 +9,12 @@ public abstract class AbstractLoginHandler implements LoginHandler {
 
 	/**
 	 * 处理方法
-	 * @param loginStr 登录参数
+	 * @param code
 	 * @return
 	 */
 	@Override
-	public UserInfo handle(String loginStr) {
-		String identify = identify(loginStr);
+	public UserInfo handle(String code) {
+		String identify = identify(code);
 		return info(identify);
 	}
 

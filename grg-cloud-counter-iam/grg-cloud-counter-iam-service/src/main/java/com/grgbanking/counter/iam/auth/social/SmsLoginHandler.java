@@ -1,18 +1,14 @@
 package com.grgbanking.counter.iam.auth.social;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.grgbanking.counter.common.core.constant.enums.LoginTypeEnum;
 import com.grgbanking.counter.iam.api.dto.UserInfo;
 import com.grgbanking.counter.iam.api.entity.SysSocialAuthUserEntity;
 import com.grgbanking.counter.iam.api.entity.SysUserEntity;
 import com.grgbanking.counter.iam.service.SysSocialAuthUserService;
-import com.grgbanking.counter.iam.service.SysUserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  */
