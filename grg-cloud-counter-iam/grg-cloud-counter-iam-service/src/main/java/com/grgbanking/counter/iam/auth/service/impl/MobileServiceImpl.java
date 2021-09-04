@@ -38,12 +38,12 @@ public class MobileServiceImpl implements MobileService {
 	 */
 	@Override
 	public Resp<Boolean> sendSmsCode(String mobile) {
-		List<SysSocialAuthUserEntity> userList = socialAuthUserDao.selectList(Wrappers.<SysSocialAuthUserEntity>query().lambda().eq(SysSocialAuthUserEntity::getLoginNo, mobile));
-
-		if (CollUtil.isEmpty(userList)) {
-			log.info("手机号未注册:{}", mobile);
-			return Resp.success(Boolean.FALSE, "手机号未注册");
-		}
+//		List<SysSocialAuthUserEntity> userList = socialAuthUserDao.selectList(Wrappers.<SysSocialAuthUserEntity>query().lambda().eq(SysSocialAuthUserEntity::getLoginNo, mobile));
+//
+//		if (CollUtil.isEmpty(userList)) {
+//			log.info("手机号未注册:{}", mobile);
+//			return Resp.success(Boolean.FALSE, "手机号未注册");
+//		}
 
 		Object codeObj = redisTemplate.opsForValue().get(CacheConstants.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + StringPool.AT + mobile);
 

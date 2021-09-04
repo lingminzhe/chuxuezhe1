@@ -20,7 +20,7 @@ public class SmsLoginHandler extends AbstractLoginHandler {
 	private final SysSocialAuthUserService sysSocialAuthUserService;
 
 	/**
-	 * 验证码登录传入为手机号 不用不处理
+	 * 验证码登录传入为手机号 不用处理
 	 * @param mobile
 	 * @return
 	 */
@@ -39,7 +39,12 @@ public class SmsLoginHandler extends AbstractLoginHandler {
 		SysSocialAuthUserEntity socialAuthUser = sysSocialAuthUserService.getOne(Wrappers.<SysSocialAuthUserEntity>query().lambda().eq(SysSocialAuthUserEntity::getLoginNo, identify).eq(SysSocialAuthUserEntity::getLoginType, LoginTypeEnum.SMS.getType()));
 		if (socialAuthUser == null) {
 			log.error("手机号未注册：{}", identify);
-			return null;
+			socialAuthUser = new SysSocialAuthUserEntity();
+			socialAuthUser.setUserName(identify);
+			socialAuthUser.setLoginType(LoginTypeEnum.SMS.getType());
+			socialAuthUser.setLoginNo(identify);
+			sysSocialAuthUserService.save(socialAuthUser);
+			socialAuthUser = sysSocialAuthUserService.getOne(Wrappers.<SysSocialAuthUserEntity>query().lambda().eq(SysSocialAuthUserEntity::getLoginNo, identify).eq(SysSocialAuthUserEntity::getLoginType, LoginTypeEnum.SMS.getType()));
 		}
 		UserInfo userInfo = new UserInfo();
 		SysUserEntity user = new SysUserEntity();
