@@ -38,8 +38,7 @@ public class MobileServiceImpl implements MobileService {
 	 */
 	@Override
 	public Resp<Boolean> sendSmsCode(String mobile) {
-		List<SysSocialAuthUserEntity> userList = socialAuthUserDao
-				.selectList(Wrappers.<SysSocialAuthUserEntity>query().lambda().eq(SysSocialAuthUserEntity::getLoginNo, mobile));
+		List<SysSocialAuthUserEntity> userList = socialAuthUserDao.selectList(Wrappers.<SysSocialAuthUserEntity>query().lambda().eq(SysSocialAuthUserEntity::getLoginNo, mobile));
 
 		if (CollUtil.isEmpty(userList)) {
 			log.info("手机号未注册:{}", mobile);

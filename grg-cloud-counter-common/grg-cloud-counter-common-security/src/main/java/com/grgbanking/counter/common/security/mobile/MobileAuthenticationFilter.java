@@ -21,12 +21,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class MobileAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
-    private static final String SPRING_SECURITY_FORM_MOBILE_KEY = "mobile";
-
-    @Getter
-    @Setter
-    private String mobileParameter = SPRING_SECURITY_FORM_MOBILE_KEY;
-
     @Getter
     @Setter
     private boolean postOnly = true;
@@ -46,7 +40,7 @@ public class MobileAuthenticationFilter extends AbstractAuthenticationProcessing
             throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         }
 
-        String mobile = obtainMobile(request);
+        String mobile = request.getParameter("mobile");
 
         if (mobile == null) {
             mobile = "";
@@ -61,27 +55,18 @@ public class MobileAuthenticationFilter extends AbstractAuthenticationProcessing
         Authentication authResult = null;
         try {
             authResult = this.getAuthenticationManager().authenticate(mobileAuthenticationToken);
-
             logger.debug("Authentication success: " + authResult);
             SecurityContextHolder.getContext().setAuthentication(authResult);
-
         } catch (Exception failed) {
             SecurityContextHolder.clearContext();
             logger.debug("Authentication request failed: " + failed);
-
             try {
-                authenticationEntryPoint.commence(request, response,
-                        new UsernameNotFoundException(failed.getMessage(), failed));
+                authenticationEntryPoint.commence(request, response, new UsernameNotFoundException(failed.getMessage(), failed));
             } catch (Exception e) {
                 logger.error("authenticationEntryPoint handle error:{}", failed);
             }
         }
-
         return authResult;
-    }
-
-    private String obtainMobile(HttpServletRequest request) {
-        return request.getParameter(mobileParameter);
     }
 
     private void setDetails(HttpServletRequest request, MobileAuthenticationToken authRequest) {

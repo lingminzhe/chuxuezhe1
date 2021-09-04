@@ -14,7 +14,7 @@ public interface SecurityConstants {
 	/**
 	 * 验证码有效期
 	 */
-	int CODE_TIME = 60;
+	int CODE_TIME = 180;
 
 	/**
 	 * 验证码长度
@@ -70,7 +70,7 @@ public interface SecurityConstants {
 	/**
 	 * 自定义登录URL
 	 */
-	String MOBILE_TOKEN_URL = "/mobile/token/*";
+	String MOBILE_TOKEN_URL = "/mobile/token/**";
 
 	/**
 	 * 微信获取OPENID
