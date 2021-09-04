@@ -30,16 +30,17 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 @Configuration
 public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
-	@Override
-	@SneakyThrows
-	protected void configure(HttpSecurity http) {
-		http.formLogin().loginPage("/token/login").loginProcessingUrl("/token/form")
-				.successHandler(tenantSavedRequestAwareAuthenticationSuccessHandler())
-				.failureHandler(authenticationFailureHandler()).and().logout()
-				.logoutSuccessHandler(logoutSuccessHandler()).deleteCookies("JSESSIONID").invalidateHttpSession(true)
-				.and().authorizeRequests().antMatchers("/token/**", "/actuator/**", "/mobile/**").permitAll()
-				.anyRequest().authenticated().and().csrf().disable().apply(mobileSecurityConfigurer());
-	}
+//	@Override
+//	@SneakyThrows
+//	protected void configure(HttpSecurity httpSecurity) {
+//		super.configure(httpSecurity);
+//		http.formLogin().loginPage("/token/login").loginProcessingUrl("/token/form")
+//				.successHandler(tenantSavedRequestAwareAuthenticationSuccessHandler())
+//				.failureHandler(authenticationFailureHandler()).and().logout()
+//				.logoutSuccessHandler(logoutSuccessHandler()).deleteCookies("JSESSIONID").invalidateHttpSession(true)
+//				.and().authorizeRequests().antMatchers("/token/**", "/actuator/**", "/mobile/**").permitAll()
+//				.anyRequest().authenticated().and().csrf().disable().apply(mobileSecurityConfigurer());
+//	}
 
 	/**
 	 * 不拦截静态资源

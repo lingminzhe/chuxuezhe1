@@ -18,7 +18,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author <a href="https://grgbanking.com">grgbanking</a>
- * @since 2021-09-03
+ * @since 2021-09-04
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -31,8 +31,8 @@ public class SysSocialAuthUserEntity extends Model<SysSocialAuthUserEntity> {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @TableField("username")
-    private String username;
+    @TableField("user_name")
+    private String userName;
 
     /**
      * 客户id

@@ -53,7 +53,6 @@ public class GrgUserDetailsServiceImpl implements GrgUserDetailsService {
 
     /**
      * 根据社交登录code 登录
-     * 根据
      * @param inStr TYPE@CODE
      * @return UserDetails
      * @throws UsernameNotFoundException
@@ -61,8 +60,7 @@ public class GrgUserDetailsServiceImpl implements GrgUserDetailsService {
     @Override
     @SneakyThrows
     public UserDetails loadUserBySocial(String inStr) {
-        return null;
-//		return getUserDetails(remoteUserService.social(inStr, SecurityConstants.FROM_IN));
+		return getUserDetails(remoteUserService.social(inStr));
     }
 
     /**
@@ -80,7 +78,7 @@ public class GrgUserDetailsServiceImpl implements GrgUserDetailsService {
         boolean enabled = user.getEnabled() == 1;
         boolean lock = user.getLockFlag() == 0;
         // 构造security用户
-        return new GrgUser(user.getUserId(), user.getDeptId(), user.getPhone(), user.getAvatar(),user.getUsername(),user.getPassword(), enabled, true, true, lock, authorities);
+        return new GrgUser(user.getUserId(), user.getDeptId(), user.getPhone(), user.getAvatar(),user.getUserName(),user.getPassword(), enabled, true, true, lock, authorities);
     }
 
 }
