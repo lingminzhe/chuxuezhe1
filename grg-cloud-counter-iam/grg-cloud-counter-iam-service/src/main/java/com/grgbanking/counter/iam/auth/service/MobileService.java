@@ -12,6 +12,6 @@ public interface MobileService {
 	 * @param mobile mobile
 	 * @return code
 	 */
-	Resp<Boolean> sendSmsCode(String mobile);
+	Resp sendSmsCode(String mobile);
 
 }

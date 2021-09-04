@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 10.252.21.20
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 50732
- Source Host           : 10.252.21.20:3306
+ Source Server Version : 50731
+ Source Host           : localhost:3306
  Source Schema         : grg-cloud-counter-iam
 
  Target Server Type    : MySQL
- Target Server Version : 50732
+ Target Server Version : 50731
  File Encoding         : 65001
 
- Date: 03/09/2021 16:25:46
+ Date: 04/09/2021 20:35:45
 */
 
 SET NAMES utf8mb4;
@@ -36,13 +36,14 @@ CREATE TABLE `oauth_client_details` (
   `autoapprove` varchar(256) DEFAULT NULL,
   `enabled` int(1) DEFAULT '1',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='终端信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='终端信息表';
 
 -- ----------------------------
 -- Records of oauth_client_details
 -- ----------------------------
 BEGIN;
 INSERT INTO `oauth_client_details` VALUES (1, 'web-client', NULL, '$2a$10$uV/VUTBZgPyHX16GSP21pO.ArPPohUXrtXgDS17EXyOL3CAl7W1q6', 'server', 'password,refresh_token,authorization_code,client_credentials,implicit', NULL, NULL, 43200, 2592000, NULL, 'true', 1);
+INSERT INTO `oauth_client_details` VALUES (2, 'sms', NULL, '$2a$10$uV/VUTBZgPyHX16GSP21pO.ArPPohUXrtXgDS17EXyOL3CAl7W1q6', 'server', 'password,refresh_token,authorization_code,client_credentials,implicit', NULL, NULL, 259200, 2592000, NULL, 'true', 1);
 COMMIT;
 
 -- ----------------------------
@@ -295,7 +296,7 @@ CREATE TABLE `sys_log` (
   KEY `sys_log_request_uri` (`request_uri`) USING BTREE,
   KEY `sys_log_type` (`type`) USING BTREE,
   KEY `sys_log_create_date` (`create_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COMMENT='日志表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='日志表';
 
 -- ----------------------------
 -- Records of sys_log
@@ -630,10 +631,12 @@ COMMIT;
 DROP TABLE IF EXISTS `sys_social_auth_user`;
 CREATE TABLE `sys_social_auth_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+  `nick_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '昵称',
   `customer_id` int(11) DEFAULT NULL COMMENT '客户id',
-  `login_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '登录方式',
-  `login_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '登录账号',
+  `phone` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '手机号',
+  `wx_openid` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '微信登录openId',
+  `mini_openid` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '微信小程序openId',
   `lock_flag` int(1) DEFAULT '0' COMMENT '0-未锁定，1-已锁定',
   `enabled` int(1) DEFAULT '1' COMMENT '1-可用；0-禁用',
   `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '头像',
@@ -641,14 +644,16 @@ CREATE TABLE `sys_social_auth_user` (
   `create_by` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
   `update_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `update_by` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='客户社交账户认证信息表';
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `phone_unique` (`phone`),
+  UNIQUE KEY `wx_openid_unique` (`wx_openid`),
+  UNIQUE KEY `mini_openid_unique` (`mini_openid`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='客户社交账户认证信息表';
 
 -- ----------------------------
 -- Records of sys_social_auth_user
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_social_auth_user` VALUES (1, NULL, 123, 'SMS', '18302040699', 0, 1, NULL, '2021-09-03 09:57:42', NULL, NULL, NULL);
 COMMIT;
 
 -- ----------------------------
@@ -657,24 +662,25 @@ COMMIT;
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user` (
   `user_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-  `username` varchar(64) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `avatar` varchar(255) DEFAULT NULL,
+  `user_name` varchar(50) DEFAULT NULL COMMENT '用户名',
+  `nick_name` varchar(64) DEFAULT NULL COMMENT '昵称',
+  `password` varchar(255) DEFAULT NULL COMMENT '密码',
+  `phone` varchar(20) DEFAULT NULL COMMENT '手机号',
+  `avatar` varchar(255) DEFAULT NULL COMMENT '头像',
   `dept_id` bigint(20) DEFAULT NULL COMMENT '部门ID',
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `lock_flag` int(1) DEFAULT '0' COMMENT '0-未锁定，1-已锁定',
   `enabled` int(1) DEFAULT '1' COMMENT '1-可用；0-禁用',
   PRIMARY KEY (`user_id`) USING BTREE,
-  KEY `user_idx1_username` (`username`) USING BTREE
+  KEY `user_idx1_username` (`nick_name`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_user` VALUES (1, 'admin', '$2a$10$H3p/ptZ9U8LoR1kwF5CF/eGn92yFTPO6ma0jgeOhVJMsw/oFyez.6', '13800138000', '', 1, '2018-04-20 07:15:18', '2021-09-03 15:57:07', 0, 1);
+INSERT INTO `sys_user` VALUES (1, 'admin', '管理员', '$2a$10$H3p/ptZ9U8LoR1kwF5CF/eGn92yFTPO6ma0jgeOhVJMsw/oFyez.6', '13800138000', '', 1, '2018-04-20 07:15:18', '2021-09-04 17:44:34', 0, 1);
 COMMIT;
 
 -- ----------------------------

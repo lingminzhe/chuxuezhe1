@@ -31,8 +31,17 @@ public class SysSocialAuthUserEntity extends Model<SysSocialAuthUserEntity> {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
+    /**
+     * 用户名
+     */
     @TableField("user_name")
     private String userName;
+
+    /**
+     * 昵称
+     */
+    @TableField("nick_name")
+    private String nickName;
 
     /**
      * 客户id
@@ -41,16 +50,22 @@ public class SysSocialAuthUserEntity extends Model<SysSocialAuthUserEntity> {
     private Integer customerId;
 
     /**
-     * 登录方式
+     * 手机号
      */
-    @TableField("login_type")
-    private String loginType;
+    @TableField("phone")
+    private String phone;
 
     /**
-     * 登录账号
+     * 微信登录openId
      */
-    @TableField("login_no")
-    private String loginNo;
+    @TableField("wx_openid")
+    private String wxOpenid;
+
+    /**
+     * 微信小程序openId
+     */
+    @TableField("mini_openid")
+    private String miniOpenid;
 
     /**
      * 0-未锁定，1-已锁定

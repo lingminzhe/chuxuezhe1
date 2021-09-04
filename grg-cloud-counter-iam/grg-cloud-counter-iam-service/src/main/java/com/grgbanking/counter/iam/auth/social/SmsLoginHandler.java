@@ -36,25 +36,24 @@ public class SmsLoginHandler extends AbstractLoginHandler {
 	 */
 	@Override
 	public UserInfo info(String identify) {
-		SysSocialAuthUserEntity socialAuthUser = sysSocialAuthUserService.getOne(Wrappers.<SysSocialAuthUserEntity>query().lambda().eq(SysSocialAuthUserEntity::getLoginNo, identify).eq(SysSocialAuthUserEntity::getLoginType, LoginTypeEnum.SMS.getType()));
+		SysSocialAuthUserEntity socialAuthUser = sysSocialAuthUserService.getOne(Wrappers.<SysSocialAuthUserEntity>query().lambda().eq(SysSocialAuthUserEntity::getPhone, identify));
 		if (socialAuthUser == null) {
 			log.error("手机号未注册：{}", identify);
 			socialAuthUser = new SysSocialAuthUserEntity();
 			socialAuthUser.setUserName(identify);
-			socialAuthUser.setLoginType(LoginTypeEnum.SMS.getType());
-			socialAuthUser.setLoginNo(identify);
+			socialAuthUser.setPhone(identify);
 			sysSocialAuthUserService.save(socialAuthUser);
-			socialAuthUser = sysSocialAuthUserService.getOne(Wrappers.<SysSocialAuthUserEntity>query().lambda().eq(SysSocialAuthUserEntity::getLoginNo, identify).eq(SysSocialAuthUserEntity::getLoginType, LoginTypeEnum.SMS.getType()));
+			socialAuthUser = sysSocialAuthUserService.getOne(Wrappers.<SysSocialAuthUserEntity>query().lambda().eq(SysSocialAuthUserEntity::getPhone, identify));
 		}
 		UserInfo userInfo = new UserInfo();
 		SysUserEntity user = new SysUserEntity();
 		user.setUserId(socialAuthUser.getId());
-		user.setUserName(socialAuthUser.getLoginNo());
+		user.setUserName(socialAuthUser.getPhone());
 		user.setNickName(socialAuthUser.getUserName());
 		user.setEnabled(socialAuthUser.getEnabled());
 		user.setLockFlag(socialAuthUser.getLockFlag());
 		user.setAvatar(socialAuthUser.getAvatar());
-		user.setPhone(socialAuthUser.getLoginNo());
+		user.setPhone(socialAuthUser.getPhone());
 		user.setPassword(identify);
 		userInfo.setSysUser(user);
 		String[] permissions = new String[]{identify};

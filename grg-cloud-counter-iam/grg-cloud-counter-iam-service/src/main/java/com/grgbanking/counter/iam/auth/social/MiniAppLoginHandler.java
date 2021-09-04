@@ -52,7 +52,7 @@ public class MiniAppLoginHandler extends AbstractLoginHandler {
 	 */
 	@Override
 	public UserInfo info(String openId) {
-		SysSocialAuthUserEntity user = sysSocialAuthUserService.getOne(Wrappers.<SysSocialAuthUserEntity>query().lambda().eq(SysSocialAuthUserEntity::getLoginNo, openId));
+		SysSocialAuthUserEntity user = sysSocialAuthUserService.getOne(Wrappers.<SysSocialAuthUserEntity>query().lambda().eq(SysSocialAuthUserEntity::getMiniOpenid, openId));
 
 		if (user == null) {
 			log.info("微信小程序未绑定:{}", openId);
@@ -70,17 +70,17 @@ public class MiniAppLoginHandler extends AbstractLoginHandler {
 	 */
 	@Override
 	public Boolean bind(SysSocialAuthUserEntity user, String identify) {
-		List<SysSocialAuthUserEntity> userList = sysSocialAuthUserService.list(Wrappers.<SysSocialAuthUserEntity>query().lambda().eq(SysSocialAuthUserEntity::getLoginNo, identify));
+		List<SysSocialAuthUserEntity> userList = sysSocialAuthUserService.list(Wrappers.<SysSocialAuthUserEntity>query().lambda().eq(SysSocialAuthUserEntity::getMiniOpenid, identify));
 
 		// 先把原有绑定关系去除,设置绑定为NULL
 		if (CollUtil.isNotEmpty(userList)) {
 			SysSocialAuthUserEntity condition = new SysSocialAuthUserEntity();
-			condition.setLoginNo(identify);
-			sysSocialAuthUserService.update(condition, Wrappers.<SysSocialAuthUserEntity>lambdaUpdate().set(SysSocialAuthUserEntity::getLoginNo, null));
+			condition.setMiniOpenid(identify);
+			sysSocialAuthUserService.update(condition, Wrappers.<SysSocialAuthUserEntity>lambdaUpdate().set(SysSocialAuthUserEntity::getMiniOpenid, null));
 			log.info("小程序账号 {} 更换账号绑定", identify);
 		}
 
-		user.setLoginNo(identify);
+		user.setMiniOpenid(identify);
 		sysSocialAuthUserService.updateById(user);
 		return null;
 	}

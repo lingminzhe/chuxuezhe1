@@ -2,6 +2,7 @@ package com.grgbanking.counter.common.security.component;
 
 import com.grgbanking.counter.common.core.constant.SecurityConstants;
 import com.grgbanking.counter.common.security.service.GrgUser;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
