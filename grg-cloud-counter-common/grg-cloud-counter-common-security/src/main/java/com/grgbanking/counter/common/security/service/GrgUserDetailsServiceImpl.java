@@ -44,7 +44,6 @@ public class GrgUserDetailsServiceImpl implements GrgUserDetailsService {
         if (cache != null && cache.get(username) != null) {
             return cache.get(username, GrgUser.class);
         }
-
         UserInfo result = remoteUserService.info(username);
         UserDetails userDetails = getUserDetails(result);
         cache.put(username, userDetails);
@@ -60,8 +59,17 @@ public class GrgUserDetailsServiceImpl implements GrgUserDetailsService {
     @Override
     @SneakyThrows
     public UserDetails loadUserBySocial(String inStr) {
-		return getUserDetails(remoteUserService.social(inStr));
+        Cache cache = cacheManager.getCache(CacheConstants.USER_DETAILS);
+        String code = inStr.split("@")[1];
+        if (cache != null && cache.get(code) != null) {
+            return cache.get(code, GrgUser.class);
+        }
+        UserInfo result = remoteUserService.social(inStr);
+        UserDetails userDetails = getUserDetails(result);
+        cache.put(code, userDetails);
+        return userDetails;
     }
+
 
     /**
      * 构建userdetails

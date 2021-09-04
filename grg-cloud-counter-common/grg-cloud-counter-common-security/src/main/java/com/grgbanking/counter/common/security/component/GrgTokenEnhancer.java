@@ -22,7 +22,7 @@ public class GrgTokenEnhancer implements TokenEnhancer {
 			return accessToken;
 		}
 
-		final Map<String, Object> additionalInfo = new HashMap<>(8);
+		final Map<String, Object> additionalInfo = new HashMap<>();
 		GrgUser grgUser = (GrgUser) authentication.getUserAuthentication().getPrincipal();
 		additionalInfo.put(SecurityConstants.DETAILS_USER, grgUser);
 //		additionalInfo.put(SecurityConstants.DETAILS_LICENSE, SecurityConstants.GRG_LICENSE);

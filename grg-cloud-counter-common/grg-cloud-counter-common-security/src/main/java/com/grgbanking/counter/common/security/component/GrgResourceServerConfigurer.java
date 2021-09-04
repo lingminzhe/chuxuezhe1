@@ -2,7 +2,6 @@ package com.grgbanking.counter.common.security.component;
 
 import com.grgbanking.counter.common.security.handler.FormAuthenticationFailureHandler;
 import com.grgbanking.counter.common.security.handler.SsoLogoutSuccessHandler;
-import com.grgbanking.counter.common.security.handler.TenantSavedRequestAwareAuthenticationSuccessHandler;
 import com.grgbanking.counter.common.security.mobile.MobileSecurityConfigurer;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -11,9 +10,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.authentication.TokenExtractor;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 /**
  * 资源服务器配置
@@ -32,7 +31,7 @@ public class GrgResourceServerConfigurer extends ResourceServerConfigurerAdapter
 	private ResourceServerTokenServices resourceServerTokenServices;
 
 	@Autowired
-	private TenantSavedRequestAwareAuthenticationSuccessHandler tenantSavedRequestAwareAuthenticationSuccessHandler;
+	private SavedRequestAwareAuthenticationSuccessHandler savedRequestAwareAuthenticationSuccessHandler;
 
 	@Autowired
 	private FormAuthenticationFailureHandler formAuthenticationFailureHandler;
@@ -50,19 +49,12 @@ public class GrgResourceServerConfigurer extends ResourceServerConfigurerAdapter
 	@SneakyThrows
 	public void configure(HttpSecurity httpSecurity) {
 		// 允许使用iframe 嵌套，避免swagger-ui 不被加载的问题
-//		httpSecurity.headers().frameOptions().disable();
-//		ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = httpSecurity.authorizeRequests();
-//		// 配置对外暴露接口
-//		permitAllUrlResolver.registry(registry);
-//		registry.anyRequest().authenticated().and().csrf().disable();
-
-
 		httpSecurity.headers().frameOptions().disable();
 		ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = httpSecurity.authorizeRequests();
 		// 配置对外暴露接口
 		permitAllUrlResolver.registry(registry);
 		httpSecurity.formLogin().loginPage("/token/login").loginProcessingUrl("/token/form")
-				.successHandler(tenantSavedRequestAwareAuthenticationSuccessHandler)
+				.successHandler(savedRequestAwareAuthenticationSuccessHandler)
 				.failureHandler(formAuthenticationFailureHandler).and().logout()
 				.logoutSuccessHandler(ssoLogoutSuccessHandler).deleteCookies("JSESSIONID").invalidateHttpSession(true)
 				.and().authorizeRequests().antMatchers("/token/**", "/actuator/**", "/mobile/**").permitAll()

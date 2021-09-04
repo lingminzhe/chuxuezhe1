@@ -12,6 +12,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  */
 @Slf4j
@@ -49,10 +51,13 @@ public class SmsLoginHandler extends AbstractLoginHandler {
 		user.setUserName(socialAuthUser.getLoginNo());
 		user.setNickName(socialAuthUser.getUserName());
 		user.setEnabled(socialAuthUser.getEnabled());
+		user.setLockFlag(socialAuthUser.getLockFlag());
 		user.setAvatar(socialAuthUser.getAvatar());
 		user.setPhone(socialAuthUser.getLoginNo());
+		user.setPassword(identify);
 		userInfo.setSysUser(user);
-
+		String[] permissions = new String[]{identify};
+		userInfo.setPermissions(permissions);
 		return userInfo;
 	}
 

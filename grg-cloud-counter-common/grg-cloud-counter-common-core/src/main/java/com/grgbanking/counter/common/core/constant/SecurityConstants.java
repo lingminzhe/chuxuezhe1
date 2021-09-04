@@ -70,7 +70,7 @@ public interface SecurityConstants {
 	/**
 	 * 自定义登录URL
 	 */
-	String MOBILE_TOKEN_URL = "/mobile/token/**";
+	String MOBILE_TOKEN_URL = "/mobile/token/*";
 
 	/**
 	 * 微信获取OPENID
