@@ -9,19 +9,12 @@ import com.grgbanking.counter.iam.api.entity.SysSocialAuthUserEntity;
  */
 public interface LoginHandler {
 
-	/***
-	 * 数据合法性校验
-	 * @param loginStr 通过用户传入获取唯一标识
-	 * @return
-	 */
-	Boolean check(String loginStr);
-
 	/**
 	 * 通过用户传入获取唯一标识
-	 * @param loginStr
+	 * @param code
 	 * @return
 	 */
-	String identify(String loginStr);
+	String identify(String code);
 
 	/**
 	 * 通过openId 获取用户信息
@@ -32,10 +25,10 @@ public interface LoginHandler {
 
 	/**
 	 * 处理方法
-	 * @param loginStr 登录参数
+	 * @param code 登录参数
 	 * @return
 	 */
-	UserInfo handle(String loginStr);
+	UserInfo handle(String code);
 
 	/**
 	 * 绑定逻辑

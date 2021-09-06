@@ -1,8 +1,11 @@
 package com.grgbanking.counter.iam.auth.social;
 
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.grgbanking.counter.common.core.constant.enums.LoginTypeEnum;
 import com.grgbanking.counter.iam.api.dto.UserInfo;
 import com.grgbanking.counter.iam.api.entity.SysSocialAuthUserEntity;
-import com.grgbanking.counter.iam.service.SysUserService;
+import com.grgbanking.counter.iam.api.entity.SysUserEntity;
+import com.grgbanking.counter.iam.service.SysSocialAuthUserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -14,10 +17,10 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class SmsLoginHandler extends AbstractLoginHandler {
 
-	private final SysUserService sysUserService;
+	private final SysSocialAuthUserService sysSocialAuthUserService;
 
 	/**
-	 * 验证码登录传入为手机号 不用不处理
+	 * 验证码登录传入为手机号 不用处理
 	 * @param mobile
 	 * @return
 	 */
@@ -33,14 +36,29 @@ public class SmsLoginHandler extends AbstractLoginHandler {
 	 */
 	@Override
 	public UserInfo info(String identify) {
-//		SysUser user = sysUserService.getOne(Wrappers.<SysUser>query().lambda().eq(SysUser::getPhone, identify));
-//
-//		if (user == null) {
-//			log.info("手机号未注册:{}", identify);
-//			return null;
-//		}
-//		return sysUserService.findUserInfo(user);
-		return null;
+		SysSocialAuthUserEntity socialAuthUser = sysSocialAuthUserService.getOne(Wrappers.<SysSocialAuthUserEntity>query().lambda().eq(SysSocialAuthUserEntity::getPhone, identify));
+		if (socialAuthUser == null) {
+			log.error("手机号未注册：{}", identify);
+			socialAuthUser = new SysSocialAuthUserEntity();
+			socialAuthUser.setUserName(identify);
+			socialAuthUser.setPhone(identify);
+			sysSocialAuthUserService.save(socialAuthUser);
+			socialAuthUser = sysSocialAuthUserService.getOne(Wrappers.<SysSocialAuthUserEntity>query().lambda().eq(SysSocialAuthUserEntity::getPhone, identify));
+		}
+		UserInfo userInfo = new UserInfo();
+		SysUserEntity user = new SysUserEntity();
+		user.setUserId(socialAuthUser.getId());
+		user.setUserName(socialAuthUser.getPhone());
+		user.setNickName(socialAuthUser.getUserName());
+		user.setEnabled(socialAuthUser.getEnabled());
+		user.setLockFlag(socialAuthUser.getLockFlag());
+		user.setAvatar(socialAuthUser.getAvatar());
+		user.setPhone(socialAuthUser.getPhone());
+		user.setPassword(identify);
+		userInfo.setSysUser(user);
+		String[] permissions = new String[]{identify};
+		userInfo.setPermissions(permissions);
+		return userInfo;
 	}
 
 	/**

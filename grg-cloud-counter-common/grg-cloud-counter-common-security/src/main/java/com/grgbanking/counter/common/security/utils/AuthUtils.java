@@ -20,6 +20,9 @@ public class AuthUtils {
 
 	private final String BASIC_ = "Basic ";
 
+	public static void main(String[] args) {
+		System.out.println(Base64.encode("sms:123456").toString());
+	}
 	/**
 	 * 从header 请求中的clientId/clientsecect
 	 * @param header header中的参数
@@ -32,8 +35,7 @@ public class AuthUtils {
 		byte[] decoded;
 		try {
 			decoded = Base64.decode(base64Token);
-		}
-		catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException e) {
 			throw new RuntimeException("Failed to decode basic authentication token");
 		}
 

@@ -72,7 +72,6 @@ public class MobileLoginSuccessHandler implements AuthenticationSuccessHandler {
             // 校验secret
             if (!passwordEncoder.matches(tokens[1], clientDetails.getClientSecret())) {
                 throw new InvalidClientException("Given client ID does not match authenticated client");
-
             }
 
             TokenRequest tokenRequest = new TokenRequest(MapUtil.newHashMap(), clientId, clientDetails.getScope(), "mobile");

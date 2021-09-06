@@ -14,7 +14,7 @@ public interface SecurityConstants {
 	/**
 	 * 验证码有效期
 	 */
-	int CODE_TIME = 60;
+	int CODE_TIME = 180;
 
 	/**
 	 * 验证码长度

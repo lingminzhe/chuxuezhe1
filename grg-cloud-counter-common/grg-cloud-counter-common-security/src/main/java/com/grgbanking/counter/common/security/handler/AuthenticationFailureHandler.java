@@ -18,7 +18,6 @@ public interface AuthenticationFailureHandler {
 	 * @param request 请求信息
 	 * @param response 响应信息
 	 */
-	void handle(AuthenticationException authenticationException, Authentication authentication,
-			HttpServletRequest request, HttpServletResponse response);
+	void handle(AuthenticationException authenticationException, Authentication authentication, HttpServletRequest request, HttpServletResponse response);
 
 }

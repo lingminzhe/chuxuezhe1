@@ -15,7 +15,7 @@ public class UnauthorizedException extends GrgAuth2Exception {
 
 	@Override
 	public String getOAuth2ErrorCode() {
-		return "unauthorized";
+		return "Unauthorized";
 	}
 
 	@Override

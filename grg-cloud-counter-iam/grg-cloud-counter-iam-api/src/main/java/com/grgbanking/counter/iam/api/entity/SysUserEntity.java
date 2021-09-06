@@ -18,7 +18,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author <a href="https://grgbanking.com">grgbanking</a>
- * @since 2021-09-03
+ * @since 2021-09-04
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -34,15 +34,33 @@ public class SysUserEntity extends Model<SysUserEntity> {
     @TableId(value = "user_id", type = IdType.AUTO)
     private Long userId;
 
-    @TableField("username")
-    private String username;
+    /**
+     * 用户名
+     */
+    @TableField("user_name")
+    private String userName;
 
+    /**
+     * 昵称
+     */
+    @TableField("nick_name")
+    private String nickName;
+
+    /**
+     * 密码
+     */
     @TableField("password")
     private String password;
 
+    /**
+     * 手机号
+     */
     @TableField("phone")
     private String phone;
 
+    /**
+     * 头像
+     */
     @TableField("avatar")
     private String avatar;
 

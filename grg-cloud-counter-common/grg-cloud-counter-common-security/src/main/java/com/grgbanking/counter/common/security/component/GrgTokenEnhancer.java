@@ -2,6 +2,7 @@ package com.grgbanking.counter.common.security.component;
 
 import com.grgbanking.counter.common.core.constant.SecurityConstants;
 import com.grgbanking.counter.common.security.service.GrgUser;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -22,11 +23,11 @@ public class GrgTokenEnhancer implements TokenEnhancer {
 			return accessToken;
 		}
 
-		final Map<String, Object> additionalInfo = new HashMap<>(8);
+		final Map<String, Object> additionalInfo = new HashMap<>();
 		GrgUser grgUser = (GrgUser) authentication.getUserAuthentication().getPrincipal();
 		additionalInfo.put(SecurityConstants.DETAILS_USER, grgUser);
-		additionalInfo.put(SecurityConstants.DETAILS_LICENSE, SecurityConstants.GRG_LICENSE);
-		additionalInfo.put(SecurityConstants.ACTIVE, Boolean.TRUE);
+//		additionalInfo.put(SecurityConstants.DETAILS_LICENSE, SecurityConstants.GRG_LICENSE);
+//		additionalInfo.put(SecurityConstants.ACTIVE, Boolean.TRUE);
 		((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
 		return accessToken;
 	}

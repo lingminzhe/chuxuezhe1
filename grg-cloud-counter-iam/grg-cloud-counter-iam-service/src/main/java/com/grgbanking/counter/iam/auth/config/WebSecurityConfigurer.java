@@ -3,7 +3,6 @@ package com.grgbanking.counter.iam.auth.config;
 import com.grgbanking.counter.common.security.handler.FormAuthenticationFailureHandler;
 import com.grgbanking.counter.common.security.handler.MobileLoginSuccessHandler;
 import com.grgbanking.counter.common.security.handler.SsoLogoutSuccessHandler;
-import com.grgbanking.counter.common.security.handler.TenantSavedRequestAwareAuthenticationSuccessHandler;
 import com.grgbanking.counter.common.security.mobile.MobileSecurityConfigurer;
 import lombok.SneakyThrows;
 import org.springframework.context.annotation.Bean;
@@ -11,15 +10,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 /**
@@ -29,17 +26,6 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 @Order(90)
 @Configuration
 public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
-
-	@Override
-	@SneakyThrows
-	protected void configure(HttpSecurity http) {
-		http.formLogin().loginPage("/token/login").loginProcessingUrl("/token/form")
-				.successHandler(tenantSavedRequestAwareAuthenticationSuccessHandler())
-				.failureHandler(authenticationFailureHandler()).and().logout()
-				.logoutSuccessHandler(logoutSuccessHandler()).deleteCookies("JSESSIONID").invalidateHttpSession(true)
-				.and().authorizeRequests().antMatchers("/token/**", "/actuator/**", "/mobile/**").permitAll()
-				.anyRequest().authenticated().and().csrf().disable().apply(mobileSecurityConfigurer());
-	}
 
 	/**
 	 * 不拦截静态资源
@@ -77,8 +63,8 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 	 * @return AuthenticationSuccessHandler
 	 */
 	@Bean
-	public AuthenticationSuccessHandler tenantSavedRequestAwareAuthenticationSuccessHandler() {
-		return new TenantSavedRequestAwareAuthenticationSuccessHandler();
+	public AuthenticationSuccessHandler savedRequestAwareAuthenticationSuccessHandler() {
+		return new SavedRequestAwareAuthenticationSuccessHandler();
 	}
 
 	@Bean
@@ -87,8 +73,6 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 	}
 
 	/**
-	 * https://spring.io/blog/2017/11/01/spring-security-5-0-0-rc1-released#password-storage-updated
-	 * Encoded password does not look like BCrypt
 	 * @return PasswordEncoder
 	 */
 	@Bean

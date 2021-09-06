@@ -27,12 +27,9 @@ public class SysDeptController {
     @Autowired
     private SysDeptService sysDeptService;
 
-    @SysLog("查询部门列表")
+//    @SysLog("查询部门列表")
     @GetMapping("/list")
-    public List<SysDeptEntity> list(Long deptId,String userId){
-        if (sysDeptService != null) {
-            throw new CheckedException("报错"+deptId);
-        }
+    public List<SysDeptEntity> list(){
         return sysDeptService.list();
     }
 

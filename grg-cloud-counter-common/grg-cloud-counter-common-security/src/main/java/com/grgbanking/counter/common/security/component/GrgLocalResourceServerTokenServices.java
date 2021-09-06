@@ -1,13 +1,14 @@
 package com.grgbanking.counter.common.security.component;
 
+import com.grgbanking.counter.common.core.constant.enums.LoginTypeEnum;
 import com.grgbanking.counter.common.security.service.GrgUser;
+import com.grgbanking.counter.common.security.service.GrgUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.exceptions.InvalidTokenException;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -26,7 +27,7 @@ public class GrgLocalResourceServerTokenServices implements ResourceServerTokenS
 
     private final TokenStore tokenStore;
 
-    private final UserDetailsService userDetailsService;
+    private final GrgUserDetailsService userDetailsService;
 
     @Override
     public OAuth2Authentication loadAuthentication(String accessToken) throws AuthenticationException, InvalidTokenException {
@@ -41,8 +42,14 @@ public class GrgLocalResourceServerTokenServices implements ResourceServerTokenS
         }
 
         // 根据 username 查询 spring cache 最新的值 并返回
-        GrgUser GrgUser = (GrgUser) oAuth2Authentication.getPrincipal();
-        UserDetails userDetails = userDetailsService.loadUserByUsername(GrgUser.getUsername());
+        GrgUser grgUser = (GrgUser) oAuth2Authentication.getPrincipal();
+        UserDetails userDetails = null;
+        /**系统用户登录*/
+        if (grgUser.getLoginTypeEnum() == LoginTypeEnum.PWD) {
+            userDetails = userDetailsService.loadUserByUsername(grgUser.getUsername());
+        }else {/**社交账户登录*/
+            userDetails = userDetailsService.loadUserBySocial(grgUser.getLoginTypeEnum(),grgUser.getUsername());
+        }
         Authentication userAuthentication = new UsernamePasswordAuthenticationToken(userDetails, "N/A", userDetails.getAuthorities());
         OAuth2Authentication authentication = new OAuth2Authentication(oAuth2Request, userAuthentication);
         authentication.setAuthenticated(true);
