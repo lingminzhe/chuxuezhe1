@@ -9,13 +9,20 @@ import com.grgbanking.counter.common.socket.service.SocketAbstractService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 这是socket的实现类，自行实现的Demo，可根据实际情况进行定制开发
  */
 @Slf4j
 @Service
+@EnableScheduling
 public class SocketServiceImpl extends SocketAbstractService {
     private final String redisKeyPrefix ="grg-cloud-counter-app-register";
     private String instanceId= UUIDUtils.uuid();
@@ -85,13 +92,36 @@ public class SocketServiceImpl extends SocketAbstractService {
     }
 
     @Override
-    public void register(SocketIOClient client,String schema,String termId) {
+    public synchronized void register(SocketIOClient client,String schema,String termId) {
         String clientId=getClientId(client);
         String key= redisKeyPrefix +":"+instanceId;
         String hashKey=clientId;
         String value=schema+":"+termId;
 
-        redisTemplate.opsForHash().put(key,hashKey,value);
+        Map<String,String> map =(Map<String,String>)redisTemplate.opsForValue().get(key);
+        if(map==null){
+            map=new HashMap<>();
+        }else {
+            for (Map.Entry<String, String> entry : map.entrySet()) {
+                if(entry.getValue().equals(value)){
+                    map.remove(entry.getKey());
+                }
+            }
+        }
+        map.put(hashKey,value);
+
+        redisTemplate.opsForValue().set(key,map,1, TimeUnit.HOURS);
         log.info("客户端注册了{},{},{}",clientId,schema,termId);
     }
+
+    //每隔20分钟重置一下redis超时时间，防止过期删除
+    @Scheduled(fixedRate =20*60*1000)
+    public synchronized void monitorRedis(){
+        String key= redisKeyPrefix +":"+instanceId;
+        Object o = redisTemplate.opsForValue().get(key);
+        if(o!=null){
+            redisTemplate.opsForValue().set(key,o,1, TimeUnit.HOURS);
+        }
+    }
+
 }
