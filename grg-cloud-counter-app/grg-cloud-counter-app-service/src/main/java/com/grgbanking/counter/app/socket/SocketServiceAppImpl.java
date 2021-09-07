@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Service
 @EnableScheduling
-public class SocketServiceImpl extends SocketAbstractService {
+public class SocketServiceAppImpl extends SocketAbstractService {
     private final String redisKeyPrefix ="grg-cloud-counter-app-register";
     private String instanceId= UUIDUtils.uuid();
 
