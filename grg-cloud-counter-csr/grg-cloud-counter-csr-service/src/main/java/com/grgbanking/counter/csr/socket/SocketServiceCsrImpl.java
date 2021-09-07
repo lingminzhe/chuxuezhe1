@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-public class SocketServiceImpl extends SocketAbstractService {
+public class SocketServiceCsrImpl extends SocketAbstractService {
 
     @Override
     public void addListener(SocketIOServer socketIOServer) {
