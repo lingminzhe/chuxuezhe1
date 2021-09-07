@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * @author: Ye Kaitao
  * @create: 2021-09-06
- * 需要注册到Spring容器中
+ * entity属性字段自动注入值
  */
 @Component
 public class MyMetaObjectHandler implements MetaObjectHandler {
