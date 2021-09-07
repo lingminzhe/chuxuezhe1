@@ -2,6 +2,7 @@ package com.grgbanking.counter.csr.socket;
 
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
+import com.corundumstudio.socketio.listener.ConnectListener;
 import com.grgbanking.counter.common.core.util.Resp;
 import com.grgbanking.counter.common.socket.server.SocketServer;
 import com.grgbanking.counter.common.socket.service.SocketAbstractService;
@@ -60,6 +61,20 @@ public class SocketServiceImpl extends SocketAbstractService {
          * 父类发送消息的函数
          */
         sendMessage(SocketServer.getClient("1000"),Resp.success("这是服务器消息"));
+        return false;
+    }
+
+    @Override
+    public void register(SocketIOClient clientId, String schema, String termId) {
+
+    }
+
+
+    public boolean sendMessage(String termId, String data) {
+        /**
+         * 父类发送消息的函数
+         */
+        sendMessage(SocketServer.getClient("1000"),Resp.success(data));
         return false;
     }
 }
