@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Service("grgAccountService")
@@ -27,12 +28,21 @@ public class GrgAccountServiceImpl extends ServiceImpl<GrgAccountDao, GrgAccount
         return new PageUtils(page);
     }
 
+    /**
+     * 根据客户id查出名下账户信息
+     * @param id
+     * @return
+     */
     @Override
     public List<GrgAccountEntity> getByCustomerId(Integer id) {
-        GrgAccountEntity entity = baseMapper.selectById(id);
-        System.out.println(entity.toString());
+        //查出所有信息
+        List<GrgAccountEntity> entities = this.baseMapper.selectList(null);
+        //
+        List<GrgAccountEntity> list = entities.stream().filter(grgAccountEntity ->
+                grgAccountEntity.getCustomerId().equals(id)
+        ).collect(Collectors.toList());
 
-        return null;
+        return list;
     }
 
 }

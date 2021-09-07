@@ -19,7 +19,6 @@ import java.util.Map;
  * 银行卡业务操作记录表
  *
  * @author GRGBanking
- * @email ${email}
  * @date 2021-09-03 13:43:56
  */
 @RestController
@@ -31,7 +30,7 @@ public class GrgAccountRecordController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
    //@grgAccountService("bank:grgaccountrecord:list")
     public Resp list(@RequestParam Map<String, Object> params){
         PageUtils page = grgAccountRecordService.queryPage(params);
@@ -43,7 +42,7 @@ public class GrgAccountRecordController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{id}")
+    @GetMapping("/info/{id}")
    //@grgAccountService("bank:grgaccountrecord:info")
     public Resp info(@PathVariable("id") Integer id){
 		GrgAccountRecordEntity grgAccountRecord = grgAccountRecordService.getById(id);
@@ -59,30 +58,30 @@ public class GrgAccountRecordController {
     //TODO
     @ApiOperation(value = "根据customer_id查询账户信息")
     @ApiImplicitParam(name = "customer_id",value = "客户Id",required = true)
-    @RequestMapping("/getAccountRecordById/{id}")
+    @GetMapping("/getAccountRecordById/{id}")
     //@grgAccountService("bank:grgaccount:info")
     public Resp getAccountById(@PathVariable("id") Integer id){
         List<GrgAccountRecordEntity> entities = grgAccountRecordService.getByCustomerId(id);
 //        GrgAccountRecordEntity entity = grgAccountRecordService.getByCustomerId(id);
 
-        return Resp.success(entities, "entity");
+        return Resp.success(entities, "entities");
     }
 
     /**
      * 保存
      */
-    @RequestMapping("/save")
+    @PostMapping("/save")
    //@grgAccountService("bank:grgaccountrecord:save")
     public Resp save(@RequestBody GrgAccountRecordEntity grgAccountRecord){
-		grgAccountRecordService.save(grgAccountRecord);
+        grgAccountRecordService.save(grgAccountRecord);
 
-        return Resp.success();
+        return Resp.success().setCode(200);
     }
 
     /**
      * 修改
      */
-    @RequestMapping("/update")
+    @PostMapping("/update")
    //@grgAccountService("bank:grgaccountrecord:update")
     public Resp update(@RequestBody GrgAccountRecordEntity grgAccountRecord){
 		grgAccountRecordService.updateById(grgAccountRecord);
@@ -92,7 +91,7 @@ public class GrgAccountRecordController {
     /**
      * 删除
      */
-    @RequestMapping("/delete")
+    @DeleteMapping("/delete")
    //@grgAccountService("bank:grgaccountrecord:delete")
     public Resp delete(@RequestBody Integer[] ids){
 		grgAccountRecordService.removeByIds(Arrays.asList(ids));

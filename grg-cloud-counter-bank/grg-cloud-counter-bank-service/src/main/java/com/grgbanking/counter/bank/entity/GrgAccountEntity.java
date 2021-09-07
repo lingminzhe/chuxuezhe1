@@ -1,9 +1,13 @@
 package com.grgbanking.counter.bank.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -27,10 +31,12 @@ public class GrgAccountEntity implements Serializable {
 	/**
 	 * 客户id
 	 */
+	@NotNull(message = "账户id必须提交")
 	private Integer customerId;
 	/**
 	 * 卡号
 	 */
+	@NotBlank(message = "卡号必须提交")
 	private String cardNo;
 	/**
 	 * 卡密
@@ -55,6 +61,7 @@ public class GrgAccountEntity implements Serializable {
 	/**
 	 * 
 	 */
+	@TableField(fill = FieldFill.INSERT)
 	private Date createDate;
 	/**
 	 * 卡片等级（1： 一类卡； 2：二类卡）
@@ -67,6 +74,7 @@ public class GrgAccountEntity implements Serializable {
 	/**
 	 * 
 	 */
+	@TableField(fill = FieldFill.INSERT_UPDATE)
 	private Date updateDate;
 	/**
 	 * 

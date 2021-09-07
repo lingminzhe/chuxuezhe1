@@ -71,8 +71,11 @@ public class GrgCustomerController {
     @RequestMapping("/save")
    //@grgAccountService("bank:grgcustomer:save")
     public Resp save(@RequestBody GrgCustomerEntity grgCustomer){
-		grgCustomerService.save(grgCustomer);
-
+        log.info("grgCustomer.save()");
+        boolean b = grgCustomerService.save(grgCustomer);
+        if (!b){
+            return Resp.failed().setMsg("删除失败");
+        }
         return Resp.success();
     }
 
@@ -84,8 +87,10 @@ public class GrgCustomerController {
     @RequestMapping("/update")
    //@grgAccountService("bank:grgcustomer:update")
     public Resp update(@RequestBody GrgCustomerEntity grgCustomer){
-		grgCustomerService.updateById(grgCustomer);
-
+        boolean b = grgCustomerService.updateById(grgCustomer);
+        if (!b){
+            return Resp.failed().setMsg("删除失败");
+        }
         return Resp.success();
     }
 
@@ -97,8 +102,10 @@ public class GrgCustomerController {
     @RequestMapping("/delete")
    //@grgAccountService("bank:grgcustomer:delete")
     public Resp delete(@RequestBody String[] ids){
-		grgCustomerService.removeByIds(Arrays.asList(ids));
-
+        boolean b = grgCustomerService.removeByIds(Arrays.asList(ids));
+        if (!b){
+            return Resp.failed().setMsg("删除失败");
+        }
         return Resp.success();
     }
 

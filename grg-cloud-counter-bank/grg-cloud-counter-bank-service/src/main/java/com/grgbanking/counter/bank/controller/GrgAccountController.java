@@ -12,7 +12,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
@@ -56,9 +58,9 @@ public class GrgAccountController {
     @GetMapping("/info/{id}")
     //@grgAccountService("bank:grgaccount:info")
     public Resp info(@PathVariable("id") Integer id){
-		GrgAccountEntity grgAccount = grgAccountService.getById(id);
+        List<GrgAccountEntity> entities = grgAccountService.getByCustomerId(id);
 
-        return Resp.success(grgAccount, "grgAccount");
+        return Resp.success(entities, "grgAccount");
     }
 
     /**
@@ -68,10 +70,10 @@ public class GrgAccountController {
     @ApiImplicitParam(name = "AccountEntity",value = "客户信息",required = true)
     @PostMapping("/save")
     //@grgAccountService("bank:grgaccount:save")
-    public Resp save(@RequestBody GrgAccountEntity grgAccount){
-		grgAccountService.save(grgAccount);
+    public Resp save(@Valid @RequestBody GrgAccountEntity grgAccount){
+        grgAccountService.save(grgAccount);
 
-        return Resp.success();
+        return Resp.success().setMsg("保存成功");
     }
 
     /**
@@ -82,23 +84,29 @@ public class GrgAccountController {
     @PostMapping("/update")
     //@grgAccountService("bank:grgaccount:update")
     public Resp update(@RequestBody GrgAccountEntity grgAccount){
-		grgAccountService.updateById(grgAccount);
+        boolean b = grgAccountService.updateById(grgAccount);
+        if (!b){
+            return Resp.failed().setMsg("更改失败");
+        }
 
-        return Resp.success();
+        return Resp.success().setMsg("更改成功");
     }
 
     /**
      * 删除
      */
-    //TODO 删除状态变化 而不是删除数据
+    //TODO 删除状态变化 而不是删除数据 逻辑删除 须添加数据库字段 - -！
     @ApiOperation(value = "根据id删除客户信息")
     @ApiImplicitParam(name = "ids",value = "客户Ids",required = true)
     @DeleteMapping("/delete")
     //@grgAccountService("bank:grgaccount:delete")
     public Resp delete(@RequestBody Integer[] ids){
-		grgAccountService.removeByIds(Arrays.asList(ids));
+        boolean b = grgAccountService.removeByIds(Arrays.asList(ids));
+        if (!b){
+            return Resp.failed().setMsg("删除失败");
+        }
 
-        return Resp.success();
+        return Resp.success().setMsg("删除成功");
     }
 
 }

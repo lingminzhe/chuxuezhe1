@@ -40,6 +40,8 @@ public class GrgAccountRecordServiceImpl extends ServiceImpl<GrgAccountRecordDao
                 grgAccountRecordEntity.getAccountId().equals(id)
         ).collect(Collectors.toList());
 
+
+
         return list;
 
     }

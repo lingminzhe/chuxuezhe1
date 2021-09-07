@@ -1,5 +1,7 @@
 package com.grgbanking.counter.bank.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -151,6 +153,7 @@ public class GrgCustomerEntity implements Serializable {
 	/**
 	 * 创建时间
 	 */
+	@TableField(fill = FieldFill.INSERT)
 	private Date createDate;
 	/**
 	 * 更新者
@@ -159,6 +162,7 @@ public class GrgCustomerEntity implements Serializable {
 	/**
 	 * 更新时间
 	 */
+	@TableField(fill = FieldFill.INSERT_UPDATE)
 	private Date updateDate;
 	/**
 	 * 备注信息
