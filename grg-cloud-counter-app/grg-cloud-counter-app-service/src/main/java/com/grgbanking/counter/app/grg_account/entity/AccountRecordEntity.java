@@ -1,7 +1,5 @@
-package com.grgbanking.counter.bank.entity;
+package com.grgbanking.counter.app.grg_account.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -12,13 +10,12 @@ import java.util.Date;
 /**
  * 银行卡业务操作记录表
  * 
- * @author GRGBanking
- * @email ${email}
- * @date 2021-09-03 13:43:56
+ * @author Ye Kaitao
+ * @date 2021-08-30
  */
 @Data
-@TableName("grg_account_record")
-public class GrgAccountRecordEntity implements Serializable {
+@TableName("grg_account_info_details")
+public class AccountRecordEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -41,7 +38,6 @@ public class GrgAccountRecordEntity implements Serializable {
 	/**
 	 * 
 	 */
-	@TableField(fill = FieldFill.INSERT)        // 新增的时候填充数据
 	private Date createDate;
 	/**
 	 * 
@@ -50,12 +46,10 @@ public class GrgAccountRecordEntity implements Serializable {
 	/**
 	 * 
 	 */
-	@TableField(fill = FieldFill.INSERT_UPDATE)
 	private Date updateDate;
 	/**
 	 * 
 	 */
-	       // 新增的时候填充数据
 	private String updateBy;
 
 }

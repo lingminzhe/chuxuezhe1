@@ -1,7 +1,5 @@
-package com.grgbanking.counter.bank.entity;
+package com.grgbanking.counter.app.grg_account.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -10,36 +8,37 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 客户详情表
+ * 联系人信息表
  * 
- * @author GRGBanking
- * @email ${email}
- * @date 2021-09-03 13:43:56
+ * @author Ye Kaitao
+ * @date 2021-08-30
  */
 @Data
-@TableName("grg_customer")
-public class GrgCustomerEntity implements Serializable {
+@TableName("grg_customer_info")
+public class CustomerEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 主键
+	 * 联系人ID
 	 */
 	@TableId
 	private String id;
 	/**
-	 * 性别
+	 * 联系人性别
 	 */
 	private String gender;
+
 	/**
 	 * 出生日期
 	 */
 	private String cusbirthday;
+
 	/**
-	 * 姓名
+	 * 联系人姓名
 	 */
 	private String name;
 	/**
-	 * 昵称
+	 * 联系人昵称
 	 */
 	private String nickname;
 	/**
@@ -153,7 +152,6 @@ public class GrgCustomerEntity implements Serializable {
 	/**
 	 * 创建时间
 	 */
-	@TableField(fill = FieldFill.INSERT)
 	private Date createDate;
 	/**
 	 * 更新者
@@ -162,7 +160,6 @@ public class GrgCustomerEntity implements Serializable {
 	/**
 	 * 更新时间
 	 */
-	@TableField(fill = FieldFill.INSERT_UPDATE)
 	private Date updateDate;
 	/**
 	 * 备注信息
