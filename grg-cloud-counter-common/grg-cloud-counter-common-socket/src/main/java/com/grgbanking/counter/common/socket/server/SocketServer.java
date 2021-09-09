@@ -79,6 +79,17 @@ public class SocketServer {
             }
         });
 
+        socketIOServer.addEventListener("register", Map.class, new DataListener<Map>() {
+            @Override
+            public void onData(SocketIOClient client, Map data, AckRequest ackRequest) throws Exception {
+                client.getHandshakeData();
+                log.info("接收到注册消息：{}",String.valueOf(data));
+                String term_schema=(String)data.get("term_schema");
+                String term_id=(String)data.get("term_id");
+                socketService.register(client,term_schema,term_id);
+            }
+        });
+
         /**
          * 添加自定义监听器
          */

@@ -40,4 +40,5 @@ public interface SocketService {
      */
     boolean receiveMessage(Resp data,String fromClientId);
 
+    void register(SocketIOClient  clientId,String schema,String termId);
 }
