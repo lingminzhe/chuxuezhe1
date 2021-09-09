@@ -19,5 +19,7 @@ public interface GrgAccountService extends IService<GrgAccountEntity> {
     PageUtils queryPage(Map<String, Object> params);
 
     List<GrgAccountEntity> getByCustomerId(Integer id);
+
+    PageUtils queryPage(Map<String, Object> params, Integer customerId);
 }
 

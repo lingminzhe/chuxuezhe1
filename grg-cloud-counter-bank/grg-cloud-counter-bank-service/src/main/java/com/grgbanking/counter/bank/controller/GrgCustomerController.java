@@ -23,7 +23,7 @@ import java.util.Map;
  *
  * @author GRGBanking
  * @email ${email}
- * @date 2021-09-03 13:43:56
+ * @date 2021-09-03
  */
 @Api(tags = "客户信息表")
 @Slf4j
@@ -41,7 +41,7 @@ public class GrgCustomerController {
      */
     @ApiOperation(value = "查询所有客户信息")
     @ApiImplicitParam(name = "null",value = "null",required = true)
-    @RequestMapping("/list")
+    @GetMapping("/list")
    //@grgAccountService("bank:grgcustomer:list")
     public Resp list(@RequestParam Map<String, Object> params){
         PageUtils page = grgCustomerService.queryPage(params);
@@ -55,7 +55,7 @@ public class GrgCustomerController {
      */
     @ApiOperation(value = "根据id查询客户信息")
     @ApiImplicitParam(name = "id",value = "客户Id",required = true)
-    @RequestMapping("/info/{id}")
+    @GetMapping("/info/{id}")
    //@grgAccountService("bank:grgcustomer:info")
     public Resp info(@PathVariable("id") String id){
 		GrgCustomerEntity grgCustomer = grgCustomerService.getById(id);
@@ -68,7 +68,7 @@ public class GrgCustomerController {
      */
     @ApiOperation(value = "新增客户信息")
     @ApiImplicitParam(name = "CustomerEntity",value = "客户信息",required = true)
-    @RequestMapping("/save")
+    @PostMapping("/save")
    //@grgAccountService("bank:grgcustomer:save")
     public Resp save(@RequestBody GrgCustomerEntity grgCustomer){
         log.info("grgCustomer.save()");
@@ -84,7 +84,7 @@ public class GrgCustomerController {
      */
     @ApiOperation(value = "修改客户信息")
     @ApiImplicitParam(name = "CustomerEntity",value = "客户信息",required = true)
-    @RequestMapping("/update")
+    @PostMapping("/update")
    //@grgAccountService("bank:grgcustomer:update")
     public Resp update(@RequestBody GrgCustomerEntity grgCustomer){
         boolean b = grgCustomerService.updateById(grgCustomer);
@@ -99,7 +99,7 @@ public class GrgCustomerController {
      */
     @ApiOperation(value = "根据id删除客户信息")
     @ApiImplicitParam(name = "ids",value = "客户Ids",required = true)
-    @RequestMapping("/delete")
+    @DeleteMapping("/delete")
    //@grgAccountService("bank:grgcustomer:delete")
     public Resp delete(@RequestBody String[] ids){
         boolean b = grgCustomerService.removeByIds(Arrays.asList(ids));

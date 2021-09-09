@@ -35,6 +35,7 @@ public class GrgAccountRecordServiceImpl extends ServiceImpl<GrgAccountRecordDao
      */
     @Override
     public List<GrgAccountRecordEntity> getByCustomerId(Integer id) {
+
         List<GrgAccountRecordEntity> entities = baseMapper.selectList(null);
         List<GrgAccountRecordEntity> list = entities.stream().filter(grgAccountRecordEntity ->
                 grgAccountRecordEntity.getAccountId().equals(id)

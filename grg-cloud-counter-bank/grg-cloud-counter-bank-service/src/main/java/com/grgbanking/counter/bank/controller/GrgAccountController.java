@@ -24,7 +24,7 @@ import java.util.Map;
  *
  * @author GRGBanking
  * @email ${email}
- * @date 2021-09-03 13:43:55
+ * @date 2021-09-03
  */
 @Api(tags = "银行卡账户信息")
 @Slf4j
@@ -49,6 +49,18 @@ public class GrgAccountController {
         return Resp.success(page, "page");
     }
 
+    /**
+     * 列表
+     */
+    @ApiOperation(value = "查询用户名下账户信息customerId为必输入，输入0表示查询全部  可选择根据主键id或卡号精确查询")
+    @GetMapping("/listAll/{customer_id}")
+    //@grgAccountService("bank:grgaccount:list")
+    public Resp listAll(@RequestParam Map<String, Object> params,
+                        @PathVariable("customer_id") Integer customerId){
+        PageUtils page = grgAccountService.queryPage(params,customerId);
+
+        return Resp.success(page, "page");
+    }
 
     /**
      * 信息
