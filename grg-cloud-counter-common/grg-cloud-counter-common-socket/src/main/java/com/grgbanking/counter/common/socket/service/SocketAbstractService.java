@@ -3,6 +3,7 @@ package com.grgbanking.counter.common.socket.service;
 
 import com.corundumstudio.socketio.SocketIOClient;
 import com.grgbanking.counter.common.core.util.Resp;
+import com.grgbanking.counter.common.socket.server.SocketServer;
 
 public abstract class SocketAbstractService implements SocketService {
 
@@ -14,6 +15,11 @@ public abstract class SocketAbstractService implements SocketService {
      */
     public void sendMessage(SocketIOClient client, Resp data){
         client.sendEvent(EVENT_NAME,data);
+    }
+
+    public void sendMessage(String clientId, Resp data){
+        SocketIOClient client = SocketServer.getClient(clientId);
+        sendMessage(client,data);
     }
 
 }

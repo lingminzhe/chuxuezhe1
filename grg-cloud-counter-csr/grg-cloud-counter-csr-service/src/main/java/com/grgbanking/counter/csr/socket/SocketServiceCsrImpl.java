@@ -55,10 +55,15 @@ public class SocketServiceCsrImpl extends SocketAbstractService {
      */
     @Override
     public void disconnect(String clientId) {
-        log.info("客户端连断开实现类了：{}",clientId);
-        String key=instanceId+":"+clientId;
-        redisTemplate.opsForHash().delete("grg-cloud-counter-app-register",key);
+        String key= redisKeyPrefix +":"+instanceId;
+        Map<String,String> map =(Map<String,String>)redisTemplate.opsForValue().get(key);
+        if(map!=null&&!map.isEmpty()){
+            map.remove(clientId);
+            redisTemplate.opsForValue().set(key,map,1, TimeUnit.HOURS);
+        }
+        log.info("客户端连断开了：{}",clientId);
     }
+
 
     /**
      * 获取客户端id的逻辑，自行实现

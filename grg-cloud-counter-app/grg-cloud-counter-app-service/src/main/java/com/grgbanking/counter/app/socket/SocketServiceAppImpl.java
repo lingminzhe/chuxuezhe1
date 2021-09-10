@@ -2,11 +2,14 @@ package com.grgbanking.counter.app.socket;
 
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
+import com.grgbanking.counter.app.business.BusinessHandler;
+import com.grgbanking.counter.app.business.ServiceSessionManagement;
 import com.grgbanking.counter.common.core.util.Resp;
 import com.grgbanking.counter.common.core.util.UUIDUtils;
 import com.grgbanking.counter.common.socket.server.SocketServer;
 import com.grgbanking.counter.common.socket.service.SocketAbstractService;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -30,6 +33,12 @@ public class SocketServiceAppImpl extends SocketAbstractService {
 
     @Autowired
     RedisTemplate redisTemplate;
+
+    @Autowired
+    BusinessFactory businessFactory;
+
+    @Autowired
+    ServiceSessionManagement serviceSessionManagement;
 
     @Override
     public void addListener(SocketIOServer socketIOServer) {
@@ -55,9 +64,13 @@ public class SocketServiceAppImpl extends SocketAbstractService {
      */
     @Override
     public void disconnect(String clientId) {
-        log.info("客户端连断开实现类了：{}",clientId);
-        String key=instanceId+":"+clientId;
-        redisTemplate.opsForHash().delete("grg-cloud-counter-app-register",key);
+        String key= redisKeyPrefix +":"+instanceId;
+        Map<String,String> map =(Map<String,String>)redisTemplate.opsForValue().get(key);
+        if(map!=null&&!map.isEmpty()){
+            map.remove(clientId);
+            redisTemplate.opsForValue().set(key,map,1, TimeUnit.HOURS);
+        }
+        log.info("客户端连断开了：{}",clientId);
     }
 
     /**
@@ -78,12 +91,14 @@ public class SocketServiceAppImpl extends SocketAbstractService {
     public boolean receiveMessage(Resp data, String fromClientId) {
         log.info("客户端消息发送到实现类了,客户端ID：{}，消息内容：{}",fromClientId,data);
 
-        /**
-         * 父类发送消息的函数
-         */
-        if("video".equals(data.getData())){
-            //发布消息
-            redisTemplate.convertAndSend("video",fromClientId);
+        Map map=(Map)data.getData();
+
+        String serviceType=(String)map.get("service_type");
+        String serviceSessionId=(String)map.get("service_session_id");
+        serviceSessionManagement.addSession(serviceSessionId,fromClientId);
+        BusinessHandler handler=businessFactory.findHandler(serviceType);
+        if(handler!=null){
+            handler.execute(serviceSessionId);
         }
 
 
