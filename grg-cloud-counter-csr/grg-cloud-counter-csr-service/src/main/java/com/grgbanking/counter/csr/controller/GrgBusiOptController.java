@@ -4,6 +4,7 @@ import com.grgbanking.counter.common.core.util.PageUtils;
 import com.grgbanking.counter.common.core.util.Resp;
 import com.grgbanking.counter.csr.entity.GrgBusiOptEntity;
 import com.grgbanking.counter.csr.service.GrgBusiOptService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,10 +52,13 @@ public class GrgBusiOptController {
     /**
      * 保存
      */
+    @ApiOperation(value = "新增账户交易流水信息")
     @RequestMapping("/save")
 //    @RequiresPermissions("csr:grgbusiopt:save")
     public Resp save(@RequestBody GrgBusiOptEntity grgBusiOpt){
-		grgBusiOptService.save(grgBusiOpt);
+
+        //
+		grgBusiOptService.saveBusiOpt(grgBusiOpt);
 
         return Resp.success();
     }

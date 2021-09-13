@@ -26,4 +26,10 @@ public class GrgBusiOptServiceImpl extends ServiceImpl<GrgBusiOptDao, GrgBusiOpt
         return new PageUtils(page);
     }
 
+    @Override
+    public void saveBusiOpt(GrgBusiOptEntity grgBusiOpt) {
+
+        this.save(grgBusiOpt);
+    }
+
 }
