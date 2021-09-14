@@ -20,6 +20,8 @@ public interface GrgEmployeeService extends IService<GrgEmployeeServiceEntity> {
 
     GrgEmployeeServiceEntity getByEmployeeId(String id);
 
-    List<GrgEmployeeServiceEntity> getFreeEmployee();
+    List<GrgEmployeeServiceEntity> getAllFreeEmployee();
+
+    GrgEmployeeServiceEntity getFreeEmployee(String userId);
 }
 

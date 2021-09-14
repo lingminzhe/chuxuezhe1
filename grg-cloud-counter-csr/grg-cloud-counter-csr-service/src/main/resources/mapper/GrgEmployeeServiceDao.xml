@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.grgbanking.counter.csr.dao.GrgEmployeeServiceDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.grgbanking.counter.csr.entity.GrgEmployeeServiceEntity" id="grgEmployeeServiceMap">
+        <result property="id" column="id"/>
+        <result property="employeeId" column="employee_id"/>
+<!--        <result property="employeeType" column="employee_type"/>-->
+        <result property="busiNo" column="busi_no"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+
+</mapper>

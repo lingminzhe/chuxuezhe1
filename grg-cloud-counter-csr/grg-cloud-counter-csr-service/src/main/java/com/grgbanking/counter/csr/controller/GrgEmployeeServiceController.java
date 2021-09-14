@@ -61,12 +61,29 @@ public class GrgEmployeeServiceController {
      */
     //TODO 分配座席问题
     @ApiOperation(value = "获取所有空闲座席")
-    @GetMapping("/freeEmployee")
+    @GetMapping("/getAllFreeEmployee")
     //@RequiresPermissions("csr:grgemployeeservice:info")
-    public Resp getFreeEmployee(){
-         List<GrgEmployeeServiceEntity> list = grgEmployeeService.getFreeEmployee();
+    public Resp getAllFreeEmployee(){
+         List<GrgEmployeeServiceEntity> list = grgEmployeeService.getAllFreeEmployee();
 
         return Resp.success(list, "空闲座席数量为："+list.size());
+    }
+
+    /**
+     * 获取所有空闲座席
+     */
+    //TODO 分配座席问题
+    @ApiOperation(value = "获取所有空闲座席")
+    @GetMapping("/getFreeEmployee")
+    //@RequiresPermissions("csr:grgemployeeservice:info")
+    public Resp getFreeEmployee(){
+        String id = "";
+        GrgEmployeeServiceEntity entity = grgEmployeeService.getFreeEmployee(id);
+
+        if (entity == null){
+            return Resp.failed("目前没有空闲座席");
+        }
+        return Resp.success(entity, "空闲座席");
     }
 
     /**

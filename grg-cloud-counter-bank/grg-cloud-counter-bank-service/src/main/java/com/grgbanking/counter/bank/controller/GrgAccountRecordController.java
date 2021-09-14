@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -59,7 +60,6 @@ public class GrgAccountRecordController {
      * @param id
      * @return
      */
-    //TODO
     @ApiOperation(value = "根据account_id查询账户信息")
     @ApiImplicitParam(name = "customer_id",value = "客户Id",required = true)
     @GetMapping("/getAccountRecordById/{id}")
@@ -76,6 +76,7 @@ public class GrgAccountRecordController {
     /**
      * 保存
      */
+    @Transactional
     @ApiOperation(value = "新增账户交易流水信息")
     @PostMapping("/save")
    //@grgAccountService("bank:grgaccountrecord:save")

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 
 @Service("grgAccountRecordService")
@@ -36,14 +35,9 @@ public class GrgAccountRecordServiceImpl extends ServiceImpl<GrgAccountRecordDao
     @Override
     public List<GrgAccountRecordEntity> getByCustomerId(Integer id) {
 
-        List<GrgAccountRecordEntity> entities = baseMapper.selectList(null);
-        List<GrgAccountRecordEntity> list = entities.stream().filter(grgAccountRecordEntity ->
-                grgAccountRecordEntity.getAccountId().equals(id)
-        ).collect(Collectors.toList());
+        List<GrgAccountRecordEntity> entity = baseMapper.selectList(new QueryWrapper<GrgAccountRecordEntity>().eq("account_id",id));
 
-
-
-        return list;
+        return entity;
 
     }
 
