@@ -40,6 +40,10 @@ public class GrgAccountEntity implements Serializable {
 	 */
 	private String cardPwd;
 	/**
+	 * 开户行
+	 */
+	private String cardBank;
+	/**
 	 * 开户证件类型
 	 */
 	private String cardCertificateType;

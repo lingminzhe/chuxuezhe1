@@ -1,0 +1,106 @@
+package com.grgbanking.counter.app.controller;
+
+import com.grg.banking.counter.csr.api.dubbo.RemoteBusiInfoService;
+import com.grg.banking.counter.csr.api.dubbo.RemoteBusiOptService;
+import com.grg.banking.counter.csr.api.entity.GrgCusBusiInfoEntity;
+import com.grg.banking.counter.csr.api.entity.GrgCusBusiOptEntity;
+import com.grgbanking.counter.app.dto.CusAccountDto;
+import com.grgbanking.counter.bank.api.dubbo.RemoteCusInfoService;
+import com.grgbanking.counter.bank.api.entity.GrgCusAccountEntity;
+import com.grgbanking.counter.bank.api.entity.GrgCusInfoEntiry;
+import com.grgbanking.counter.common.core.util.Resp;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.apache.dubbo.config.annotation.DubboReference;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@Api(tags = "个人中心")
+@RestController
+@RequestMapping("/cus")
+public class CusInfoController {
+
+    @DubboReference
+    RemoteCusInfoService remoteCusInfoService;
+
+    @DubboReference
+    RemoteBusiInfoService remoteBusiInfoService;
+
+    @DubboReference
+    RemoteBusiOptService remoteBusiOptService;
+
+    @ApiOperation("个人详细")
+    @GetMapping("/personal/info")
+    public Resp getPersonalInfo(@RequestBody CusAccountDto cusAccountDto) {
+        GrgCusInfoEntiry cusInfo = remoteCusInfoService.findCusInfo(cusAccountDto.getUserId());
+        if (cusInfo != null){
+            return Resp.success(cusInfo);
+        }
+        return Resp.failed("无法查询到用户数据!");
+    }
+
+    @ApiOperation("银行卡详情")
+    @GetMapping("/card/{id}")
+    public Resp getCard(@PathVariable("id")String id) {
+        GrgCusAccountEntity cusAccount = remoteCusInfoService.findCusAccount(id);
+        return Resp.success(cusAccount);
+    }
+
+    @ApiOperation("银行卡列表")
+    @GetMapping("/card/list")
+    public Resp getCardList(@RequestBody CusAccountDto cusAccountDto) {
+        List<GrgCusAccountEntity> cusAccountList = remoteCusInfoService.findCusAccountList(cusAccountDto.getUserId());
+        return Resp.success(cusAccountList);
+    }
+
+    @ApiOperation("新增银行卡")
+    @PostMapping("/save/card")
+    public Resp saveBankCard(@RequestBody GrgCusAccountEntity grgCusAccountEntity) {
+        boolean b = remoteCusInfoService.saveBankCard(grgCusAccountEntity);
+        if (b != true){
+            return Resp.failed("新增失败!");
+        }
+        return Resp.success("新增成功!");
+    }
+
+    @ApiOperation("银行卡流水列表")
+    @GetMapping("/card/itemized/list")
+    public Resp getCardSequenceList(@RequestBody CusAccountDto cusAccountDto) {
+        List<GrgCusBusiOptEntity> list = remoteBusiOptService.findList(cusAccountDto.getUserId());
+        return Resp.success(list);
+    }
+
+    @ApiOperation("银行卡流水详情")
+    @GetMapping("/card/itemized/{id}")
+    public Resp getCardSequence(@PathVariable("id")String id) {
+        GrgCusBusiOptEntity one = remoteBusiOptService.getOne(id);
+        return Resp.success(one);
+    }
+
+    @ApiOperation("办理业务列表")
+    @GetMapping("/business/list")
+    public Resp getBuinessList(@RequestBody CusAccountDto cusAccountDto) {
+        List<GrgCusBusiInfoEntity> list = remoteBusiInfoService.findList(cusAccountDto.getUserId());
+        return Resp.success(list);
+    }
+
+    @ApiOperation("办理业务详情")
+    @GetMapping("/business/{id}")
+    public Resp getBusiness(@PathVariable("id")String id) {
+        GrgCusBusiInfoEntity one = remoteBusiInfoService.getOne(id);
+        return Resp.success(one);
+    }
+
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "userId", value = "用户id", required = true),
+//            @ApiImplicitParam(name = "accountId", value = "银行卡id", required = true),
+//    })
+//    @ApiOperation("删除")
+//    @GetMapping("/delete/card")
+//    public Resp deleteBankCard(@RequestBody CusAccountDto cusAccountDto) {
+//
+//        return Resp.failed("无法查询到用户数据!");
+//    }
+
+}

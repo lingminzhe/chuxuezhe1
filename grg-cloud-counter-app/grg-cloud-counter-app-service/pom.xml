@@ -96,7 +96,13 @@
 
         <dependency>
             <groupId>com.grgbanking.counter</groupId>
-            <artifactId>grg-cloud-counter-common-bom</artifactId>
+            <artifactId>grg-cloud-counter-bank-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.grgbanking.counter</groupId>
+            <artifactId>grg-cloud-counter-csr-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
@@ -130,6 +136,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
             </plugin>
         </plugins>
     </build>
