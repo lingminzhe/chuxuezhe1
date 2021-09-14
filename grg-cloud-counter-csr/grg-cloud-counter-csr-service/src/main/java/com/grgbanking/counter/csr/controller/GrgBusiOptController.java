@@ -4,9 +4,9 @@ import com.grgbanking.counter.common.core.util.PageUtils;
 import com.grgbanking.counter.common.core.util.Resp;
 import com.grgbanking.counter.csr.entity.GrgBusiOptEntity;
 import com.grgbanking.counter.csr.service.GrgBusiOptService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -21,6 +21,7 @@ import java.util.Map;
  * @email ${email}
  * @date 2021-09-09
  */
+@Api(tags = "座席操作记录")
 @RestController
 @RequestMapping("csr/grgbusiopt")
 public class GrgBusiOptController {
@@ -30,6 +31,7 @@ public class GrgBusiOptController {
     /**
      * 列表
      */
+    @ApiOperation(value = "查看所有操作记录")
     @GetMapping("/list")
 //    @RequiresPermissions("csr:grgbusiopt:list")
     public Resp list(@RequestParam Map<String, Object> params){

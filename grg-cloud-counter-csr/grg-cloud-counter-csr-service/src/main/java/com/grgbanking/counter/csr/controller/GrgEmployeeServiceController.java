@@ -73,7 +73,7 @@ public class GrgEmployeeServiceController {
      * 保存
      */
     @Transactional
-    @ApiOperation(value = "新增座席座席")
+    @ApiOperation(value = "新增座席")
     @PostMapping("/save")
     //@RequiresPermissions("csr:grgemployeeservice:save")
     public Resp save(@RequestBody GrgEmployeeServiceEntity grgEmployeeService){
@@ -85,6 +85,7 @@ public class GrgEmployeeServiceController {
     /**
      * 修改
      */
+    @ApiOperation(value = "更改座席状态")
     @Transactional
     @PostMapping("/update")
     //@RequiresPermissions("csr:grgemployeeservice:update")
