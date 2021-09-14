@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.grgbanking.counter.common.core.util.PageUtils;
 import com.grgbanking.counter.csr.entity.GrgEmployeeServiceEntity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,8 +14,12 @@ import java.util.Map;
  * @email ${email}
  * @date 2021-09-13 10:55:49
  */
-public interface GrgEmployeeServiceService extends IService<GrgEmployeeServiceEntity> {
+public interface GrgEmployeeService extends IService<GrgEmployeeServiceEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    GrgEmployeeServiceEntity getByEmployeeId(String id);
+
+    List<GrgEmployeeServiceEntity> getFreeEmployee();
 }
 

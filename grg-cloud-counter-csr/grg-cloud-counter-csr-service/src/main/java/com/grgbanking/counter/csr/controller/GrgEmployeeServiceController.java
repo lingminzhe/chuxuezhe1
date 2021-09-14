@@ -3,11 +3,15 @@ package com.grgbanking.counter.csr.controller;
 import com.grgbanking.counter.common.core.util.PageUtils;
 import com.grgbanking.counter.common.core.util.Resp;
 import com.grgbanking.counter.csr.entity.GrgEmployeeServiceEntity;
-import com.grgbanking.counter.csr.service.GrgEmployeeServiceService;
+import com.grgbanking.counter.csr.service.GrgEmployeeService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
@@ -18,21 +22,23 @@ import java.util.Map;
  *
  * @author GrgBanking
  * @email ${email}
- * @date 2021-09-13 10:55:49
+ * @date 2021-09-13
  */
+@Api(tags = "座席端服务信息")
 @RestController
 @RequestMapping("csr/grgemployeeservice")
 public class GrgEmployeeServiceController {
     @Autowired
-    private GrgEmployeeServiceService grgEmployeeServiceService;
+    private GrgEmployeeService grgEmployeeService;
 
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @ApiOperation(value = "查看座席信息信息")
+    @GetMapping("/list")
     //@RequiresPermissions("csr:grgemployeeservice:list")
     public Resp list(@RequestParam Map<String, Object> params){
-        PageUtils page = grgEmployeeServiceService.queryPage(params);
+        PageUtils page = grgEmployeeService.queryPage(params);
 
         return Resp.success(page, "page");
     }
@@ -41,21 +47,37 @@ public class GrgEmployeeServiceController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{id}")
+    @ApiOperation(value = "根据employee_id查询账户信息")
+    @GetMapping("/info/{id}")
     //@RequiresPermissions("csr:grgemployeeservice:info")
     public Resp info(@PathVariable("id") String id){
-		GrgEmployeeServiceEntity grgEmployeeService = grgEmployeeServiceService.getById(id);
+		GrgEmployeeServiceEntity grgEmployeeService = this.grgEmployeeService.getByEmployeeId(id);
 
         return Resp.success(grgEmployeeService, "grgEmployeeService");
     }
 
     /**
+     * 获取所有空闲座席
+     */
+    //TODO 分配座席问题
+    @ApiOperation(value = "获取所有空闲座席")
+    @GetMapping("/freeEmployee")
+    //@RequiresPermissions("csr:grgemployeeservice:info")
+    public Resp getFreeEmployee(){
+         List<GrgEmployeeServiceEntity> list = grgEmployeeService.getFreeEmployee();
+
+        return Resp.success(list, "空闲座席数量为："+list.size());
+    }
+
+    /**
      * 保存
      */
-    @RequestMapping("/save")
+    @Transactional
+    @ApiOperation(value = "新增座席座席")
+    @PostMapping("/save")
     //@RequiresPermissions("csr:grgemployeeservice:save")
     public Resp save(@RequestBody GrgEmployeeServiceEntity grgEmployeeService){
-		grgEmployeeServiceService.save(grgEmployeeService);
+		this.grgEmployeeService.save(grgEmployeeService);
 
         return Resp.success();
     }
@@ -63,10 +85,11 @@ public class GrgEmployeeServiceController {
     /**
      * 修改
      */
-    @RequestMapping("/update")
+    @Transactional
+    @PostMapping("/update")
     //@RequiresPermissions("csr:grgemployeeservice:update")
     public Resp update(@RequestBody GrgEmployeeServiceEntity grgEmployeeService){
-		grgEmployeeServiceService.updateById(grgEmployeeService);
+		this.grgEmployeeService.updateById(grgEmployeeService);
 
         return Resp.success();
     }
@@ -74,10 +97,10 @@ public class GrgEmployeeServiceController {
     /**
      * 删除
      */
-    @RequestMapping("/delete")
+    @DeleteMapping("/delete")
     //@RequiresPermissions("csr:grgemployeeservice:delete")
     public Resp delete(@RequestBody String[] ids){
-		grgEmployeeServiceService.removeByIds(Arrays.asList(ids));
+		grgEmployeeService.removeByIds(Arrays.asList(ids));
 
         return Resp.success();
     }

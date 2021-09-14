@@ -28,7 +28,7 @@ public class GrgFileManagerController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
 //    @RequiresPermissions("csr:grgfilemanager:list")
     public Resp list(@RequestParam Map<String, Object> params){
         PageUtils page = grgFileManagerService.queryPage(params);
@@ -40,7 +40,7 @@ public class GrgFileManagerController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{id}")
+    @GetMapping("/info/{id}")
 //    @RequiresPermissions("csr:grgfilemanager:info")
     public Resp info(@PathVariable("id") String id){
 		GrgFileManagerEntity grgFileManager = grgFileManagerService.getById(id);
@@ -51,7 +51,7 @@ public class GrgFileManagerController {
     /**
      * 保存
      */
-    @RequestMapping("/save")
+    @PostMapping("/save")
 //    @RequiresPermissions("csr:grgfilemanager:save")
     public Resp save(@RequestBody GrgFileManagerEntity grgFileManager){
 		grgFileManagerService.save(grgFileManager);
@@ -62,7 +62,7 @@ public class GrgFileManagerController {
     /**
      * 修改
      */
-    @RequestMapping("/update")
+    @PostMapping("/update")
 //    @RequiresPermissions("csr:grgfilemanager:update")
     public Resp update(@RequestBody GrgFileManagerEntity grgFileManager){
 		grgFileManagerService.updateById(grgFileManager);
@@ -73,7 +73,7 @@ public class GrgFileManagerController {
     /**
      * 删除
      */
-    @RequestMapping("/delete")
+    @DeleteMapping("/delete")
 //    @RequiresPermissions("csr:grgfilemanager:delete")
     public Resp delete(@RequestBody String[] ids){
 		grgFileManagerService.removeByIds(Arrays.asList(ids));

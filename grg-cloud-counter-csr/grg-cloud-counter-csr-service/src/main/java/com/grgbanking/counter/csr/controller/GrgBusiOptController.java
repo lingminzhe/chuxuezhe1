@@ -6,6 +6,7 @@ import com.grgbanking.counter.csr.entity.GrgBusiOptEntity;
 import com.grgbanking.counter.csr.service.GrgBusiOptService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -29,7 +30,7 @@ public class GrgBusiOptController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
 //    @RequiresPermissions("csr:grgbusiopt:list")
     public Resp list(@RequestParam Map<String, Object> params){
         PageUtils page = grgBusiOptService.queryPage(params);
@@ -41,7 +42,7 @@ public class GrgBusiOptController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{id}")
+    @GetMapping("/info/{id}")
 //    @RequiresPermissions("csr:grgbusiopt:info")
     public Resp info(@PathVariable("id") String id){
 		GrgBusiOptEntity grgBusiOpt = grgBusiOptService.getById(id);
@@ -53,7 +54,7 @@ public class GrgBusiOptController {
      * 保存
      */
     @ApiOperation(value = "新增账户交易流水信息")
-    @RequestMapping("/save")
+    @PostMapping("/save")
 //    @RequiresPermissions("csr:grgbusiopt:save")
     public Resp save(@RequestBody GrgBusiOptEntity grgBusiOpt){
 
@@ -66,7 +67,7 @@ public class GrgBusiOptController {
     /**
      * 修改
      */
-    @RequestMapping("/update")
+    @PostMapping("/update")
 //    @RequiresPermissions("csr:grgbusiopt:update")
     public Resp update(@RequestBody GrgBusiOptEntity grgBusiOpt){
 		grgBusiOptService.updateById(grgBusiOpt);
@@ -77,7 +78,7 @@ public class GrgBusiOptController {
     /**
      * 删除
      */
-    @RequestMapping("/delete")
+    @DeleteMapping("/delete")
 //    @RequiresPermissions("csr:grgbusiopt:delete")
     public Resp delete(@RequestBody String[] ids){
 		grgBusiOptService.removeByIds(Arrays.asList(ids));

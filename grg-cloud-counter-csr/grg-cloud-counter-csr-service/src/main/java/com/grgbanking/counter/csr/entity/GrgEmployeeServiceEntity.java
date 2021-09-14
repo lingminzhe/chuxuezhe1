@@ -2,17 +2,16 @@ package com.grgbanking.counter.csr.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 坐席客服表
  * 
  * @author GrgBanking
- * @email ${email}
- * @date 2021-09-13 10:55:49
+ * @date 2021-09-13
  */
 @Data
 @TableName("grg_employee_service")
@@ -31,7 +30,7 @@ public class GrgEmployeeServiceEntity implements Serializable {
 	/**
 	 * 坐席状态
 	 */
-	private String employeeType;
+	private String employeeStatus;
 	/**
 	 * 业务编码
 	 */
