@@ -1,9 +1,9 @@
 package com.grgbanking.counter.app.controller;
 
-import com.grg.banking.counter.csr.api.dubbo.RemoteBusiInfoService;
-import com.grg.banking.counter.csr.api.dubbo.RemoteBusiOptService;
-import com.grg.banking.counter.csr.api.entity.GrgCusBusiInfoEntity;
-import com.grg.banking.counter.csr.api.entity.GrgCusBusiOptEntity;
+import com.grgbanking.counter.csr.api.dubbo.RemoteBusiInfoService;
+import com.grgbanking.counter.csr.api.dubbo.RemoteBusiOptService;
+import com.grgbanking.counter.csr.api.entity.GrgCusBusiInfoEntity;
+import com.grgbanking.counter.csr.api.entity.GrgCusBusiOptEntity;
 import com.grgbanking.counter.app.dto.CusAccountDto;
 import com.grgbanking.counter.bank.api.dubbo.RemoteCusInfoService;
 import com.grgbanking.counter.bank.api.entity.GrgCusAccountEntity;
@@ -32,7 +32,7 @@ public class CusInfoController {
 
     @ApiOperation("个人详细")
     @GetMapping("/personal/info")
-    public Resp getPersonalInfo(@RequestBody CusAccountDto cusAccountDto) {
+    public Resp<GrgCusInfoEntiry> getPersonalInfo(@RequestBody CusAccountDto cusAccountDto) {
         GrgCusInfoEntiry cusInfo = remoteCusInfoService.findCusInfo(cusAccountDto.getUserId());
         if (cusInfo != null){
             return Resp.success(cusInfo);
@@ -42,21 +42,21 @@ public class CusInfoController {
 
     @ApiOperation("银行卡详情")
     @GetMapping("/card/{id}")
-    public Resp getCard(@PathVariable("id")String id) {
+    public Resp<GrgCusAccountEntity> getCard(@PathVariable("id")String id) {
         GrgCusAccountEntity cusAccount = remoteCusInfoService.findCusAccount(id);
         return Resp.success(cusAccount);
     }
 
     @ApiOperation("银行卡列表")
     @GetMapping("/card/list")
-    public Resp getCardList(@RequestBody CusAccountDto cusAccountDto) {
+    public Resp<List<GrgCusAccountEntity>> getCardList(@RequestBody CusAccountDto cusAccountDto) {
         List<GrgCusAccountEntity> cusAccountList = remoteCusInfoService.findCusAccountList(cusAccountDto.getUserId());
         return Resp.success(cusAccountList);
     }
 
     @ApiOperation("新增银行卡")
     @PostMapping("/save/card")
-    public Resp saveBankCard(@RequestBody GrgCusAccountEntity grgCusAccountEntity) {
+    public Resp<String> saveBankCard(@RequestBody GrgCusAccountEntity grgCusAccountEntity) {
         boolean b = remoteCusInfoService.saveBankCard(grgCusAccountEntity);
         if (b != true){
             return Resp.failed("新增失败!");
@@ -66,28 +66,28 @@ public class CusInfoController {
 
     @ApiOperation("银行卡流水列表")
     @GetMapping("/card/itemized/list")
-    public Resp getCardSequenceList(@RequestBody CusAccountDto cusAccountDto) {
+    public Resp<List<GrgCusBusiOptEntity>> getCardSequenceList(@RequestBody CusAccountDto cusAccountDto) {
         List<GrgCusBusiOptEntity> list = remoteBusiOptService.findList(cusAccountDto.getUserId());
         return Resp.success(list);
     }
 
     @ApiOperation("银行卡流水详情")
     @GetMapping("/card/itemized/{id}")
-    public Resp getCardSequence(@PathVariable("id")String id) {
+    public Resp<GrgCusBusiOptEntity> getCardSequence(@PathVariable("id")String id) {
         GrgCusBusiOptEntity one = remoteBusiOptService.getOne(id);
         return Resp.success(one);
     }
 
     @ApiOperation("办理业务列表")
     @GetMapping("/business/list")
-    public Resp getBuinessList(@RequestBody CusAccountDto cusAccountDto) {
+    public Resp<List<GrgCusBusiInfoEntity>> getBuinessList(@RequestBody CusAccountDto cusAccountDto) {
         List<GrgCusBusiInfoEntity> list = remoteBusiInfoService.findList(cusAccountDto.getUserId());
         return Resp.success(list);
     }
 
     @ApiOperation("办理业务详情")
     @GetMapping("/business/{id}")
-    public Resp getBusiness(@PathVariable("id")String id) {
+    public Resp<GrgCusBusiInfoEntity> getBusiness(@PathVariable("id")String id) {
         GrgCusBusiInfoEntity one = remoteBusiInfoService.getOne(id);
         return Resp.success(one);
     }

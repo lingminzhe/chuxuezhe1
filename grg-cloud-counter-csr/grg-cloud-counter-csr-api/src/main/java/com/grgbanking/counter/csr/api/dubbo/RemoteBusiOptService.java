@@ -1,6 +1,6 @@
-package com.grg.banking.counter.csr.api.dubbo;
+package com.grgbanking.counter.csr.api.dubbo;
 
-import com.grg.banking.counter.csr.api.entity.GrgCusBusiOptEntity;
+import com.grgbanking.counter.csr.api.entity.GrgCusBusiOptEntity;
 
 import java.util.List;
 
