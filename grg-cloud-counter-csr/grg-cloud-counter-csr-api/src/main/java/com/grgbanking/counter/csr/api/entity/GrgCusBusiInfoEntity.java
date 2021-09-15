@@ -1,4 +1,4 @@
-package com.grg.banking.counter.csr.api.entity;
+package com.grgbanking.counter.csr.api.entity;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

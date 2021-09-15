@@ -1,11 +1,9 @@
 package com.grgbanking.counter.csr.dubbo;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.grg.banking.counter.csr.api.dubbo.RemoteBusiInfoService;
-import com.grg.banking.counter.csr.api.entity.GrgCusBusiInfoEntity;
-import com.grg.banking.counter.csr.api.entity.GrgCusBusiOptEntity;
+import com.grgbanking.counter.csr.api.dubbo.RemoteBusiInfoService;
+import com.grgbanking.counter.csr.api.entity.GrgCusBusiInfoEntity;
 import com.grgbanking.counter.csr.entity.GrgBusiInfoEntity;
-import com.grgbanking.counter.csr.entity.GrgBusiOptEntity;
 import com.grgbanking.counter.csr.service.GrgBusiInfoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
