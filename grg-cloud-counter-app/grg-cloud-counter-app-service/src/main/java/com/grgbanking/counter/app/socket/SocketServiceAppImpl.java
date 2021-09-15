@@ -2,14 +2,10 @@ package com.grgbanking.counter.app.socket;
 
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
-import com.grgbanking.counter.app.business.BusinessHandler;
 import com.grgbanking.counter.app.business.ServiceSessionManagement;
-import com.grgbanking.counter.common.core.util.Resp;
 import com.grgbanking.counter.common.core.util.UUIDUtils;
-import com.grgbanking.counter.common.socket.server.SocketServer;
 import com.grgbanking.counter.common.socket.service.SocketAbstractService;
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -35,7 +31,7 @@ public class SocketServiceAppImpl extends SocketAbstractService {
     RedisTemplate redisTemplate;
 
     @Autowired
-    BusinessFactory businessFactory;
+    SocketHandlerFactory socketHandlerFactory;
 
     @Autowired
     ServiceSessionManagement serviceSessionManagement;
@@ -88,25 +84,29 @@ public class SocketServiceAppImpl extends SocketAbstractService {
      * @return
      */
     @Override
-    public boolean receiveMessage(Resp data, String fromClientId) {
-        log.info("客户端消息发送到实现类了,客户端ID：{}，消息内容：{}",fromClientId,data);
+    public boolean receiveMessage(Object data, String fromClientId) { log.info("客户端消息发送到实现类了,客户端ID：{}，消息内容：{}",fromClientId,data);
 
-        Map map=(Map)data.getData();
+        Map map=(Map)data;
 
-        String serviceType=(String)map.get("service_type");
-        String serviceSessionId=(String)map.get("service_session_id");
-        serviceSessionManagement.addSession(serviceSessionId,fromClientId);
-        BusinessHandler handler=businessFactory.findHandler(serviceType);
+        Map head=(Map)map.get("head");
+
+
+        String serviceType=(String)head.get("tran_code");
+        String schema=(String)head.get("user_login_type");
+        String termId=(String)head.get("user_login_id");
+
+
+
+        SocketHandler handler= socketHandlerFactory.findHandler(serviceType);
         if(handler!=null){
-            handler.execute(serviceSessionId);
+            handler.execute(data,fromClientId);
         }
 
 
-        sendMessage(SocketServer.getClient(fromClientId),Resp.success("这是服务器消息"));
+       // sendMessage(SocketServer.getClient(fromClientId),Resp.success("这是服务器消息"));
         return false;
     }
 
-    @Override
     public synchronized void register(SocketIOClient client,String schema,String termId) {
         String clientId=getClientId(client);
         String key= redisKeyPrefix +":"+instanceId;

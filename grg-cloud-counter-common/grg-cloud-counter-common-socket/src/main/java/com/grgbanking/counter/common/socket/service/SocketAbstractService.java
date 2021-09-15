@@ -22,4 +22,9 @@ public abstract class SocketAbstractService implements SocketService {
         sendMessage(client,data);
     }
 
+    public void sendMessage(String clientId, Object data){
+        SocketIOClient client = SocketServer.getClient(clientId);
+        client.sendEvent(EVENT_NAME,data);
+    }
+
 }

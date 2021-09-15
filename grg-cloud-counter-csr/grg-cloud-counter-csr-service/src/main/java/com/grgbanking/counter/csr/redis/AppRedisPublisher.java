@@ -1,17 +1,18 @@
-package com.grgbanking.counter.app.publish;
+package com.grgbanking.counter.csr.redis;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CounterRedisPublisher {
+public class AppRedisPublisher {
 
-    private final String channel="csr";
+    private final String channelPrefix="app:";
     @Autowired
     RedisTemplate redisTemplate;
 
-    public void publish(Object msg){
+    public void publish(String type,Object msg){
+        String channel=channelPrefix+type;
         redisTemplate.convertAndSend(channel,msg);
     }
 

@@ -38,7 +38,7 @@ public interface SocketService {
      * @param fromClientId  消息来源的客户端Id
      * @return
      */
-    boolean receiveMessage(Resp data,String fromClientId);
+    boolean receiveMessage(Object data,String fromClientId);
 
-    void register(SocketIOClient  clientId,String schema,String termId);
+
 }

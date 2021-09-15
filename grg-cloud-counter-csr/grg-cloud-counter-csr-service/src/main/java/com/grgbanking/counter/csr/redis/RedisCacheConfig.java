@@ -1,6 +1,6 @@
-package com.grgbanking.counter.app.subscribe;
+package com.grgbanking.counter.csr.redis;
 
-import com.grgbanking.counter.app.subscribe.CounterRedisReceiver;
+import com.grgbanking.counter.csr.redis.AppRedisReceiver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +14,7 @@ import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 public class RedisCacheConfig {
 
     @Autowired
-    CounterRedisReceiver counterRedisReceiver;
+    AppRedisReceiver appMsgReceiver;
 
     @Bean
     RedisMessageListenerContainer container(RedisConnectionFactory connectionFactory) {
@@ -22,7 +22,9 @@ public class RedisCacheConfig {
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);
         // 可以添加多个 messageListener，配置不同的交换机
-        container.addMessageListener(counterRedisReceiver,  PatternTopic.of("app"));
+        container.addMessageListener(appMsgReceiver,  PatternTopic.of("csr:video_cmd"));
+ //       container.addMessageListener(appMsgReceiver,  PatternTopic.of("csr:video"));
+ //       container.addMessageListener(appMsgReceiver,  PatternTopic.of("csr:video"));
         return container;
     }
 
