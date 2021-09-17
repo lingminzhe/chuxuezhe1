@@ -67,12 +67,13 @@ public class GrgBusiOptController {
     }
 
     /**
-     * 修改
+     * 更改交易操作记录
      */
     @PostMapping("/update")
+    @ApiOperation(value = "更改交易操作记录")
 //    @RequiresPermissions("csr:grgbusiopt:update")
     public Resp update(@RequestBody GrgBusiOptEntity grgBusiOpt){
-		grgBusiOptService.updateById(grgBusiOpt);
+		grgBusiOptService.updateByBusiOptNo(grgBusiOpt);
 
         return Resp.success();
     }

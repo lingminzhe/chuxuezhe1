@@ -3,6 +3,7 @@ package com.grgbanking.counter.csr.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.grgbanking.counter.common.core.util.PageUtils;
 import com.grgbanking.counter.csr.entity.GrgEmployeeServiceEntity;
+import com.grgbanking.counter.csr.vo.EmployeeCustomerVo;
 
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,10 @@ public interface GrgEmployeeService extends IService<GrgEmployeeServiceEntity> {
 
     List<GrgEmployeeServiceEntity> getAllFreeEmployee();
 
-    GrgEmployeeServiceEntity getFreeEmployee(String userId);
+    EmployeeCustomerVo getFreeEmployee(String userId);
+
+    int setFreeEmployee(String userId, String employeeId);
+
+    void updateByEmployeeId(GrgEmployeeServiceEntity grgEmployeeService);
 }
 

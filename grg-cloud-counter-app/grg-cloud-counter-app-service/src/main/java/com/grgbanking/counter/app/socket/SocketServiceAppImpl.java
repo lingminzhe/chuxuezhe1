@@ -21,7 +21,6 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 @Service
-@EnableScheduling
 public class SocketServiceAppImpl extends SocketAbstractService {
     private final String redisKeyPrefix ="grg-cloud-counter-app-register";
     private String instanceId= UUIDUtils.uuid();
@@ -105,38 +104,6 @@ public class SocketServiceAppImpl extends SocketAbstractService {
 
        // sendMessage(SocketServer.getClient(fromClientId),Resp.success("这是服务器消息"));
         return false;
-    }
-
-    public synchronized void register(SocketIOClient client,String schema,String termId) {
-        String clientId=getClientId(client);
-        String key= redisKeyPrefix +":"+instanceId;
-        String hashKey=clientId;
-        String value=schema+":"+termId;
-
-        Map<String,String> map =(Map<String,String>)redisTemplate.opsForValue().get(key);
-        if(map==null){
-            map=new HashMap<>();
-        }else {
-            for (Map.Entry<String, String> entry : map.entrySet()) {
-                if(entry.getValue().equals(value)){
-                    map.remove(entry.getKey());
-                }
-            }
-        }
-        map.put(hashKey,value);
-
-        redisTemplate.opsForValue().set(key,map,1, TimeUnit.HOURS);
-        log.info("客户端注册了{},{},{}",clientId,schema,termId);
-    }
-
-    //每隔20分钟重置一下redis超时时间，防止过期删除
-    @Scheduled(fixedRate =20*60*1000)
-    public synchronized void monitorRedis(){
-        String key= redisKeyPrefix +":"+instanceId;
-        Object o = redisTemplate.opsForValue().get(key);
-        if(o!=null){
-            redisTemplate.opsForValue().set(key,o,1, TimeUnit.HOURS);
-        }
     }
 
 }

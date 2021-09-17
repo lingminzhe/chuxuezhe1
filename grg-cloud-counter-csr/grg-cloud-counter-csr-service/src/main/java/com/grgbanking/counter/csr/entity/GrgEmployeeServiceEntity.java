@@ -30,7 +30,7 @@ public class GrgEmployeeServiceEntity implements Serializable {
 	/**
 	 * 坐席状态
 	 */
-	private String employeeStatus;
+	private volatile String employeeStatus;
 	/**
 	 * 业务编码
 	 */
@@ -43,5 +43,7 @@ public class GrgEmployeeServiceEntity implements Serializable {
 	 * 更新时间
 	 */
 	private Date updateTime;
+
+
 
 }

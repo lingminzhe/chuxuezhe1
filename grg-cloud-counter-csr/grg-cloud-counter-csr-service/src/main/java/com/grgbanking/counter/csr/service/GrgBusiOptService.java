@@ -18,5 +18,7 @@ public interface GrgBusiOptService extends IService<GrgBusiOptEntity> {
     PageUtils queryPage(Map<String, Object> params);
 
     void saveBusiOpt(GrgBusiOptEntity grgBusiOpt);
+
+    void updateByBusiOptNo(GrgBusiOptEntity grgBusiOpt);
 }
 

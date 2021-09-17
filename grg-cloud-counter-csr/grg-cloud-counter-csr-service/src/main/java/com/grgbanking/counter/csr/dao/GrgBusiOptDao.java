@@ -9,9 +9,10 @@ import org.apache.ibatis.annotations.Mapper;
  * 
  * @author GrgBanking
  * @email ${email}
- * @date 2021-09-09 09:12:51
+ * @date 2021-09-09
  */
 @Mapper
 public interface GrgBusiOptDao extends BaseMapper<GrgBusiOptEntity> {
-	
+
+    String selectMaxOptNo();
 }

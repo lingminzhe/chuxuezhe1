@@ -4,8 +4,12 @@ import com.grgbanking.counter.common.core.util.PageUtils;
 import com.grgbanking.counter.common.core.util.Resp;
 import com.grgbanking.counter.csr.entity.GrgEmployeeServiceEntity;
 import com.grgbanking.counter.csr.service.GrgEmployeeService;
+import com.grgbanking.counter.csr.vo.EmployeeCustomerVo;
+import com.grgbanking.counter.iam.api.dto.UserInfo;
+import com.grgbanking.counter.iam.api.dubbo.RemoteUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -28,19 +32,34 @@ import java.util.Map;
 @RestController
 @RequestMapping("csr/grgemployeeservice")
 public class GrgEmployeeServiceController {
+
     @Autowired
     private GrgEmployeeService grgEmployeeService;
+
+    @DubboReference
+    RemoteUserService remoteUserService;
 
     /**
      * 列表
      */
-    @ApiOperation(value = "查看座席信息信息")
+    @ApiOperation(value = "查看座席状态")
     @GetMapping("/list")
     //@RequiresPermissions("csr:grgemployeeservice:list")
     public Resp list(@RequestParam Map<String, Object> params){
         PageUtils page = grgEmployeeService.queryPage(params);
 
         return Resp.success(page, "page");
+    }
+    /**
+     * 列表
+     */
+    @ApiOperation(value = "查看座席个人信息")
+    @GetMapping("/employeeInfo")
+    //@RequiresPermissions("csr:grgemployeeservice:list")
+    public Resp employeeInfo(@RequestParam String name){
+        UserInfo info = remoteUserService.info(name);
+
+        return Resp.success(info, "page");
     }
 
 
@@ -73,12 +92,12 @@ public class GrgEmployeeServiceController {
      * 获取所有空闲座席
      */
     //TODO 分配座席问题
-    @ApiOperation(value = "获取所有空闲座席")
+    @ApiOperation(value = "分配空闲座席")
     @GetMapping("/getFreeEmployee")
     //@RequiresPermissions("csr:grgemployeeservice:info")
-    public Resp getFreeEmployee(){
-        String id = "";
-        GrgEmployeeServiceEntity entity = grgEmployeeService.getFreeEmployee(id);
+    public Resp getFreeEmployee(@RequestParam String id){
+
+        EmployeeCustomerVo entity = grgEmployeeService.getFreeEmployee(id);
 
         if (entity == null){
             return Resp.failed("目前没有空闲座席");
@@ -86,7 +105,9 @@ public class GrgEmployeeServiceController {
         return Resp.success(entity, "空闲座席");
     }
 
-    /**
+
+
+    /** setFreeEmployee
      * 保存
      */
     @Transactional
@@ -107,7 +128,7 @@ public class GrgEmployeeServiceController {
     @PostMapping("/update")
     //@RequiresPermissions("csr:grgemployeeservice:update")
     public Resp update(@RequestBody GrgEmployeeServiceEntity grgEmployeeService){
-		this.grgEmployeeService.updateById(grgEmployeeService);
+		this.grgEmployeeService.updateByEmployeeId(grgEmployeeService);
 
         return Resp.success();
     }
