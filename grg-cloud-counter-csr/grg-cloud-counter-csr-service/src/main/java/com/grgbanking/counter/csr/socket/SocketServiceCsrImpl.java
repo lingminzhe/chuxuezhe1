@@ -2,7 +2,11 @@ package com.grgbanking.counter.csr.socket;
 
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
+import com.grgbanking.counter.common.socket.constant.RedisConstant;
+import com.grgbanking.counter.common.socket.server.SocketServer;
 import com.grgbanking.counter.common.socket.service.SocketAbstractService;
+import com.grgbanking.counter.csr.api.entity.GrgCusEmployeeServiceEntity;
+import com.grgbanking.counter.csr.service.TencentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -24,6 +28,9 @@ public class SocketServiceCsrImpl extends SocketAbstractService {
 
     @Autowired
     SocketHandlerFactory socketHandlerFactory;
+
+    @Autowired
+    TencentService tencentService;
 
     @Override
     public void addListener(SocketIOServer socketIOServer) {
@@ -60,7 +67,8 @@ public class SocketServiceCsrImpl extends SocketAbstractService {
      */
     @Override
     public String getClientId(SocketIOClient client) {
-        return client.getSessionId().toString();
+        String agent_id = client.getHandshakeData().getSingleUrlParam("user_id");
+        return agent_id;
     }
 
 
@@ -78,13 +86,39 @@ public class SocketServiceCsrImpl extends SocketAbstractService {
         Map map=(Map)data;
 
         Map head=(Map)map.get("head");
+        Map body=(Map)map.get("body");
 
 
-        String serviceType=(String)head.get("tran_code");
+        String serviceType=(String)head.get("api_no");
         String schema=(String)head.get("user_login_type");
         String termId=(String)head.get("user_login_id");
 
-
+        if (serviceType.equals("prepared")){
+            String user_id = (String)redisTemplate.opsForList().leftPop(RedisConstant.CUSTOMER_WAITING_QUEUE);
+            if (user_id != null){
+                redisTemplate.opsForSet().remove(RedisConstant.CUSTOMER_WAITING_SET, user_id);
+                log.info("当前客户队列有用户，取出第一位：{}", user_id);
+                body.put("user_id", user_id);
+                body.put("employee_id", fromClientId);
+                body.put("user_sig", tencentService.getUserSig(fromClientId));
+                head.put("api_no", "video_cmd");
+                head.put("code", 200);
+                head.put("msg", "当前有客户接入视频： " + user_id);
+                serviceType = "video_cmd";
+                SocketIOClient client = SocketServer.getClient(fromClientId);
+                client.sendEvent("push_event", map);
+            }else {
+                String employee_id = fromClientId;
+                GrgCusEmployeeServiceEntity employeeServiceEntity = new GrgCusEmployeeServiceEntity();
+                employeeServiceEntity.setEmployeeId(employee_id);
+                Boolean isMenber = redisTemplate.opsForSet().isMember(RedisConstant.EMPLOYEE_SERVICE_SET, employee_id);
+                if (!isMenber){
+                    redisTemplate.opsForSet().add(RedisConstant.EMPLOYEE_SERVICE_SET, employee_id);
+                    redisTemplate.opsForList().rightPush(RedisConstant.EMPLOYEE_SERVICE_QUEUE, employee_id);
+                }
+                log.info("当前无用户，客服id: {}进入客服队列", employee_id);
+            }
+        }
 
        SocketHandler handler= socketHandlerFactory.findHandler(serviceType);
         if(handler!=null){

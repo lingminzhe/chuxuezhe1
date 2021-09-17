@@ -23,6 +23,10 @@ public class GrgCusEmployeeServiceEntity implements Serializable {
 	 */
 	private String employeeId;
 	/**
+	 * 用户id
+	 */
+	private String userId;
+	/**
 	 * 坐席状态
 	 */
 	private String employeeStatus;
@@ -30,13 +34,5 @@ public class GrgCusEmployeeServiceEntity implements Serializable {
 	 * 业务编码
 	 */
 	private String busiNo;
-	/**
-	 * 创建时间
-	 */
-	private Date createTime;
-	/**
-	 * 更新时间
-	 */
-	private Date updateTime;
 
 }

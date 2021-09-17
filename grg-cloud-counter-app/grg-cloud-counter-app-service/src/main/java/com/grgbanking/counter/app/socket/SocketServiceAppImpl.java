@@ -73,7 +73,8 @@ public class SocketServiceAppImpl extends SocketAbstractService {
      */
     @Override
     public String getClientId(SocketIOClient client) {
-        return client.getSessionId().toString();
+        String user_id = client.getHandshakeData().getSingleUrlParam("user_id");
+        return user_id;
     }
 
     /**
@@ -90,7 +91,7 @@ public class SocketServiceAppImpl extends SocketAbstractService {
         Map head=(Map)map.get("head");
 
 
-        String serviceType=(String)head.get("tran_code");
+        String serviceType=(String)head.get("api_no");
         String schema=(String)head.get("user_login_type");
         String termId=(String)head.get("user_login_id");
 

@@ -28,7 +28,7 @@ public class VideoCmdSocketHandler implements SocketHandler {
 
             Map map =(Map) param;
             Map head=(Map)map.get("head");
-            String serviceType=(String)head.get("tran_code");
+            String serviceType=(String)head.get("api_no");
 //            String schema=(String)head.get("user_login_type");
 //            String termId=(String)head.get("user_login_id");
 //
