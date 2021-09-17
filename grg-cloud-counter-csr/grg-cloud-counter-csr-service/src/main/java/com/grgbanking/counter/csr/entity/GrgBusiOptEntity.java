@@ -1,5 +1,6 @@
 package com.grgbanking.counter.csr.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -22,7 +23,7 @@ public class GrgBusiOptEntity implements Serializable {
 	/**
 	 * 主键
 	 */
-	@TableId
+	@TableId(type = IdType.ASSIGN_UUID)
 	private String id;
 	/**
 	 * 业务编码
@@ -38,6 +39,7 @@ public class GrgBusiOptEntity implements Serializable {
 	private String customerId;
 	/**
 	 * 业务办理状态
+	 * (1、已完成  2、正在进行 3、未完成)
 	 */
 	private String busiOptStatus;
 	/**
