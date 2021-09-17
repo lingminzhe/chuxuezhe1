@@ -16,13 +16,13 @@ public class RemoteCusBusiServiceImpl implements RemoteCusBusiService {
 
     @Override
     public GrgCusEmployeeServiceEntity getEmployeeService(String userId) {
-        GrgEmployeeServiceEntity freeEmployee = grgEmployeeService.getFreeEmployee(userId);
-        GrgCusEmployeeServiceEntity grgCusEmployeeServiceEntity = null;
-        if (freeEmployee != null){
-            grgCusEmployeeServiceEntity = new GrgCusEmployeeServiceEntity();
-            BeanUtils.copyProperties(freeEmployee, grgCusEmployeeServiceEntity);
-        }
-        return grgCusEmployeeServiceEntity;
+//        GrgEmployeeServiceEntity freeEmployee = grgEmployeeService.getFreeEmployee(userId);
+//        GrgCusEmployeeServiceEntity grgCusEmployeeServiceEntity = null;
+//        if (freeEmployee != null){
+//            grgCusEmployeeServiceEntity = new GrgCusEmployeeServiceEntity();
+//            BeanUtils.copyProperties(freeEmployee, grgCusEmployeeServiceEntity);
+//        }
+        return null;
     }
 
 }
