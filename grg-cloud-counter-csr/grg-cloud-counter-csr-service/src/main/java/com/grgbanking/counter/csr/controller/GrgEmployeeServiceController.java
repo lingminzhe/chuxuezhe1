@@ -42,7 +42,7 @@ public class GrgEmployeeServiceController {
     /**
      * 列表
      */
-    @ApiOperation(value = "查看座席状态")
+    @ApiOperation(value = "查看所有座席的状态")
     @GetMapping("/list")
     //@RequiresPermissions("csr:grgemployeeservice:list")
     public Resp list(@RequestParam Map<String, Object> params){
@@ -66,7 +66,7 @@ public class GrgEmployeeServiceController {
     /**
      * 信息
      */
-    @ApiOperation(value = "根据employee_id查询账户信息")
+    @ApiOperation(value = "根据employee_id查询座席状态信息")
     @GetMapping("/info/{id}")
     //@RequiresPermissions("csr:grgemployeeservice:info")
     public Resp info(@PathVariable("id") String id){
@@ -128,20 +128,26 @@ public class GrgEmployeeServiceController {
     @PostMapping("/update")
     //@RequiresPermissions("csr:grgemployeeservice:update")
     public Resp update(@RequestBody GrgEmployeeServiceEntity grgEmployeeService){
-		this.grgEmployeeService.updateByEmployeeId(grgEmployeeService);
-
-        return Resp.success();
+        int i = this.grgEmployeeService.updateByEmployeeId(grgEmployeeService);
+        if (i==0){
+            return Resp.failed(i,"更改失败");
+        }
+        return Resp.success(i,"更改成功");
     }
 
     /**
      * 删除
      */
+    @ApiOperation(value = "删除座席")
     @DeleteMapping("/delete")
     //@RequiresPermissions("csr:grgemployeeservice:delete")
     public Resp delete(@RequestBody String[] ids){
-		grgEmployeeService.removeByIds(Arrays.asList(ids));
+        boolean b = grgEmployeeService.removeByIds(Arrays.asList(ids));
+        if (!b){
+            return Resp.failed();
+        }
 
-        return Resp.success();
+        return Resp.success(b,"删除成功");
     }
 
 }

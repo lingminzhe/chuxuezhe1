@@ -8,8 +8,10 @@ import com.grgbanking.counter.common.core.util.PageUtils;
 import com.grgbanking.counter.common.core.util.Query;
 import com.grgbanking.counter.csr.dao.GrgBusiOptDao;
 import com.grgbanking.counter.csr.entity.GrgBusiOptEntity;
+import com.grgbanking.counter.csr.entity.GrgEmployeeServiceEntity;
 import com.grgbanking.counter.csr.service.GrgBusiInfoService;
 import com.grgbanking.counter.csr.service.GrgBusiOptService;
+import com.grgbanking.counter.csr.vo.BusiOptNumVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,6 +65,27 @@ public class GrgBusiOptServiceImpl extends ServiceImpl<GrgBusiOptDao, GrgBusiOpt
 
         this.baseMapper.update(grgBusiOpt,wrapper);
 
+    }
+
+    /**
+     * todayBusiOptNum todayCallOptNum; monthBusiOptNum; monthCallOptNum queueNum
+     * @return
+     */
+    @Override
+    public BusiOptNumVo getBuisOptNum(GrgEmployeeServiceEntity entity) {
+        //数据存放在vo
+        BusiOptNumVo busiOptNumVo = new BusiOptNumVo();
+
+        String employeeId = entity.getEmployeeId();
+
+        busiOptNumVo.setTodayBusiOptNum(busiOptDao.getTodayBusiOptNum(employeeId));
+        busiOptNumVo.setTodayCallOptNum(busiOptDao.getTodayCallOptNum(employeeId));
+        busiOptNumVo.setMonthBusiOptNum(busiOptDao.getMonthBusiOptNum(employeeId));
+        busiOptNumVo.setMonthCallOptNum(busiOptDao.getMonthCallOptNum(employeeId));
+//        busiOptNumVo.setQueueNum();
+
+
+        return busiOptNumVo;
     }
 
 }

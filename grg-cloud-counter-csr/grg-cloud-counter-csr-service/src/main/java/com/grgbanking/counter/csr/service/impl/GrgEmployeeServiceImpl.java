@@ -148,10 +148,10 @@ public class GrgEmployeeServiceImpl extends ServiceImpl<GrgEmployeeServiceDao, G
     }
 
     @Override
-    public void updateByEmployeeId(GrgEmployeeServiceEntity grgEmployeeService) {
+    public int updateByEmployeeId(GrgEmployeeServiceEntity grgEmployeeService) {
         UpdateWrapper<GrgEmployeeServiceEntity> wrapper = new UpdateWrapper<GrgEmployeeServiceEntity>().eq("employee_id", grgEmployeeService.getEmployeeId());
 
-        this.baseMapper.update(grgEmployeeService,wrapper);
+        return this.baseMapper.update(grgEmployeeService,wrapper);
     }
 
 

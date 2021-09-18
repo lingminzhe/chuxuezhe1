@@ -19,5 +19,21 @@
         select MAX(busi_opt_no) from grg_busi_opt;
     </select>
 
+    <select id="getTodayBusiOptNum" resultType="String" parameterType="String">
+        select count(*) from grg_busi_opt where to_days(update_time) = to_days(now()) and user_id = #{employeeId} and busi_opt_status = 1;
+    </select>
+
+    <select id="getTodayCallOptNum" resultType="java.lang.String">
+        select count(*) from grg_busi_opt where to_days(update_time) = to_days(now()) and user_id = #{employeeId};
+    </select>
+
+    <select id="getMonthBusiOptNum" resultType="java.lang.String">
+        SELECT count(*) FROM grg_busi_opt WHERE DATE_FORMAT( update_time, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ) and user_id = #{employeeId} and busi_opt_status = 1;
+    </select>
+
+    <select id="getMonthCallOptNum" resultType="java.lang.String">
+        select count(*) from grg_busi_opt where DATE_FORMAT( update_time, '%Y%m' ) = DATE_FORMAT( CURDATE( ),'%Y%m' ) and user_id = #{employeeId};
+    </select>
+
 
 </mapper>

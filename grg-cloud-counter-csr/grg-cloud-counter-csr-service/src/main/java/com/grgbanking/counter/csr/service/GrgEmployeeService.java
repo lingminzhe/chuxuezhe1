@@ -27,6 +27,6 @@ public interface GrgEmployeeService extends IService<GrgEmployeeServiceEntity> {
 
     int setFreeEmployee(String userId, String employeeId);
 
-    void updateByEmployeeId(GrgEmployeeServiceEntity grgEmployeeService);
+    int updateByEmployeeId(GrgEmployeeServiceEntity grgEmployeeService);
 }
 
