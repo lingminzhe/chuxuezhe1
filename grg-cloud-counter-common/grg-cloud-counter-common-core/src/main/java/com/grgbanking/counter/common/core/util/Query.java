@@ -13,7 +13,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.grgbanking.counter.common.core.constant.ParameterConstant;
-import com.grgbanking.counter.common.core.validator.SQLFilter;
+import com.grgbanking.counter.common.data.validator.SQLFilter;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;
