@@ -1,7 +1,6 @@
 package com.grgbanking.counter.app.socket;
 
 import com.corundumstudio.socketio.SocketIOClient;
-import com.corundumstudio.socketio.SocketIOServer;
 import com.grgbanking.counter.app.business.ServiceSessionManagement;
 import com.grgbanking.counter.common.core.util.SocketParam;
 import com.grgbanking.counter.common.core.util.UUIDUtils;
@@ -32,12 +31,6 @@ public class SocketServiceAppImpl extends SocketAbstractService {
 
     @Autowired
     ServiceSessionManagement serviceSessionManagement;
-
-    @Override
-    public void preStart(SocketIOServer socketIOServer) {
-
-    }
-
 
 
     /**

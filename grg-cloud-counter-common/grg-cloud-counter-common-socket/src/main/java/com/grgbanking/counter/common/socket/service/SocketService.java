@@ -2,16 +2,9 @@ package com.grgbanking.counter.common.socket.service;
 
 
 import com.corundumstudio.socketio.SocketIOClient;
-import com.corundumstudio.socketio.SocketIOServer;
 import com.grgbanking.counter.common.core.util.SocketParam;
 
 public interface SocketService {
-
-    /**
-     * Socket服务启动前的操作
-     * @param socketIOServer
-     */
-    void preStart(SocketIOServer socketIOServer);
 
     /**
      * 客户端连接上来了

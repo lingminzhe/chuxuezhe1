@@ -7,19 +7,16 @@ import com.grgbanking.counter.common.socket.server.SocketServer;
 
 public abstract class SocketAbstractService implements SocketService {
 
+    /**消息的Event Name */
     public static final String EVENT_NAME = "push_event";
 
     /**
      *  发送消息给对方
      * @param param
      */
-    public void sendMessage(SocketIOClient client, SocketParam param){
-        client.sendEvent(EVENT_NAME,param);
-    }
-
     public void sendMessage(String clientId, SocketParam param){
         SocketIOClient client = SocketServer.getClient(clientId);
-        sendMessage(client,param);
+        client.sendEvent(EVENT_NAME,param);
     }
 
 }

@@ -1,7 +1,6 @@
 package com.grgbanking.counter.csr.socket;
 
 import com.corundumstudio.socketio.SocketIOClient;
-import com.corundumstudio.socketio.SocketIOServer;
 import com.grgbanking.counter.common.core.util.SocketParam;
 import com.grgbanking.counter.common.socket.constant.RedisConstant;
 import com.grgbanking.counter.common.socket.server.SocketServer;
@@ -31,12 +30,6 @@ public class SocketServiceCsrImpl extends SocketAbstractService {
 
     @Autowired
     TencentService tencentService;
-
-    @Override
-    public void preStart(SocketIOServer socketIOServer) {
-
-    }
-
 
 
     /**

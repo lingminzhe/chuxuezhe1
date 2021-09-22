@@ -41,7 +41,7 @@ public class SocketServer {
     }
 
     private void start() throws Exception {
-        // 监听客户端连接
+        /**监听客户端连接*/
         socketIOServer.addConnectListener(client -> {
             log.info("有客户端连接上来了");
             String clientId = socketService.getClientId(client);
@@ -57,19 +57,20 @@ public class SocketServer {
             }
         });
 
-        // 监听客户端断开连接
+        /**监听客户端断开连接*/
         socketIOServer.addDisconnectListener(client -> {
             String clientId = socketService.getClientId(client);
             if (StringUtils.hasText(clientId)) {
                 clientMap.remove(clientId);
-                log.info("断开连接：{}", clientId);
-                log.info("断开连接：{}", client.getSessionId());
+                log.info("断开连接,clientId：{}，sessionId：{}", clientId,client.getSessionId());
                 client.disconnect();
                 socketService.disconnect(clientId);
             }else {
                 log.error("客户端断开连接，但是获取不到clientId");
             }
         });
+
+        /**添加消息接收监听器*/
         socketIOServer.addEventListener(SocketAbstractService.EVENT_NAME, SocketParam.class, new DataListener<SocketParam>() {
             @Override
             public void onData(SocketIOClient client, SocketParam param, AckRequest ackRequest) throws Exception {
@@ -79,11 +80,7 @@ public class SocketServer {
             }
         });
 
-        /**
-         * 添加自定义监听器
-         */
-        socketService.preStart(socketIOServer);
-
+        /**启动Socket服务*/
         socketIOServer.start();
     }
 

@@ -5,6 +5,9 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+/**
+ * Socket数据传输统一参数head部分
+ */
 @Data
 public class SocketParamHead implements Serializable {
 
