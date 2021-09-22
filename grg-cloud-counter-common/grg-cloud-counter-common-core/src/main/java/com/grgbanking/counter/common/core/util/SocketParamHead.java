@@ -20,8 +20,6 @@ public class SocketParamHead implements Serializable {
 
     private String serviceSessionId;
 
-    private String tokenId;
-
     private int code = CommonConstants.SUCCESS;
 
     private String msg = CommonConstants.SUCCESS_MESSAGE;
@@ -29,14 +27,13 @@ public class SocketParamHead implements Serializable {
     public SocketParamHead() {
     }
 
-    public SocketParamHead(String apiNo, String tranTime, String bizNo, String userLoginType, String userLoginId,String serviceSessionId,String tokenId, int code, String msg) {
+    public SocketParamHead(String apiNo, String tranTime, String bizNo, String userLoginType, String userLoginId, String serviceSessionId, int code, String msg) {
         this.apiNo = apiNo;
         this.tranTime = tranTime;
         this.bizNo = bizNo;
         this.userLoginId = userLoginType;
         this.userLoginId = userLoginId;
         this.serviceSessionId = serviceSessionId;
-        this.tokenId = tokenId;
         this.code = code;
         this.msg = msg;
     }

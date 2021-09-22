@@ -39,32 +39,32 @@ public class SocketParam<T> implements Serializable {
     private T body;
 
     public static <T> SocketParam<T> success() {
-        return result(null, DateUtil.format(new Date(), DatePattern.NORM_DATETIME_MS_PATTERN), null, null,null, null, null, CommonConstants.SUCCESS, CommonConstants.SUCCESS_MESSAGE, null);
+        return result(null, DateUtil.format(new Date(), DatePattern.NORM_DATETIME_MS_PATTERN), null, null, null, null, CommonConstants.SUCCESS, CommonConstants.SUCCESS_MESSAGE, null);
     }
 
     public static <T> SocketParam<T> success(T body) {
-        return result(null, DateUtil.format(new Date(), DatePattern.NORM_DATETIME_MS_PATTERN), null, null,null, null, null, CommonConstants.SUCCESS, CommonConstants.SUCCESS_MESSAGE, body);
+        return result(null, DateUtil.format(new Date(), DatePattern.NORM_DATETIME_MS_PATTERN), null, null, null, null, CommonConstants.SUCCESS, CommonConstants.SUCCESS_MESSAGE, body);
     }
 
     public static <T> SocketParam<T> failed() {
-        return result(null, DateUtil.format(new Date(), DatePattern.NORM_DATETIME_MS_PATTERN), null, null,null, null, null, CommonConstants.FAIL, CommonConstants.FAILURE_MESSAGE, null);
+        return result(null, DateUtil.format(new Date(), DatePattern.NORM_DATETIME_MS_PATTERN), null, null, null, null, CommonConstants.FAIL, CommonConstants.FAILURE_MESSAGE, null);
     }
 
     public static <T> SocketParam<T> failed(String msg) {
-        return result(null, DateUtil.format(new Date(), DatePattern.NORM_DATETIME_MS_PATTERN), null, null,null, null, null, CommonConstants.FAIL, msg, null);
+        return result(null, DateUtil.format(new Date(), DatePattern.NORM_DATETIME_MS_PATTERN), null, null, null, null, CommonConstants.FAIL, msg, null);
     }
 
     public static <T> SocketParam<T> failed(T body) {
-        return result(null, DateUtil.format(new Date(), DatePattern.NORM_DATETIME_MS_PATTERN), null, null,null, null, null, CommonConstants.FAIL, CommonConstants.FAILURE_MESSAGE, body);
+        return result(null, DateUtil.format(new Date(), DatePattern.NORM_DATETIME_MS_PATTERN), null, null, null, null, CommonConstants.FAIL, CommonConstants.FAILURE_MESSAGE, body);
     }
 
     public static <T> SocketParam<T> failed(String apiNo, String tranTime, String bizNo, int code, String msg) {
-        return result(apiNo, tranTime, bizNo, null, null, null, null,code, msg, null);
+        return result(apiNo, tranTime, bizNo, null, null, null, code, msg, null);
     }
 
-    public static <T> SocketParam<T> result(String apiNo, String tranTime, String bizNo, String user_login_type, String user_login_id, String service_session_id,String tokenId, int code, String msg, T body) {
+    public static <T> SocketParam<T> result(String apiNo, String tranTime, String bizNo, String user_login_type, String user_login_id, String service_session_id, int code, String msg, T body) {
         SocketParam<T> result = new SocketParam<>();
-        result.setHead(new SocketParamHead(apiNo, tranTime, bizNo, user_login_type, user_login_id,service_session_id,tokenId, code, msg));
+        result.setHead(new SocketParamHead(apiNo, tranTime, bizNo, user_login_type, user_login_id, service_session_id, code, msg));
         result.setBody(body);
         return result;
     }
