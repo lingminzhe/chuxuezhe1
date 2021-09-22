@@ -63,7 +63,6 @@ public class MockRegister {
             head.put("tran_code","register");
             head.put("user_login_type","counter");
             head.put("user_login_id","001");
-            body.put("token_id","csrtokenid");
             map.put("body",body);
             map.put("head",head);
 

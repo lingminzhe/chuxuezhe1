@@ -43,12 +43,9 @@ public class RegisterSocketHandler implements SocketHandler {
             String termId=(String)head.get("user_login_id");
 
             Map body=(Map)map.get("body");
-            String tokenId=(String)head.get("token_id");
-
+            
             register(clientId,schema,termId);
 
-            //后面再想想
-            serviceSessionManagement.addSession(tokenId,clientId);
 
             body.put("msg","注册成功");
             map.put("body",body);

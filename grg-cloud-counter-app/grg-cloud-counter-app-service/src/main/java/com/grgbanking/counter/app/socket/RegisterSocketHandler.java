@@ -5,11 +5,13 @@ import com.grgbanking.counter.common.core.util.UUIDUtils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -18,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @EnableScheduling
 public class RegisterSocketHandler implements SocketHandler {
+
 
 
     @Autowired
@@ -44,12 +47,10 @@ public class RegisterSocketHandler implements SocketHandler {
             String termId=(String)head.get("user_login_id");
 
             Map body=(Map)map.get("body");
-            String tokenId=(String)head.get("token_id");
+
 
             register(clientId,schema,termId);
 
-            //后面再想想
-            serviceSessionManagement.addSession(tokenId,clientId);
 
             head.put("code",0);
             head.put("msg","注册成功");
@@ -100,6 +101,10 @@ public class RegisterSocketHandler implements SocketHandler {
         if(o!=null){
             redisTemplate.opsForValue().set(key,o,1, TimeUnit.HOURS);
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(UUIDUtils.uuid());
     }
 
 }

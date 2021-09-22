@@ -54,7 +54,6 @@ public class MockClient {
             head.put("user_login_type","app");
             head.put("user_login_id","13354566777");
             Map<String,Object> body=new HashMap<>();
-            body.put("token_id","abcd1244");
             jsonObject.put("head",head);
             jsonObject.put("body",body);
             socket.emit("push_event",jsonObject);
@@ -96,7 +95,6 @@ public class MockClient {
             head.put("user_login_type","app");
             head.put("user_login_id","13354566777");
             Map<String,Object> body=new HashMap<>();
-            body.put("token_id","abcd1244");
             jsonObject.put("head",head);
             jsonObject.put("body",body);
             socket.emit("push_event",jsonObject);
