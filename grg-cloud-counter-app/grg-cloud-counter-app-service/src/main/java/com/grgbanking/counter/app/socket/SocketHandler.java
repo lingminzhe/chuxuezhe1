@@ -1,5 +1,7 @@
 package com.grgbanking.counter.app.socket;
 
+import com.grgbanking.counter.common.core.util.SocketParam;
+
 public interface SocketHandler {
-    void execute(Object param,String fromClientId);
+    void execute(SocketParam param, String fromClientId);
 }

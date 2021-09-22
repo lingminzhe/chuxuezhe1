@@ -2,6 +2,7 @@ package com.grgbanking.counter.csr.socket;
 
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
+import com.grgbanking.counter.common.core.util.SocketParam;
 import com.grgbanking.counter.common.socket.constant.RedisConstant;
 import com.grgbanking.counter.common.socket.server.SocketServer;
 import com.grgbanking.counter.common.socket.service.SocketAbstractService;
@@ -75,25 +76,16 @@ public class SocketServiceCsrImpl extends SocketAbstractService {
 
     /**
      * 接收到消息回调
-     * @param data      消息内容
+     * @param param      消息内容
      * @param fromClientId  消息来源的客户端Id
      * @return
      */
     @Override
-    public boolean receiveMessage(Object data, String fromClientId) {
-        log.info("客户端消息发送到实现类了,客户端ID：{}，消息内容：{}",fromClientId,data);
-
-        Map map=(Map)data;
-
-        Map head=(Map)map.get("head");
-        Map body=(Map)map.get("body");
-
-
-        String serviceType=(String)head.get("api_no");
-        String schema=(String)head.get("user_login_type");
-        String termId=(String)head.get("user_login_id");
-
-        if (serviceType.equals("prepared")){
+    public boolean receiveMessage(SocketParam param, String fromClientId) {
+        log.info("客户端消息发送到实现类了,客户端ID：{}，消息内容：{}",fromClientId,param);
+        Map<String,Object> body = (Map)param.getBody();
+        String apiNo = param.getHead().getApiNo();
+        if (apiNo.equals("prepared")){
             String user_id = (String)redisTemplate.opsForList().leftPop(RedisConstant.CUSTOMER_WAITING_QUEUE);
             if (user_id != null){
                 redisTemplate.opsForSet().remove(RedisConstant.CUSTOMER_WAITING_SET, user_id);
@@ -101,12 +93,11 @@ public class SocketServiceCsrImpl extends SocketAbstractService {
                 body.put("user_id", user_id);
                 body.put("employee_id", fromClientId);
                 body.put("user_sig", tencentService.getUserSig(fromClientId));
-                head.put("api_no", "video_cmd");
-                head.put("code", 200);
-                head.put("msg", "当前有客户接入视频： " + user_id);
-                serviceType = "video_cmd";
+                param.getHead().setApiNo("video_cmd");
+                param.getHead().setMsg("当前有客户接入视频： " + user_id);
+                apiNo = "video_cmd";
                 SocketIOClient client = SocketServer.getClient(fromClientId);
-                client.sendEvent("push_event", map);
+                client.sendEvent("push_event", param);
             }else {
                 String employee_id = fromClientId;
                 GrgCusEmployeeServiceEntity employeeServiceEntity = new GrgCusEmployeeServiceEntity();
@@ -120,9 +111,9 @@ public class SocketServiceCsrImpl extends SocketAbstractService {
             }
         }
 
-       SocketHandler handler= socketHandlerFactory.findHandler(serviceType);
+       SocketHandler handler= socketHandlerFactory.findHandler(apiNo);
         if(handler!=null){
-            handler.execute(data,fromClientId);
+            handler.execute(param,fromClientId);
         }
 
        // sendMessage(SocketServer.getClient(fromClientId),Resp.success("这是服务器消息"));

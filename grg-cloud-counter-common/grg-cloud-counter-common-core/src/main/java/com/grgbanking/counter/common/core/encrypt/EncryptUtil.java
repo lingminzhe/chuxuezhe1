@@ -5,6 +5,7 @@ package com.grgbanking.counter.common.core.encrypt;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -98,4 +99,11 @@ public class EncryptUtil {
 			return null;
 		}
 	}
+
+	public static void main(String[] args) {
+		String password = EncryptUtil.strToSHA256("123456");
+		System.out.println("前端密码密文："+password);
+		System.out.println("数据库密码密文："+new BCryptPasswordEncoder().encode(password));
+	}
+
 }

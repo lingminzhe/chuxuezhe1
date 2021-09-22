@@ -1,5 +1,7 @@
 package com.grgbanking.counter.csr.socket;
 
+import com.grgbanking.counter.common.core.constant.CommonConstants;
+import com.grgbanking.counter.common.core.util.SocketParam;
 import com.grgbanking.counter.common.core.util.UUIDUtils;
 import com.grgbanking.counter.csr.business.ServiceSessionManagement;
 import lombok.extern.slf4j.Slf4j;
@@ -33,23 +35,14 @@ public class RegisterSocketHandler implements SocketHandler {
 
 
     @Override
-    public void execute(Object param,String clientId) {
+    public void execute(SocketParam param, String clientId) {
         try {
 
-            Map map =(Map) param;
-            Map head=(Map)map.get("head");
-            String serviceType=(String)head.get("tran_code");
-            String schema=(String)head.get("user_login_type");
-            String termId=(String)head.get("user_login_id");
+            register(clientId,param.getHead().getUserLoginType(),param.getHead().getUserLoginId());
 
-            Map body=(Map)map.get("body");
-            
-            register(clientId,schema,termId);
-
-
-            body.put("msg","注册成功");
-            map.put("body",body);
-            socketServiceCsr.sendMessage(clientId,map);
+            param.getHead().setCode(CommonConstants.SUCCESS);
+            param.getHead().setMsg("注册成功");
+            socketServiceCsr.sendMessage(clientId,param);
 
         } catch (Exception e){
 

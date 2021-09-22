@@ -4,9 +4,10 @@ import com.corundumstudio.socketio.SocketIOClient;
 import com.grgbanking.counter.app.business.ServiceSessionManagement;
 import com.grgbanking.counter.app.redis.CsrRedisPublisher;
 import com.grgbanking.counter.app.redis.CsrRedisReceiver;
-
 import com.grgbanking.counter.app.tencent.service.TencentService;
 import com.grgbanking.counter.app.vo.CusAgentVideoVo;
+import com.grgbanking.counter.common.core.constant.CommonConstants;
+import com.grgbanking.counter.common.core.util.SocketParam;
 import com.grgbanking.counter.common.socket.constant.RedisConstant;
 import com.grgbanking.counter.common.socket.server.SocketServer;
 import com.grgbanking.counter.csr.api.entity.GrgCusEmployeeServiceEntity;
@@ -14,10 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 @Service
 public class VideoCmdSocketHandler implements SocketHandler {
@@ -42,16 +40,11 @@ public class VideoCmdSocketHandler implements SocketHandler {
     TencentService tencentService;
 
     @Override
-    public void execute(Object param, String fromClientId) {
+    public void execute(SocketParam param, String fromClientId) {
         try {
-            Map map=(Map)param;
-            Map head=(Map)map.get("head");
-            Map body=(Map)map.get("body");
-            String serviceSessionId=(String)head.get("service_session_id");
+            Map<String,Object> body = (Map)param.getBody();
+            String serviceSessionId=param.getHead().getServiceSessionId();
             serviceSessionManagement.addSession(serviceSessionId,fromClientId);
-
-//            String clientId = serviceSessionManagement.getAvaliableClientId(serviceSessionId);
-//            socketServiceApp.sendMessage();
 
             SocketIOClient client = SocketServer.getClient(fromClientId);
             String employee_id = (String)redisTemplate.opsForList().leftPop(RedisConstant.EMPLOYEE_SERVICE_QUEUE);
@@ -80,9 +73,9 @@ public class VideoCmdSocketHandler implements SocketHandler {
                 }
                 System.out.println("准备发送等待事件!");
                 //若从客服队列取不到客服,返回等待数据
-                head.put("code", 500);
-                head.put("msg", "坐席全忙，当前为第" + count + "个");
-                client.sendEvent("push_event", map);
+                param.getHead().setCode(CommonConstants.FAIL);
+                param.getHead().setMsg("坐席全忙，当前为第" + count + "个");
+                client.sendEvent("push_event", param);
             }else {
                 redisTemplate.opsForSet().remove(RedisConstant.EMPLOYEE_SERVICE_SET, employee_id);
                 CusAgentVideoVo cusAgentVideoVo = new CusAgentVideoVo();
@@ -91,15 +84,14 @@ public class VideoCmdSocketHandler implements SocketHandler {
                 cusAgentVideoVo.setUserId(fromClientId);
                 body.put("employee_id", cusAgentVideoVo.getEmployeeId());
                 body.put("user_id", cusAgentVideoVo.getUserId());
-                head.put("api_no", "video_cmd");
+                param.getHead().setApiNo("video_cmd");
                 //通知当前客服接入视频
                 publisher.publish("video_cmd",param);
-                head.put("msg", "当前有坐席接入： " + cusAgentVideoVo.getEmployeeId());
-                head.put("code", 200);
+                param.getHead().setMsg("当前有坐席接入： " + cusAgentVideoVo.getEmployeeId());
                 body.put("user_sig", cusAgentVideoVo.getUserSig());
                 System.out.println("准备发送接入视频事件!");
                 //通知当前用户接入视频
-                client.sendEvent("push_event", map);
+                client.sendEvent("push_event", param);
             }
 
         } catch (Exception e) {

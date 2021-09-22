@@ -3,16 +3,14 @@ package com.grgbanking.counter.app.socket;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.grgbanking.counter.app.business.ServiceSessionManagement;
+import com.grgbanking.counter.common.core.util.SocketParam;
 import com.grgbanking.counter.common.core.util.UUIDUtils;
 import com.grgbanking.counter.common.socket.service.SocketAbstractService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -79,27 +77,16 @@ public class SocketServiceAppImpl extends SocketAbstractService {
 
     /**
      * 接收到消息回调
-     * @param data      消息内容
+     * @param param      消息内容
      * @param fromClientId  消息来源的客户端Id
      * @return
      */
     @Override
-    public boolean receiveMessage(Object data, String fromClientId) { log.info("客户端消息发送到实现类了,客户端ID：{}，消息内容：{}",fromClientId,data);
-
-        Map map=(Map)data;
-
-        Map head=(Map)map.get("head");
-
-
-        String serviceType=(String)head.get("api_no");
-        String schema=(String)head.get("user_login_type");
-        String termId=(String)head.get("user_login_id");
-
-
-
-        SocketHandler handler= socketHandlerFactory.findHandler(serviceType);
+    public boolean receiveMessage(SocketParam param, String fromClientId) {
+        log.info("客户端消息发送到实现类了,客户端ID：{}，消息内容：{}",fromClientId,param);
+        SocketHandler handler= socketHandlerFactory.findHandler(param.getHead().getApiNo());
         if(handler!=null){
-            handler.execute(data,fromClientId);
+            handler.execute(param,fromClientId);
         }
 
 

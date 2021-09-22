@@ -4,7 +4,7 @@ import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.DataListener;
-import com.grgbanking.counter.common.core.util.Resp;
+import com.grgbanking.counter.common.core.util.SocketParam;
 import com.grgbanking.counter.common.socket.service.SocketAbstractService;
 import com.grgbanking.counter.common.socket.service.SocketService;
 import lombok.extern.slf4j.Slf4j;
@@ -70,25 +70,14 @@ public class SocketServer {
                 log.error("客户端断开连接，但是获取不到clientId");
             }
         });
-        socketIOServer.addEventListener(SocketAbstractService.EVENT_NAME, Object.class, new DataListener<Object>() {
+        socketIOServer.addEventListener(SocketAbstractService.EVENT_NAME, SocketParam.class, new DataListener<SocketParam>() {
             @Override
-            public void onData(SocketIOClient client, Object data, AckRequest ackRequest) throws Exception {
+            public void onData(SocketIOClient client, SocketParam param, AckRequest ackRequest) throws Exception {
                 client.getHandshakeData();
-                log.info("接收到消息：{}",String.valueOf(data));
-                socketService.receiveMessage(data,socketService.getClientId(client));
+                log.info("接收到消息：{}",param);
+                socketService.receiveMessage(param,socketService.getClientId(client));
             }
         });
-
-//        socketIOServer.addEventListener("register", Map.class, new DataListener<Map>() {
-//            @Override
-//            public void onData(SocketIOClient client, Map data, AckRequest ackRequest) throws Exception {
-//                client.getHandshakeData();
-//                log.info("接收到注册消息：{}",String.valueOf(data));
-//                String term_schema=(String)data.get("term_schema");
-//                String term_id=(String)data.get("term_id");
-//                socketService.register(client,term_schema,term_id);
-//            }
-//        });
 
         /**
          * 添加自定义监听器

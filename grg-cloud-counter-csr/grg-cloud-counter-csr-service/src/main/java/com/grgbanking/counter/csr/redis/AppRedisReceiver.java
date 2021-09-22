@@ -1,6 +1,7 @@
 package com.grgbanking.counter.csr.redis;
 
 import com.corundumstudio.socketio.SocketIOClient;
+import com.grgbanking.counter.common.core.util.SocketParam;
 import com.grgbanking.counter.common.lock.components.LockTemplate;
 import com.grgbanking.counter.common.socket.server.SocketServer;
 import com.grgbanking.counter.csr.entity.CusAgentVideoVo;
@@ -30,28 +31,28 @@ public class AppRedisReceiver implements MessageListener {
 
     @Autowired
     RedisHandlerFactory redisHandlerFactory;
+
     public void receiveMessage(String message) {
         // TODO 这里是收到通道的消息之后执行的方法
-        System.out.println("消费了消息: "+message);
+        System.out.println("消费了消息: " + message);
     }
 
     @Override
     public void onMessage(Message message, byte[] bytes) {
         String s = new String(message.getChannel());
 
-        Map map = (Map)redisTemplate.getValueSerializer().deserialize(message.getBody());
-        Map head = (Map)map.get("head");
-        Map body = (Map)map.get("body");
-        log.info("当前坐席获取到的报文： {}", map);
+        SocketParam param = (SocketParam) redisTemplate.getValueSerializer().deserialize(message.getBody());
+        Map<String,Object> body = (Map)param.getBody();
+        log.info("当前坐席获取到的报文： {}", param);
 //        RedisHandler handler = redisHandlerFactory.findHandler(serviceType);
 //        handler.execute(map);
 
-        String serviceType=(String)head.get("api_no");
+        String apiNo = param.getHead().getApiNo();
         //若是视频事件
-        if (serviceType.equals("video_cmd")){
+        if (apiNo.equals("video_cmd")) {
             String employee_id = (String) body.get("employee_id");
             SocketIOClient client = SocketServer.getClient(employee_id);
-            if (client != null){
+            if (client != null) {
                 System.out.println("当前坐席以获取到消息");
                 String user_id = (String) body.get("user_id");
                 CusAgentVideoVo cusAgentVideoVo = new CusAgentVideoVo();
@@ -60,10 +61,9 @@ public class AppRedisReceiver implements MessageListener {
                 cusAgentVideoVo.setUserSig(tencentService.getUserSig(employee_id));
                 cusAgentVideoVo.setEmployeeId(employee_id);
                 body.put("user_sig", cusAgentVideoVo.getUserSig());
-                head.put("api_no", "video_cmd");
-                head.put("code", 200);
-                head.put("msg", "当前有客户接入视频: " + user_id);
-                client.sendEvent("push_event", map);
+                param.getHead().setApiNo("video_cmd");
+                param.getHead().setMsg("当前有客户接入视频: " + user_id);
+                client.sendEvent("push_event", param);
             }
             //获取所有坐席，并通知变更当前排队统计
             Map<String, SocketIOClient> clientMap = SocketServer.clientMap();

@@ -1,5 +1,6 @@
 package com.grgbanking.counter.csr.socket;
 
+import com.grgbanking.counter.common.core.util.SocketParam;
 import com.grgbanking.counter.csr.redis.AppRedisPublisher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,22 +24,9 @@ public class VideoCmdSocketHandler implements SocketHandler {
 
 
     @Override
-    public void execute(Object param,String clientId) {
+    public void execute(SocketParam param, String clientId) {
         try {
-
-            Map map =(Map) param;
-            Map head=(Map)map.get("head");
-            String serviceType=(String)head.get("api_no");
-//            String schema=(String)head.get("user_login_type");
-//            String termId=(String)head.get("user_login_id");
-//
-//
-//            Map body=new HashMap();
-//            body.put("msg","注册成功");
-//            map.put("body",body);
-
-            redisPublisher.publish(serviceType,param);
-
+            redisPublisher.publish(param.getHead().getApiNo(),param);
         } catch (Exception e){
 
         }

@@ -3,7 +3,7 @@ package com.grgbanking.counter.common.socket.service;
 
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
-import com.grgbanking.counter.common.core.util.Resp;
+import com.grgbanking.counter.common.core.util.SocketParam;
 
 public interface SocketService {
 
@@ -34,11 +34,11 @@ public interface SocketService {
 
     /**
      * 接收消息
-     * @param data      消息内容
+     * @param param      消息内容
      * @param fromClientId  消息来源的客户端Id
      * @return
      */
-    boolean receiveMessage(Object data,String fromClientId);
+    boolean receiveMessage(SocketParam param, String fromClientId);
 
 
 }
