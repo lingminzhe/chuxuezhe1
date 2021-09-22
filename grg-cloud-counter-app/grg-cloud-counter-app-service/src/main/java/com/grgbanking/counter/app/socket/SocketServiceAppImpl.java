@@ -34,7 +34,7 @@ public class SocketServiceAppImpl extends SocketAbstractService {
     ServiceSessionManagement serviceSessionManagement;
 
     @Override
-    public void addListener(SocketIOServer socketIOServer) {
+    public void preStart(SocketIOServer socketIOServer) {
 
     }
 

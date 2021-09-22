@@ -82,7 +82,7 @@ public class SocketServer {
         /**
          * 添加自定义监听器
          */
-        socketService.addListener(socketIOServer);
+        socketService.preStart(socketIOServer);
 
         socketIOServer.start();
     }

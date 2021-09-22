@@ -8,10 +8,10 @@ import com.grgbanking.counter.common.core.util.SocketParam;
 public interface SocketService {
 
     /**
-     * 添加自定义监听器以及其他处理
+     * Socket服务启动前的操作
      * @param socketIOServer
      */
-    void addListener(SocketIOServer socketIOServer);
+    void preStart(SocketIOServer socketIOServer);
 
     /**
      * 客户端连接上来了

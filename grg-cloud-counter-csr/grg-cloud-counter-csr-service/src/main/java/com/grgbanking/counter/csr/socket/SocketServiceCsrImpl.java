@@ -23,7 +23,6 @@ import java.util.Map;
 public class SocketServiceCsrImpl extends SocketAbstractService {
 
 
-
     @Autowired
     RedisTemplate redisTemplate;
 
@@ -34,7 +33,7 @@ public class SocketServiceCsrImpl extends SocketAbstractService {
     TencentService tencentService;
 
     @Override
-    public void addListener(SocketIOServer socketIOServer) {
+    public void preStart(SocketIOServer socketIOServer) {
 
     }
 
