@@ -1,4 +1,4 @@
-package com.grgbanking.counter.app.tencent.controller;
+package com.grgbanking.counter.device.tencent.controller;
 
 import com.grgbanking.counter.device.tencent.entity.TencentEidToken;
 import com.grgbanking.counter.device.tencent.entity.TencentUserInfo;

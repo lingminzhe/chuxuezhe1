@@ -1,12 +1,10 @@
-package com.grgbanking.counter.app.socket;
+package com.grgbanking.counter.device.socket;
 
 import com.grgbanking.counter.device.business.ServiceSessionManagement;
 import com.grgbanking.counter.common.core.constant.CommonConstants;
 import com.grgbanking.counter.common.core.util.SocketParam;
 import com.grgbanking.counter.common.core.util.UUIDUtils;
 
-import com.grgbanking.counter.device.socket.SocketHandler;
-import com.grgbanking.counter.device.socket.SocketServiceAppImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 

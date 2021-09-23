@@ -1,7 +1,5 @@
-package com.grgbanking.counter.app.redis;
+package com.grgbanking.counter.device.redis;
 
-import com.grgbanking.counter.device.redis.RedisHandler;
-import com.grgbanking.counter.device.redis.VideoCmdRedisHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;

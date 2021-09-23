@@ -1,11 +1,9 @@
-package com.grgbanking.counter.app.socket;
+package com.grgbanking.counter.device.socket;
 
 import com.corundumstudio.socketio.SocketIOClient;
 import com.grgbanking.counter.device.business.ServiceSessionManagement;
 import com.grgbanking.counter.device.redis.CsrRedisPublisher;
 import com.grgbanking.counter.device.redis.CsrRedisReceiver;
-import com.grgbanking.counter.device.socket.SocketHandler;
-import com.grgbanking.counter.device.socket.SocketServiceAppImpl;
 import com.grgbanking.counter.device.tencent.service.TencentService;
 import com.grgbanking.counter.device.vo.CusAgentVideoVo;
 import com.grgbanking.counter.common.core.constant.CommonConstants;

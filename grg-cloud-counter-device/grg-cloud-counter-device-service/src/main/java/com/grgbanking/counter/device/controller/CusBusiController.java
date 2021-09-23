@@ -1,4 +1,4 @@
-package com.grgbanking.counter.app.controller;
+package com.grgbanking.counter.device.controller;
 
 import com.grgbanking.counter.csr.api.dubbo.RemoteCusBusiService;
 import com.grgbanking.counter.csr.api.entity.GrgCusEmployeeServiceEntity;

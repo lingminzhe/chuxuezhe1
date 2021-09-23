@@ -1,4 +1,4 @@
-package com.grgbanking.counter.app.tencent.service;
+package com.grgbanking.counter.device.tencent.service;
 
 import com.alibaba.fastjson.JSON;
 import com.grgbanking.counter.device.tencent.entity.TencentEidToken;

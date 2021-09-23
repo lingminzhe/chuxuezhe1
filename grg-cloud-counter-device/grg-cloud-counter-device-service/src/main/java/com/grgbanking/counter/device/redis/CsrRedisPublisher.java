@@ -1,4 +1,4 @@
-package com.grgbanking.counter.app.redis;
+package com.grgbanking.counter.device.redis;
 
 import com.grgbanking.counter.device.business.ServiceSessionManagement;
 import org.springframework.beans.factory.annotation.Autowired;
