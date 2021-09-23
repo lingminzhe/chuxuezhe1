@@ -1,8 +1,9 @@
-package com.grgbanking.counter.iam.controller;
+package com.grgbanking.counter.bank.controller;
 
+import com.grgbanking.counter.bank.service.MobileService;
 import com.grgbanking.counter.common.core.util.Resp;
-import com.grgbanking.counter.iam.auth.service.MobileService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ public class MobileController {
 
 	private final MobileService mobileService;
 
+	@ApiOperation(value = "发送短信")
 	@GetMapping("/{mobile}")
 	public Resp sendSmsCode(@PathVariable String mobile) {
 		return mobileService.sendSmsCode(mobile);

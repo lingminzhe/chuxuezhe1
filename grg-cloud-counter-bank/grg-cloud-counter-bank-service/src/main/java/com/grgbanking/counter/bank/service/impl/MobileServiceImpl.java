@@ -1,13 +1,12 @@
-package com.grgbanking.counter.iam.auth.service.impl;
+package com.grgbanking.counter.bank.service.impl;
 
 import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
+import com.grgbanking.counter.bank.service.MobileService;
 import com.grgbanking.counter.common.core.constant.CacheConstants;
 import com.grgbanking.counter.common.core.constant.SecurityConstants;
 import com.grgbanking.counter.common.core.constant.enums.LoginTypeEnum;
 import com.grgbanking.counter.common.core.util.Resp;
-import com.grgbanking.counter.iam.auth.service.MobileService;
-import com.grgbanking.counter.iam.dao.SysSocialAuthUserDao;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -26,8 +25,6 @@ import java.util.concurrent.TimeUnit;
 public class MobileServiceImpl implements MobileService {
 
 	private final RedisTemplate redisTemplate;
-
-	private final SysSocialAuthUserDao socialAuthUserDao;
 
 	/**
 	 * 发送手机验证码 TODO: 调用短信网关发送验证码,测试返回前端
