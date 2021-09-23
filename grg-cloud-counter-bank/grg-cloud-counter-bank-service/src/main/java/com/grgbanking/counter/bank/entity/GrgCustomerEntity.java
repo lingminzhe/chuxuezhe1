@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -172,5 +173,8 @@ public class GrgCustomerEntity implements Serializable {
 	 * 删除标记
 	 */
 	private String delFlag;
-
+	/**
+	 * 头像
+	 */
+	private String portrait;
 }

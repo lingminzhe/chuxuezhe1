@@ -31,7 +31,7 @@ public class CusInfoController {
     RemoteBusiOptService remoteBusiOptService;
 
     @ApiOperation("个人详细")
-    @GetMapping("/personal/info")
+    @PostMapping("/personal/info")
     public Resp<GrgCusInfoEntiry> getPersonalInfo(@RequestBody CusAccountDto cusAccountDto) {
         GrgCusInfoEntiry cusInfo = remoteCusInfoService.findCusInfo(cusAccountDto.getUserId());
         if (cusInfo != null){
@@ -48,7 +48,7 @@ public class CusInfoController {
     }
 
     @ApiOperation("银行卡列表")
-    @GetMapping("/card/list")
+    @PostMapping("/card/list")
     public Resp<List<GrgCusAccountEntity>> getCardList(@RequestBody CusAccountDto cusAccountDto) {
         List<GrgCusAccountEntity> cusAccountList = remoteCusInfoService.findCusAccountList(cusAccountDto.getUserId());
         return Resp.success(cusAccountList);
@@ -65,7 +65,7 @@ public class CusInfoController {
     }
 
     @ApiOperation("银行卡流水列表")
-    @GetMapping("/card/itemized/list")
+    @PostMapping("/card/itemized/list")
     public Resp<List<GrgCusBusiOptEntity>> getCardSequenceList(@RequestBody CusAccountDto cusAccountDto) {
         List<GrgCusBusiOptEntity> list = remoteBusiOptService.findList(cusAccountDto.getUserId());
         return Resp.success(list);
@@ -79,7 +79,7 @@ public class CusInfoController {
     }
 
     @ApiOperation("办理业务列表")
-    @GetMapping("/business/list")
+    @PostMapping("/business/list")
     public Resp<List<GrgCusBusiInfoEntity>> getBuinessList(@RequestBody CusAccountDto cusAccountDto) {
         List<GrgCusBusiInfoEntity> list = remoteBusiInfoService.findList(cusAccountDto.getUserId());
         return Resp.success(list);
