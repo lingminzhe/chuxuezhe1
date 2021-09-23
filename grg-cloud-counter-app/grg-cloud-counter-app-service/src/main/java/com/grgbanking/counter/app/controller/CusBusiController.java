@@ -2,9 +2,9 @@ package com.grgbanking.counter.app.controller;
 
 import com.grgbanking.counter.csr.api.dubbo.RemoteCusBusiService;
 import com.grgbanking.counter.csr.api.entity.GrgCusEmployeeServiceEntity;
-import com.grgbanking.counter.device.dto.CusAccountDto;
-import com.grgbanking.counter.device.tencent.service.TencentService;
-import com.grgbanking.counter.device.vo.CusAgentVideoVo;
+import com.grgbanking.counter.app.dto.CusAccountDto;
+import com.grgbanking.counter.app.tencent.service.TencentService;
+import com.grgbanking.counter.app.vo.CusAgentVideoVo;
 import com.grgbanking.counter.common.core.util.Resp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

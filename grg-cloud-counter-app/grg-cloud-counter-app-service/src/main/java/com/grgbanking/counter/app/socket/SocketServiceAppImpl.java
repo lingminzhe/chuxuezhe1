@@ -1,12 +1,10 @@
 package com.grgbanking.counter.app.socket;
 
 import com.corundumstudio.socketio.SocketIOClient;
-import com.grgbanking.counter.device.business.ServiceSessionManagement;
+import com.grgbanking.counter.app.business.ServiceSessionManagement;
 import com.grgbanking.counter.common.core.util.SocketParam;
 import com.grgbanking.counter.common.core.util.UUIDUtils;
 import com.grgbanking.counter.common.socket.service.SocketAbstractService;
-import com.grgbanking.counter.device.socket.SocketHandler;
-import com.grgbanking.counter.device.socket.SocketHandlerFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;

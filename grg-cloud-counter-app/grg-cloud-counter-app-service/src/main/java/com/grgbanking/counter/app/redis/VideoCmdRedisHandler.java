@@ -1,8 +1,7 @@
 package com.grgbanking.counter.app.redis;
 
-import com.grgbanking.counter.device.business.ServiceSessionManagement;
-import com.grgbanking.counter.device.redis.RedisHandler;
-import com.grgbanking.counter.device.socket.SocketServiceAppImpl;
+import com.grgbanking.counter.app.business.ServiceSessionManagement;
+import com.grgbanking.counter.app.socket.SocketServiceAppImpl;
 import com.grgbanking.counter.common.core.util.SocketParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,12 +1,10 @@
 package com.grgbanking.counter.app.socket;
 
-import com.grgbanking.counter.device.business.ServiceSessionManagement;
+import com.grgbanking.counter.app.business.ServiceSessionManagement;
 import com.grgbanking.counter.common.core.constant.CommonConstants;
 import com.grgbanking.counter.common.core.util.SocketParam;
 import com.grgbanking.counter.common.core.util.UUIDUtils;
 
-import com.grgbanking.counter.device.socket.SocketHandler;
-import com.grgbanking.counter.device.socket.SocketServiceAppImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,6 +13,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;

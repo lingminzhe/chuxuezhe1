@@ -1,8 +1,8 @@
 package com.grgbanking.counter.app.tencent.controller;
 
-import com.grgbanking.counter.device.tencent.entity.TencentEidToken;
-import com.grgbanking.counter.device.tencent.entity.TencentUserInfo;
-import com.grgbanking.counter.device.tencent.service.TencentService;
+import com.grgbanking.counter.app.tencent.entity.TencentEidToken;
+import com.grgbanking.counter.app.tencent.entity.TencentUserInfo;
+import com.grgbanking.counter.app.tencent.service.TencentService;
 import com.grgbanking.counter.common.core.util.Resp;
 import com.tencentcloudapi.faceid.v20180301.models.*;
 import io.swagger.annotations.*;

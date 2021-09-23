@@ -1,6 +1,5 @@
 package com.grgbanking.counter.app.redis;
 
-import com.grgbanking.counter.device.redis.CsrRedisReceiver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;

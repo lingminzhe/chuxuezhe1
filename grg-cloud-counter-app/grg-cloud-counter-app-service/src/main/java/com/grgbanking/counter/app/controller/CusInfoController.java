@@ -4,7 +4,7 @@ import com.grgbanking.counter.csr.api.dubbo.RemoteBusiInfoService;
 import com.grgbanking.counter.csr.api.dubbo.RemoteBusiOptService;
 import com.grgbanking.counter.csr.api.entity.GrgCusBusiInfoEntity;
 import com.grgbanking.counter.csr.api.entity.GrgCusBusiOptEntity;
-import com.grgbanking.counter.device.dto.CusAccountDto;
+import com.grgbanking.counter.app.dto.CusAccountDto;
 import com.grgbanking.counter.bank.api.dubbo.RemoteCusInfoService;
 import com.grgbanking.counter.bank.api.entity.GrgCusAccountEntity;
 import com.grgbanking.counter.bank.api.entity.GrgCusInfoEntiry;

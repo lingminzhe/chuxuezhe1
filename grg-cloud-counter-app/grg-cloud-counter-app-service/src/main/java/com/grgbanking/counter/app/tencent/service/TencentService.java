@@ -1,8 +1,8 @@
 package com.grgbanking.counter.app.tencent.service;
 
 import com.alibaba.fastjson.JSON;
-import com.grgbanking.counter.device.tencent.entity.TencentEidToken;
-import com.grgbanking.counter.device.tencent.entity.TencentUserInfo;
+import com.grgbanking.counter.app.tencent.entity.TencentEidToken;
+import com.grgbanking.counter.app.tencent.entity.TencentUserInfo;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 import com.tencentcloudapi.common.profile.ClientProfile;

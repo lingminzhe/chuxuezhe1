@@ -1,6 +1,6 @@
 package com.grgbanking.counter.app.redis;
 
-import com.grgbanking.counter.device.business.ServiceSessionManagement;
+import com.grgbanking.counter.app.business.ServiceSessionManagement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
