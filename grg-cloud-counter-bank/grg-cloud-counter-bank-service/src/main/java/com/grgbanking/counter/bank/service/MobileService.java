@@ -1,4 +1,4 @@
-package com.grgbanking.counter.iam.auth.service;
+package com.grgbanking.counter.bank.service;
 
 
 import com.grgbanking.counter.common.core.util.Resp;
