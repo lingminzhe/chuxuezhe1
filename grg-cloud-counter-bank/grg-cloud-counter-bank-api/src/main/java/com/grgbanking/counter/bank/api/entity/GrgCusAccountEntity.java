@@ -76,5 +76,9 @@ public class GrgCusAccountEntity implements Serializable {
      *
      */
     private String updateBy;
-
+    /**
+     * 银行卡绑定状态（0：未绑定；1：已绑定）
+     */
+    @ApiModelProperty("银行卡绑定状态（0：未绑定；1：已绑定）")
+    private String bind;
 }

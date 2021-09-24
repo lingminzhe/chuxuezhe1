@@ -1,0 +1,14 @@
+version: '3'
+services:
+  grgms-fileserver-service:
+    container_name: grgms-fileserver-service
+    network_mode: "host"
+    image: 10.1.7.60:9001/grgms-fileserver-service:latest
+    # 目录挂载映射
+    volumes:
+      - ./bootstrap.yml:/application/bootstrap.yml
+      - ./agent.config:/agent/config/agent.config:rw
+      - /home/iBankPro/logs:/application/logs:rw
+      - ./logback-spring.xml:/application/logback-spring.xml
+    ports:
+      - 9010:9010

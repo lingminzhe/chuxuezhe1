@@ -1,10 +1,10 @@
-package com.grgbanking.counter.app.controller;
+package com.grgbanking.counter.device.controller;
 
 import com.grgbanking.counter.csr.api.dubbo.RemoteBusiInfoService;
 import com.grgbanking.counter.csr.api.dubbo.RemoteBusiOptService;
 import com.grgbanking.counter.csr.api.entity.GrgCusBusiInfoEntity;
 import com.grgbanking.counter.csr.api.entity.GrgCusBusiOptEntity;
-import com.grgbanking.counter.app.dto.CusAccountDto;
+import com.grgbanking.counter.device.dto.CusAccountDto;
 import com.grgbanking.counter.bank.api.dubbo.RemoteCusInfoService;
 import com.grgbanking.counter.bank.api.entity.GrgCusAccountEntity;
 import com.grgbanking.counter.bank.api.entity.GrgCusInfoEntiry;
@@ -62,13 +62,6 @@ public class CusInfoController {
             return Resp.failed("新增失败!");
         }
         return Resp.success("新增成功!");
-    }
-
-    @ApiOperation("绑定银行卡")
-    @PostMapping("/bind/card")
-    public Resp<GrgCusAccountEntity> bindBankCard(@RequestBody GrgCusAccountEntity grgCusAccountEntity) {
-        GrgCusAccountEntity grgCusAccount = remoteCusInfoService.searchCusAccount(grgCusAccountEntity);
-        return Resp.success(grgCusAccount);
     }
 
     @ApiOperation("银行卡流水列表")

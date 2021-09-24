@@ -195,5 +195,9 @@ public class GrgCusInfoEntiry implements Serializable {
      */
     @ApiModelProperty("删除标记")
     private String delFlag;
-
+    /**
+     * 头像
+     */
+    @ApiModelProperty("头像")
+    private String portrait;
 }
