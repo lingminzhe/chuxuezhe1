@@ -23,7 +23,7 @@ import java.util.Map;
  */
 @Api(tags = "业务接口")
 @RestController
-@RequestMapping("csr/grgbusiinfo")
+@RequestMapping("/grgbusiinfo")
 public class GrgBusiInfoController {
     @Autowired
     private GrgBusiInfoService grgBusiInfoService;

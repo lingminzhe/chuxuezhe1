@@ -20,7 +20,7 @@ import java.util.Map;
  * @date 2021-09-09
  */
 @RestController
-@RequestMapping("csr/grgfilemanager")
+@RequestMapping("/grgfilemanager")
 public class GrgFileManagerController {
     @Autowired
     private GrgFileManagerService grgFileManagerService;

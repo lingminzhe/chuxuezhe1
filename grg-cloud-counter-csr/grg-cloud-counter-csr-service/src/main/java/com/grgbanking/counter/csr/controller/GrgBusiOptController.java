@@ -25,7 +25,7 @@ import java.util.Map;
  */
 @Api(tags = "座席操作记录")
 @RestController
-@RequestMapping("csr/grgbusiopt")
+@RequestMapping("/grgbusiopt")
 public class GrgBusiOptController {
     @Autowired
     private GrgBusiOptService grgBusiOptService;

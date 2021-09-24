@@ -28,7 +28,7 @@ import java.util.Map;
 @Api(tags = "客户信息表")
 @Slf4j
 @RestController
-@RequestMapping("bank/customer")
+@RequestMapping("/customer")
 public class GrgCustomerController {
     @Autowired
     private GrgCustomerService grgCustomerService;
@@ -59,6 +59,11 @@ public class GrgCustomerController {
    //@grgAccountService("bank:grgcustomer:info")
     public Resp info(@PathVariable("id") String id){
 		GrgCustomerEntity grgCustomer = grgCustomerService.getById(id);
+		/*if (grgCustomer==null){
+		    grgCustomer = new GrgCustomerEntity();
+		    grgCustomer.setId(id);
+            return Resp.success(grgCustomer, "grgCustomer").setMsg("找不到当前id");
+        }*/
 
         return Resp.success(grgCustomer, "grgCustomer");
     }
@@ -74,7 +79,7 @@ public class GrgCustomerController {
         log.info("grgCustomer.save()");
         boolean b = grgCustomerService.save(grgCustomer);
         if (!b){
-            return Resp.failed().setMsg("删除失败");
+            return Resp.failed().setMsg("新增客户失败");
         }
         return Resp.success();
     }

@@ -29,7 +29,7 @@ import java.util.Map;
 @Api(tags = "银行卡账户信息")
 @Slf4j
 @RestController
-@RequestMapping("bank/account")
+@RequestMapping("/account")
 public class GrgAccountController {
     @Autowired
     private GrgAccountService grgAccountService;
@@ -107,7 +107,7 @@ public class GrgAccountController {
     /**
      * 删除
      */
-    //TODO 删除状态变化 而不是删除数据 逻辑删除 须添加数据库字段 - -！
+    //TODO 删除状态变化
     @ApiOperation(value = "根据id删除客户信息")
     @ApiImplicitParam(name = "ids",value = "客户Ids",required = true)
     @DeleteMapping("/delete")

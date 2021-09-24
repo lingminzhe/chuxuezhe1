@@ -25,7 +25,7 @@ import java.util.Map;
  */
 @Api(tags = "银行卡账户交易信息")
 @RestController
-@RequestMapping("bank/accountrecord")
+@RequestMapping("/accountrecord")
 public class GrgAccountRecordController {
     @Autowired
     private GrgAccountRecordService grgAccountRecordService;

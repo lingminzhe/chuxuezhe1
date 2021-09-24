@@ -30,7 +30,7 @@ import java.util.Map;
  */
 @Api(tags = "座席端服务信息")
 @RestController
-@RequestMapping("csr/grgemployeeservice")
+@RequestMapping("/empservice")
 public class GrgEmployeeServiceController {
 
     @Autowired

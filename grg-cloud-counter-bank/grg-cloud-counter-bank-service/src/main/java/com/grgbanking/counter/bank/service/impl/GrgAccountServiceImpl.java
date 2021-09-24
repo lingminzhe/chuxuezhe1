@@ -3,6 +3,7 @@ package com.grgbanking.counter.bank.service.impl;
 import com.alibaba.nacos.common.utils.StringUtils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.grgbanking.counter.bank.dao.GrgAccountDao;
 import com.grgbanking.counter.bank.entity.GrgAccountEntity;
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 
 @Service("grgAccountService")
@@ -36,14 +36,21 @@ public class GrgAccountServiceImpl extends ServiceImpl<GrgAccountDao, GrgAccount
      */
     @Override
     public List<GrgAccountEntity> getByCustomerId(Integer id) {
+
+     /*   List<GrgAccountEntity> status = this.baseMapper.selectList(Wrappers.<GrgAccountEntity>lambdaQuery().eq(GrgAccountEntity::getAccountStatus, "status"));
+
         //查出所有信息
         List<GrgAccountEntity> entities = this.baseMapper.selectList(null);
         //
         List<GrgAccountEntity> list = entities.stream().filter(grgAccountEntity ->
                 grgAccountEntity.getCustomerId().equals(id)
-        ).collect(Collectors.toList());
+        ).collect(Collectors.toList());*/
 
-        return list;
+        List<GrgAccountEntity> list1 = this.baseMapper.selectList(Wrappers.<GrgAccountEntity>lambdaQuery()
+                .eq(GrgAccountEntity::getCustomerId, id));
+
+
+        return list1;
     }
 
     /**
@@ -66,7 +73,7 @@ public class GrgAccountServiceImpl extends ServiceImpl<GrgAccountDao, GrgAccount
             QueryWrapper<GrgAccountEntity> wrapper = new QueryWrapper<GrgAccountEntity>().eq("customer_id",customerId);
             if (!StringUtils.isEmpty(key)){
                 wrapper.and(obj->{
-                   obj.eq("id",key).or().eq("card_no",key);
+                   obj.eq("id",key).or().like("card_no",key);
                 });
             }
             IPage<GrgAccountEntity> page = this.page(new Query<GrgAccountEntity>().getPage(params), wrapper);
