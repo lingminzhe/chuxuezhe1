@@ -17,4 +17,5 @@ public interface RemoteCusInfoService {
 
     void deleteBankCard();
 
+    GrgCusAccountEntity searchCusAccount(GrgCusAccountEntity grgCusAccountEntity);
 }

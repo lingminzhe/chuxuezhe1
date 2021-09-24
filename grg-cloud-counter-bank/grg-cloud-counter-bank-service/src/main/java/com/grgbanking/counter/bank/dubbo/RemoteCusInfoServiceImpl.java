@@ -68,4 +68,15 @@ public class RemoteCusInfoServiceImpl implements RemoteCusInfoService {
     public void deleteBankCard() {
 
     }
+
+    @Override
+    public GrgCusAccountEntity searchCusAccount(GrgCusAccountEntity grgCusAccountEntity) {
+        QueryWrapper<GrgAccountEntity> wrapper = new QueryWrapper();
+        wrapper.eq("customer_id", grgCusAccountEntity.getCustomerId());
+        wrapper.eq("card_no", grgCusAccountEntity.getCardNo());
+        GrgAccountEntity one = grgAccountService.getOne(wrapper, true);
+        GrgCusAccountEntity grgCusAccount = new GrgCusAccountEntity();
+        BeanUtils.copyProperties(one, grgCusAccount);
+        return grgCusAccount;
+    }
 }

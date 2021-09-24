@@ -64,6 +64,13 @@ public class CusInfoController {
         return Resp.success("新增成功!");
     }
 
+    @ApiOperation("绑定银行卡")
+    @PostMapping("/bind/card")
+    public Resp<GrgCusAccountEntity> bindBankCard(@RequestBody GrgCusAccountEntity grgCusAccountEntity) {
+        GrgCusAccountEntity grgCusAccount = remoteCusInfoService.searchCusAccount(grgCusAccountEntity);
+        return Resp.success(grgCusAccount);
+    }
+
     @ApiOperation("银行卡流水列表")
     @PostMapping("/card/itemized/list")
     public Resp<List<GrgCusBusiOptEntity>> getCardSequenceList(@RequestBody CusAccountDto cusAccountDto) {

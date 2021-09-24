@@ -1,6 +1,7 @@
 package com.grgbanking.counter.bank.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -81,5 +82,8 @@ public class GrgAccountEntity implements Serializable {
 	 * 
 	 */
 	private String updateBy;
-
+	/**
+	 * 银行卡绑定状态（0：未绑定；1：已绑定）
+	 */
+	private String bind;
 }
