@@ -30,7 +30,7 @@ public class TencentController {
             @ApiImplicitParam(name = "livenessType", value = "LIP为数字模式，ACTION为动作模式，SILENT为静默模式", required = true)
     })
     @PostMapping("/live/faceid")
-    public Resp<LivenessRecognitionResponse> liveFaceid(LivenessRecognitionRequest req) {
+    public Resp<LivenessRecognitionResponse> liveFaceid(@RequestBody LivenessRecognitionRequest req) {
         return Resp.success(tencentService.liveFaceid(req));
     }
 
@@ -46,7 +46,7 @@ public class TencentController {
             @ApiImplicitParam(name = "livenessType", value = "LIP为数字模式，ACTION为动作模式，SILENT为静默模式", required = true)
     })
     @PostMapping("/live/face/comparison")
-    public Resp<LivenessCompareResponse> liveFaceComparison(LivenessCompareRequest req) {
+    public Resp<LivenessCompareResponse> liveFaceComparison(@RequestBody LivenessCompareRequest req) {
         return Resp.success(tencentService.liveFaceComparison(req));
     }
 
@@ -62,7 +62,7 @@ public class TencentController {
     })
     @ApiResponses({@ApiResponse(code = 200, message = "ok")})
     @PostMapping("/live/check")
-    public Resp<LivenessResponse> liveCheck(LivenessRequest req) {
+    public Resp<LivenessResponse> liveCheck(@RequestBody LivenessRequest req) {
         return Resp.success(tencentService.liveCheck(req));
     }
 
@@ -78,7 +78,7 @@ public class TencentController {
             @ApiImplicitParam(name = "imageBase64", value = "人脸比对的照片", required = true)
     })
     @PostMapping("/image/recognition")
-    public Resp<ImageRecognitionResponse> imageRecognition(ImageRecognitionRequest req) {
+    public Resp<ImageRecognitionResponse> imageRecognition(@RequestBody ImageRecognitionRequest req) {
         return Resp.success(tencentService.imageRecognition(req));
     }
 
@@ -94,7 +94,7 @@ public class TencentController {
             @ApiImplicitParam(name = "imageBase64", value = "人脸比对的照片", required = true)
     })
     @PostMapping("/action/sequence")
-    public Resp<GetActionSequenceResponse> actionSequence(GetActionSequenceRequest req) {
+    public Resp<GetActionSequenceResponse> actionSequence(@RequestBody GetActionSequenceRequest req) {
         return Resp.success(tencentService.actionSequence(req));
     }
 
