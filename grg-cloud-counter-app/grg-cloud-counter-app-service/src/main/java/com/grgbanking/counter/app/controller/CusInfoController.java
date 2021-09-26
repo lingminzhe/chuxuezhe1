@@ -34,7 +34,7 @@ public class CusInfoController {
     @PostMapping("/personal/info")
     public Resp<GrgCusInfoEntiry> getPersonalInfo(@RequestBody CusAccountDto cusAccountDto) {
         GrgCusInfoEntiry cusInfo = remoteCusInfoService.findCusInfo(cusAccountDto.getUserId());
-        if (cusInfo != null){
+        if (cusInfo != null) {
             return Resp.success(cusInfo);
         }
         return Resp.failed("无法查询到用户数据!");
@@ -42,7 +42,7 @@ public class CusInfoController {
 
     @ApiOperation("银行卡详情")
     @GetMapping("/card/{id}")
-    public Resp<GrgCusAccountEntity> getCard(@PathVariable("id")String id) {
+    public Resp<GrgCusAccountEntity> getCard(@PathVariable("id") String id) {
         GrgCusAccountEntity cusAccount = remoteCusInfoService.findCusAccount(id);
         return Resp.success(cusAccount);
     }
@@ -58,7 +58,7 @@ public class CusInfoController {
     @PostMapping("/save/card")
     public Resp<String> saveBankCard(@RequestBody GrgCusAccountEntity grgCusAccountEntity) {
         boolean b = remoteCusInfoService.saveBankCard(grgCusAccountEntity);
-        if (b != true){
+        if (b != true) {
             return Resp.failed("新增失败!");
         }
         return Resp.success("新增成功!");
@@ -66,9 +66,11 @@ public class CusInfoController {
 
     @ApiOperation("绑定银行卡")
     @PostMapping("/bind/card")
-    public Resp<GrgCusAccountEntity> bindBankCard(@RequestBody GrgCusAccountEntity grgCusAccountEntity) {
-        GrgCusAccountEntity grgCusAccount = remoteCusInfoService.searchCusAccount(grgCusAccountEntity);
-        return Resp.success(grgCusAccount);
+    public Resp<String> bindBankCard(@RequestBody GrgCusAccountEntity grgCusAccountEntity) {
+        boolean b = remoteCusInfoService.bindBankCard(grgCusAccountEntity);
+        if (b)
+            return Resp.success("绑定银行卡成功");
+        return Resp.failed("绑定银行卡失败");
     }
 
     @ApiOperation("银行卡流水列表")
@@ -80,7 +82,7 @@ public class CusInfoController {
 
     @ApiOperation("银行卡流水详情")
     @GetMapping("/card/itemized/{id}")
-    public Resp<GrgCusBusiOptEntity> getCardSequence(@PathVariable("id")String id) {
+    public Resp<GrgCusBusiOptEntity> getCardSequence(@PathVariable("id") String id) {
         GrgCusBusiOptEntity one = remoteBusiOptService.getOne(id);
         return Resp.success(one);
     }
@@ -94,7 +96,7 @@ public class CusInfoController {
 
     @ApiOperation("办理业务详情")
     @GetMapping("/business/{id}")
-    public Resp<GrgCusBusiInfoEntity> getBusiness(@PathVariable("id")String id) {
+    public Resp<GrgCusBusiInfoEntity> getBusiness(@PathVariable("id") String id) {
         GrgCusBusiInfoEntity one = remoteBusiInfoService.getOne(id);
         return Resp.success(one);
     }

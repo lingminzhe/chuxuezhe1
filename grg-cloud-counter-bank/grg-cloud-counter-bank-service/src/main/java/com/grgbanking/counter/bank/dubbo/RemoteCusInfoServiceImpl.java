@@ -1,6 +1,7 @@
 package com.grgbanking.counter.bank.dubbo;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.grgbanking.counter.bank.api.dubbo.RemoteCusInfoService;
 import com.grgbanking.counter.bank.api.entity.GrgCusAccountEntity;
 import com.grgbanking.counter.bank.api.entity.GrgCusInfoEntiry;
@@ -70,13 +71,12 @@ public class RemoteCusInfoServiceImpl implements RemoteCusInfoService {
     }
 
     @Override
-    public GrgCusAccountEntity searchCusAccount(GrgCusAccountEntity grgCusAccountEntity) {
-        QueryWrapper<GrgAccountEntity> wrapper = new QueryWrapper();
+    public boolean bindBankCard(GrgCusAccountEntity grgCusAccountEntity) {
+        UpdateWrapper<GrgAccountEntity> wrapper = new UpdateWrapper<>();
+        GrgAccountEntity grgAccountEntity = new GrgAccountEntity();
+        grgAccountEntity.setBind("1");
         wrapper.eq("customer_id", grgCusAccountEntity.getCustomerId());
         wrapper.eq("card_no", grgCusAccountEntity.getCardNo());
-        GrgAccountEntity one = grgAccountService.getOne(wrapper, true);
-        GrgCusAccountEntity grgCusAccount = new GrgCusAccountEntity();
-        BeanUtils.copyProperties(one, grgCusAccount);
-        return grgCusAccount;
+        return grgAccountService.update(grgAccountEntity, wrapper);
     }
 }
