@@ -119,7 +119,7 @@ public class TencentController {
      */
     @ApiOperation("获取e证通token和认证链接")
     @GetMapping("/eid/token")
-    public Resp<TencentEidToken> eidToken(TencentUserInfo userInfo) {
+    public Resp<TencentEidToken> eidToken(@RequestBody TencentUserInfo userInfo) {
         return Resp.success(tencentService.eidRequest(userInfo));
     }
 
@@ -130,7 +130,7 @@ public class TencentController {
      */
     @ApiOperation("获取e证通认证结果")
     @GetMapping("/eid/result")
-    public Resp<GetEidResultResponse> eidResult(TencentEidToken eidToken) {
+    public Resp<GetEidResultResponse> eidResult(@RequestBody TencentEidToken eidToken) {
         return Resp.success(tencentService.eidResPonse(eidToken));
     }
 
@@ -141,7 +141,7 @@ public class TencentController {
      */
     @ApiOperation("身份信息及有效期核验")
     @GetMapping("/check/id/name")
-    public Resp<CheckIdNameDateResponse> checkIdNameDate(CheckIdNameDateRequest req) {
+    public Resp<CheckIdNameDateResponse> checkIdNameDate(@RequestBody CheckIdNameDateRequest req) {
         return Resp.success(tencentService.checkIdNameDate(req));
     }
 
@@ -152,7 +152,7 @@ public class TencentController {
      */
     @ApiOperation("银行卡基础信息查询")
     @GetMapping("/check/bank/card")
-    public Resp<CheckBankCardInformationResponse> checkBankCardInfo(CheckBankCardInformationRequest req) {
+    public Resp<CheckBankCardInformationResponse> checkBankCardInfo(@RequestBody CheckBankCardInformationRequest req) {
         return Resp.success(tencentService.checkBankCardInfo(req));
     }
 
@@ -163,7 +163,7 @@ public class TencentController {
      */
     @ApiOperation("身份证人像照片验真")
     @GetMapping("/check/id/card")
-    public Resp<CheckIdCardInformationResponse> checkIdCardInfo(CheckIdCardInformationRequest req) {
+    public Resp<CheckIdCardInformationResponse> checkIdCardInfo(@RequestBody CheckIdCardInformationRequest req) {
         return Resp.success(tencentService.checkIdCardInfo(req));
     }
 
@@ -174,7 +174,7 @@ public class TencentController {
      */
     @ApiOperation("身份证识别及信息核验")
     @GetMapping("/id/card/ocr/veri")
-    public Resp<IdCardOCRVerificationResponse> idCardOCRVeri(IdCardOCRVerificationRequest req) {
+    public Resp<IdCardOCRVerificationResponse> idCardOCRVeri(@RequestBody IdCardOCRVerificationRequest req) {
         return Resp.success(tencentService.idCardOCRVeri(req));
     }
 
