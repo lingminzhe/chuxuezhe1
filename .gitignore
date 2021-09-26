@@ -1,4 +1,29 @@
-/grg-cloud-counter-app/grg-cloud-counter-app-service/target/
-/grg-cloud-counter-app/grg-cloud-counter-app-api/target/
-/grg-cloud-counter-device/grg-cloud-counter-device-api/target/
-/grg-cloud-counter-device/grg-cloud-counter-device-service/target/
+### Java template
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs
+hs_err_pid*
+
+# other more
+.idea/
+target/
+*.iml
