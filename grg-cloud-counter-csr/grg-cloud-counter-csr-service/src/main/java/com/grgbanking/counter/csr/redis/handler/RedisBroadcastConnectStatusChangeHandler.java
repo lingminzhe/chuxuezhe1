@@ -24,7 +24,7 @@ public class RedisBroadcastConnectStatusChangeHandler extends RedisBroadcastAbst
 
     @Override
     public void onMessage(String channel, SocketParam param) {
-        /**给该坐席发送对方的连接状态的变更通知*/
+        /**给该坐席发送对方的连接状态的变更通知，body里直接是终端id，所以直接取出来用*/
         socketService.sendMessage((String)param.getBody(),param);
     }
 }

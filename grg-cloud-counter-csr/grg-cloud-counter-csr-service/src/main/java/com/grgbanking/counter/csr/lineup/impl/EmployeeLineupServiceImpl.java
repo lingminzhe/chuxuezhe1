@@ -18,6 +18,9 @@ import org.springframework.util.StringUtils;
 
 import java.util.Set;
 
+/**
+ * 坐席端关于视频呼叫排队的实现
+ */
 @Slf4j
 @Service
 public class EmployeeLineupServiceImpl extends LineupAbstractService {
