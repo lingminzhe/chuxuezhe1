@@ -1,5 +1,5 @@
 server:
-  port: 8062
+  port: 8063
 spring:
   application:
     name: grg-cloud-counter-csr

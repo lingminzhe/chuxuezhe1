@@ -1,8 +1,8 @@
 server:
-  port: 8062
+  port: 8072
 spring:
   application:
-    name: grg-cloud-counter-app
+    name: grg-cloud-counter-device
   cloud:
     nacos:
       discovery:
