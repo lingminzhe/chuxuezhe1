@@ -43,6 +43,11 @@
             <groupId>com.grgbanking.counter</groupId>
             <artifactId>grg-cloud-counter-common-sentinel</artifactId>
         </dependency>
+        <!--  cache 依赖      -->
+        <dependency>
+            <groupId>com.grgbanking.counter</groupId>
+            <artifactId>grg-cloud-counter-common-cache</artifactId>
+        </dependency>
         <!-- 平台管理api层依赖 -->
         <dependency>
             <groupId>com.grgbanking.counter</groupId>

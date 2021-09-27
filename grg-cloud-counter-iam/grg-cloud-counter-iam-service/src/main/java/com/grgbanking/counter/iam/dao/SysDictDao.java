@@ -1,8 +1,11 @@
 package com.grgbanking.counter.iam.dao;
 
-import com.grgbanking.counter.iam.api.entity.SysDictEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.grgbanking.counter.iam.api.entity.SysDictEntity;
+import com.grgbanking.counter.iam.vo.DictWithItemVo;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * <p>
@@ -15,4 +18,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SysDictDao extends BaseMapper<SysDictEntity> {
 
+    List<DictWithItemVo> getDictAndItem();
 }

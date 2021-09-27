@@ -1,7 +1,11 @@
 package com.grgbanking.counter.iam.service;
 
-import com.grgbanking.counter.iam.api.entity.SysDictEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.grgbanking.counter.common.core.util.PageUtils;
+import com.grgbanking.counter.iam.api.entity.SysDictEntity;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -12,5 +16,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2021-08-31
  */
 public interface SysDictService extends IService<SysDictEntity> {
+    PageUtils queryPage(Map<String, Object> params);
 
+    List<Map<String, Map<String, String>>> listDictWithItem();
 }
