@@ -12,4 +12,6 @@ public class CusAccountDto {
 
     private String accountId;
 
+    @NotNull(message = "业务状态必须提交")
+    private String busiStatus;
 }

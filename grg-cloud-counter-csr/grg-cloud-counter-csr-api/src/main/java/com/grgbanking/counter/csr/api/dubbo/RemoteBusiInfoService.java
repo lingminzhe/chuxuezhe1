@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface RemoteBusiInfoService {
 
-    List<GrgCusBusiInfoEntity> findList(String customerId);
+    List<GrgCusBusiInfoEntity> findList(String customerId,String busiStatus);
 
     GrgCusBusiInfoEntity getOne(String id);
 

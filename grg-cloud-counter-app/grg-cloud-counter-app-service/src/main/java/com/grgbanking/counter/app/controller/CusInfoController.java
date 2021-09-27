@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Api(tags = "个人中心")
@@ -89,8 +90,8 @@ public class CusInfoController {
 
     @ApiOperation("办理业务列表")
     @PostMapping("/business/list")
-    public Resp<List<GrgCusBusiInfoEntity>> getBuinessList(@RequestBody CusAccountDto cusAccountDto) {
-        List<GrgCusBusiInfoEntity> list = remoteBusiInfoService.findList(cusAccountDto.getUserId());
+    public Resp<List<GrgCusBusiInfoEntity>> getBuinessList(@Valid @RequestBody CusAccountDto cusAccountDto) {
+        List<GrgCusBusiInfoEntity> list = remoteBusiInfoService.findList(cusAccountDto.getUserId(),cusAccountDto.getBusiStatus());
         return Resp.success(list);
     }
 

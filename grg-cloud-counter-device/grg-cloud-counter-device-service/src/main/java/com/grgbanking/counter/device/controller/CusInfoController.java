@@ -81,7 +81,7 @@ public class CusInfoController {
     @ApiOperation("办理业务列表")
     @PostMapping("/business/list")
     public Resp<List<GrgCusBusiInfoEntity>> getBuinessList(@RequestBody CusAccountDto cusAccountDto) {
-        List<GrgCusBusiInfoEntity> list = remoteBusiInfoService.findList(cusAccountDto.getUserId());
+        List<GrgCusBusiInfoEntity> list = remoteBusiInfoService.findList(cusAccountDto.getUserId(),cusAccountDto.getBusiStatus());
         return Resp.success(list);
     }
 
