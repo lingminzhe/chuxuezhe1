@@ -41,6 +41,12 @@ public class GlobalExceptionHandlerResolver {
         return Resp.failed(e.getMessage());
     }
 
+    @ExceptionHandler(BizException.class)
+    public Resp handleBizException(BizException e) {
+        log.error("统一异常处理拦截到异常ValidateCodeException");
+        return Resp.failed(e.getMessage());
+    }
+
     @ExceptionHandler(Exception.class)
     public Resp exception(Exception e) {
         log.error("统一异常处理拦截到异常Exception:{}", e.getMessage(), e);

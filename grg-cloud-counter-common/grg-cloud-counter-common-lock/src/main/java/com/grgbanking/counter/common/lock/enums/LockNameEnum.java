@@ -13,17 +13,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum LockNameEnum {
 
-    /**ots加载数据锁*/
-    OTS_REDIS_INIT("ots_redis_init"),
-
-    /**mam抢单加锁*/
-    MAM_ACTION_RESPONSE("mam_action_response"),
-
-    /**mam工单配置读写锁*/
-    MAM_RULE_CFG("mam_rule_cfg"),
-
-    /**mam服务负载均衡处理加锁*/
-    MAM_SERVICE_LB("mam_service_lb");
+    /**检查用户视频呼叫锁*/
+    CHECK_CUSTOMER_VIDEO_APPLY("cusomter_video_apply");
 
     /**其他需要使用锁的地方在此加上锁名字*/
 

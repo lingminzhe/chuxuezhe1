@@ -39,32 +39,44 @@ public class SocketParam<T> implements Serializable {
     private T body;
 
     public static <T> SocketParam<T> success() {
-        return result(null, DateUtil.format(new Date(), DatePattern.NORM_DATETIME_MS_PATTERN), null, null, null, null, CommonConstants.SUCCESS, CommonConstants.SUCCESS_MESSAGE, null);
+        return success(SocketParamHead.success());
+    }
+
+    public static <T> SocketParam<T> success(SocketParamHead head) {
+        return success(head,null);
     }
 
     public static <T> SocketParam<T> success(T body) {
-        return result(null, DateUtil.format(new Date(), DatePattern.NORM_DATETIME_MS_PATTERN), null, null, null, null, CommonConstants.SUCCESS, CommonConstants.SUCCESS_MESSAGE, body);
+        return success(SocketParamHead.success(), body);
+    }
+
+    public static <T> SocketParam<T> success(SocketParamHead head, T body) {
+        return result(head, body);
     }
 
     public static <T> SocketParam<T> failed() {
-        return result(null, DateUtil.format(new Date(), DatePattern.NORM_DATETIME_MS_PATTERN), null, null, null, null, CommonConstants.FAIL, CommonConstants.FAILURE_MESSAGE, null);
+        return failed(SocketParamHead.failed(),null);
     }
 
     public static <T> SocketParam<T> failed(String msg) {
-        return result(null, DateUtil.format(new Date(), DatePattern.NORM_DATETIME_MS_PATTERN), null, null, null, null, CommonConstants.FAIL, msg, null);
+        return failed(CommonConstants.FAIL, msg);
+    }
+
+    public static <T> SocketParam<T> failed(int code,String msg) {
+        return failed(SocketParamHead.failed(code,msg), null);
     }
 
     public static <T> SocketParam<T> failed(T body) {
-        return result(null, DateUtil.format(new Date(), DatePattern.NORM_DATETIME_MS_PATTERN), null, null, null, null, CommonConstants.FAIL, CommonConstants.FAILURE_MESSAGE, body);
+        return failed(SocketParamHead.failed(),body);
     }
 
-    public static <T> SocketParam<T> failed(String apiNo, String tranTime, String bizNo, int code, String msg) {
-        return result(apiNo, tranTime, bizNo, null, null, null, code, msg, null);
+    public static <T> SocketParam<T> failed(SocketParamHead head, T body) {
+        return result(head, body);
     }
 
-    public static <T> SocketParam<T> result(String apiNo, String tranTime, String bizNo, String user_login_type, String user_login_id, String service_session_id, int code, String msg, T body) {
+    private static <T> SocketParam<T> result(SocketParamHead head, T body) {
         SocketParam<T> result = new SocketParam<>();
-        result.setHead(new SocketParamHead(apiNo, tranTime, bizNo, user_login_type, user_login_id, service_session_id, code, msg));
+        result.setHead(head);
         result.setBody(body);
         return result;
     }

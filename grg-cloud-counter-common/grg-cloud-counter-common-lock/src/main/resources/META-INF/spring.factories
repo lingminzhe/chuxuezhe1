@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.grgbanking.counter.common.lock.components.LockTemplate
+  com.grgbanking.counter.common.lock.components.RedisLockTemplate

@@ -15,7 +15,7 @@
         <mysql.connector.version>8.0.23</mysql.connector.version>
         <fastjson.version>1.2.75</fastjson.version>
         <hutool.version>5.7.3</hutool.version>
-        <redisson.version>3.16.1</redisson.version>
+        <redisson.version>3.16.3</redisson.version>
         <knife4j.version>3.0.3</knife4j.version>
         <kaptcha.version>0.0.9</kaptcha.version>
         <jsoup.version>1.14.2</jsoup.version>

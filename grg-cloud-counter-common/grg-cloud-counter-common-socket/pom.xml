@@ -24,6 +24,10 @@
 			<groupId>com.corundumstudio.socketio</groupId>
 			<artifactId>netty-socketio</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.grgbanking.counter</groupId>
+			<artifactId>grg-cloud-counter-common-cache</artifactId>
+		</dependency>
 
 	</dependencies>
 </project>
