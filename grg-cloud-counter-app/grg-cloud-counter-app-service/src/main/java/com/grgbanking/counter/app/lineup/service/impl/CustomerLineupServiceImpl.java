@@ -20,6 +20,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
+/**
+ * 用户端关于视频呼叫排队的实现
+ */
 @Slf4j
 @Service
 public class CustomerLineupServiceImpl extends LineupAbstractService {

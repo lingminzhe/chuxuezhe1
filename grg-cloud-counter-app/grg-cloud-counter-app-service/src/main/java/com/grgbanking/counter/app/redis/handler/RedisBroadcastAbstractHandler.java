@@ -5,7 +5,7 @@ import com.grgbanking.counter.common.socket.broadcast.constant.RedisBroadcastCon
 import com.grgbanking.counter.common.socket.broadcast.handler.RedisBroadcastHandler;
 
 /**
- * 消息分发抽象类，具体到每个消息处理器继承本类
+ * 消息分发抽象类，各个业务消息处理器继承本类
  */
 public abstract class RedisBroadcastAbstractHandler implements RedisBroadcastHandler {
 
