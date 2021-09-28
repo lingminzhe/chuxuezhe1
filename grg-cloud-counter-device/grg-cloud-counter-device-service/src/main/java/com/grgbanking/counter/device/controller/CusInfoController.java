@@ -7,7 +7,7 @@ import com.grgbanking.counter.csr.api.entity.GrgCusBusiOptEntity;
 import com.grgbanking.counter.device.dto.CusAccountDto;
 import com.grgbanking.counter.bank.api.dubbo.RemoteCusInfoService;
 import com.grgbanking.counter.bank.api.entity.GrgCusAccountEntity;
-import com.grgbanking.counter.bank.api.entity.GrgCusInfoEntiry;
+import com.grgbanking.counter.bank.api.entity.GrgCusInfoEntity;
 import com.grgbanking.counter.common.core.util.Resp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,8 +32,8 @@ public class CusInfoController {
 
     @ApiOperation("个人详细")
     @PostMapping("/personal/info")
-    public Resp<GrgCusInfoEntiry> getPersonalInfo(@RequestBody CusAccountDto cusAccountDto) {
-        GrgCusInfoEntiry cusInfo = remoteCusInfoService.findCusInfo(cusAccountDto.getUserId());
+    public Resp<GrgCusInfoEntity> getPersonalInfo(@RequestBody CusAccountDto cusAccountDto) {
+        GrgCusInfoEntity cusInfo = remoteCusInfoService.findCusInfo(cusAccountDto.getUserId());
         if (cusInfo != null){
             return Resp.success(cusInfo);
         }

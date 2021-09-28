@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.grgbanking.counter.bank.api.dubbo.RemoteCusInfoService;
 import com.grgbanking.counter.bank.api.entity.GrgCusAccountEntity;
-import com.grgbanking.counter.bank.api.entity.GrgCusInfoEntiry;
+import com.grgbanking.counter.bank.api.entity.GrgCusInfoEntity;
 import com.grgbanking.counter.bank.entity.GrgAccountEntity;
 import com.grgbanking.counter.bank.entity.GrgCustomerEntity;
 import com.grgbanking.counter.bank.service.GrgAccountService;
@@ -14,7 +14,6 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.sql.Wrapper;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,9 +28,9 @@ public class RemoteCusInfoServiceImpl implements RemoteCusInfoService {
     GrgAccountService grgAccountService;
 
     @Override
-    public GrgCusInfoEntiry findCusInfo(String user_id) {
+    public GrgCusInfoEntity findCusInfo(String user_id) {
         GrgCustomerEntity grgCustomerEntity = grgCustomerService.getById(user_id);
-        GrgCusInfoEntiry grgCusInfoEntiry = new GrgCusInfoEntiry();
+        GrgCusInfoEntity grgCusInfoEntiry = new GrgCusInfoEntity();
         BeanUtils.copyProperties(grgCustomerEntity, grgCusInfoEntiry);
         return grgCusInfoEntiry;
     }
@@ -48,6 +47,18 @@ public class RemoteCusInfoServiceImpl implements RemoteCusInfoService {
             accountEntityList.add(accountEntity);
         });
         return accountEntityList;
+    }
+
+    @Override
+    public GrgCusInfoEntity getByCardNoOrIdNo(String no) {
+        QueryWrapper<GrgCustomerEntity> wrapper = new QueryWrapper<>();
+        wrapper.eq("identifynumber", no).or().eq("phone", no);
+        GrgCustomerEntity grgCustomerEntity = grgCustomerService.getOne(wrapper);
+        GrgCusInfoEntity grgCusInfoEntity = new GrgCusInfoEntity();
+        if (grgCustomerEntity != null){
+            BeanUtils.copyProperties(grgCustomerEntity, grgCusInfoEntity);
+        }
+        return grgCusInfoEntity;
     }
 
     @Override
