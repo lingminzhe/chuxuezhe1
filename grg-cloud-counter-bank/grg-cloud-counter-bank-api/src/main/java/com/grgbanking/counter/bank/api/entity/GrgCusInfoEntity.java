@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class GrgCusInfoEntiry implements Serializable {
+public class GrgCusInfoEntity implements Serializable {
 
     /**
      * 主键

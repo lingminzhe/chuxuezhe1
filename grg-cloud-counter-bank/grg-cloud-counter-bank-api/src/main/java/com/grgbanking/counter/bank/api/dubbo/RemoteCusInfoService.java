@@ -1,17 +1,19 @@
 package com.grgbanking.counter.bank.api.dubbo;
 
 import com.grgbanking.counter.bank.api.entity.GrgCusAccountEntity;
-import com.grgbanking.counter.bank.api.entity.GrgCusInfoEntiry;
+import com.grgbanking.counter.bank.api.entity.GrgCusInfoEntity;
 
 import java.util.List;
 
 public interface RemoteCusInfoService {
 
-    GrgCusInfoEntiry findCusInfo(String userId);
+    GrgCusInfoEntity findCusInfo(String userId);
 
     List<GrgCusAccountEntity> findCusAccountList(String customerId);
 
     GrgCusAccountEntity findCusAccount(String id);
+
+    GrgCusInfoEntity getByCardNoOrIdNo(String no);
 
     boolean saveBankCard(GrgCusAccountEntity account);
 
