@@ -1,5 +1,6 @@
 package com.grgbanking.counter.app.socket;
 
+import com.grgbanking.counter.app.lineup.service.impl.CustomerLineupServiceImpl;
 import com.grgbanking.counter.common.core.util.SocketParam;
 import com.grgbanking.counter.common.socket.lineup.service.LineupService;
 import com.grgbanking.counter.common.socket.socket.service.SocketAbstractService;
@@ -7,14 +8,23 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Slf4j
 @Service
 public class SocketServiceImpl extends SocketAbstractService {
 
+    @Autowired
+    private CustomerLineupServiceImpl lineupService;
 
     @Override
     public void connected(String clientId) {
         log.info("用户终端上线:{}", clientId);
+        Long rank = lineupService.rank(clientId);
+        Map<String, Object> body = new HashMap<>();
+        body.put("rank", rank);
+        sendMessage(clientId,SocketParam.success(body));
     }
 
     @Override
