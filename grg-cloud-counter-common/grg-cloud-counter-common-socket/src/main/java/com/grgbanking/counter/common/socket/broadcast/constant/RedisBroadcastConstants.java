@@ -21,5 +21,9 @@ public class RedisBroadcastConstants {
      */
     public final static String BROADCAST_CHANNEL_APP = BROADCAST_PREFIX.concat("app");
 
+    /**
+     * 发送给DEVICE服务的广播渠道名
+     */
+    public final static String BROADCAST_CHANNEL_DEVICE = BROADCAST_PREFIX.concat("device");
 
 }
