@@ -75,6 +75,11 @@ public interface CacheConstants {
 	 */
 	String CLIENT_FLAG = "client_config_flag";
 
+	/**
+	 * 数据字典默认路径
+	 */
+	String DICT_DEFAULT_KEY = "GRG_COUNTER_DICT:";
+
 
 
 }
