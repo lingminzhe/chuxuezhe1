@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Configuration;
  */
 @Slf4j
 @Configuration
-@ComponentScan({"com.grgbanking.counter.common.socket.socket.config"})
 public class GrgSocketConfig {
 
 	@Autowired
