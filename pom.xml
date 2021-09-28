@@ -149,11 +149,52 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>${spring-boot.version}</version>
+                    <configuration>
+                        <layout>ZIP</layout>
+                        <outputDirectory>target/${project.artifactId}</outputDirectory>
+                        <includes>
+                            <include>
+                                <groupId>non-exists</groupId>
+                                <artifactId>non-exists</artifactId>
+                            </include>
+                        </includes>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                            <configuration>
+                                <attach>false</attach>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!-- 把lib打包到程序jar的外部 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>3.1.2</version>
+                    <executions>
+                        <execution>
+                            <id>copy-dependencies</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>copy-dependencies</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>target/${project.artifactId}/lib</outputDirectory>
+                                <excludeTransitive>false</excludeTransitive>
+                                <stripVersion>false</stripVersion>
+                                <includeScope>runtime</includeScope>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.1.0</version>
                     <configuration>
                         <nonFilteredFileExtensions>
                             <nonFilteredFileExtension>xlsx</nonFilteredFileExtension>
@@ -179,6 +220,18 @@
                                 <overwrite>true</overwrite>
                                 <outputDirectory>target/${project.artifactId}</outputDirectory>
                                 <resources>
+                                    <resource>
+                                        <directory>target/classes/skywalking</directory>
+                                        <includes>
+                                            <include>*</include>
+                                        </includes>
+                                    </resource>
+                                    <resource>
+                                        <directory>src/main/resources/docker</directory>
+                                        <includes>
+                                            <include>**/*</include>
+                                        </includes>
+                                    </resource>
                                     <resource>
                                         <directory>target/classes</directory>
                                         <includes>

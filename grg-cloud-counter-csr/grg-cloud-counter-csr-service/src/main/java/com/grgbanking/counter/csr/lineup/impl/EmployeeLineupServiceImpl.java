@@ -48,7 +48,7 @@ public class EmployeeLineupServiceImpl extends LineupAbstractService {
 
     @Override
     public boolean connectionChanged(String clientId, SocketConnectStatusEnum statusEnum) {
-        String customerId = (String) redisTemplate.opsForHash().get(LineupConstants.EMPLOYEE_ONLINE_VIDEO_KEY, clientId);
+        String customerId = findCustomer(clientId);
         /**
          * 没有正在服务用户，不需要发送警告广播
          */

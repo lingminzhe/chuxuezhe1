@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -69,6 +70,23 @@ public abstract class LineupAbstractService implements LineupService {
         SocketParam param = SocketParam.success(head, employeeId);
         /**给坐席服务发送提醒广播*/
         broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, param);
+    }
+
+    @Override
+    public String findEmployee(String clientId) {
+        Cursor<Map.Entry<String, String>> result = redisTemplate.opsForHash().scan(LineupConstants.EMPLOYEE_ONLINE_VIDEO_KEY, ScanOptions.NONE);
+        while (result.hasNext()) {
+            Map.Entry<String, String> entry = result.next();
+            if (clientId.equals(entry.getValue())) {
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public String findCustomer(String clientId) {
+        return (String)redisTemplate.opsForHash().get(LineupConstants.EMPLOYEE_ONLINE_VIDEO_KEY,clientId);
     }
 
 
