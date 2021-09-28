@@ -31,7 +31,7 @@ public class GrgFileManagerEntity implements Serializable {
 	/**
 	 * 文件类型
 	 */
-	private String fileType;
+	private String fileBusiType;
 	/**
 	 * 文件ID
 	 */

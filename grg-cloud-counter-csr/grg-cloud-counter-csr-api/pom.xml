@@ -3,13 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
+
     <parent>
         <groupId>com.grgbanking.counter</groupId>
         <artifactId>grg-cloud-counter-csr</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    
+
     <artifactId>grg-cloud-counter-csr-api</artifactId>
     <packaging>jar</packaging>
     <description>坐席服务对外接口</description>
@@ -19,6 +19,11 @@
         <dependency>
             <groupId>com.grgbanking.counter</groupId>
             <artifactId>grg-cloud-counter-common-swagger</artifactId>
+        </dependency>
+        <!--mybatis -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
     </dependencies>
 </project>
