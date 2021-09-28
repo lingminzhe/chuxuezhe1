@@ -20,5 +20,11 @@
             <groupId>com.grgbanking.counter</groupId>
             <artifactId>grg-cloud-counter-common-swagger</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.grgbanking.counter</groupId>
+            <artifactId>grg-cloud-counter-csr-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>
