@@ -61,25 +61,6 @@ public class EmployeeLineupServiceImpl extends LineupAbstractService {
     }
 
     /**
-     * 接受用户的视频呼叫
-     *
-     * @param clientId
-     * @return
-     */
-    public String accept(String clientId) {
-        Set<String> set = redisTemplate.opsForZSet().range(LineupConstants.CUSTOMER_VIDEO_QUEUE_KEY, 0, 0);
-        if (CollectionUtils.isEmpty(set)) {
-            log.info("暂无排队的用户");
-            return null;
-        }
-        String customerId = set.stream().findFirst().get();
-        redisTemplate.opsForZSet().remove(LineupConstants.CUSTOMER_VIDEO_QUEUE_KEY, customerId);
-        /**把该坐席与取出的用户进行绑定，代表该坐席接受了该用户的视频呼叫*/
-        redisTemplate.opsForHash().put(LineupConstants.EMPLOYEE_ONLINE_VIDEO_KEY, clientId, customerId);
-        return customerId;
-    }
-
-    /**
      * 登出
      *
      * @param clientId
