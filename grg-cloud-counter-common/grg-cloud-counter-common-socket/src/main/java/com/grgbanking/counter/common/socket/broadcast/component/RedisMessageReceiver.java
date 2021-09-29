@@ -42,7 +42,7 @@ public class RedisMessageReceiver implements MessageListener, ApplicationContext
     public void onMessage(Message message, byte[] bytes) {
         SocketParam param = (SocketParam) redisTemplate.getValueSerializer().deserialize(message.getBody());
         String channel = new String(message.getChannel());
-        String apiNo = param.getHead().getApi_no();
+        String apiNo = param.getHead().getApiNo();
         log.debug("接收到广播消息，channel:{},apiNo:{}", channel, apiNo);
         if (!StringUtils.hasText(apiNo)) {
             log.info("apiNo为空，将把广播消息转发到默认接收器");

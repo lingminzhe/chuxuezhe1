@@ -95,7 +95,7 @@ public class SocketServer implements ApplicationContextAware {
         });
         socketServer.addEventListener(SocketAbstractService.PUSH_EVENT_NAME, SocketParam.class, (client, param, ackRequest) -> {
             client.getHandshakeData();
-            String apiNo = param.getHead().getApi_no();
+            String apiNo = param.getHead().getApiNo();
             log.info("socket接收到消息，apiNo：{},消息：{}", apiNo, param);
             if (CollectionUtils.isEmpty(handlers) || !StringUtils.hasText(apiNo)) {
                 log.error("接收到Socket消息，但无接收器处理或者无业务编号，将把消息转发到默认的onMessage方法");

@@ -29,8 +29,13 @@ public class SocketController {
         //...
 
         /**删除与坐席的关系*/
-        lineupService.finish(clientId);
-        return Resp.success("结束视频成功");
+        try {
+            lineupService.finish(clientId);
+            return Resp.success("结束视频成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Resp.failed("不在等待队列中");
+        }
     }
 
 }
