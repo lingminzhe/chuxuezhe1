@@ -35,10 +35,6 @@ public class SocketApiNoConstants {
      */
     public static final String FACE_RECOGNITION = "face_recognition";
 
-    /**
-     * 视频呼叫
-     */
-    public static final String BUSI_NO = "busi_no";
 
 
 }
