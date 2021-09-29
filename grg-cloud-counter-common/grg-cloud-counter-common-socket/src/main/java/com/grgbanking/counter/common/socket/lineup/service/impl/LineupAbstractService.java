@@ -76,8 +76,8 @@ public abstract class LineupAbstractService implements LineupService {
 
         SocketParamHead head = SocketParamHead.success(SocketApiNoConstants.VIDEO_CMD, CommonConstants.SUCCESS, "有用户申请视频协助");
         EmployeeService employeeService = new EmployeeService();
-        employeeService.setEmployeeId(employeeId);
-        employeeService.setCustomerId(customerId);
+        employeeService.setEmployee_id(employeeId);
+        employeeService.setCustomer_id(customerId);
         /**body只放坐席客户端id*/
         SocketParam<EmployeeService> param = SocketParam.success(head, employeeService);
         /**给APP服务发送提醒广播*/
