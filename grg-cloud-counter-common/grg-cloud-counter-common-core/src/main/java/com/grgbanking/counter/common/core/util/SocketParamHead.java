@@ -13,11 +13,11 @@ import java.util.Date;
 @Data
 public class SocketParamHead implements Serializable {
 
-    private String apiNo;
+    private String api_no;
 
-    private String tranTime;
+    private String tran_time;
 
-    private String bizNo;
+    private String biz_no;
 
     private int code = CommonConstants.SUCCESS;
 
@@ -71,9 +71,9 @@ public class SocketParamHead implements Serializable {
 
     private static SocketParamHead result(String apiNo, String tranTime, String bizNo, int code, String msg) {
         SocketParamHead head = new SocketParamHead();
-        head.setApiNo(apiNo);
-        head.setBizNo(bizNo);
-        head.setTranTime(tranTime);
+        head.setApi_no(apiNo);
+        head.setBiz_no(bizNo);
+        head.setTran_time(tranTime);
         head.setCode(code);
         head.setMsg(msg);
         return head;
