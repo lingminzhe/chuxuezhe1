@@ -24,7 +24,7 @@ public class GrgCusInfoController {
     @DubboReference
     RemoteCusInfoService remoteCusInfoService;
 
-    @ApiOperation("通过证件照或手机号查询用户信息")
+    @ApiOperation("通过证件号码或手机号查询用户信息")
     @GetMapping("/get/{no}")
     public Resp<GrgCusInfoEntity> getPersonalInfo(@PathVariable String no) {
         GrgCusInfoEntity grgCusInfoEntity = remoteCusInfoService.getByCardNoOrIdNo(no);

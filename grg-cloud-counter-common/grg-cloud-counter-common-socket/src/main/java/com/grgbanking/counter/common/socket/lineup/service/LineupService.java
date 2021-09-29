@@ -44,4 +44,17 @@ public interface LineupService {
      */
     boolean connectionChanged(String clientId, SocketConnectStatusEnum statusEnum);
 
+    /**
+     * 找出服务我的坐席
+     * @param clientId  用户id
+     * @return
+     */
+    String findEmployee(String clientId);
+
+    /**
+     * 找出我服务的用户
+     * @param clientId  坐席id
+     * @return
+     */
+    String findCustomer(String clientId);
 }

@@ -2,7 +2,11 @@ package com.grgbanking.counter.app.socket;
 
 import com.grgbanking.counter.app.lineup.service.impl.CustomerLineupServiceImpl;
 import com.grgbanking.counter.common.core.util.SocketParam;
+import com.grgbanking.counter.common.socket.broadcast.constant.RedisBroadcastConstants;
+import com.grgbanking.counter.common.socket.broadcast.service.RedisBroadcastService;
 import com.grgbanking.counter.common.socket.lineup.service.LineupService;
+import com.grgbanking.counter.common.socket.lineup.service.impl.LineupAbstractService;
+import com.grgbanking.counter.common.socket.socket.constant.SocketApiNoConstants;
 import com.grgbanking.counter.common.socket.socket.service.SocketAbstractService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,9 @@ public class SocketServiceImpl extends SocketAbstractService {
 
     @Autowired
     private CustomerLineupServiceImpl lineupService;
+
+    @Autowired
+    private RedisBroadcastService redisBroadcastService;
 
     @Override
     public void connected(String clientId) {
@@ -41,6 +48,13 @@ public class SocketServiceImpl extends SocketAbstractService {
      */
     @Override
     public boolean onMessage(String clientId, SocketParam param) {
+        String apiNo = param.getHead().getApi_no();
+        if (apiNo.equals(SocketApiNoConstants.VIDEO_CMD)){
+            param.getHead().setApi_no(SocketApiNoConstants.BUSI_NO);
+            String employeeId = lineupService.findEmployee(clientId);
+            param.getHead().setMsg(employeeId);
+            redisBroadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR,param);
+        }
         log.info("接收到默认无人处理的消息,ClientId:{},消息：{}", clientId, param);
         return false;
     }
