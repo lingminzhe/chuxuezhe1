@@ -4,6 +4,7 @@ import com.grgbanking.counter.common.core.util.Resp;
 import com.grgbanking.counter.common.socket.lineup.service.LineupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +23,7 @@ public class SocketController {
      * @param clientId  用户端的id
      * @return
      */
-    @GetMapping("finish")
+    @PostMapping("finish")
     public Resp finish(String clientId){
         // TODO 端开视频
         //...
