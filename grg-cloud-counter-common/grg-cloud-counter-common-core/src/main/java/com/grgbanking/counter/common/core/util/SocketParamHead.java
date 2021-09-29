@@ -13,6 +13,8 @@ import java.util.Date;
 @Data
 public class SocketParamHead implements Serializable {
 
+    private String clientId;
+
     private String api_no;
 
     private String tran_time;

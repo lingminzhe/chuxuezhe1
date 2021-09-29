@@ -43,7 +43,7 @@ public class SocketParam<T> implements Serializable {
     }
 
     public static <T> SocketParam<T> success(SocketParamHead head) {
-        return success(head,null);
+        return success(head, null);
     }
 
     public static <T> SocketParam<T> success(T body) {
@@ -55,19 +55,19 @@ public class SocketParam<T> implements Serializable {
     }
 
     public static <T> SocketParam<T> failed() {
-        return failed(SocketParamHead.failed(),null);
+        return failed(SocketParamHead.failed(), null);
     }
 
     public static <T> SocketParam<T> failed(String msg) {
         return failed(CommonConstants.FAIL, msg);
     }
 
-    public static <T> SocketParam<T> failed(int code,String msg) {
-        return failed(SocketParamHead.failed(code,msg), null);
+    public static <T> SocketParam<T> failed(int code, String msg) {
+        return failed(SocketParamHead.failed(code, msg), null);
     }
 
     public static <T> SocketParam<T> failed(T body) {
-        return failed(SocketParamHead.failed(),body);
+        return failed(SocketParamHead.failed(), body);
     }
 
     public static <T> SocketParam<T> failed(SocketParamHead head, T body) {
