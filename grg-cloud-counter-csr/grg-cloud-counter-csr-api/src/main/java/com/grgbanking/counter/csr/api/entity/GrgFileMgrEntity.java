@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 @Data
 @TableName("grg_file_manager")
-public class GrgCusFileMgrEntity implements Serializable {
+public class GrgFileMgrEntity implements Serializable {
     /**
      * 主键
      */

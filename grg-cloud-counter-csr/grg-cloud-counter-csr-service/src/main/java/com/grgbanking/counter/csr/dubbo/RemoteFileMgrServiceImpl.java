@@ -2,7 +2,7 @@ package com.grgbanking.counter.csr.dubbo;
 
 
 import com.grgbanking.counter.csr.api.dubbo.RemoteFileMgrService;
-import com.grgbanking.counter.csr.api.entity.GrgCusFileMgrEntity;
+import com.grgbanking.counter.csr.api.entity.GrgFileMgrEntity;
 import com.grgbanking.counter.csr.entity.GrgFileManagerEntity;
 import com.grgbanking.counter.csr.service.GrgFileManagerService;
 import org.apache.dubbo.config.annotation.DubboService;
@@ -15,9 +15,9 @@ public class RemoteFileMgrServiceImpl implements RemoteFileMgrService {
     private GrgFileManagerService grgFileManagerService;
 
     @Override
-    public void save(GrgCusFileMgrEntity grgCusFileMgrEntity) {
+    public void save(GrgFileMgrEntity grgFileMgrEntity) {
         GrgFileManagerEntity grgFileManagerEntity = new GrgFileManagerEntity();
-        BeanUtils.copyProperties(grgCusFileMgrEntity,grgFileManagerEntity);
+        BeanUtils.copyProperties(grgFileMgrEntity,grgFileManagerEntity);
         grgFileManagerService.save(grgFileManagerEntity);
     }
 }
