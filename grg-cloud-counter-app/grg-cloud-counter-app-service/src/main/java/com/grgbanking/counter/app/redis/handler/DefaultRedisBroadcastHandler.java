@@ -34,6 +34,7 @@ public class DefaultRedisBroadcastHandler extends RedisBroadcastAbstractHandler 
      */
     @Override
     public void onMessage(String channel, SocketParam param) {
+        log.info("默认处理器 收到的报文{}", param);
         String clientId = param.getHead().getClientId();
         param.getHead().setClientId(null);
         socketService.sendMessage(clientId,param);

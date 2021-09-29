@@ -51,15 +51,16 @@ public class CustomerLineupServiceImpl extends LineupAbstractService {
         }
         String employeeId = lineupService.findEmployee(clientId);
         if (StringUtils.isNotBlank(employeeId)){
-            SocketParam param = new SocketParam<>();
-            param.getHead().setApiNo(SocketApiNoConstants.VIDEO_CMD);
-            param.getHead().setMsg("当前已有分配坐席");
             EmployeeService employeeService = new EmployeeService();
             employeeService.setEmployee_id(employeeId);
             employeeService.setCustomer_id(clientId);
             employeeService.setUser_sig(tencentService.getUserSig(clientId));
+            SocketParam param = SocketParam.success();
+            param.getHead().setApiNo(SocketApiNoConstants.VIDEO_CMD);
+            param.getHead().setMsg("当前已有分配坐席");
             param.setBody(employeeService);
             broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_APP, param);
+            return;
         }
         redisTemplate.opsForZSet().addIfAbsent(LineupConstants.CUSTOMER_VIDEO_QUEUE_KEY, clientId, 1);
     }
