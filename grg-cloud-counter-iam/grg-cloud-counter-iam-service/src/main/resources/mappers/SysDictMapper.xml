@@ -19,6 +19,7 @@
     <sql id="Base_Column_List" >
         dict_id, type, description, create_time, update_time, remarks, system, enabled
     </sql>
+
     <select id="getDictAndItem" resultType="com.grgbanking.counter.iam.vo.DictWithItemVo">
         select dict.*,item.* from sys_dict dict,sys_dict_item item where dict.dict_id=item.dict_id
     </select>

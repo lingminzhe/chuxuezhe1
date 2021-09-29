@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -58,33 +57,77 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictDao, SysDictEntity> i
     @Override
     public List<Map<String, Map<String, String>>> listDictWithItem() {
 
-        List<DictWithItemVo> dictAndItem = dictDao.getDictAndItem();
-        List<Map<String, Map<String, String>>> collect = dictAndItem.stream().map((dictWithItemVo) -> {
-//                一级key为grgbanking.counter.dict
-//                二级key 为type  value 为 (value,label)
-//                Object codeObj = redisTemplate.opsForValue().get(CacheConstants.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + StringPool.AT + mobile);
+        Object codeObj = redisTemplate.opsForValue().get(CacheConstants.DICT_DEFAULT_KEY );
+        if (codeObj != null) {
+//            log.info("字典缓存已存在:{}，{}", "dict", codeObj);
+            log.info("字典缓存已存在");
+            return (List<Map<String, Map<String, String>>>) codeObj;
+        }
+        //将dict写入缓存中
+        saveDictInRedis();
+        Object obj = redisTemplate.opsForValue().get(CacheConstants.DICT_DEFAULT_KEY );
 
+        return (List<Map<String, Map<String, String>>>) obj;
+    }
+
+    @Override
+    public boolean saveDictAndItem(SysDictEntity sysDict) {
+        boolean save = false;
+        if (sysDict!=null) {
+            save = this.save(sysDict);
+            //更新redis
+            saveDictInRedis();
+        }
+        return save;
+
+    }
+
+    @Override
+    public List<DictWithItemVo> getDictByType(SysDictEntity sysDict) {
+        if (sysDict.getType()!=null) {
+            List<DictWithItemVo> dictAndItem = dictDao.getDictAndItem();
+            List<DictWithItemVo> collect = dictAndItem.stream().filter(dict ->
+                    dict.getType().equals(sysDict.getType())
+            ).collect(Collectors.toList());
+            return collect;
+        }
+        else{
+            return null;
+        }
+
+    }
+
+    @Override
+    public void removeDictById(List<Long> asList) {
+        //TODO 字典可能绑定了其他字段 需判断
+        baseMapper.deleteBatchIds(asList);
+        saveDictInRedis();
+    }
+
+    @Override
+    public int updateDictById(SysDictEntity sysDict) {
+        int update = baseMapper.update(sysDict, null);
+        if (update==1) {
+            saveDictInRedis();
+        }
+        return update;
+    }
+
+    public void saveDictInRedis(){
+        //获取根据type字段保存字典信息
+        List<DictWithItemVo> dictAndItem = dictDao.getDictAndItem();
+        //1级list
+        List<Map<String, Map<String, String>>> collect = dictAndItem.stream().map((dictWithItemVo) -> {
+            //二级map
             Map<String, Map<String, String>> dictItemMap = new HashMap<>();
+            //三级map
             Map<String, String> valueLabel = new HashMap<>();
             valueLabel.put(dictWithItemVo.getValue(), dictWithItemVo.getLabel());
             dictItemMap.put(dictWithItemVo.getType(), valueLabel);
 
             return dictItemMap;
         }).collect(Collectors.toList());
-
-        Object codeObj = redisTemplate.opsForValue().get(CacheConstants.DICT_DEFAULT_KEY );
-        if (codeObj != null) {
-            log.info("字典缓存已存在:{}，{}", "dict", codeObj);
-            //TODO 清理缓存 再更新
-//            return Resp.success(Boolean.FALSE, "验证码发送过频繁");
-            return collect;
-        }
-
-        redisTemplate.opsForValue().set(CacheConstants.DICT_DEFAULT_KEY, collect, 24*60*60 , TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(CacheConstants.DICT_DEFAULT_KEY, collect);
         log.info("字典存入缓存成功");
-
-
-
-        return collect;
     }
 }
