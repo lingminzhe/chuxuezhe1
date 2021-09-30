@@ -32,11 +32,6 @@ public interface LineupService {
     void check();
 
     /**
-     * 提醒有人在排队
-     */
-    void remind();
-
-    /**
      * 连接状态发生变化
      *
      * @param clientId

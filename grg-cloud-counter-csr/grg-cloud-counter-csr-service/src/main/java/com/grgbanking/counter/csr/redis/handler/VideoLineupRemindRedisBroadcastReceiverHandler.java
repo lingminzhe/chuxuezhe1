@@ -6,20 +6,21 @@ import com.grgbanking.counter.common.lock.enums.LockNameEnum;
 import com.grgbanking.counter.common.socket.lineup.service.LineupService;
 import com.grgbanking.counter.common.socket.socket.constant.SocketApiNoConstants;
 import com.grgbanking.counter.common.socket.socket.service.SocketAbstractService;
+import com.grgbanking.counter.csr.lineup.impl.EmployeeLineupServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 视频通话结束，通知检查是否还有用户正在视频呼叫排队
+ * 检查是否有用户正在视频呼叫排队
  */
 @Slf4j
 @Component
 public class VideoLineupRemindRedisBroadcastReceiverHandler extends RedisBroadcastAbstractHandler {
 
     @Autowired
-    private LineupService lineupService;
+    private EmployeeLineupServiceImpl lineupService;
 
     @Autowired
     private RedisLockTemplate redisLockTemplate;
