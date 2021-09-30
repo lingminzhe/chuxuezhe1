@@ -2,7 +2,7 @@ package com.grgbanking.counter.app.controller;
 
 import com.grgbanking.counter.common.core.util.FileUtil;
 import com.grgbanking.counter.common.core.util.Resp;
-import com.grgbanking.counter.csr.api.entity.GrgCusFileMgrEntity;
+import com.grgbanking.counter.csr.api.entity.GrgFileMgrEntity;
 import com.grgbanking.counter.oss.api.dubbo.RemoteOssService;
 import lombok.SneakyThrows;
 import org.apache.commons.io.IOUtils;
@@ -28,13 +28,13 @@ public class OssController {
      */
     @SneakyThrows
     @PostMapping("/file/upload")
-    public Resp upload(@RequestBody MultipartFile file, GrgCusFileMgrEntity grgCusFileMgrEntity) {
+    public Resp upload(@RequestBody MultipartFile file, GrgFileMgrEntity grgFileMgrEntity, String createUser) {
         byte[] fileByte = IOUtils.toByteArray(file.getInputStream());
         String md5 = FileUtil.getFileMd5(file);
         String original = file.getOriginalFilename();
         long size = file.getSize();
         String contentType = file.getContentType();
-        return Resp.success(remoteOssService.upload(fileByte, md5, original, size, contentType, grgCusFileMgrEntity));
+        return Resp.success(remoteOssService.upload(fileByte, md5, original, size, contentType, grgFileMgrEntity,createUser));
     }
 
 }

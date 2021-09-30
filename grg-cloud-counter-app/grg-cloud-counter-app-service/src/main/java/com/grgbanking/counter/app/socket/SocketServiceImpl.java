@@ -48,13 +48,11 @@ public class SocketServiceImpl extends SocketAbstractService {
      */
     @Override
     public boolean onMessage(String clientId, SocketParam param) {
-        String apiNo = param.getHead().getApi_no();
-        if (apiNo.equals(SocketApiNoConstants.VIDEO_CMD)){
-            param.getHead().setApi_no(SocketApiNoConstants.BUSI_NO);
-            String employeeId = lineupService.findEmployee(clientId);
-            param.getHead().setMsg(employeeId);
-            redisBroadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR,param);
-        }
+        String employeeId = lineupService.findEmployee(clientId);
+        /**把自己的clientId传给对方服务*/
+        param.getHead().setClientId(employeeId);
+        param.getHead().setMsg(employeeId);
+        redisBroadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, param);
         log.info("接收到默认无人处理的消息,ClientId:{},消息：{}", clientId, param);
         return false;
     }

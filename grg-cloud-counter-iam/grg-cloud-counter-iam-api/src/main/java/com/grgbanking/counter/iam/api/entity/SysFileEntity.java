@@ -1,16 +1,15 @@
 package com.grgbanking.counter.iam.api.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.baomidou.mybatisplus.annotation.Version;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -40,11 +39,14 @@ public class SysFileEntity extends Model<SysFileEntity> {
     @TableField("bucket_name")
     private String bucketName;
 
-    @TableField("original")
-    private String original;
+    @TableField("original_name")
+    private String originalName;
 
-    @TableField("type")
-    private String type;
+    @TableField("file_type")
+    private String fileType;
+
+    @TableField("file_md5")
+    private String fileMd5;
 
     /**
      * 文件大小

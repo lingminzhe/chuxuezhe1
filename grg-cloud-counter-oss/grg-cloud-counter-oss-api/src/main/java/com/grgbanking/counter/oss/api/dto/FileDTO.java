@@ -3,24 +3,38 @@ package com.grgbanking.counter.oss.api.dto;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Data
 public class FileDTO implements Serializable {
 
     private static final long serialVersionUID = -3275256067334372054L;
 
-    String original;
+    private String originalName;
 
-    String fileName;
+    private String fileName;
 
-    String md5;
+    private String fileMd5;
 
-    long size;
+    private long fileSize;
 
-    String contentType;
+    private String fileType;
 
-    String url;
+    private String url;
 
-    String userId;
+    private String userId;
 
+    private String bucketName;
+
+    private String enable;
+
+    private String createUser;
+
+    private LocalDateTime createTime;
+
+    private String updateUser;
+
+    private LocalDateTime updateTime;
+
+    private Integer enabled;
 }

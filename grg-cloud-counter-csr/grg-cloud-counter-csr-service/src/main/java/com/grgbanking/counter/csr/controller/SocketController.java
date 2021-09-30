@@ -7,6 +7,7 @@ import com.grgbanking.counter.csr.service.TencentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,7 +30,7 @@ public class SocketController {
      * @param clientId 坐席id
      * @return
      */
-    @GetMapping("accept")
+    @PostMapping("accept")
     public Resp accept(String clientId) {
         String customerId = lineupService.accept(clientId);
         if (!StringUtils.hasText(customerId)) {
@@ -45,7 +46,7 @@ public class SocketController {
      * @param clientId
      * @return
      */
-    @GetMapping("finish")
+    @PostMapping("finish")
     public Resp finish(String clientId) {
         lineupService.finish(clientId);
         return Resp.success("结束视频成功");
@@ -56,7 +57,7 @@ public class SocketController {
      * @param clientId
      * @return
      */
-    @GetMapping("logout")
+    @PostMapping("logout")
     public Resp logout(String clientId){
         lineupService.logout(clientId);
         return Resp.success("退出坐席视频服务成功");

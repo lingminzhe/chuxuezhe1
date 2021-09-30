@@ -1,21 +1,9 @@
 package com.grgbanking.counter.common.socket.socket.server;
 
-import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
-import com.corundumstudio.socketio.annotation.OnConnect;
-import com.corundumstudio.socketio.annotation.OnDisconnect;
-import com.corundumstudio.socketio.annotation.OnEvent;
-import com.corundumstudio.socketio.listener.ConnectListener;
-import com.corundumstudio.socketio.listener.DataListener;
-import com.corundumstudio.socketio.listener.DisconnectListener;
-import com.corundumstudio.socketio.store.MemoryStore;
 import com.grgbanking.counter.common.core.util.SocketParam;
-import com.grgbanking.counter.common.core.util.SocketParamHead;
-import com.grgbanking.counter.common.socket.broadcast.constant.RedisBroadcastConstants;
-import com.grgbanking.counter.common.socket.broadcast.service.RedisBroadcastService;
 import com.grgbanking.counter.common.socket.lineup.service.LineupService;
-import com.grgbanking.counter.common.socket.socket.constant.SocketApiNoConstants;
 import com.grgbanking.counter.common.socket.socket.constant.SocketConnectStatusEnum;
 import com.grgbanking.counter.common.socket.socket.handler.SocketMessageHandler;
 import com.grgbanking.counter.common.socket.socket.service.SocketAbstractService;
@@ -26,7 +14,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -95,7 +82,7 @@ public class SocketServer implements ApplicationContextAware {
         });
         socketServer.addEventListener(SocketAbstractService.PUSH_EVENT_NAME, SocketParam.class, (client, param, ackRequest) -> {
             client.getHandshakeData();
-            String apiNo = param.getHead().getApi_no();
+            String apiNo = param.getHead().getApiNo();
             log.info("socket接收到消息，apiNo：{},消息：{}", apiNo, param);
             if (CollectionUtils.isEmpty(handlers) || !StringUtils.hasText(apiNo)) {
                 log.error("接收到Socket消息，但无接收器处理或者无业务编号，将把消息转发到默认的onMessage方法");

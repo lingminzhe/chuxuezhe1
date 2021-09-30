@@ -4,7 +4,7 @@ import com.amazonaws.util.IOUtils;
 import com.grgbanking.counter.common.core.util.FileUtil;
 import com.grgbanking.counter.common.core.util.Resp;
 import com.grgbanking.counter.common.data.annotation.MultiRequestBody;
-import com.grgbanking.counter.csr.api.entity.GrgCusFileMgrEntity;
+import com.grgbanking.counter.csr.api.entity.GrgFileMgrEntity;
 import com.grgbanking.counter.oss.service.OssService;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
@@ -30,13 +30,13 @@ public class OssController {
      */
     @SneakyThrows
     @PostMapping("/upload")
-    public Resp upload( MultipartFile file, GrgCusFileMgrEntity grgCusFileMgrEntity) {
+    public Resp upload(MultipartFile file, GrgFileMgrEntity grgFileMgrEntity, String createUser) {
         byte[] fileByte = IOUtils.toByteArray(file.getInputStream());
         String md5 = FileUtil.getFileMd5(file);
         String original = file.getOriginalFilename();
         long size = file.getSize();
         String contentType = file.getContentType();
-        return Resp.success(ossService.upload(fileByte, md5, original, size, contentType, grgCusFileMgrEntity));
+        return Resp.success(ossService.upload(fileByte, md5, original, size, contentType, grgFileMgrEntity,createUser));
     }
 
     /**

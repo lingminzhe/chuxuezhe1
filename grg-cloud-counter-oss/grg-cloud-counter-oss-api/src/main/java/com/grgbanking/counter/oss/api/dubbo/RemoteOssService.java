@@ -1,6 +1,6 @@
 package com.grgbanking.counter.oss.api.dubbo;
 
-import com.grgbanking.counter.csr.api.entity.GrgCusFileMgrEntity;
+import com.grgbanking.counter.csr.api.entity.GrgFileMgrEntity;
 import com.grgbanking.counter.oss.api.dto.FileDTO;
 
 public interface RemoteOssService {
@@ -10,6 +10,6 @@ public interface RemoteOssService {
      *
      * @return
      */
-    FileDTO upload(byte[] fileByte, String md5, String original, long size, String contentType, GrgCusFileMgrEntity grgCusFileMgrEntity);
+    FileDTO upload(byte[] fileByte, String md5, String original, long size, String contentType, GrgFileMgrEntity grgFileMgrEntity, String createUser);
 
 }

@@ -1,6 +1,6 @@
 package com.grgbanking.counter.common.socket.broadcast.config;
 
-import com.grgbanking.counter.common.socket.broadcast.component.RedisMessageReceiver;
+import com.grgbanking.counter.common.socket.broadcast.component.RedisBroadcastMessageReceiver;
 import com.grgbanking.counter.common.socket.broadcast.handler.RedisBroadcastHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
@@ -27,7 +27,7 @@ import java.util.Set;
 public class RedisBroadcastConfig implements ApplicationContextAware {
 
     @Autowired
-    private RedisMessageReceiver redisMessageReceiver;
+    private RedisBroadcastMessageReceiver redisBroadcastMessageReceiver;
 
     private Set<String> channels = new HashSet<>();
 
@@ -41,7 +41,7 @@ public class RedisBroadcastConfig implements ApplicationContextAware {
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(redisConnectionFactory);
         channels.forEach(channel -> {
-            container.addMessageListener(redisMessageReceiver, new PatternTopic(channel));
+            container.addMessageListener(redisBroadcastMessageReceiver, new PatternTopic(channel));
         });
         return container;
     }

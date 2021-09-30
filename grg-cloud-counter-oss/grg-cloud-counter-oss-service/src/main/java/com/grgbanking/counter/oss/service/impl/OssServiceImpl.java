@@ -11,7 +11,8 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.grgbanking.counter.common.core.util.FileUtil;
 import com.grgbanking.counter.csr.api.dubbo.RemoteFileMgrService;
-import com.grgbanking.counter.csr.api.entity.GrgCusFileMgrEntity;
+import com.grgbanking.counter.csr.api.entity.GrgFileMgrEntity;
+import com.grgbanking.counter.iam.api.dubbo.RemoteSysFileService;
 import com.grgbanking.counter.oss.api.dto.FileDTO;
 import com.grgbanking.counter.oss.config.OssProperties;
 import com.grgbanking.counter.oss.service.OssService;
@@ -31,6 +32,9 @@ public class OssServiceImpl implements OssService {
     @DubboReference
     RemoteFileMgrService remoteFileMgrService;
 
+    @DubboReference
+    RemoteSysFileService remoteSysFileService;
+
     @Autowired
     private OssProperties ossProperties;
 
@@ -38,15 +42,14 @@ public class OssServiceImpl implements OssService {
 
     // TODO 同时保存相关信息到数据库
     @Override
-    public FileDTO upload(byte[] fileByte,String md5, String original, long size, String contentType,GrgCusFileMgrEntity grgCusFileMgrEntity) {
+    public FileDTO upload(byte[] fileByte, String md5, String original, long size, String contentType, GrgFileMgrEntity grgFileMgrEntity, String createUser) {
         FileDTO fileDTO = new FileDTO();
         String fileName = FileUtil.randomFileName();
-        String fileSize = FileUtil.getPrintSize(size);
-        fileDTO.setOriginal(original);
-        fileDTO.setMd5(fileName);
+        fileDTO.setOriginalName(original);
+        fileDTO.setFileMd5(md5);
         fileDTO.setFileName(fileName);
-        fileDTO.setSize(size);
-        fileDTO.setContentType(contentType);
+        fileDTO.setFileSize(size);
+        fileDTO.setFileType(contentType);
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setContentLength(size);
         objectMetadata.setContentType(contentType);
@@ -56,7 +59,11 @@ public class OssServiceImpl implements OssService {
         calendar.add(Calendar.DAY_OF_MONTH, 7); // url有效期最多7天
         String url = amazonS3.generatePresignedUrl(ossProperties.getBucketName(), fileName, calendar.getTime()).toString();
         fileDTO.setUrl(url);
-        remoteFileMgrService.save(grgCusFileMgrEntity);
+        fileDTO.setEnable("1");
+        fileDTO.setBucketName(ossProperties.getBucketName());
+        fileDTO.setCreateUser(createUser);
+        remoteFileMgrService.save(grgFileMgrEntity);
+        remoteSysFileService.save(fileDTO);
         return fileDTO;
     }
 
