@@ -20,11 +20,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 接收Redis广播消息
+ * 接收Redis广播消息分发处理
  */
 @Slf4j
 @Component
-public class RedisMessageReceiver implements MessageListener, ApplicationContextAware {
+public class RedisBroadcastMessageReceiver implements MessageListener, ApplicationContextAware {
 
     @Autowired
     private RedisTemplate redisTemplate;

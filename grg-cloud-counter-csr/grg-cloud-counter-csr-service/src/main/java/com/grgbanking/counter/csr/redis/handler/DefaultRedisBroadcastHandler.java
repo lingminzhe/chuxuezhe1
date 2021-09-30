@@ -22,6 +22,11 @@ public class DefaultRedisBroadcastHandler extends RedisBroadcastAbstractHandler 
         return SocketApiNoConstants.DEFAULT_HANDLER_NAME;
     }
 
+    /**
+     * 默认直接透传给坐席终端
+     * @param channel
+     * @param param
+     */
     @Override
     public void onMessage(String channel, SocketParam param) {
         String clientId = param.getHead().getClientId();

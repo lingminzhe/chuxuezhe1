@@ -2,7 +2,7 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.grgbanking.counter.common.socket.socket.config.GrgSocketConfig,\
   com.grgbanking.counter.common.socket.socket.config.SocketConfigProperties,\
   com.grgbanking.counter.common.socket.socket.server.SocketServer,\
-  com.grgbanking.counter.common.socket.broadcast.component.RedisMessageReceiver,\
+  com.grgbanking.counter.common.socket.broadcast.component.RedisBroadcastMessageReceiver,\
   com.grgbanking.counter.common.socket.broadcast.config.RedisBroadcastConfig,\
   com.grgbanking.counter.common.socket.broadcast.service.impl.RedisBroadcastServiceImpl
 
