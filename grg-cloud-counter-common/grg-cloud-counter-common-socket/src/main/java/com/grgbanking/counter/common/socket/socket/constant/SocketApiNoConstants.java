@@ -35,6 +35,11 @@ public class SocketApiNoConstants {
      */
     public static final String FACE_RECOGNITION = "face_recognition";
 
+    /**
+     * 查看我的视频呼叫排队的名次
+     */
+    public static final String QUERY_WAITING_RANK = "query_waiting_rank";
+
 
 
 }
