@@ -5,6 +5,9 @@ import com.grgbanking.counter.common.core.util.PageUtils;
 import com.grgbanking.counter.common.core.util.Resp;
 import com.grgbanking.counter.iam.api.entity.SysDictEntity;
 import com.grgbanking.counter.iam.service.SysDictService;
+import com.grgbanking.counter.iam.vo.DictWithItemVo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +23,7 @@ import java.util.Map;
  * @author <a href="https://grgbanking.com">grgbanking</a>
  * @since 2021-08-31
  */
+@Api(tags = "数据字典表")
 @RestController
 @RequestMapping("/sys/dict")
 public class SysDictController {
@@ -30,8 +34,8 @@ public class SysDictController {
     /**
      * 列表
      */
+    @ApiOperation(value = "分页查询数据字典表")
     @GetMapping("/list")
-//    //@REQUIREsPermissions("iam:sysdict:list")
     public Resp list(@RequestParam Map<String, Object> params){
         //分页查询所以
         PageUtils page = sysDictService.queryPage(params);
@@ -40,36 +44,37 @@ public class SysDictController {
         return Resp.success(list," page");
     }
 
+    @ApiOperation(value = "查询数据字典字段")
     @GetMapping("/listAll")
-//    //@REQUIREsPermissions("iam:sysdict:list")
     public Resp listAll(){
 
         //查询所有
         List<Map<String, Map<String, String>>> list = sysDictService.listDictWithItem();
 
-
-
-        return Resp.success(list," list");
+        return Resp.success(list," 数据字典");
     }
 
     /**
-     * 信息
+     * 查找某个数据字典
      */
-    @RequestMapping("/info/{dictId}")
-    //@REQUIREsPermissions("iam:sysdict:info")
-    public Resp info(@PathVariable("dictId") Long dictId){
-       SysDictEntity sysDict = sysDictService.getById(dictId);
-
-        return Resp.success(sysDict, "sysDict");
+    @ApiOperation(value = "查找数据字典")
+    @PostMapping("/getDictByType")
+    public Resp getDictByType(@RequestBody SysDictEntity sysDict){
+        List<DictWithItemVo> dict = sysDictService.getDictByType(sysDict);
+        if (dict.size()==0){
+            return Resp.failed(dict,"查不到当前字段,请联系管理员添加");
+        }else {
+            return Resp.success(dict, "type");
+        }
     }
 
     /**
      * 保存
      */
-    @RequestMapping("/save")
-    //@REQUIREsPermissions("iam:sysdict:save")
+    @ApiOperation(value = "新增数据字典")
+    @PostMapping("/save")
     public Resp save(@RequestBody SysDictEntity sysDict){
-        sysDictService.save(sysDict);
+        sysDictService.saveDictAndItem(sysDict);
 
         return Resp.success();
     }
@@ -77,21 +82,21 @@ public class SysDictController {
     /**
      * 修改
      */
-    @RequestMapping("/update")
-    //@REQUIREsPermissions("iam:sysdict:update")
+    @ApiOperation(value = "修改数据字典")
+    @PostMapping("/update")
     public Resp update(@RequestBody SysDictEntity sysDict){
-        sysDictService.updateById(sysDict);
+        int i = sysDictService.updateDictById(sysDict);
 
-        return Resp.success();
+        return Resp.success(i);
     }
 
     /**
      * 删除
      */
-    @RequestMapping("/delete")
-    //@REQUIREsPermissions("iam:sysdict:delete")
+    @ApiOperation(value = "删除数据字典")
+    @PostMapping("/delete")
     public Resp delete(@RequestBody Long[] dictIds){
-        sysDictService.removeByIds(Arrays.asList(dictIds));
+        sysDictService.removeDictById(Arrays.asList(dictIds));
 
         return Resp.success();
     }

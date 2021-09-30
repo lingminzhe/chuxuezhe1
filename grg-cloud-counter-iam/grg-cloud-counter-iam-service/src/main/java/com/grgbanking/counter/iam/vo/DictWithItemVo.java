@@ -3,6 +3,7 @@ package com.grgbanking.counter.iam.vo;
 import lombok.Data;
 
 /**
+ * 字典表及字典表详情vo
  * @author: Ye Kaitao
  * @create: 2021-09-27
  */
@@ -16,4 +17,6 @@ public class DictWithItemVo {
     private String value;
     private String label;
 //    private Map<String,String> dictItem;
+
+
 }
