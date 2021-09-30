@@ -36,7 +36,6 @@ public class QueryMyWaitingRankHandler implements SocketMessageHandler {
     public void onMessage(String clientId, SocketParam param) {
         Long rank = lineupService.rank(clientId);
         Map<String, Object> body = new HashMap<>();
-        body.put("clientId", rank);
         body.put("rank", rank);
         param.setBody(body);
         log.info("查询我的排队名次，clientId：{}，名次：{}",clientId,rank);
