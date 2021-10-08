@@ -52,9 +52,9 @@ public class CustomerLineupServiceImpl extends LineupAbstractService {
         String employeeId = lineupService.findEmployee(clientId);
         if (StringUtils.isNotBlank(employeeId)){
             EmployeeService employeeService = new EmployeeService();
-            employeeService.setEmployee_id(employeeId);
-            employeeService.setCustomer_id(clientId);
-            employeeService.setUser_sig(tencentService.getUserSig(clientId));
+            employeeService.setEmployeeId(employeeId);
+            employeeService.setCustomerId(clientId);
+            employeeService.setUserSig(tencentService.getUserSig(clientId));
             SocketParam param = SocketParam.success();
             param.getHead().setApiNo(SocketApiNoConstants.VIDEO_CMD);
             param.getHead().setMsg("当前已有分配坐席");

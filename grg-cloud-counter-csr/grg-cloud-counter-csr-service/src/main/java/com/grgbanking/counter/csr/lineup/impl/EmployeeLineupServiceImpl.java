@@ -82,8 +82,8 @@ public class EmployeeLineupServiceImpl extends LineupAbstractService {
 
         SocketParamHead head = SocketParamHead.success(SocketApiNoConstants.VIDEO_CMD, CommonConstants.SUCCESS, "有用户申请视频协助");
         EmployeeService employeeService = new EmployeeService();
-        employeeService.setEmployee_id(employeeId);
-        employeeService.setCustomer_id(customerId);
+        employeeService.setEmployeeId(employeeId);
+        employeeService.setCustomerId(customerId);
         /**body只放坐席客户端id*/
         SocketParam<EmployeeService> param = SocketParam.success(head, employeeService);
         /**给APP服务发送提醒广播*/

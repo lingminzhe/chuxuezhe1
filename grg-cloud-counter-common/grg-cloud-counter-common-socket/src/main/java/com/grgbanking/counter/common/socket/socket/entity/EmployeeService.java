@@ -10,14 +10,14 @@ public class EmployeeService implements Serializable {
     /**
      * 坐席ID
      */
-    private String employee_id;
+    private String employeeId;
     /**
      * 用户id
      */
-    private String customer_id;
+    private String customerId;
     /**
      * userSig
      */
-    private String user_sig;
+    private String userSig;
 
 }

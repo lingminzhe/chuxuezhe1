@@ -33,8 +33,8 @@ public class RedisBroadcastVideoConnectHandler extends RedisBroadcastAbstractHan
         Object body = param.getBody();
         if (body instanceof EmployeeService){
             EmployeeService employeeService = (EmployeeService) body;
-            String customerId = employeeService.getCustomer_id();
-            employeeService.setUser_sig(tencentService.getUserSig(customerId));
+            String customerId = employeeService.getCustomerId();
+            employeeService.setUserSig(tencentService.getUserSig(customerId));
             log.info("报文内容{}", employeeService);
             socketService.sendMessage(customerId,param);
         }

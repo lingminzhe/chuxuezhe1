@@ -10,6 +10,7 @@ import com.grgbanking.counter.common.core.util.Query;
 import com.grgbanking.counter.csr.dao.GrgEmployeeServiceDao;
 import com.grgbanking.counter.csr.entity.GrgBusiOptEntity;
 import com.grgbanking.counter.csr.entity.GrgEmployeeServiceEntity;
+import com.grgbanking.counter.csr.lineup.impl.EmployeeLineupServiceImpl;
 import com.grgbanking.counter.csr.service.GrgBusiOptService;
 import com.grgbanking.counter.csr.service.GrgEmployeeService;
 import com.grgbanking.counter.csr.vo.EmployeeCustomerVo;
@@ -34,6 +35,9 @@ public class GrgEmployeeServiceImpl extends ServiceImpl<GrgEmployeeServiceDao, G
 
     @Autowired
     private GrgBusiOptService busiOptService;
+
+    @Autowired
+    private EmployeeLineupServiceImpl lineupService;
 
 
 
@@ -150,7 +154,12 @@ public class GrgEmployeeServiceImpl extends ServiceImpl<GrgEmployeeServiceDao, G
     @Override
     public int updateByEmployeeId(GrgEmployeeServiceEntity grgEmployeeService) {
         UpdateWrapper<GrgEmployeeServiceEntity> wrapper = new UpdateWrapper<GrgEmployeeServiceEntity>().eq("employee_id", grgEmployeeService.getEmployeeId());
-
+        String employeeId = grgEmployeeService.getEmployeeId();
+        if (!grgEmployeeService.getEmployeeStatus().equals("1")){
+            lineupService.logout(employeeId);
+        }else {
+            lineupService.login(employeeId);
+        }
         return this.baseMapper.update(grgEmployeeService,wrapper);
     }
 
