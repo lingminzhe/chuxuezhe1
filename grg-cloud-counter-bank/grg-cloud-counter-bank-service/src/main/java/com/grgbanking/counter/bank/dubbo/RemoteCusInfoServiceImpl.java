@@ -54,8 +54,9 @@ public class RemoteCusInfoServiceImpl implements RemoteCusInfoService {
         QueryWrapper<GrgCustomerEntity> wrapper = new QueryWrapper<>();
         wrapper.eq("identifynumber", no).or().eq("phone", no);
         GrgCustomerEntity grgCustomerEntity = grgCustomerService.getOne(wrapper);
-        GrgCusInfoEntity grgCusInfoEntity = new GrgCusInfoEntity();
+        GrgCusInfoEntity grgCusInfoEntity = null;
         if (grgCustomerEntity != null){
+            grgCusInfoEntity = new GrgCusInfoEntity();
             BeanUtils.copyProperties(grgCustomerEntity, grgCusInfoEntity);
         }
         return grgCusInfoEntity;

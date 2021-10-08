@@ -42,7 +42,6 @@ public class SocketServiceImpl extends SocketAbstractService {
         String customerId = lineupService.findCustomer(clientId);
         /**把自己的clientId传给对方服务*/
         param.getHead().setClientId(customerId);
-        param.getHead().setMsg(customerId);
         redisBroadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_APP, param);
         log.info("接收到默认无人处理的消息,ClientId:{},消息：{}", clientId, param);
         return false;

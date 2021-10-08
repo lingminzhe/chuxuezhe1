@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 
 /**
  * 
@@ -25,9 +27,13 @@ public class GrgCusInfoController {
     RemoteCusInfoService remoteCusInfoService;
 
     @ApiOperation("通过证件号码或手机号查询用户信息")
-    @GetMapping("/get/{no}")
-    public Resp<GrgCusInfoEntity> getPersonalInfo(@PathVariable String no) {
-        GrgCusInfoEntity grgCusInfoEntity = remoteCusInfoService.getByCardNoOrIdNo(no);
+    @PostMapping("/get")
+    public Resp<GrgCusInfoEntity> getPersonalInfo(@RequestBody Map<String, String> param) {
+        String number = param.get("number");
+        GrgCusInfoEntity grgCusInfoEntity = remoteCusInfoService.getByCardNoOrIdNo(number);
+        if(grgCusInfoEntity == null){
+            return Resp.failed("用户信息不存在！");
+        }
         return Resp.success(grgCusInfoEntity);
     }
 

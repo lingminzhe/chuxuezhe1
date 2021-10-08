@@ -3,10 +3,9 @@ package com.grgbanking.counter.app.controller;
 import com.grgbanking.counter.common.core.util.Resp;
 import com.grgbanking.counter.common.socket.lineup.service.LineupService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * socket通讯的测试controller
@@ -24,12 +23,13 @@ public class SocketController {
      * @return
      */
     @PostMapping("finish")
-    public Resp finish(String clientId){
+    public Resp finish(@RequestBody Map<String, String> param){
         // TODO 端开视频
         //...
 
         /**删除与坐席的关系*/
         try {
+            String clientId = param.get("clientId");
             lineupService.finish(clientId);
             return Resp.success("结束视频成功");
         } catch (Exception e) {

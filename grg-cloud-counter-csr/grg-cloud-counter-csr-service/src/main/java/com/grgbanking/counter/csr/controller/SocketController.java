@@ -5,8 +5,11 @@ import com.grgbanking.counter.csr.lineup.impl.EmployeeLineupServiceImpl;
 import com.grgbanking.counter.csr.service.TencentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 /**
  * socket通讯的测试controller
@@ -28,7 +31,8 @@ public class SocketController {
      * @return
      */
     @PostMapping("finish")
-    public Resp finish(String clientId) {
+    public Resp finish(@RequestBody Map<String, String> param) {
+        String clientId = param.get("clientId");
         lineupService.finish(clientId);
         return Resp.success("结束视频成功");
     }
