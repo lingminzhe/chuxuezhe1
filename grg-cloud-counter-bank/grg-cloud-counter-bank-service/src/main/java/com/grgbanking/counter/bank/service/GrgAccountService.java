@@ -21,5 +21,7 @@ public interface GrgAccountService extends IService<GrgAccountEntity> {
     List<GrgAccountEntity> getByCustomerId(Integer id);
 
     PageUtils queryPage(Map<String, Object> params, Integer customerId);
+
+    boolean updateByCardNo(GrgAccountEntity grgAccount);
 }
 

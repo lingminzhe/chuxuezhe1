@@ -13,6 +13,7 @@ import com.grgbanking.counter.common.core.util.FileUtil;
 import com.grgbanking.counter.csr.api.dubbo.RemoteFileMgrService;
 import com.grgbanking.counter.csr.api.entity.GrgFileMgrEntity;
 import com.grgbanking.counter.iam.api.dubbo.RemoteSysFileService;
+import com.grgbanking.counter.iam.api.entity.SysFileEntity;
 import com.grgbanking.counter.oss.api.dto.FileDTO;
 import com.grgbanking.counter.oss.config.OssProperties;
 import com.grgbanking.counter.oss.service.OssService;
@@ -48,6 +49,7 @@ public class OssServiceImpl implements OssService {
         fileDTO.setOriginalName(original);
         fileDTO.setFileMd5(md5);
         fileDTO.setFileName(fileName);
+        System.out.println("文件名:"+fileName);
         fileDTO.setFileSize(size);
         fileDTO.setFileType(contentType);
         ObjectMetadata objectMetadata = new ObjectMetadata();
@@ -62,8 +64,15 @@ public class OssServiceImpl implements OssService {
         fileDTO.setEnable("1");
         fileDTO.setBucketName(ossProperties.getBucketName());
         fileDTO.setCreateUser(createUser);
-        remoteFileMgrService.save(grgFileMgrEntity);
+
+        //先存进sys_file 生成id后与fileManager关联
         remoteSysFileService.save(fileDTO);
+        if (grgFileMgrEntity.getFileId()==null){
+            SysFileEntity sysFileEntity = remoteSysFileService.getFileIdByFileName(fileName);
+            grgFileMgrEntity.setFileId(String.valueOf(sysFileEntity.getId()));
+        }
+        remoteFileMgrService.save(grgFileMgrEntity);
+
         return fileDTO;
     }
 

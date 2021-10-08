@@ -2,6 +2,7 @@ package com.grgbanking.counter.bank.service.impl;
 
 import com.alibaba.nacos.common.utils.StringUtils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -81,6 +82,17 @@ public class GrgAccountServiceImpl extends ServiceImpl<GrgAccountDao, GrgAccount
         }
 
 
+    }
+
+    @Override
+    public boolean updateByCardNo(GrgAccountEntity grgAccount) {
+        UpdateWrapper<GrgAccountEntity> wrapper = new UpdateWrapper<GrgAccountEntity>().eq("card_no", grgAccount.getCardNo()).set("account_status",grgAccount.getAccountStatus());
+        int delete = this.baseMapper.update(null,wrapper);
+        if( delete == 1){
+            return true;
+        }else {
+            return false;
+        }
     }
 
 }

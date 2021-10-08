@@ -96,7 +96,7 @@ public class GrgAccountController {
     @PostMapping("/update")
     //@grgAccountService("bank:grgaccount:update")
     public Resp update(@RequestBody GrgAccountEntity grgAccount){
-        boolean b = grgAccountService.updateById(grgAccount);
+        boolean b = grgAccountService.updateByCardNo(grgAccount);
         if (!b){
             return Resp.failed().setMsg("更改失败");
         }

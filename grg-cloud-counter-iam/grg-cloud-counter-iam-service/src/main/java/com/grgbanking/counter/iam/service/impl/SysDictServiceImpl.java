@@ -113,6 +113,10 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictDao, SysDictEntity> i
         return update;
     }
 
+    /**
+     * 查数据库
+     * 存入redis
+     */
     public void saveDictInRedis(){
         //获取根据type字段保存字典信息
         List<DictWithItemVo> dictAndItem = dictDao.getDictAndItem();

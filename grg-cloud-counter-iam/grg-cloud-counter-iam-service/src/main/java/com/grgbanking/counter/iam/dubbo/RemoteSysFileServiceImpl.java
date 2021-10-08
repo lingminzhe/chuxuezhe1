@@ -1,5 +1,6 @@
 package com.grgbanking.counter.iam.dubbo;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.grgbanking.counter.iam.api.dubbo.RemoteSysFileService;
 import com.grgbanking.counter.iam.api.entity.SysFileEntity;
 import com.grgbanking.counter.iam.service.SysFileService;
@@ -18,5 +19,11 @@ public class RemoteSysFileServiceImpl implements RemoteSysFileService {
         SysFileEntity sysFileEntity = new SysFileEntity();
         BeanUtils.copyProperties(fileDTO,sysFileEntity);
         sysFileService.save(sysFileEntity);
+    }
+
+    @Override
+    public SysFileEntity getFileIdByFileName(String fileName) {
+        SysFileEntity one = sysFileService.getOne(new QueryWrapper<SysFileEntity>().eq("file_name", fileName));
+        return one;
     }
 }
