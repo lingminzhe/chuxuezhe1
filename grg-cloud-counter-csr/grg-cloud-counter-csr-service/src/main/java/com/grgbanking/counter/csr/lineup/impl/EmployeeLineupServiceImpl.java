@@ -12,6 +12,7 @@ import com.grgbanking.counter.common.socket.lineup.service.impl.LineupAbstractSe
 import com.grgbanking.counter.common.socket.socket.constant.SocketApiNoConstants;
 import com.grgbanking.counter.common.socket.socket.constant.SocketConnectStatusEnum;
 import com.grgbanking.counter.common.socket.socket.entity.EmployeeService;
+import com.grgbanking.counter.common.socket.socket.service.SocketAbstractService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.Cursor;
@@ -37,9 +38,21 @@ public class EmployeeLineupServiceImpl extends LineupAbstractService {
     @Autowired
     private LineupService lineupService;
 
+    @Autowired
+    private SocketAbstractService socketService;
+
     @Override
     public void login(String clientId) {
-        redisTemplate.opsForHash().putIfAbsent(LineupConstants.EMPLOYEE_ONLINE_VIDEO_KEY, clientId, null);
+        String customerId = lineupService.findCustomer(clientId);
+        if (StringUtils.hasText(customerId)){
+            SocketParamHead head = SocketParamHead.success(SocketApiNoConstants.VIDEO_CMD, CommonConstants.SUCCESS, "当前用户未挂断，业务办理中");
+            EmployeeService employeeService = new EmployeeService();
+            employeeService.setEmployeeId(clientId);
+            employeeService.setCustomerId(customerId);
+            SocketParam<EmployeeService> param = SocketParam.success(head, employeeService);
+            socketService.sendMessage(clientId, param);
+            return;
+        }
     }
 
     @Override

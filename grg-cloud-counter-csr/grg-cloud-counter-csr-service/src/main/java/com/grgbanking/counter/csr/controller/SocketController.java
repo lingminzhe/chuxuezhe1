@@ -1,9 +1,11 @@
 package com.grgbanking.counter.csr.controller;
 
 import com.grgbanking.counter.common.core.util.Resp;
+import com.grgbanking.counter.common.socket.lineup.constant.LineupConstants;
 import com.grgbanking.counter.csr.lineup.impl.EmployeeLineupServiceImpl;
 import com.grgbanking.counter.csr.service.TencentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +22,6 @@ public class SocketController {
 
     @Autowired
     private EmployeeLineupServiceImpl lineupService;
-
-    @Autowired
-    private TencentService tencentService;
 
     /**
      * 正常结束视频通话
@@ -43,7 +42,8 @@ public class SocketController {
      * @return
      */
     @PostMapping("logout")
-    public Resp logout(String clientId){
+    public Resp logout(@RequestBody Map<String, String> param){
+        String clientId = param.get("clientId");
         lineupService.logout(clientId);
         return Resp.success("退出坐席视频服务成功");
     }

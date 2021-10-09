@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.grgbanking.counter.common.core.util.PageUtils;
 import com.grgbanking.counter.common.core.util.Query;
+import com.grgbanking.counter.common.socket.lineup.constant.LineupConstants;
 import com.grgbanking.counter.csr.dao.GrgEmployeeServiceDao;
 import com.grgbanking.counter.csr.entity.GrgBusiOptEntity;
 import com.grgbanking.counter.csr.entity.GrgEmployeeServiceEntity;
@@ -18,6 +19,7 @@ import com.grgbanking.counter.iam.api.dubbo.RemoteUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,6 +40,9 @@ public class GrgEmployeeServiceImpl extends ServiceImpl<GrgEmployeeServiceDao, G
 
     @Autowired
     private EmployeeLineupServiceImpl lineupService;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
 
 
@@ -155,10 +160,14 @@ public class GrgEmployeeServiceImpl extends ServiceImpl<GrgEmployeeServiceDao, G
     public int updateByEmployeeId(GrgEmployeeServiceEntity grgEmployeeService) {
         UpdateWrapper<GrgEmployeeServiceEntity> wrapper = new UpdateWrapper<GrgEmployeeServiceEntity>().eq("employee_id", grgEmployeeService.getEmployeeId());
         String employeeId = grgEmployeeService.getEmployeeId();
-        if (!grgEmployeeService.getEmployeeStatus().equals("1")){
-            lineupService.logout(employeeId);
-        }else {
-            lineupService.login(employeeId);
+        String employeeStatus = grgEmployeeService.getEmployeeStatus();
+        if (employeeId != null){
+            if (employeeStatus.equals("2")){
+                redisTemplate.opsForHash().putIfAbsent(LineupConstants.EMPLOYEE_ONLINE_VIDEO_KEY, employeeId, null);
+                lineupService.check();
+            }else if(!employeeStatus.equals("3")){
+                lineupService.logout(employeeId);
+            }
         }
         return this.baseMapper.update(grgEmployeeService,wrapper);
     }
