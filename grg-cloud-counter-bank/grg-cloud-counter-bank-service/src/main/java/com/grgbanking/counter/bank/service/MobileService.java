@@ -1,6 +1,7 @@
 package com.grgbanking.counter.bank.service;
 
 
+import com.grgbanking.counter.bank.MobileSmsVo;
 import com.grgbanking.counter.common.core.util.Resp;
 
 /**
@@ -14,4 +15,5 @@ public interface MobileService {
 	 */
 	Resp sendSmsCode(String mobile);
 
+	Resp verifySmsCode(MobileSmsVo mobile);
 }
