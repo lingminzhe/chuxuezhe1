@@ -51,7 +51,7 @@ public class MobileServiceImpl implements MobileService {
 		//验证码
 		String code = RandomUtil.randomNumbers(Integer.parseInt(SecurityConstants.CODE_SIZE));
 		//短信文本
-		String smsText = "短信验证码：" + RandomUtil.randomNumbers(Integer.parseInt(SecurityConstants.CODE_SIZE));
+		String smsText = "短信验证码：" + code;
 
 		log.info("手机号生成验证码成功:{}",  code);
 		redisTemplate.opsForValue().set(CacheConstants.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + StringPool.AT + mobile, code, SecurityConstants.CODE_TIME, TimeUnit.SECONDS);

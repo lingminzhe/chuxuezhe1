@@ -7,4 +7,6 @@ public interface RemoteFileMgrService {
      * grg_file_manager文件上传存表
      */
      void save(GrgFileMgrEntity grgFileMgrEntity);
+
+    GrgFileMgrEntity getByFileName(String fileName);
 }

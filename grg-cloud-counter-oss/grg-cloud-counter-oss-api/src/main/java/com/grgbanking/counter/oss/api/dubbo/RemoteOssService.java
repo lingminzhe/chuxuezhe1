@@ -12,4 +12,5 @@ public interface RemoteOssService {
      */
     FileDTO upload(byte[] fileByte, String md5, String original, long size, String contentType, GrgFileMgrEntity grgFileMgrEntity, String createUser);
 
+    FileDTO queryFileInfo(String fileName);
 }

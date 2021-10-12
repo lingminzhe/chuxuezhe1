@@ -13,5 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface GrgFileManagerDao extends BaseMapper<GrgFileManagerEntity> {
-	
+
+    GrgFileManagerEntity getByCustomerId(String customerId);
 }

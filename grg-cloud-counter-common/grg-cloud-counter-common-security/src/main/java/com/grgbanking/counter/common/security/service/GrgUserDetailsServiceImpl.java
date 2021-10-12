@@ -41,13 +41,13 @@ public class GrgUserDetailsServiceImpl implements GrgUserDetailsService {
     @SneakyThrows
     public UserDetails loadUserByUsername(String username) {
         Cache cache = cacheManager.getCache(CacheConstants.USER_DETAILS);
-        String cacheKey = LoginTypeEnum.PWD.getType().concat(":").concat(username);
-        if (cache != null && cache.get(cacheKey) != null) {
-            return cache.get(cacheKey, GrgUser.class);
-        }
+//        String cacheKey = LoginTypeEnum.PWD.getType().concat(":").concat(username);
+//        if (cache != null && cache.get(cacheKey) != null) {
+//            return cache.get(cacheKey, GrgUser.class);
+//        }
         UserInfo result = remoteUserService.info(username);
         UserDetails userDetails = getUserDetails(LoginTypeEnum.PWD,result);
-        cache.put(cacheKey, userDetails);
+//        cache.put(cacheKey, userDetails);
         return userDetails;
     }
 

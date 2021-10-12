@@ -21,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.io.ByteArrayInputStream;
@@ -41,7 +42,8 @@ public class OssServiceImpl implements OssService {
 
     private AmazonS3 amazonS3;
 
-    // TODO 同时保存相关信息到数据库
+
+    @Transactional
     @Override
     public FileDTO upload(byte[] fileByte, String md5, String original, long size, String contentType, GrgFileMgrEntity grgFileMgrEntity, String createUser) {
         FileDTO fileDTO = new FileDTO();

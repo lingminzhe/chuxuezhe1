@@ -17,4 +17,9 @@ public class RemoteOssServiceImpl implements RemoteOssService {
     public FileDTO upload(byte[] fileByte, String md5, String original, long size, String contentType, GrgFileMgrEntity grgFileMgrEntity, String createUser) {
         return ossService.upload(fileByte, md5, original, size, contentType, grgFileMgrEntity,createUser);
     }
+
+    @Override
+    public FileDTO queryFileInfo(String fileName) {
+        return ossService.queryFileInfo(fileName);
+    }
 }

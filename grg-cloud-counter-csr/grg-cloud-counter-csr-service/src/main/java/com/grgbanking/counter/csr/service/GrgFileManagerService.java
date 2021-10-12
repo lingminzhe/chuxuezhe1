@@ -16,5 +16,7 @@ import java.util.Map;
 public interface GrgFileManagerService extends IService<GrgFileManagerEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    GrgFileManagerEntity getByCustomerId(String customerId);
 }
 

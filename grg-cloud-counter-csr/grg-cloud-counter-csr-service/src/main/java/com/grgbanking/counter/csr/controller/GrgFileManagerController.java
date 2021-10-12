@@ -2,9 +2,10 @@ package com.grgbanking.counter.csr.controller;
 
 import com.grgbanking.counter.common.core.util.PageUtils;
 import com.grgbanking.counter.common.core.util.Resp;
+import com.grgbanking.counter.csr.api.dubbo.RemoteFileMgrService;
 import com.grgbanking.counter.csr.entity.GrgFileManagerEntity;
 import com.grgbanking.counter.csr.service.GrgFileManagerService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -22,8 +23,15 @@ import java.util.Map;
 @RestController
 @RequestMapping("/grgfilemanager")
 public class GrgFileManagerController {
-    @Autowired
+
+    @DubboReference
     private GrgFileManagerService grgFileManagerService;
+
+    /**
+     * 远程调用接口
+     */
+    @DubboReference
+    private RemoteFileMgrService remoteFileMgrService;
 
     /**
      * 列表
@@ -40,12 +48,19 @@ public class GrgFileManagerController {
     /**
      * 信息
      */
-    @GetMapping("/info/{id}")
+    @GetMapping("/info/{customerId}")
 //    @RequiresPermissions("csr:grgfilemanager:info")
-    public Resp info(@PathVariable("id") String id){
-		GrgFileManagerEntity grgFileManager = grgFileManagerService.getById(id);
+    public Resp info(@PathVariable("customerId") String customerId){
+		GrgFileManagerEntity grgFileManager = grgFileManagerService.getByCustomerId(customerId);
 
         return Resp.success(grgFileManager, "grgFileManager");
+    }
+
+    //RemoteFileMgrService
+    @PostMapping("/getByFileName")
+    public Resp getByCustomerName(@RequestBody String fileName){
+//        GrgFileMgrEntity entity = remoteFileMgrService.getByFileName(fileName);
+        return Resp.success();
     }
 
     /**

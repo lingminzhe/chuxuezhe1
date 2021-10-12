@@ -14,10 +14,19 @@ public class RemoteFileMgrServiceImpl implements RemoteFileMgrService {
     @Autowired
     private GrgFileManagerService grgFileManagerService;
 
+
+
     @Override
     public void save(GrgFileMgrEntity grgFileMgrEntity) {
         GrgFileManagerEntity grgFileManagerEntity = new GrgFileManagerEntity();
         BeanUtils.copyProperties(grgFileMgrEntity,grgFileManagerEntity);
         grgFileManagerService.save(grgFileManagerEntity);
+    }
+
+    @Override
+    public GrgFileMgrEntity getByFileName(String fileName) {
+//        FileDTO fileDTO = remoteOssService.queryFileInfo(fileName);
+//        System.out.println(fileDTO);
+        return null;
     }
 }

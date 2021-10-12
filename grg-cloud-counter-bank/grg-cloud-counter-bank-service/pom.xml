@@ -78,6 +78,16 @@
             <groupId>com.grgbanking.counter</groupId>
             <artifactId>grg-cloud-counter-common-cache</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.28</version>
+        </dependency>
 
     </dependencies>
 

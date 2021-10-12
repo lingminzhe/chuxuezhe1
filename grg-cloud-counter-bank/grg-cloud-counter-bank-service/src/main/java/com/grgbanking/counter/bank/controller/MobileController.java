@@ -26,7 +26,7 @@ public class MobileController {
 	}
 
 	@ApiOperation(value = "验证短信验证码")
-	@PostMapping("/verifySmsCode/{mobile}")
+	@PostMapping("/verifySmsCode")
 	public Resp verifySmsCode(@RequestBody MobileSmsVo mobile) {
 		return mobileService.verifySmsCode(mobile);
 	}
