@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Api(tags = "个人中心")
@@ -34,7 +35,7 @@ public class CusInfoController {
     @PostMapping("/personal/info")
     public Resp<GrgCusInfoEntity> getPersonalInfo(@RequestBody CusAccountDto cusAccountDto) {
         GrgCusInfoEntity cusInfo = remoteCusInfoService.findCusInfo(cusAccountDto.getUserId());
-        if (cusInfo != null){
+        if (cusInfo != null) {
             return Resp.success(cusInfo);
         }
         return Resp.failed("无法查询到用户数据!");
@@ -42,7 +43,7 @@ public class CusInfoController {
 
     @ApiOperation("银行卡详情")
     @GetMapping("/card/{id}")
-    public Resp<GrgCusAccountEntity> getCard(@PathVariable("id")String id) {
+    public Resp<GrgCusAccountEntity> getCard(@PathVariable("id") String id) {
         GrgCusAccountEntity cusAccount = remoteCusInfoService.findCusAccount(id);
         return Resp.success(cusAccount);
     }
@@ -58,10 +59,19 @@ public class CusInfoController {
     @PostMapping("/save/card")
     public Resp<String> saveBankCard(@RequestBody GrgCusAccountEntity grgCusAccountEntity) {
         boolean b = remoteCusInfoService.saveBankCard(grgCusAccountEntity);
-        if (b != true){
+        if (b != true) {
             return Resp.failed("新增失败!");
         }
         return Resp.success("新增成功!");
+    }
+
+    @ApiOperation("绑定银行卡")
+    @PostMapping("/bind/card")
+    public Resp<String> bindBankCard(@RequestBody GrgCusAccountEntity grgCusAccountEntity) {
+        boolean b = remoteCusInfoService.bindBankCard(grgCusAccountEntity);
+        if (b)
+            return Resp.success("绑定银行卡成功");
+        return Resp.failed("绑定银行卡失败");
     }
 
     @ApiOperation("银行卡流水列表")
@@ -73,21 +83,21 @@ public class CusInfoController {
 
     @ApiOperation("银行卡流水详情")
     @GetMapping("/card/itemized/{id}")
-    public Resp<GrgCusBusiOptEntity> getCardSequence(@PathVariable("id")String id) {
+    public Resp<GrgCusBusiOptEntity> getCardSequence(@PathVariable("id") String id) {
         GrgCusBusiOptEntity one = remoteBusiOptService.getOne(id);
         return Resp.success(one);
     }
 
     @ApiOperation("办理业务列表")
     @PostMapping("/business/list")
-    public Resp<List<GrgCusBusiInfoEntity>> getBuinessList(@RequestBody CusAccountDto cusAccountDto) {
+    public Resp<List<GrgCusBusiInfoEntity>> getBuinessList(@Valid @RequestBody CusAccountDto cusAccountDto) {
         List<GrgCusBusiInfoEntity> list = remoteBusiInfoService.findList(cusAccountDto.getUserId(),cusAccountDto.getBusiStatus());
         return Resp.success(list);
     }
 
     @ApiOperation("办理业务详情")
     @GetMapping("/business/{id}")
-    public Resp<GrgCusBusiInfoEntity> getBusiness(@PathVariable("id")String id) {
+    public Resp<GrgCusBusiInfoEntity> getBusiness(@PathVariable("id") String id) {
         GrgCusBusiInfoEntity one = remoteBusiInfoService.getOne(id);
         return Resp.success(one);
     }

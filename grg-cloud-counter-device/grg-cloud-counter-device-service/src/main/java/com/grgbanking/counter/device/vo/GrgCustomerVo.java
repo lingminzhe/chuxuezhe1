@@ -1,7 +1,5 @@
 package com.grgbanking.counter.device.vo;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -149,7 +147,6 @@ public class GrgCustomerVo implements Serializable {
 	/**
 	 * 创建时间
 	 */
-	@TableField(fill = FieldFill.INSERT)
 	private Date createDate;
 	/**
 	 * 更新者
@@ -158,7 +155,6 @@ public class GrgCustomerVo implements Serializable {
 	/**
 	 * 更新时间
 	 */
-	@TableField(fill = FieldFill.INSERT_UPDATE)
 	private Date updateDate;
 	/**
 	 * 备注信息

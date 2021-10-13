@@ -1,9 +1,8 @@
 package com.grgbanking.counter.device.redis.handler;
 
 import com.grgbanking.counter.common.core.util.SocketParam;
-import com.grgbanking.counter.common.socket.broadcast.constant.RedisBroadcastConstants;
-import com.grgbanking.counter.common.socket.broadcast.service.RedisBroadcastService;
 import com.grgbanking.counter.common.socket.socket.constant.SocketApiNoConstants;
+import com.grgbanking.counter.common.socket.socket.service.SocketAbstractService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class DefaultRedisBroadcastHandler extends RedisBroadcastAbstractHandler {
 
     @Autowired
-    private RedisBroadcastService redisBroadcastService;
+    private SocketAbstractService socketService;
 
     @Override
     public String setApiNo() {
@@ -31,8 +30,9 @@ public class DefaultRedisBroadcastHandler extends RedisBroadcastAbstractHandler 
      */
     @Override
     public void onMessage(String channel, SocketParam param) {
-        /**给CSR服务转发广播消息，CSR服务务必有处理该广播的处理器，否则CSR服务又会把消息转发回来*/
-        log.info("没有处理广播消息的handler，此处是默认接收消息：{}", param);
-        redisBroadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR,param);
+        log.info("默认处理器 收到的报文{}", param);
+        String clientId = param.getHead().getClientId();
+        param.getHead().setClientId(null);
+        socketService.sendMessage(clientId,param);
     }
 }

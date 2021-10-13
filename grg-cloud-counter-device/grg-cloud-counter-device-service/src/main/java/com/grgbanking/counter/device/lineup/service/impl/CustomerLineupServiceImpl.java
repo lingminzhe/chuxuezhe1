@@ -1,6 +1,7 @@
 package com.grgbanking.counter.device.lineup.service.impl;
 
 
+import com.grgbanking.counter.device.tencent.service.TencentService;
 import com.grgbanking.counter.common.core.constant.CommonConstants;
 import com.grgbanking.counter.common.core.util.SocketParam;
 import com.grgbanking.counter.common.core.util.SocketParamHead;
@@ -11,7 +12,9 @@ import com.grgbanking.counter.common.socket.lineup.service.LineupService;
 import com.grgbanking.counter.common.socket.lineup.service.impl.LineupAbstractService;
 import com.grgbanking.counter.common.socket.socket.constant.SocketApiNoConstants;
 import com.grgbanking.counter.common.socket.socket.constant.SocketConnectStatusEnum;
+import com.grgbanking.counter.common.socket.socket.entity.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.ScanOptions;
@@ -33,6 +36,9 @@ public class CustomerLineupServiceImpl extends LineupAbstractService {
     @Autowired
     private LineupService lineupService;
 
+    @Autowired
+    private TencentService tencentService;
+
     @Override
     public void login(String clientId) {
         Cursor<ZSetOperations.TypedTuple<Object>> cursor = redisTemplate.opsForZSet().scan(LineupConstants.CUSTOMER_VIDEO_QUEUE_KEY, ScanOptions.NONE);
@@ -42,6 +48,19 @@ public class CustomerLineupServiceImpl extends LineupAbstractService {
                 log.error("该客户端正在视频通话，无法加入视频呼叫排队");
                 return;
             }
+        }
+        String employeeId = lineupService.findEmployee(clientId);
+        if (StringUtils.isNotBlank(employeeId)){
+            EmployeeService employeeService = new EmployeeService();
+            employeeService.setEmployeeId(employeeId);
+            employeeService.setCustomerId(clientId);
+            employeeService.setUserSig(tencentService.getUserSig(clientId));
+            SocketParam param = SocketParam.success();
+            param.getHead().setApiNo(SocketApiNoConstants.VIDEO_CMD);
+            param.getHead().setMsg("当前已有分配坐席");
+            param.setBody(employeeService);
+            broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_APP, param);
+            return;
         }
         redisTemplate.opsForZSet().addIfAbsent(LineupConstants.CUSTOMER_VIDEO_QUEUE_KEY, clientId, 1);
     }
