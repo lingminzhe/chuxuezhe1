@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.grgbanking.counter.common.core.util.PageUtils;
 import com.grgbanking.counter.common.core.util.Query;
+import com.grgbanking.counter.common.socket.lineup.service.LineupService;
 import com.grgbanking.counter.csr.dao.GrgBusiOptDao;
 import com.grgbanking.counter.csr.entity.GrgBusiOptEntity;
 import com.grgbanking.counter.csr.entity.GrgEmployeeServiceEntity;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.Map;
 
 
@@ -27,6 +29,9 @@ public class GrgBusiOptServiceImpl extends ServiceImpl<GrgBusiOptDao, GrgBusiOpt
 
     @Autowired
     private GrgBusiInfoService busiInfoService;
+
+    @Autowired
+    private LineupService lineupService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -56,6 +61,16 @@ public class GrgBusiOptServiceImpl extends ServiceImpl<GrgBusiOptDao, GrgBusiOpt
             //(1、已完成  2、正在进行 3、未完成
             grgBusiOpt.setBusiOptStatus("2");
         }
+        String userId = grgBusiOpt.getUserId();
+        String customerId = lineupService.findCustomer(userId);
+        String sessionId = "";
+        if (customerId != null){
+            sessionId = lineupService.findSessionId(customerId);
+        }
+        grgBusiOpt.setCreateTime(new Date());
+        grgBusiOpt.setUpdateTime(new Date());
+        grgBusiOpt.setCustomerId(customerId);
+        grgBusiOpt.setSessionId(sessionId);
         this.save(grgBusiOpt);
     }
 

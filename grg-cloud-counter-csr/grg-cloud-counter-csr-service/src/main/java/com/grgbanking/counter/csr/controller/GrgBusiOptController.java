@@ -60,9 +60,7 @@ public class GrgBusiOptController {
     @ApiOperation(value = "新增账户交易流水信息")
     @PostMapping("/save")
 //    @RequiresPermissions("csr:grgbusiopt:save")
-    public Resp save(@RequestBody GrgBusiOptEntity grgBusiOpt){
-
-        //
+    public Resp<GrgBusiOptEntity> save(@RequestBody GrgBusiOptEntity grgBusiOpt){
 		grgBusiOptService.saveBusiOpt(grgBusiOpt);
 
         return Resp.success();

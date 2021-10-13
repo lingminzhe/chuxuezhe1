@@ -62,7 +62,10 @@ public abstract class LineupAbstractService implements LineupService {
 
     @Override
     public Boolean finishSession(String clientId) {
-        Boolean hasKey = redisTemplate.opsForHash().hasKey(LineupConstants.BUSI_SESSION_KEY, clientId);
+        Boolean hasKey = false;
+        if (clientId != null){
+            hasKey = redisTemplate.opsForHash().hasKey(LineupConstants.BUSI_SESSION_KEY, clientId);
+        }
         Long delete = 0L;
         if (hasKey){
             delete = redisTemplate.opsForHash().delete(LineupConstants.BUSI_SESSION_KEY, clientId);

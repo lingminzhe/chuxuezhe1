@@ -102,8 +102,9 @@ public class EmployeeLineupServiceImpl extends LineupAbstractService {
         SocketParam<EmployeeService> param = SocketParam.success(head, employeeService);
         /**给APP服务发送提醒广播*/
         broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_APP, param);
+        log.info("接入视频、绑定当前会话{}", customerId);
         //接入视频、绑定当前会话
-        redisTemplate.opsForHash().put(LineupConstants.BUSI_SESSION_KEY, customerId, UUIDUtils.idNumber());
+        redisTemplate.opsForHash().put(LineupConstants.BUSI_SESSION_KEY, customerId, String.valueOf(UUIDUtils.idNumber()));
     }
 
     @Override
