@@ -14,4 +14,10 @@ public class LineupConstants {
      * 在线坐席redis的key，hash数据结构，value是服务的用户id
      */
     public static final String EMPLOYEE_ONLINE_VIDEO_KEY = "grg:csr:online";
+
+    /**
+     * 业务流水id绑定 key
+     */
+    public static final String BUSI_SESSION_KEY = "grg:busi:session";
+
 }

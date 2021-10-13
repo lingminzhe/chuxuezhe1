@@ -26,19 +26,21 @@ public class SocketController {
     /**
      * 正常结束视频通话
      *
-     * @param clientId
+     * @param param
      * @return
      */
     @PostMapping("finish")
     public Resp finish(@RequestBody Map<String, String> param) {
         String clientId = param.get("clientId");
         lineupService.finish(clientId);
+        String employeeId = lineupService.findEmployee(clientId);
+        lineupService.finishSession(employeeId);
         return Resp.success("结束视频成功");
     }
 
     /**
      * 退出坐席服务
-     * @param clientId
+     * @param param
      * @return
      */
     @PostMapping("logout")

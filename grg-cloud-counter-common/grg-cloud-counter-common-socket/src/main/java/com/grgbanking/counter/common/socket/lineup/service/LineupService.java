@@ -52,4 +52,19 @@ public interface LineupService {
      * @return
      */
     String findCustomer(String clientId);
+
+    /**
+     * 找出当前业务流程会话id
+     * @param clientId
+     * @return
+     */
+    String findSessionId(String clientId);
+
+    /**
+     * 结束当前会话
+     * @param clientId
+     * @return
+     */
+    Boolean finishSession(String clientId);
+
 }

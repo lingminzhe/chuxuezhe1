@@ -19,7 +19,7 @@ public class SocketController {
 
     /**
      * 正常结束视频通话
-     * @param clientId  用户端的id
+     * @param param  用户端的id
      * @return
      */
     @PostMapping("finish")
@@ -31,6 +31,7 @@ public class SocketController {
         try {
             String clientId = param.get("clientId");
             lineupService.finish(clientId);
+            lineupService.finishSession(clientId);
             return Resp.success("结束视频成功");
         } catch (Exception e) {
             e.printStackTrace();

@@ -4,6 +4,7 @@ import cn.hutool.core.util.RandomUtil;
 import com.grgbanking.counter.common.core.constant.CommonConstants;
 import com.grgbanking.counter.common.core.util.SocketParam;
 import com.grgbanking.counter.common.core.util.SocketParamHead;
+import com.grgbanking.counter.common.core.util.UUIDUtils;
 import com.grgbanking.counter.common.socket.broadcast.constant.RedisBroadcastConstants;
 import com.grgbanking.counter.common.socket.broadcast.service.RedisBroadcastService;
 import com.grgbanking.counter.common.socket.lineup.constant.LineupConstants;
@@ -101,6 +102,8 @@ public class EmployeeLineupServiceImpl extends LineupAbstractService {
         SocketParam<EmployeeService> param = SocketParam.success(head, employeeService);
         /**给APP服务发送提醒广播*/
         broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_APP, param);
+        //接入视频、绑定当前会话
+        redisTemplate.opsForHash().put(LineupConstants.BUSI_SESSION_KEY, customerId, UUIDUtils.idNumber());
     }
 
     @Override
