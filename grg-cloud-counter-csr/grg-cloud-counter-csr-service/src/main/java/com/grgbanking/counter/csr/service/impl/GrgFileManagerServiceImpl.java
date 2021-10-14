@@ -46,25 +46,22 @@ public class GrgFileManagerServiceImpl extends ServiceImpl<GrgFileManagerDao, Gr
     @Override
     public List<String> getByCustomerId(String customerId) {
         List<GrgFileManagerEntity> entities = this.baseMapper.selectList(new QueryWrapper<GrgFileManagerEntity>().eq("customer_id", customerId));
-        List<String> list = new ArrayList<>();
-        //得到的fileId
-        for (GrgFileManagerEntity entity : entities) {
-            list.add(entity.getFileId());
-        }
-
-        return list;
+        return getList(entities);
     }
 
     @Override
     public List<String> getBySessionId(String sessionId) {
         List<GrgFileManagerEntity> entities = this.baseMapper.selectList(new QueryWrapper<GrgFileManagerEntity>().eq("session_id", sessionId));
 
+        return getList(entities);
+    }
+
+    private List<String> getList(List<GrgFileManagerEntity> entities) {
         List<String> list = new ArrayList<>();
         //得到的fileId
         for (GrgFileManagerEntity entity : entities) {
-            list.add(entity.getSessionId());
+            list.add(entity.getFileId());
         }
-
         return list;
     }
 

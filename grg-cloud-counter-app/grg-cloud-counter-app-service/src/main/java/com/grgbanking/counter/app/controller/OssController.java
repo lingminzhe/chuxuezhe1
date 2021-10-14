@@ -5,6 +5,7 @@ import com.grgbanking.counter.bank.api.dubbo.RemoteCusInfoService;
 import com.grgbanking.counter.bank.api.entity.GrgCusInfoEntity;
 import com.grgbanking.counter.common.core.util.FileUtil;
 import com.grgbanking.counter.common.core.util.Resp;
+import com.grgbanking.counter.common.socket.lineup.service.impl.LineupAbstractService;
 import com.grgbanking.counter.csr.api.entity.GrgFileMgrEntity;
 import com.grgbanking.counter.oss.api.dto.FileDTO;
 import com.grgbanking.counter.oss.api.dubbo.RemoteOssService;
@@ -14,6 +15,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,6 +42,9 @@ public class OssController {
 
     @DubboReference
     private RemoteCusInfoService remoteCusInfoService;
+
+    @Autowired
+    private LineupAbstractService lineupAbstractService;
 
     /**
      * 上传文件
@@ -73,9 +78,19 @@ public class OssController {
         if(null==file1 || null==file2){
             return Resp.failed("需上传身份证正反面");
         }
+        //LineupAbstractService.findSessionId
+        //获取sessionId
+        //TODO 开发时使用
+//        grgFileMgrEntity.setSessionId("100001");
+        grgFileMgrEntity.setSessionId(lineupAbstractService.findSessionId(grgCustomerVo.getCustomerId()));
+        //身份证正面
+        grgFileMgrEntity.setFileBusiType("101");
         FileDTO uploadFile1 = uploadFile(file1, grgFileMgrEntity, createUser);
+        //身份证反面
+        grgFileMgrEntity.setFileBusiType("102");
         FileDTO uploadFile2 = uploadFile(file2, grgFileMgrEntity, createUser);
         log.info("文件上传成功,文件名为:{},{}"+uploadFile1.getFileName(),uploadFile2.getFileName());
+        //获取到的file信息存入map里
         List<FileDTO> list = new ArrayList<>();
         list.add(uploadFile1);
         list.add(uploadFile2);
@@ -103,9 +118,6 @@ public class OssController {
         }
         return Resp.success(map);
     }
-
-
-
 
      /**
       * 公共参数抽取成一个方法
