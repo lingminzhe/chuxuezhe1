@@ -14,4 +14,6 @@ public interface RemoteSysFileService {
      * @return
      */
     SysFileEntity getFileIdByFileName(String fileName);
+
+    SysFileEntity getFileByFileId(String fileId);
 }

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.grgbanking.counter.common.core.util.PageUtils;
 import com.grgbanking.counter.csr.entity.GrgFileManagerEntity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,6 +18,8 @@ public interface GrgFileManagerService extends IService<GrgFileManagerEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
 
-    GrgFileManagerEntity getByCustomerId(String customerId);
+    List<String> getByCustomerId(String customerId);
+
+    List<String> getBySessionId(String sessionId);
 }
 

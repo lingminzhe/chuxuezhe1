@@ -9,8 +9,11 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 @DubboService
 public class RemoteFileMgrServiceImpl implements RemoteFileMgrService {
+
     @Autowired
     private GrgFileManagerService grgFileManagerService;
 
@@ -27,6 +30,11 @@ public class RemoteFileMgrServiceImpl implements RemoteFileMgrService {
     public GrgFileMgrEntity getByFileName(String fileName) {
 //        FileDTO fileDTO = remoteOssService.queryFileInfo(fileName);
 //        System.out.println(fileDTO);
+        return null;
+    }
+
+    @Override
+    public List<String> getFileIdBySessionId(String fileId) {
         return null;
     }
 }

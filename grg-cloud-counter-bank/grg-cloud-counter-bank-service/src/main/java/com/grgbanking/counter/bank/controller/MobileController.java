@@ -1,6 +1,6 @@
 package com.grgbanking.counter.bank.controller;
 
-import com.grgbanking.counter.bank.MobileSmsVo;
+import com.grgbanking.counter.bank.vo.MobileSmsVo;
 import com.grgbanking.counter.bank.service.MobileService;
 import com.grgbanking.counter.common.core.util.Resp;
 import io.swagger.annotations.Api;

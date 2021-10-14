@@ -26,4 +26,11 @@ public class RemoteSysFileServiceImpl implements RemoteSysFileService {
         SysFileEntity one = sysFileService.getOne(new QueryWrapper<SysFileEntity>().eq("file_name", fileName));
         return one;
     }
+
+    @Override
+    public SysFileEntity getFileByFileId(String fileId) {
+        SysFileEntity one = sysFileService.getOne(new QueryWrapper<SysFileEntity>().eq("id", fileId));
+
+        return one;
+    }
 }

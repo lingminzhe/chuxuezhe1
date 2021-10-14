@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.grgbanking.counter.csr.entity.GrgFileManagerEntity;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * 附件管理表
  * 
@@ -14,5 +16,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface GrgFileManagerDao extends BaseMapper<GrgFileManagerEntity> {
 
-    GrgFileManagerEntity getByCustomerId(String customerId);
+    List<GrgFileManagerEntity> getByCustomerId(String customerId);
 }

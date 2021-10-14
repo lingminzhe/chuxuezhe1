@@ -31,7 +31,7 @@ import java.util.Map;
 @Api(tags = "座席端服务信息")
 @RestController
 @RequestMapping("/empservice")
-public class GrgEmployeeServiceController {
+public class GrgEmployeeController {
 
     @Autowired
     private GrgEmployeeService grgEmployeeService;
@@ -79,6 +79,7 @@ public class GrgEmployeeServiceController {
      * 获取所有空闲座席
      */
     //TODO 分配座席问题
+    @Deprecated
     @ApiOperation(value = "获取所有空闲座席")
     @GetMapping("/getAllFreeEmployee")
     //@RequiresPermissions("csr:grgemployeeservice:info")

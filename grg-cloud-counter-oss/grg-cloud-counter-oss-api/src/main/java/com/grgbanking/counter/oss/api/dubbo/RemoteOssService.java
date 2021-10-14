@@ -3,6 +3,8 @@ package com.grgbanking.counter.oss.api.dubbo;
 import com.grgbanking.counter.csr.api.entity.GrgFileMgrEntity;
 import com.grgbanking.counter.oss.api.dto.FileDTO;
 
+import java.util.List;
+
 public interface RemoteOssService {
 
     /**
@@ -12,5 +14,11 @@ public interface RemoteOssService {
      */
     FileDTO upload(byte[] fileByte, String md5, String original, long size, String contentType, GrgFileMgrEntity grgFileMgrEntity, String createUser);
 
-    FileDTO queryFileInfo(String fileName);
+    List<FileDTO> queryFileInfoByCustomerId(String customerId);
+
+    List<FileDTO> queryFileInfoBySessionId(String SessionId);
+
+    FileDTO queryFileInfoByFileName(String fileName);
+
+//    List<FileDTO> queryFileInfo(FileDTO fileId);
 }

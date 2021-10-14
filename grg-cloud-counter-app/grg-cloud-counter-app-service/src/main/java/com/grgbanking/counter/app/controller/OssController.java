@@ -1,6 +1,6 @@
 package com.grgbanking.counter.app.controller;
 
-import com.grgbanking.counter.app.vo.GrgCustomerVo;
+import com.grgbanking.counter.app.vo.SimpleCustomerVo;
 import com.grgbanking.counter.bank.api.dubbo.RemoteCusInfoService;
 import com.grgbanking.counter.bank.api.entity.GrgCusInfoEntity;
 import com.grgbanking.counter.common.core.util.FileUtil;
@@ -51,15 +51,9 @@ public class OssController {
     @ApiOperation(value = "文件上传接口")
     @PostMapping("/file/upload")
     public Resp upload(@RequestBody MultipartFile file, GrgFileMgrEntity grgFileMgrEntity, String createUser) {
-        uploadFile(file, grgFileMgrEntity, createUser);
+        FileDTO fileDTO = uploadFile(file, grgFileMgrEntity, createUser);
 
-        return Resp.success();
-//        byte[] fileByte = IOUtils.toByteArray(file.getInputStream());
-//        String md5 = FileUtil.getFileMd5(file);
-//        String original = file.getOriginalFilename();
-//        long size = file.getSize();
-//        String contentType = file.getContentType();
-//        return Resp.success(remoteOssService.upload(fileByte, md5, original, size, contentType, grgFileMgrEntity,createUser));
+        return Resp.success(fileDTO,"文件上传成功");
 
     }
 
@@ -73,34 +67,37 @@ public class OssController {
      */
     @Transactional
     @SneakyThrows
-    @ApiOperation(value = "上传身份证正反面接口")
+    @ApiOperation(value = "上传身份证正反面接口",tags = "上传身份证正反面接口 获取上传图片url 。若传入的身份证在数据库上有记录，则获取该记录")
     @PostMapping("/file/uploadIDCard")
-    public Resp uploadIdCard(@RequestBody MultipartFile file1, MultipartFile file2, GrgFileMgrEntity grgFileMgrEntity, String createUser, GrgCustomerVo grgCustomerVo) {
-        if(file1.isEmpty() || file2.isEmpty()) {
+    public Resp uploadIdCard(@RequestBody MultipartFile file1, MultipartFile file2, GrgFileMgrEntity grgFileMgrEntity, String createUser, SimpleCustomerVo grgCustomerVo) {
+        if(null==file1 || null==file2){
             return Resp.failed("需上传身份证正反面");
         }
         FileDTO uploadFile1 = uploadFile(file1, grgFileMgrEntity, createUser);
         FileDTO uploadFile2 = uploadFile(file2, grgFileMgrEntity, createUser);
-        log.info("文件上传成功,文件名为:{}{}"+uploadFile1.getFileName(),uploadFile2.getFileName());
+        log.info("文件上传成功,文件名为:{},{}"+uploadFile1.getFileName(),uploadFile2.getFileName());
         List<FileDTO> list = new ArrayList<>();
         list.add(uploadFile1);
         list.add(uploadFile2);
         Map<String, Object> map = new HashMap(8);
         map.put("IdCardImages",list);
 
-
         //1、判断身份证号码是否为空
-        if (grgCustomerVo.getIdentifynumber()!=null ) {
+        if (grgCustomerVo.getIdentifyNumber()!=null ) {
             //2、若身份证号码不为空 根据该身份证查询数据库是否有记录
-            GrgCusInfoEntity entity = remoteCusInfoService.getByCardNoOrIdNo(grgCustomerVo.getIdentifynumber());
+            GrgCusInfoEntity entity = remoteCusInfoService.getByCardNoOrIdNo(grgCustomerVo.getIdentifyNumber());
             //2.1 若有记录则直接返回该用户数据
             if (entity!=null){
                 System.out.println(entity);
                 map.put("CustomerInfo",entity);
-            }else {
-                //TODO 2.2系统没有该用户信息 将该用户信息存入系统
-                log.info("录入新用户信息");
             }
+//            else {
+//                //TODO 2.2系统没有该用户信息 将该用户信息存入系统
+//                entity = new GrgCusInfoEntity();
+//                BeanUtils.copyProperties(grgCustomerVo,entity);
+//                System.out.println(entity);
+//                log.info("录入新用户信息");
+//            }
         }else {
             return Resp.failed("身份证号码为空");
         }
@@ -123,7 +120,7 @@ public class OssController {
         String original = file.getOriginalFilename();
         long size = file.getSize();
         String contentType = file.getContentType();
-        FileDTO upload = remoteOssService.upload(fileByte, md5, original, size, contentType, grgFileMgrEntity, createUser);
+        FileDTO upload = remoteOssService.upload(fileByte,md5, original, size, contentType, grgFileMgrEntity, createUser);
         return upload;
     }
 

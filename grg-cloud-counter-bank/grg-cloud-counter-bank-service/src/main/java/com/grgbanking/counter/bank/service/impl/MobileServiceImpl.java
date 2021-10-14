@@ -1,11 +1,10 @@
 package com.grgbanking.counter.bank.service.impl;
 
-import cn.hutool.core.lang.Console;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.http.Header;
 import cn.hutool.http.HttpRequest;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
-import com.grgbanking.counter.bank.MobileSmsVo;
+import com.grgbanking.counter.bank.vo.MobileSmsVo;
 import com.grgbanking.counter.bank.service.MobileService;
 import com.grgbanking.counter.common.core.constant.CacheConstants;
 import com.grgbanking.counter.common.core.constant.SecurityConstants;
@@ -29,7 +28,6 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Service
 @AllArgsConstructor
-
 public class MobileServiceImpl implements MobileService {
 
 
@@ -42,11 +40,14 @@ public class MobileServiceImpl implements MobileService {
 	 */
 	@Override
 	public Resp sendSmsCode(String mobile) {
-
-		Object codeObj = redisTemplate.opsForValue().get(CacheConstants.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + StringPool.AT + mobile);
+		String key = CacheConstants.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + StringPool.AT + mobile;
+		Object codeObj = redisTemplate.opsForValue().get(key);
 		if (codeObj != null) {
+			//TODO 过期时间查询
+			Long expire = redisTemplate.opsForValue().getOperations().getExpire(key, TimeUnit.SECONDS);
+
 			log.info("手机号验证码未过期:{}，{}", mobile, codeObj);
-			return Resp.success(Boolean.FALSE, "验证码发送过频繁");
+			return Resp.success(Boolean.FALSE, "验证码发送过频繁").setCode(300);
 		}
 		//验证码
 		String code = RandomUtil.randomNumbers(Integer.parseInt(SecurityConstants.CODE_SIZE));
@@ -116,7 +117,7 @@ public class MobileServiceImpl implements MobileService {
 				//超时，毫秒
 				.timeout(20000)
 				.execute().body();
-		Console.log(result2);
+		log.info(result2);
 	}
 
 }

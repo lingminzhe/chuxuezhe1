@@ -7,7 +7,7 @@
     <resultMap type="com.grgbanking.counter.csr.entity.GrgFileManagerEntity" id="grgFileManagerMap">
         <result property="id" column="id"/>
         <result property="customerId" column="customer_id"/>
-        <result property="fileType" column="file_type"/>
+        <result property="fileBusiType" column="file_type"/>
         <result property="fileId" column="file_id"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>

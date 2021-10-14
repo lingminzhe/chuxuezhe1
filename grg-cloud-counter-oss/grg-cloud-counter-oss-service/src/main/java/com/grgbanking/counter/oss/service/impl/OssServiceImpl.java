@@ -26,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.PostConstruct;
 import java.io.ByteArrayInputStream;
 import java.util.Calendar;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -100,6 +101,13 @@ public class OssServiceImpl implements OssService {
     public boolean deleteFile(String fileName) {
         amazonS3.deleteObject(ossProperties.getBucketName(), fileName);
         return true;
+    }
+
+    @Override
+    public List<FileDTO> listFileInfo(String fileId) {
+
+
+        return null;
     }
 
 

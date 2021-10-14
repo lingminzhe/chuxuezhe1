@@ -9,8 +9,8 @@ import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
-
 
 
 /**
@@ -51,7 +51,7 @@ public class GrgFileManagerController {
     @GetMapping("/info/{customerId}")
 //    @RequiresPermissions("csr:grgfilemanager:info")
     public Resp info(@PathVariable("customerId") String customerId){
-		GrgFileManagerEntity grgFileManager = grgFileManagerService.getByCustomerId(customerId);
+        List<String> grgFileManager = grgFileManagerService.getByCustomerId(customerId);
 
         return Resp.success(grgFileManager, "grgFileManager");
     }

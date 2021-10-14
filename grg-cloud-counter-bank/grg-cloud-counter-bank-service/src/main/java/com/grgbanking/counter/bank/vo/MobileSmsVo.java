@@ -1,4 +1,4 @@
-package com.grgbanking.counter.bank;
+package com.grgbanking.counter.bank.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
