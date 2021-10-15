@@ -14,6 +14,7 @@ import com.grgbanking.counter.common.socket.socket.constant.SocketApiNoConstants
 import com.grgbanking.counter.common.socket.socket.constant.SocketConnectStatusEnum;
 import com.grgbanking.counter.common.socket.socket.entity.EmployeeService;
 import com.grgbanking.counter.common.socket.socket.service.SocketAbstractService;
+import com.grgbanking.counter.csr.service.TencentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.Cursor;
@@ -41,6 +42,9 @@ public class EmployeeLineupServiceImpl extends LineupAbstractService {
 
     @Autowired
     private SocketAbstractService socketService;
+
+    @Autowired
+    private TencentService tencentService;
 
     @Override
     public void login(String clientId) {
@@ -98,10 +102,15 @@ public class EmployeeLineupServiceImpl extends LineupAbstractService {
         EmployeeService employeeService = new EmployeeService();
         employeeService.setEmployeeId(employeeId);
         employeeService.setCustomerId(customerId);
+        employeeService.setUserSig(tencentService.getUserSig(customerId));
         /**body只放坐席客户端id*/
         SocketParam<EmployeeService> param = SocketParam.success(head, employeeService);
         /**给APP服务发送提醒广播*/
         broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_APP, param);
+        /**通知当前坐席，有客户连接上了*/
+        employeeService.setUserSig(tencentService.getUserSig(employeeId));
+        param.setBody(employeeService);
+        socketService.sendMessage(employeeId, param);
         log.info("接入视频、绑定当前会话{}", customerId);
         //接入视频、绑定当前会话
         redisTemplate.opsForHash().put(LineupConstants.BUSI_SESSION_KEY, customerId, String.valueOf(UUIDUtils.idNumber()));
