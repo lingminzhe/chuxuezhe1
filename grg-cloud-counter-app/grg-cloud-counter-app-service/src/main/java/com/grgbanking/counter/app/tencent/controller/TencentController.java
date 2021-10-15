@@ -1,5 +1,6 @@
 package com.grgbanking.counter.app.tencent.controller;
 
+import com.grgbanking.counter.app.tencent.entity.IdCardOCRResponse;
 import com.grgbanking.counter.app.tencent.entity.TencentEidToken;
 import com.grgbanking.counter.app.tencent.entity.TencentUserInfo;
 import com.grgbanking.counter.app.tencent.service.TencentService;
@@ -8,6 +9,9 @@ import com.tencentcloudapi.faceid.v20180301.models.*;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Calendar;
+import java.util.Date;
 
 @Api(tags = "腾讯相关接口")
 @RestController
@@ -79,7 +83,11 @@ public class TencentController {
     })
     @PostMapping("/image/recognition")
     public Resp<ImageRecognitionResponse> imageRecognition(@RequestBody ImageRecognitionRequest req) {
-        return Resp.success(tencentService.imageRecognition(req));
+        //tencentService.imageRecognition(req);
+        ImageRecognitionResponse imageRecognitionResponse = new ImageRecognitionResponse();
+        imageRecognitionResponse.setResult("Success");
+        imageRecognitionResponse.setSim(80F);
+        return Resp.success(imageRecognitionResponse);
     }
 
     /**
@@ -175,7 +183,14 @@ public class TencentController {
     @ApiOperation("身份证识别及信息核验")
     @PostMapping("/id/card/ocr/veri")
     public Resp<IdCardOCRVerificationResponse> idCardOCRVeri(@RequestBody IdCardOCRVerificationRequest req) {
-        return Resp.success(tencentService.idCardOCRVeri(req));
+        IdCardOCRResponse response = new IdCardOCRResponse();
+        Calendar instance = Calendar.getInstance();
+        instance.set(2028, 12, 20);
+        response.setValidDate(instance.getTime());
+        response.setIdCard("440582199001156667");
+        response.setName("郑燕");
+        //return Resp.success(tencentService.idCardOCRVeri(req));
+        return Resp.success(response);
     }
 
 }

@@ -2,6 +2,7 @@ package com.grgbanking.counter.common.socket.socket.server;
 
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
+import com.corundumstudio.socketio.Transport;
 import com.grgbanking.counter.common.core.util.SocketParam;
 import com.grgbanking.counter.common.socket.lineup.service.LineupService;
 import com.grgbanking.counter.common.socket.socket.constant.SocketConnectStatusEnum;
@@ -55,8 +56,9 @@ public class SocketServer implements ApplicationContextAware {
     @PostConstruct
     private void startSocketServer() {
         socketServer.addConnectListener(client -> {
+            Transport transport = client.getTransport();
             String clientId = getClientId(client);
-            log.info("有终端连接上来，ClientId：{}", clientId);
+            log.info("有终端连接上来，ClientId：{}， transport为， {}", clientId, transport.getValue());
             if (!StringUtils.hasText(clientId)) {
                 log.info("有终端连接上来，没有传ClientId，断开连接");
                 client.disconnect();

@@ -34,7 +34,9 @@ public class VideoLineupRemindRedisBroadcastReceiverHandler extends RedisBroadca
     public void onMessage(String channel, SocketParam param) {
         RLock lock = redisLockTemplate.tryLock(LockNameEnum.CHECK_CUSTOMER_VIDEO_APPLY);
         lineupService.remind();
-        redisLockTemplate.unlock(lock);
+        if (lock.isLocked()){
+            redisLockTemplate.unlock(lock);
+        }
     }
 
 }
