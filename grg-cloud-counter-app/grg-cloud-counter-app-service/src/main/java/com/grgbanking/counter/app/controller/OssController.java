@@ -1,5 +1,6 @@
 package com.grgbanking.counter.app.controller;
 
+import com.alibaba.nacos.common.utils.StringUtils;
 import com.grgbanking.counter.app.vo.SimpleCustomerVo;
 import com.grgbanking.counter.bank.api.dubbo.RemoteCusInfoService;
 import com.grgbanking.counter.bank.api.entity.GrgCusInfoEntity;
@@ -16,7 +17,9 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.http.entity.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,10 +27,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
 
 /**
  * aws 对外提供服务端点
@@ -56,7 +59,17 @@ public class OssController {
     @SneakyThrows
     @ApiOperation(value = "文件上传接口")
     @PostMapping("/file/upload")
-    public Resp upload(@RequestBody MultipartFile file, GrgFileMgrEntity grgFileMgrEntity, String createUser) {
+    public Resp upload(@RequestBody MultipartFile file, GrgFileMgrEntity grgFileMgrEntity, String createUser,SimpleCustomerVo grgCustomerVo) {
+        byte[] bytes = file.getBytes();
+        System.out.println(bytes);
+        String sessionId = lineupAbstractService.findSessionId(grgCustomerVo.getCustomerId());
+        if (StringUtils.isNotBlank(sessionId)) {
+            grgFileMgrEntity.setSessionId(sessionId);
+        }else {
+            //临时id
+            grgFileMgrEntity.setSessionId("123456789");
+//            return Resp.failed("sessionId为空，请联系管理员");
+        }
         FileDTO fileDTO = uploadFile(file, grgFileMgrEntity, createUser);
 
         return Resp.success(fileDTO,"文件上传成功");
@@ -65,31 +78,43 @@ public class OssController {
 
     /**
      * 上传身份证正反面 及识别到的身份证信息
-     * @param file1 身份证正面
-     * @param file2 身份证反面
-     * @param grgFileMgrEntity
-     * @param createUser
+     * @param grgCustomerVo
      * @return
      */
     @Transactional
     @SneakyThrows
     @ApiOperation(value = "上传身份证正反面接口",tags = "上传身份证正反面接口 获取上传图片url 。若传入的身份证在数据库上有记录，则获取该记录")
     @PostMapping("/file/uploadIDCard")
-    public Resp uploadIdCard(@RequestBody MultipartFile file1, MultipartFile file2, GrgFileMgrEntity grgFileMgrEntity, String createUser, SimpleCustomerVo grgCustomerVo) {
-        if(null==file1 || null==file2){
+    public Resp uploadIdCard(@RequestBody SimpleCustomerVo grgCustomerVo) {
+        if(null==grgCustomerVo.getFile1() || null==grgCustomerVo.getFile2()){
             return Resp.failed("需上传身份证正反面");
         }
+
+        //获取身份证正反面
+        byte[] decode1 = Base64.getDecoder().decode(grgCustomerVo.getFile1());
+        MultipartFile file1 = getMultipartFile(decode1);
+        byte[] decode2 = Base64.getDecoder().decode(grgCustomerVo.getFile2());
+        MultipartFile file2 = getMultipartFile(decode2);
+
         //获取sessionId
         // 开发时使用的假数据
+        GrgFileMgrEntity grgFileMgrEntity = new GrgFileMgrEntity();
 //        grgFileMgrEntity.setSessionId("100001");
-        grgFileMgrEntity.setSessionId(lineupAbstractService.findSessionId(grgCustomerVo.getCustomerId()));
+        String sessionId = lineupAbstractService.findSessionId(grgCustomerVo.getCustomerId());
+        if (StringUtils.isNotBlank(sessionId)) {
+            grgFileMgrEntity.setSessionId(sessionId);
+        }else {
+            //临时id
+            grgFileMgrEntity.setSessionId("123456789");
+//            return Resp.failed("sessionId为空，请联系管理员");
+        }
         //身份证正面
         grgFileMgrEntity.setFileBusiType(FileBusiTypeConstants.ID_CARD_FRONT);
-        FileDTO uploadFile1 = uploadFile(file1, grgFileMgrEntity, createUser);
+        FileDTO uploadFile1 = uploadFile(file1, grgFileMgrEntity, grgCustomerVo.getCreateUser());
         //身份证反面
         grgFileMgrEntity.setFileBusiType(FileBusiTypeConstants.ID_CARD_BEHIND);
-        FileDTO uploadFile2 = uploadFile(file2, grgFileMgrEntity, createUser);
-        log.info("文件上传成功,文件名为:{},{}"+uploadFile1.getFileName(),uploadFile2.getFileName());
+        FileDTO uploadFile2 = uploadFile(file2, grgFileMgrEntity, grgCustomerVo.getCreateUser());
+        log.info("文件上传成功,文件名为:{}{}"+uploadFile1.getFileName(),uploadFile2.getFileName());
         //获取到的file信息存入map里
         List<FileDTO> list = new ArrayList<>();
         list.add(uploadFile1);
@@ -118,7 +143,18 @@ public class OssController {
         return Resp.success(map);
     }
 
-     /**
+    /**
+     * Base64转MultipartFile
+     * @param decode1
+     * @return
+     * @throws IOException
+     */
+    private MultipartFile getMultipartFile(byte[] decode1) throws IOException {
+        InputStream inputStream = new ByteArrayInputStream(decode1);
+        return new MockMultipartFile(ContentType.APPLICATION_OCTET_STREAM.toString(), inputStream);
+    }
+
+    /**
       * 公共参数抽取成一个方法
       * @param file
       * @param grgFileMgrEntity
