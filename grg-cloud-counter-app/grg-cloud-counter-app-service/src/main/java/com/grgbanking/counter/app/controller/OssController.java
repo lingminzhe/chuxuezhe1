@@ -3,6 +3,7 @@ package com.grgbanking.counter.app.controller;
 import com.grgbanking.counter.app.vo.SimpleCustomerVo;
 import com.grgbanking.counter.bank.api.dubbo.RemoteCusInfoService;
 import com.grgbanking.counter.bank.api.entity.GrgCusInfoEntity;
+import com.grgbanking.counter.common.core.constant.FileBusiTypeConstants;
 import com.grgbanking.counter.common.core.util.FileUtil;
 import com.grgbanking.counter.common.core.util.Resp;
 import com.grgbanking.counter.common.socket.lineup.service.impl.LineupAbstractService;
@@ -78,16 +79,15 @@ public class OssController {
         if(null==file1 || null==file2){
             return Resp.failed("需上传身份证正反面");
         }
-        //LineupAbstractService.findSessionId
         //获取sessionId
-        //TODO 开发时使用
+        // 开发时使用的假数据
 //        grgFileMgrEntity.setSessionId("100001");
         grgFileMgrEntity.setSessionId(lineupAbstractService.findSessionId(grgCustomerVo.getCustomerId()));
         //身份证正面
-        grgFileMgrEntity.setFileBusiType("101");
+        grgFileMgrEntity.setFileBusiType(FileBusiTypeConstants.ID_CARD_FRONT);
         FileDTO uploadFile1 = uploadFile(file1, grgFileMgrEntity, createUser);
         //身份证反面
-        grgFileMgrEntity.setFileBusiType("102");
+        grgFileMgrEntity.setFileBusiType(FileBusiTypeConstants.ID_CARD_BEHIND);
         FileDTO uploadFile2 = uploadFile(file2, grgFileMgrEntity, createUser);
         log.info("文件上传成功,文件名为:{},{}"+uploadFile1.getFileName(),uploadFile2.getFileName());
         //获取到的file信息存入map里
@@ -103,7 +103,6 @@ public class OssController {
             GrgCusInfoEntity entity = remoteCusInfoService.getByCardNoOrIdNo(grgCustomerVo.getIdentifyNumber());
             //2.1 若有记录则直接返回该用户数据
             if (entity!=null){
-                System.out.println(entity);
                 map.put("CustomerInfo",entity);
             }
 //            else {
