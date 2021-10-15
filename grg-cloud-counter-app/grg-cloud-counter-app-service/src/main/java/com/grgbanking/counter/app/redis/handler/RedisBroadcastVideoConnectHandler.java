@@ -20,9 +20,6 @@ public class RedisBroadcastVideoConnectHandler extends RedisBroadcastAbstractHan
     @Autowired
     private SocketAbstractService socketService;
 
-    @Autowired
-    private TencentService tencentService;
-
     @Override
     public String setApiNo() {
         return SocketApiNoConstants.VIDEO_CMD;
@@ -34,7 +31,6 @@ public class RedisBroadcastVideoConnectHandler extends RedisBroadcastAbstractHan
         if (body instanceof EmployeeService){
             EmployeeService employeeService = (EmployeeService) body;
             String customerId = employeeService.getCustomerId();
-            employeeService.setUserSig(tencentService.getUserSig(customerId));
             log.info("报文内容{}", employeeService);
             socketService.sendMessage(customerId,param);
         }

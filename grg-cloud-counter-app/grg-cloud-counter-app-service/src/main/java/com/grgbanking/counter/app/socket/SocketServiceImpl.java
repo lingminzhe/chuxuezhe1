@@ -30,7 +30,7 @@ public class SocketServiceImpl extends SocketAbstractService {
     public void connected(String clientId) {
         log.info("用户终端上线:{}", clientId);
         Long rank = lineupService.rank(clientId);
-        SocketParam<Object> linUp = SocketParam.success(SocketParamHead.success("linUp"));
+        SocketParam<Object> linUp = SocketParam.success(SocketParamHead.success("lineUp"));
         Map<String, Object> body = new HashMap<>();
         body.put("rank", rank);
         linUp.setBody(body);
