@@ -19,7 +19,7 @@ public class SocketParamHead implements Serializable {
 
     private String tranTime;
 
-    private String bizNo;
+    private String busiNo;
 
     private int code = CommonConstants.SUCCESS;
 
@@ -74,7 +74,7 @@ public class SocketParamHead implements Serializable {
     private static SocketParamHead result(String apiNo, String tranTime, String bizNo, int code, String msg) {
         SocketParamHead head = new SocketParamHead();
         head.setApiNo(apiNo);
-        head.setBizNo(bizNo);
+        head.setBusiNo(bizNo);
         head.setTranTime(tranTime);
         head.setCode(code);
         head.setMsg(msg);
