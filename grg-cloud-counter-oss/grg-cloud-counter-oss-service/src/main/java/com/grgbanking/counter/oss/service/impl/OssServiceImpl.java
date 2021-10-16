@@ -67,6 +67,8 @@ public class OssServiceImpl implements OssService {
         fileDTO.setEnable("1");
         fileDTO.setBucketName(ossProperties.getBucketName());
         fileDTO.setCreateUser(createUser);
+        fileDTO.setFileType(contentType);
+        fileDTO.setFileBusiType(grgFileMgrEntity.getFileBusiType());
 
         //先存进sys_file 生成id后与fileManager关联
         remoteSysFileService.save(fileDTO);

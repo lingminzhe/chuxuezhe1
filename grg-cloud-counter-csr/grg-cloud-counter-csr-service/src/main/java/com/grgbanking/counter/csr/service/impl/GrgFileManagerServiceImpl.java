@@ -9,6 +9,7 @@ import com.grgbanking.counter.csr.api.dubbo.RemoteFileMgrService;
 import com.grgbanking.counter.csr.dao.GrgFileManagerDao;
 import com.grgbanking.counter.csr.entity.GrgFileManagerEntity;
 import com.grgbanking.counter.csr.service.GrgFileManagerService;
+import com.grgbanking.counter.oss.api.dto.FileDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,24 +45,28 @@ public class GrgFileManagerServiceImpl extends ServiceImpl<GrgFileManagerDao, Gr
     }
 
     @Override
-    public List<String> getByCustomerId(String customerId) {
+    public List<FileDTO> getByCustomerId(String customerId) {
+
         List<GrgFileManagerEntity> entities = this.baseMapper.selectList(new QueryWrapper<GrgFileManagerEntity>().eq("customer_id", customerId));
         return getList(entities);
     }
 
     @Override
-    public List<String> getBySessionId(String sessionId) {
+    public List<FileDTO> getBySessionId(String sessionId) {
         List<GrgFileManagerEntity> entities = this.baseMapper.selectList(new QueryWrapper<GrgFileManagerEntity>().eq("session_id", sessionId));
 
         return getList(entities);
     }
 
-    private List<String> getList(List<GrgFileManagerEntity> entities) {
-        List<String> list = new ArrayList<>();
-        //得到的fileId
-        for (GrgFileManagerEntity entity : entities) {
-            list.add(entity.getFileId());
+    private List<FileDTO> getList(List<GrgFileManagerEntity> entities) {
+        List<FileDTO> list = new ArrayList<>();
+        for (GrgFileManagerEntity entity:entities) {
+            FileDTO fileDTO = new FileDTO();
+            fileDTO.setFileId(entity.getFileId());
+            fileDTO.setFileBusiType(entity.getFileBusiType());
+            list.add(fileDTO);
         }
+
         return list;
     }
 

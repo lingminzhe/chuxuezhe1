@@ -5,6 +5,7 @@ import com.grgbanking.counter.common.core.util.Resp;
 import com.grgbanking.counter.csr.api.dubbo.RemoteFileMgrService;
 import com.grgbanking.counter.csr.entity.GrgFileManagerEntity;
 import com.grgbanking.counter.csr.service.GrgFileManagerService;
+import com.grgbanking.counter.oss.api.dto.FileDTO;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,7 +52,7 @@ public class GrgFileManagerController {
     @GetMapping("/info/{customerId}")
 //    @RequiresPermissions("csr:grgfilemanager:info")
     public Resp info(@PathVariable("customerId") String customerId){
-        List<String> grgFileManager = grgFileManagerService.getByCustomerId(customerId);
+        List<FileDTO> grgFileManager = grgFileManagerService.getByCustomerId(customerId);
 
         return Resp.success(grgFileManager, "grgFileManager");
     }

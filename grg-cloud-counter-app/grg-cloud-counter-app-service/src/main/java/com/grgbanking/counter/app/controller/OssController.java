@@ -1,6 +1,7 @@
 package com.grgbanking.counter.app.controller;
 
 import com.alibaba.nacos.common.utils.StringUtils;
+import com.grgbanking.counter.app.dto.FileInfoDto;
 import com.grgbanking.counter.app.vo.SimpleCustomerVo;
 import com.grgbanking.counter.bank.api.dubbo.RemoteCusInfoService;
 import com.grgbanking.counter.bank.api.entity.GrgCusInfoEntity;
@@ -38,7 +39,7 @@ import java.util.*;
 @Slf4j
 @RestController
 @Api(value = "app", tags = "文件上传管理模块")
-@RequestMapping("/app")
+@RequestMapping("/file")
 public class OssController {
 
     @DubboReference
@@ -58,10 +59,9 @@ public class OssController {
      */
     @SneakyThrows
     @ApiOperation(value = "文件上传接口")
-    @PostMapping("/file/upload")
+    @PostMapping("/upload")
     public Resp upload(@RequestBody MultipartFile file, GrgFileMgrEntity grgFileMgrEntity, String createUser,SimpleCustomerVo grgCustomerVo) {
-        byte[] bytes = file.getBytes();
-        System.out.println(bytes);
+
         String sessionId = lineupAbstractService.findSessionId(grgCustomerVo.getCustomerId());
         if (StringUtils.isNotBlank(sessionId)) {
             grgFileMgrEntity.setSessionId(sessionId);
@@ -70,7 +70,7 @@ public class OssController {
             grgFileMgrEntity.setSessionId("123456789");
 //            return Resp.failed("sessionId为空，请联系管理员");
         }
-        FileDTO fileDTO = uploadFile(file, grgFileMgrEntity, createUser);
+        FileDTO fileDTO = ossUploadFile(file, grgFileMgrEntity, createUser);
 
         return Resp.success(fileDTO,"文件上传成功");
 
@@ -84,7 +84,7 @@ public class OssController {
     @Transactional
     @SneakyThrows
     @ApiOperation(value = "上传身份证正反面接口",tags = "上传身份证正反面接口 获取上传图片url 。若传入的身份证在数据库上有记录，则获取该记录")
-    @PostMapping("/file/uploadIDCard")
+    @PostMapping("/uploadIDCard")
     public Resp uploadIdCard(@RequestBody SimpleCustomerVo grgCustomerVo) {
         if(null==grgCustomerVo.getFile1() || null==grgCustomerVo.getFile2()){
             return Resp.failed("需上传身份证正反面");
@@ -105,15 +105,16 @@ public class OssController {
             grgFileMgrEntity.setSessionId(sessionId);
         }else {
             //临时id
-            grgFileMgrEntity.setSessionId("123456789");
+            grgFileMgrEntity.setSessionId("456789");
 //            return Resp.failed("sessionId为空，请联系管理员");
         }
         //身份证正面
         grgFileMgrEntity.setFileBusiType(FileBusiTypeConstants.ID_CARD_FRONT);
-        FileDTO uploadFile1 = uploadFile(file1, grgFileMgrEntity, grgCustomerVo.getCreateUser());
+        grgFileMgrEntity.setCustomerId(grgCustomerVo.getCustomerId());
+        FileDTO uploadFile1 = ossUploadFile(file1, grgFileMgrEntity, grgCustomerVo.getCreateUser());
         //身份证反面
         grgFileMgrEntity.setFileBusiType(FileBusiTypeConstants.ID_CARD_BEHIND);
-        FileDTO uploadFile2 = uploadFile(file2, grgFileMgrEntity, grgCustomerVo.getCreateUser());
+        FileDTO uploadFile2 = ossUploadFile(file2, grgFileMgrEntity, grgCustomerVo.getCreateUser());
         log.info("文件上传成功,文件名为:{}{}"+uploadFile1.getFileName(),uploadFile2.getFileName());
         //获取到的file信息存入map里
         List<FileDTO> list = new ArrayList<>();
@@ -140,8 +141,40 @@ public class OssController {
         }else {
             return Resp.failed("身份证号码为空");
         }
-        return Resp.success(map);
+        return Resp.success("上传成功");
     }
+
+    @SneakyThrows
+    @ApiOperation(value = "文件上传接口")
+    @PostMapping("/uploadFile")
+    public Resp uploadFile(@RequestBody List<FileInfoDto> fileDTO, String customerId){
+
+        List<FileDTO> list = new ArrayList<>();
+
+        for (FileInfoDto file:fileDTO) {
+            GrgFileMgrEntity grgFileMgrEntity = new GrgFileMgrEntity();
+            //1、获取Base64的文件
+            String fileBase64 = file.getFile();
+            byte[] decode1 = Base64.getDecoder().decode(fileBase64);
+            MultipartFile file1 = getMultipartFile(decode1);
+            //2、获取文件类型
+            String fileBusiType = file.getFileBusiType();
+            grgFileMgrEntity.setFileBusiType(fileBusiType);
+            //3、获取sessionId
+            // 开发时使用的假数据
+//        grgFileMgrEntity.setSessionId("100001");
+            String sessionId = lineupAbstractService.findSessionId(customerId);
+            grgFileMgrEntity.setCustomerId(customerId);
+            grgFileMgrEntity.setSessionId(sessionId);
+            //TODO 创建者
+            FileDTO uploadFile = ossUploadFile(file1, grgFileMgrEntity, "");
+            list.add(uploadFile);
+        }
+
+
+        return Resp.success(list);
+    }
+
 
     /**
      * Base64转MultipartFile
@@ -161,7 +194,7 @@ public class OssController {
       * @param createUser
       */
     @SneakyThrows
-    public FileDTO uploadFile( MultipartFile file, GrgFileMgrEntity grgFileMgrEntity, String createUser){
+    public FileDTO ossUploadFile( MultipartFile file, GrgFileMgrEntity grgFileMgrEntity, String createUser){
         byte[] fileByte = IOUtils.toByteArray(file.getInputStream());
         String md5 = FileUtil.getFileMd5(file);
         String original = file.getOriginalFilename();

@@ -37,4 +37,8 @@ public class FileDTO implements Serializable {
     private LocalDateTime updateTime;
 
     private Integer enabled;
+
+    private String fileBusiType;
+
+    private String fileId;
 }

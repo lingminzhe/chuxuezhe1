@@ -1,6 +1,8 @@
 package com.grgbanking.counter.csr.controller;
 
 import com.grgbanking.counter.common.core.util.Resp;
+import com.grgbanking.counter.common.socket.lineup.service.LineupService;
+import com.grgbanking.counter.common.socket.lineup.service.impl.LineupAbstractService;
 import com.grgbanking.counter.csr.service.GrgFileManagerService;
 import com.grgbanking.counter.iam.api.dubbo.RemoteSysFileService;
 import com.grgbanking.counter.iam.api.entity.SysFileEntity;
@@ -41,16 +43,29 @@ public class OssController {
     @DubboReference
     private RemoteSysFileService sysFileService;
 
+    @Autowired
+    private LineupService lineupService;
+
+    @Autowired
+    private LineupAbstractService lineupAbstractService;
+
     @Transactional
     @SneakyThrows
-    @ApiOperation(value = "根据客户id获取身份证正反面接口")
-    @PostMapping("/file/getIdCardImagesByCustomerId")
-    public Resp getIdCardImagesByCustomerId(@RequestBody Map<String, String> params){
+    @ApiOperation(value = "根据座席id获取客户身份证正反面接口")
+    @PostMapping("/file/getIdCardImagesByEmployeeId")
+    public Resp getIdCardImagesByEmployeeId(@RequestBody Map<String, String> params){
+
         //根据customerId查fileId
-        String customerId = params.get("customerId");
+        String employeeId = params.get("employeeId");
+        String customerId = lineupService.findCustomer(employeeId);
+//        String customerId = "10002";
+
+        String sessionId = lineupAbstractService.findSessionId(customerId);
+//        String sessionId = "456789";
         //判断传入的customerId是否为空
         if (customerId !=null){
-            List<String> list = fileManagerService.getByCustomerId(customerId);
+            //根据customerId 找到对应的fileId
+            List<FileDTO> list = fileManagerService.getBySessionId(sessionId);
             List<FileDTO> fileList = getFileDTO(list);
             if (fileList.size()==0){
                 return Resp.success("查询的id没有附件记录");
@@ -69,7 +84,7 @@ public class OssController {
         String sessionId = params.get("sessionId");
         if (sessionId != null) {
             //根据customerId查fileId
-            List<String> list = fileManagerService.getBySessionId(sessionId);
+            List<FileDTO> list = fileManagerService.getBySessionId(sessionId);
             List<FileDTO> fileList = getFileDTO(list);
             if (fileList.size()==0){
                 return Resp.success("查询的id没有附件记录");
@@ -81,17 +96,20 @@ public class OssController {
         }
     }
 
+
+
     /**
      * 获取fileDto 附件信息
      * @param list
      * @return
      */
-    private List<FileDTO> getFileDTO(List<String> list) {
+    private List<FileDTO> getFileDTO(List<FileDTO> list) {
         List<FileDTO> fileList = new ArrayList<>();
-        for (String fileId : list) {
-            SysFileEntity fileEntity = sysFileService.getFileByFileId(fileId);
+        for (FileDTO file : list) {
+            SysFileEntity fileEntity = sysFileService.getFileByFileId(file.getFileId());
             String fileName = fileEntity.getFileName();
             FileDTO fileDTO =  remoteOssService.queryFileInfoByFileName(fileName);
+            fileDTO.setFileBusiType(file.getFileBusiType());
             fileList.add(fileDTO);
         }
         return fileList;
