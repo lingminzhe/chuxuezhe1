@@ -23,5 +23,6 @@ public interface GrgFileManagerService extends IService<GrgFileManagerEntity> {
 
     List<FileDTO> getBySessionId(String sessionId);
 
+    List<FileDTO> getBySessionIdAndType(String sessionId, List<String> busiType);
 }
 

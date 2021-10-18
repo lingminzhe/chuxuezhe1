@@ -3,6 +3,9 @@ package com.grgbanking.counter.csr.controller;
 import com.grgbanking.counter.common.core.util.Resp;
 import com.grgbanking.counter.common.socket.lineup.service.LineupService;
 import com.grgbanking.counter.common.socket.lineup.service.impl.LineupAbstractService;
+import com.grgbanking.counter.csr.api.dto.UploadFileDTO;
+import com.grgbanking.counter.csr.api.dubbo.RemoteCsrOssService;
+import com.grgbanking.counter.csr.dto.GetFileDto;
 import com.grgbanking.counter.csr.service.GrgFileManagerService;
 import com.grgbanking.counter.iam.api.dubbo.RemoteSysFileService;
 import com.grgbanking.counter.iam.api.entity.SysFileEntity;
@@ -49,21 +52,27 @@ public class OssController {
     @Autowired
     private LineupAbstractService lineupAbstractService;
 
+    @Autowired
+    private RemoteCsrOssService csrOssService;
+
+    /**
+     *
+     * @param params
+     * @return
+     */
     @Transactional
     @SneakyThrows
     @ApiOperation(value = "根据座席id获取客户身份证正反面接口")
     @PostMapping("/file/getIdCardImagesByEmployeeId")
     public Resp getIdCardImagesByEmployeeId(@RequestBody Map<String, String> params){
-
-        //根据customerId查fileId
+        //根据employeeId找出
         String employeeId = params.get("employeeId");
         String customerId = lineupService.findCustomer(employeeId);
-//        String customerId = "10002";
-
         String sessionId = lineupAbstractService.findSessionId(customerId);
-//        String sessionId = "456789";
+//        String sessionId = "4567890";
+//        String customerId = "10002";
         //判断传入的customerId是否为空
-        if (customerId !=null){
+        if (sessionId !=null){
             //根据customerId 找到对应的fileId
             List<FileDTO> list = fileManagerService.getBySessionId(sessionId);
             List<FileDTO> fileList = getFileDTO(list);
@@ -74,26 +83,33 @@ public class OssController {
         }else {
             return Resp.failed("传入的customerId不能为空");
         }
-//        List<FileDTO> fileDTO = remoteOssService.queryFileInfoByCustomerId(customerId);
+//        List<UploadFileDTO> fileDTO = remoteOssService.queryFileInfoByCustomerId(customerId);
     }
 
+    /**
+     * 传入参数  employeeId   fileBusiType
+     * @param getFileDto
+     * @return
+     */
+    @Transactional
     @SneakyThrows
-    @ApiOperation(value = "根据SessionId获取身份证正反面接口")
-    @PostMapping("/file/getIdCardImagesBySessionId")
-    public Resp getIdCardImagesBySessionId(@RequestBody Map<String, String> params){
-        String sessionId = params.get("sessionId");
-        if (sessionId != null) {
-            //根据customerId查fileId
-            List<FileDTO> list = fileManagerService.getBySessionId(sessionId);
-            List<FileDTO> fileList = getFileDTO(list);
-            if (fileList.size()==0){
-                return Resp.success("查询的id没有附件记录");
-            }
-//        List<FileDTO> fileDTO = remoteOssService.queryFileInfoByCustomerId(customerId);
-            return Resp.success(fileList);
-        }else {
-            return Resp.failed("传入的customerId不能为空");
+    @ApiOperation(value = "根据座席id获取客户身份证正反面接口")
+    @PostMapping("/file/getFiles")
+    public Resp getFiles(@RequestBody GetFileDto fileDTO){
+
+        String customerId = lineupService.findCustomer(fileDTO.getEmployeeId());
+        List<String> busiType = fileDTO.getFileBusiType();
+
+        List<UploadFileDTO> uploadFileDTO = csrOssService.getFileByCustomerId(customerId,busiType);
+
+        if (uploadFileDTO==null){
+            return Resp.failed("文件获取失败");
         }
+        if (uploadFileDTO.size()==0){
+            return Resp.success("查无此用户的附件信息");
+        }
+
+        return Resp.success(uploadFileDTO,"获取附件成功");
     }
 
 

@@ -3,6 +3,7 @@ package com.grgbanking.counter.csr.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.grgbanking.counter.csr.entity.GrgFileManagerEntity;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ import java.util.List;
 public interface GrgFileManagerDao extends BaseMapper<GrgFileManagerEntity> {
 
     List<GrgFileManagerEntity> getByCustomerId(String customerId);
+
+    List<GrgFileManagerEntity> getBySessionIdAndType(@Param("sessionId") String sessionId, @Param("busiType")List<String> busiType);
 }

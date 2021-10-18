@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.grgbanking.counter.common.core.util.PageUtils;
 import com.grgbanking.counter.common.core.util.Query;
+import com.grgbanking.counter.csr.api.dto.UploadFileDTO;
 import com.grgbanking.counter.csr.api.dubbo.RemoteFileMgrService;
 import com.grgbanking.counter.csr.dao.GrgFileManagerDao;
 import com.grgbanking.counter.csr.entity.GrgFileManagerEntity;
@@ -56,6 +57,16 @@ public class GrgFileManagerServiceImpl extends ServiceImpl<GrgFileManagerDao, Gr
         List<GrgFileManagerEntity> entities = this.baseMapper.selectList(new QueryWrapper<GrgFileManagerEntity>().eq("session_id", sessionId));
 
         return getList(entities);
+    }
+
+    @Override
+    public List<FileDTO> getBySessionIdAndType(String sessionId, List<String> busiType) {
+//        List<GrgFileManagerEntity> entities = this.baseMapper.selectBatchIds(new QueryWrapper<GrgFileManagerEntity>()
+//                .eq("session_id", sessionId).eq("file_Busi_Type",busiType));
+        List<GrgFileManagerEntity> entities = fileManagerDao.getBySessionIdAndType(sessionId,busiType);
+
+        return getList(entities);
+//        return getList(entities);
     }
 
     private List<FileDTO> getList(List<GrgFileManagerEntity> entities) {

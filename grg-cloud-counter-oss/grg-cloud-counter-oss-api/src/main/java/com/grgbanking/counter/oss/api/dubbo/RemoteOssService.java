@@ -20,5 +20,5 @@ public interface RemoteOssService {
 
     FileDTO queryFileInfoByFileName(String fileName);
 
-//    List<FileDTO> queryFileInfo(FileDTO fileId);
+//    List<UploadFileDTO> queryFileInfo(UploadFileDTO fileId);
 }

@@ -15,6 +15,14 @@
     <select id="getByCustomerId" resultType="com.grgbanking.counter.csr.entity.GrgFileManagerEntity">
 
     </select>
+    <select id="getBySessionIdAndType" resultType="com.grgbanking.counter.csr.entity.GrgFileManagerEntity">
+        select * from grg_file_manager
+            where session_id = #{sessionId} and file_busi_type in
+        <foreach collection="busiType" item="item" index="index"
+                 open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
 
 
 </mapper>

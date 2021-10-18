@@ -28,7 +28,7 @@ public class RemoteFileMgrServiceImpl implements RemoteFileMgrService {
 
     @Override
     public GrgFileMgrEntity getByFileName(String fileName) {
-//        FileDTO fileDTO = remoteOssService.queryFileInfo(fileName);
+//        UploadFileDTO fileDTO = remoteOssService.queryFileInfo(fileName);
 //        System.out.println(fileDTO);
         return null;
     }

@@ -7,7 +7,7 @@ import lombok.Data;
  * @create: 2021-10-16
  */
 @Data
-public class FileInfoDto {
+public class FileInfoDTO {
 
     private String file;
     private String fileBusiType;

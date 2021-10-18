@@ -73,7 +73,7 @@ public class RemoteOssServiceImpl implements RemoteOssService {
 
 
 //    @Override
-//    public List<FileDTO> queryFileInfo(String fileId) {
+//    public List<UploadFileDTO> queryFileInfo(String fileId) {
 //        return ossService.listFileInfo(fileId);
 //    }
 }
