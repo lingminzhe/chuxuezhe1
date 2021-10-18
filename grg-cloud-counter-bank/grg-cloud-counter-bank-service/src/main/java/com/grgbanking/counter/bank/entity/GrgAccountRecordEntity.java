@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -18,6 +20,7 @@ import java.util.Date;
  */
 @Data
 @TableName("grg_account_record")
+@ApiModel
 public class GrgAccountRecordEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -29,6 +32,7 @@ public class GrgAccountRecordEntity implements Serializable {
 	/**
 	 * 账户id
 	 */
+	@ApiModelProperty(name = "accountId", value = "账户id")
 	private Integer accountId;
 	/**
 	 * 流水号
@@ -37,6 +41,7 @@ public class GrgAccountRecordEntity implements Serializable {
 	/**
 	 * 业务类型（1：账户密码解锁；2：云挂失；3：账户升级；4：账户降级）
 	 */
+	@ApiModelProperty(name = "businessType", value = "业务类型（1：账户密码解锁；2：云挂失；3：账户升级；4：账户降级；5：信用卡激活）")
 	private Integer businessType;
 	/**
 	 * 

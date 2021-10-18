@@ -1,5 +1,6 @@
 package com.grgbanking.counter.bank.controller;
 
+import com.grgbanking.counter.bank.entity.GrgAccountEntity;
 import com.grgbanking.counter.bank.entity.GrgAccountRecordEntity;
 import com.grgbanking.counter.bank.service.GrgAccountRecordService;
 import com.grgbanking.counter.common.core.util.Resp;
@@ -36,8 +37,8 @@ public class GrgAccountRecordController {
     @ApiOperation(value = "查询所有银行卡账户交易信息")
     @GetMapping("/list")
    //@grgAccountService("bank:grgaccountrecord:list")
-    public Resp list(@RequestParam Map<String, Object> params){
-        PageUtils page = grgAccountRecordService.queryPage(params);
+    public Resp<PageUtils<GrgAccountEntity>> list(@RequestParam Map<String, Object> params){
+        PageUtils<GrgAccountEntity> page = grgAccountRecordService.queryPage(params);
 
         return Resp.success(page,"page");
     }

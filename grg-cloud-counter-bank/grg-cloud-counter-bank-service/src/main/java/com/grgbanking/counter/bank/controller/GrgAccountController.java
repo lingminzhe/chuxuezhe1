@@ -43,8 +43,8 @@ public class GrgAccountController {
     @ApiOperation(value = "查询所有银行卡账户信息")
     @GetMapping("/list")
     //@grgAccountService("bank:grgaccount:list")
-    public Resp list(@RequestParam Map<String, Object> params){
-        PageUtils page = grgAccountService.queryPage(params);
+    public Resp<PageUtils<GrgAccountEntity>> list(@RequestParam Map<String, Object> params){
+        PageUtils<GrgAccountEntity> page = grgAccountService.queryPage(params);
 
         return Resp.success(page, "page");
     }

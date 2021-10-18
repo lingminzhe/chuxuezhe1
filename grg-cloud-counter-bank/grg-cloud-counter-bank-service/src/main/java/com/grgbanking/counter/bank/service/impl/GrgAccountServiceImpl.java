@@ -1,5 +1,9 @@
 package com.grgbanking.counter.bank.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.PropertyNamingStrategy;
+import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.nacos.common.utils.StringUtils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
@@ -13,6 +17,7 @@ import com.grgbanking.counter.common.data.util.PageUtils;
 import com.grgbanking.counter.common.data.util.Query;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,10 +28,16 @@ public class GrgAccountServiceImpl extends ServiceImpl<GrgAccountDao, GrgAccount
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         IPage<GrgAccountEntity> page = this.page(
-                new Query<GrgAccountEntity>().getPage(params),
-                new QueryWrapper<GrgAccountEntity>()
+                new Query<GrgAccountEntity>().getPage(params)
         );
-
+        params.remove("page");
+        params.remove("limit");
+        SerializeConfig config = new SerializeConfig();
+        config.propertyNamingStrategy = PropertyNamingStrategy.SnakeCase;
+        GrgAccountEntity accountEntity = JSON.parseObject(JSON.toJSONString(params), GrgAccountEntity.class);
+        String s = JSON.toJSONString(accountEntity, config);
+        params = JSON.parseObject(s, Map.class);
+        page.setRecords(baseMapper.selectList(new QueryWrapper<GrgAccountEntity>().allEq(params, false)));
         return new PageUtils(page);
     }
 
