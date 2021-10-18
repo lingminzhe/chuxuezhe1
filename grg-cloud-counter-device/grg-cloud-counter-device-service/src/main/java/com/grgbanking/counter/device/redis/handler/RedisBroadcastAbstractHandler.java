@@ -15,7 +15,7 @@ public abstract class RedisBroadcastAbstractHandler implements RedisBroadcastHan
      */
     @Override
     public String setChannel() {
-        return RedisBroadcastConstants.BROADCAST_CHANNEL_DEVICE;
+        return RedisBroadcastConstants.BROADCAST_CHANNEL_APP;
     }
 
 }
