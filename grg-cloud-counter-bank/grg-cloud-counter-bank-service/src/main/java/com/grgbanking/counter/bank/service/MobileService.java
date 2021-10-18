@@ -1,7 +1,7 @@
 package com.grgbanking.counter.bank.service;
 
 
-import com.grgbanking.counter.bank.vo.MobileSmsVo;
+import com.grgbanking.counter.bank.api.vo.MobileSmsVo;
 import com.grgbanking.counter.common.core.util.Resp;
 
 /**
