@@ -8,9 +8,10 @@ import java.io.Serializable;
 @Data
 public class CreditCardEntity implements Serializable {
 
-    @NotNull(message = "激活码必须提交")
+    @NotNull(message = "Id必须提交")
     private String accountId;
 
+    @NotNull(message = "激活码必须提交")
     private String cvvCode;
 
 }
