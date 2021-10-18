@@ -40,6 +40,9 @@ public class SocketApiNoConstants {
      */
     public static final String QUERY_WAITING_RANK = "query_waiting_rank";
 
-
+    /**
+     * 激活码校验
+     */
+    public static final String ACTIVATION_CHECK = "activation_check";
 
 }
