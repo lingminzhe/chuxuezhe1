@@ -23,10 +23,7 @@ import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
@@ -73,7 +70,7 @@ public class CusBusiController {
     }
 
     @ApiOperation("激活码校验")
-    @GetMapping("/verify/activation")
+    @PostMapping("/verify/activation")
     public Resp<String> validateActivationCode(@RequestBody @Validated CreditCardEntity creditCardEntity) {
         HashMap<Object, Object> map = new HashMap<>();
         Boolean tag = remoteCusAccountService.acvCard(creditCardEntity);
@@ -93,7 +90,7 @@ public class CusBusiController {
     }
 
     @ApiOperation("验证码校验")
-    @GetMapping("/verify/auth")
+    @PostMapping("/verify/auth")
     public Resp<String> validateAuthCode(@RequestBody MobileSmsVo mobileSmsVo) {
         HashMap<Object, Object> map = new HashMap<>();
         boolean flag = remoteMobileService.verifySmsCode(mobileSmsVo);
