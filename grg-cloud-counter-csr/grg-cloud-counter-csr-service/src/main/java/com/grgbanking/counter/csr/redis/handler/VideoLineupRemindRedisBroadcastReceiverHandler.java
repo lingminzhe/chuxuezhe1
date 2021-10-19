@@ -2,6 +2,7 @@ package com.grgbanking.counter.csr.redis.handler;
 
 import com.grgbanking.counter.common.core.util.SocketParam;
 import com.grgbanking.counter.common.lock.components.RedisLockTemplate;
+import com.grgbanking.counter.common.lock.enums.LockDurationEnum;
 import com.grgbanking.counter.common.lock.enums.LockNameEnum;
 import com.grgbanking.counter.common.socket.lineup.service.LineupService;
 import com.grgbanking.counter.common.socket.socket.constant.SocketApiNoConstants;
@@ -32,9 +33,9 @@ public class VideoLineupRemindRedisBroadcastReceiverHandler extends RedisBroadca
 
     @Override
     public void onMessage(String channel, SocketParam param) {
-        RLock lock = redisLockTemplate.tryLock(LockNameEnum.CHECK_CUSTOMER_VIDEO_APPLY);
-        lineupService.remind();
+        RLock lock = redisLockTemplate.tryLock(LockNameEnum.CHECK_CUSTOMER_VIDEO_APPLY, LockDurationEnum.FIVE_SECOND);
         if (lock.isLocked()){
+            lineupService.remind();
             redisLockTemplate.unlock(lock);
         }
     }

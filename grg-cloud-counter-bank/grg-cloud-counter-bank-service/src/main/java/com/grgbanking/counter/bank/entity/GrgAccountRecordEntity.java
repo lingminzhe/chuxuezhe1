@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -30,19 +31,29 @@ public class GrgAccountRecordEntity implements Serializable {
 	@TableId
 	private Integer id;
 	/**
-	 * 账户id
-	 */
-	@ApiModelProperty(name = "accountId", value = "账户id")
-	private Integer accountId;
-	/**
 	 * 流水号
 	 */
 	private String serialNumber;
 	/**
-	 * 业务类型（1：账户密码解锁；2：云挂失；3：账户升级；4：账户降级）
+	 * 卡号
 	 */
-	@ApiModelProperty(name = "businessType", value = "业务类型（1：账户密码解锁；2：云挂失；3：账户升级；4：账户降级；5：信用卡激活）")
-	private Integer businessType;
+	@ApiModelProperty(name = "cardNo", value = "卡号")
+	private String cardNo;
+	/**
+	 * 商户名称
+	 */
+	@ApiModelProperty(name = "merchant", value = "商户名称")
+	private String merchant;
+	/**
+	 * 金额
+	 */
+	@ApiModelProperty(name = "amount", value = "金额")
+	private BigDecimal amount;
+	/**
+	 * 交易状态
+	 */
+	@ApiModelProperty(name = "txnStatus", value = "交易状态")
+	private String txnStatus;
 	/**
 	 * 
 	 */
