@@ -136,11 +136,10 @@ public class OssController {
             grgFileMgrEntity.setFileBusiType(fileBusiType);
             //3、获取sessionId
             // 开发时使用的假数据
-            String sessionId = "1018";
-//            String sessionId = lineupAbstractService.findSessionId(fileDto.getCustomerId());
+//            String sessionId = "1019";
+            String sessionId = lineupAbstractService.findSessionId(fileDto.getCustomerId());
             grgFileMgrEntity.setSessionId(sessionId);
             grgFileMgrEntity.setCustomerId(fileDto.getCustomerId());
-
             //TODO 创建者
             ossUploadFile(file1, grgFileMgrEntity, "");
         }
@@ -167,13 +166,13 @@ public class OssController {
       * @param createUser
       */
     @SneakyThrows
-    public com.grgbanking.counter.oss.api.dto.FileDTO ossUploadFile(MultipartFile file, GrgFileMgrEntity grgFileMgrEntity, String createUser){
+    public FileDTO ossUploadFile(MultipartFile file, GrgFileMgrEntity grgFileMgrEntity, String createUser){
         byte[] fileByte = IOUtils.toByteArray(file.getInputStream());
         String md5 = FileUtil.getFileMd5(file);
         String original = file.getOriginalFilename();
         long size = file.getSize();
         String contentType = file.getContentType();
-        com.grgbanking.counter.oss.api.dto.FileDTO upload = remoteOssService.upload(fileByte,md5, original, size, contentType, grgFileMgrEntity, createUser);
+        FileDTO upload = remoteOssService.upload(fileByte,md5, original, size, contentType, grgFileMgrEntity, createUser);
         return upload;
     }
 

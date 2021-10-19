@@ -1,9 +1,12 @@
 package com.grgbanking.counter.iam.controller;
 
 
+import cn.hutool.core.util.StrUtil;
 import com.grgbanking.counter.common.core.util.PageUtils;
 import com.grgbanking.counter.common.core.util.Resp;
 import com.grgbanking.counter.iam.api.entity.SysDictEntity;
+import com.grgbanking.counter.iam.api.entity.SysDictItemEntity;
+import com.grgbanking.counter.iam.service.SysDictItemService;
 import com.grgbanking.counter.iam.service.SysDictService;
 import com.grgbanking.counter.iam.vo.DictWithItemVo;
 import io.swagger.annotations.Api;
@@ -31,6 +34,9 @@ public class SysDictController {
     @Autowired
     private SysDictService sysDictService;
 
+    @Autowired
+    private SysDictItemService sysDictItemService;
+
     /**
      * 列表
      */
@@ -52,6 +58,23 @@ public class SysDictController {
         List<Map<String, Map<String, String>>> list = sysDictService.listDictWithItem();
 
         return Resp.success(list," 数据字典");
+    }
+
+    /**
+     * 根据字典type 找到对应的字典列表
+     * @param dict
+     * @return
+     */
+    @PostMapping("/getDictItemByType")
+    public Resp getDictItemByType(@RequestBody DictWithItemVo dict){
+        String type = dict.getType();
+        if (StrUtil.isNotEmpty(type)) {
+            List<SysDictItemEntity> entities = sysDictItemService.getDictItemByType(type);
+            return Resp.success(entities);
+        }
+        return Resp.failed("查不到当前字段,请联系管理员添加");
+
+
     }
 
     /**

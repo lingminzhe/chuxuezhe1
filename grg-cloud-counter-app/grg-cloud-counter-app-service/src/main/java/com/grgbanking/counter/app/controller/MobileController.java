@@ -32,11 +32,15 @@ public class MobileController {
     @ApiOperation(value = "发送短信")
     @GetMapping("/{mobile}")
     public Resp sendSmsCode(@PathVariable String mobile) {
-        boolean b = mobileService.sendSmsCode(mobile);
-        if (b){
-            return Resp.success("短信发送成功");
-        }else {
-            return Resp.failed("短信发送失败");
+        //11位手机号码
+        if (mobile.length()==11) {
+            boolean b = mobileService.sendSmsCode(mobile);
+            if (b) {
+                return Resp.success("短信发送成功");
+            } else {
+                return Resp.failed("短信发送失败");
+            }
         }
+        return Resp.failed("输入的手机号码须为11位");
     }
 }

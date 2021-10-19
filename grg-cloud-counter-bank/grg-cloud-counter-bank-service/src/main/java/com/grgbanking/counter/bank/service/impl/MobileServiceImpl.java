@@ -33,7 +33,7 @@ public class MobileServiceImpl implements RemoteMobileService {
 	private final RedisTemplate redisTemplate;
 
 	/**
-	 * 发送手机验证码 TODO: 调用短信网关发送验证码,测试返回前端
+	 * 发送手机验证码
 	 * @param mobile mobile
 	 * @return code
 	 */
@@ -89,10 +89,8 @@ public class MobileServiceImpl implements RemoteMobileService {
 	 * @throws IOException
 	 */
 	public void getSmsApi(String mobile,String code) throws IOException {
-
 		String url = "http://oa.grgbanking.com/interface/sms/phone_msg.php";
 		String f = "ycyh";
-
 		//生成随机16位字符串
 		String randomString = RandomUtil.randomString(16);
 		long millis = System.currentTimeMillis();

@@ -45,8 +45,8 @@ public class RemoteCsrOssServiceImpl implements RemoteCsrOssService {
     @Override
     public List<UploadFileDTO> getFileByCustomerId(String customerId, List<String> busiType) {
 
-//        String sessionId = lineupAbstractService.findSessionId(customerId);
-        String sessionId = "1018";
+        String sessionId = lineupAbstractService.findSessionId(customerId);
+//        String sessionId = "1018";
         if (sessionId !=null){
             //根据customerId 找到对应的fileId
             List<FileDTO> list = fileManagerService.getBySessionIdAndType(sessionId,busiType);

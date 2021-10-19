@@ -1,6 +1,8 @@
 package com.grgbanking.counter.iam.controller;
 
 
+import com.grgbanking.counter.iam.service.SysDictItemService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/sys/dict/item")
 public class SysDictItemController {
+
+    @Autowired
+    private SysDictItemService sysDictItemService;
+
+
 
 }
 
