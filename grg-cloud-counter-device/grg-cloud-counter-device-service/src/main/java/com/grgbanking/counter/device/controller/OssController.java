@@ -43,7 +43,6 @@ public class OssController {
 
     /**
      * 上传文件
-     *
      * @param file
      * @return
      */
@@ -84,7 +83,6 @@ public class OssController {
         Map<String, Object> map = new HashMap();
         map.put("身份证图片信息",list);
 
-
         //1、判断身份证号码是否为空
         if (grgCustomerVo.getIdentifynumber()!=null ) {
             //2、若身份证号码不为空 根据该身份证查询数据库是否有记录
@@ -96,7 +94,6 @@ public class OssController {
             }else {
                 //TODO 2.2系统没有该用户信息 将该用户信息存入系统
                 log.info("录入新用户信息");
-
             }
         }else {
             return Resp.failed("身份证号码为空");

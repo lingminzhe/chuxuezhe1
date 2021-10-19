@@ -1,11 +1,13 @@
 package com.grgbanking.counter.csr.api.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
 
+@TableName("grg_busi_info")
 @Data
 public class GrgCusBusiInfoEntity implements Serializable {
 

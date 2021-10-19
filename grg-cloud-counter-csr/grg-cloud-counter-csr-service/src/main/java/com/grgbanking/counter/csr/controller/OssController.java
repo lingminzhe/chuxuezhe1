@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author: Ye Kaitao
@@ -99,20 +100,39 @@ public class OssController {
 
         String customerId = lineupService.findCustomer(fileDTO.getEmployeeId());
         List<String> busiType = fileDTO.getFileBusiType();
-
         List<UploadFileDTO> uploadFileDTO = csrOssService.getFileByCustomerId(customerId,busiType);
-
         if (uploadFileDTO==null){
             return Resp.failed("文件获取失败");
         }
         if (uploadFileDTO.size()==0){
             return Resp.success("查无此用户的附件信息");
         }
-
         return Resp.success(uploadFileDTO,"获取附件成功");
     }
+    /**
+     * 传入参数  employeeId   fileBusiType
+     * @param getFileDto
+     * @return
+     */
+    @Transactional
+    @SneakyThrows
+    @ApiOperation(value = "根据文件名获取附件接口")
+    @PostMapping("/file/getByFileName")
+    public Resp getByFileName(@RequestBody List<String> fileNames){
+        List<FileDTO> list = new ArrayList<>();
 
-
+        for (String file : fileNames) {
+            FileDTO uploadFileDTO = remoteOssService.queryFileInfoByFileName(file);
+            list.add(uploadFileDTO);
+        }
+        if (list==null){
+            return Resp.failed("文件获取失败");
+        }
+        if (list.size()==0){
+            return Resp.success("查无此用户的附件信息");
+        }
+        return Resp.success(list,"获取附件成功");
+    }
 
     /**
      * 获取fileDto 附件信息
