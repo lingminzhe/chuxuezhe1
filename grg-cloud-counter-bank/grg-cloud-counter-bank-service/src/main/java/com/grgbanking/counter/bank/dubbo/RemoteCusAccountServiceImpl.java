@@ -1,5 +1,6 @@
 package com.grgbanking.counter.bank.dubbo;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.grgbanking.counter.bank.api.dubbo.RemoteCusAccountService;
 import com.grgbanking.counter.bank.api.entity.CreditCardEntity;
 import com.grgbanking.counter.bank.entity.GrgAccountEntity;
@@ -15,7 +16,7 @@ public class RemoteCusAccountServiceImpl implements RemoteCusAccountService {
 
     @Override
     public Boolean acvCard(CreditCardEntity creditCardEntity) {
-        GrgAccountEntity grgAccountEntity = grgAccountService.getById(creditCardEntity.getAccountId());
+        GrgAccountEntity grgAccountEntity = grgAccountService.getOne(new QueryWrapper<GrgAccountEntity>().eq("card_no", creditCardEntity.getAccountId()));
         if (grgAccountEntity == null){
             return null;
         }else {
