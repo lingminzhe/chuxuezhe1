@@ -5,7 +5,9 @@ import com.grgbanking.counter.app.dto.CusAccountDto;
 import com.grgbanking.counter.app.tencent.service.TencentService;
 import com.grgbanking.counter.app.vo.CusAgentVideoVo;
 import com.grgbanking.counter.bank.api.dubbo.RemoteCusAccountService;
+import com.grgbanking.counter.bank.api.dubbo.RemoteMobileService;
 import com.grgbanking.counter.bank.api.entity.CreditCardEntity;
+import com.grgbanking.counter.bank.api.vo.MobileSmsVo;
 import com.grgbanking.counter.common.core.util.Resp;
 import com.grgbanking.counter.common.core.util.SocketParam;
 import com.grgbanking.counter.common.socket.broadcast.constant.RedisBroadcastConstants;
@@ -33,6 +35,8 @@ import java.util.HashMap;
 @RequestMapping("/busi")
 @Slf4j
 public class CusBusiController {
+    @DubboReference
+    RemoteMobileService remoteMobileService;
     @DubboReference
     RemoteCusAccountService remoteCusAccountService;
 
@@ -86,5 +90,24 @@ public class CusBusiController {
         log.info("cvvCode接口报文: {}", JSON.toJSONString(param));
         broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, param);
         return Resp.success("激活码校验成功");
+    }
+
+    @ApiOperation("验证码校验")
+    @GetMapping("/verify/auth")
+    public Resp<String> validateAuthCode(@RequestBody MobileSmsVo mobileSmsVo) {
+        HashMap<Object, Object> map = new HashMap<>();
+        boolean flag = remoteMobileService.verifySmsCode(mobileSmsVo);
+        if (false){
+            map.put("message", "验证码校验失败");
+            SocketParam param = SocketParam.success(map);
+            param.getHead().setApiNo(SocketApiNoConstants.AUTH_CHECK);
+            return Resp.failed("验证码校验失败");
+        }
+        map.put("message", "验证码校验成功");
+        SocketParam param = SocketParam.success(map);
+        param.getHead().setApiNo(SocketApiNoConstants.AUTH_CHECK);
+        log.info("authCode接口报文: {}", JSON.toJSONString(param));
+        broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, param);
+        return Resp.success("验证码校验成功");
     }
 }

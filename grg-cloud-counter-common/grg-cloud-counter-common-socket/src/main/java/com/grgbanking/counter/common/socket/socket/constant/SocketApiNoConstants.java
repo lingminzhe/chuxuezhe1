@@ -45,4 +45,8 @@ public class SocketApiNoConstants {
      */
     public static final String ACTIVATION_CHECK = "activation_check";
 
+    /**
+     * 验证码校验
+     */
+    public static final String AUTH_CHECK = "auth_check";
 }
