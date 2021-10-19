@@ -3,6 +3,7 @@ package com.grgbanking.counter.app.controller;
 import com.grgbanking.counter.bank.api.dubbo.RemoteMobileService;
 import com.grgbanking.counter.bank.api.vo.MobileSmsVo;
 import com.grgbanking.counter.common.core.util.Resp;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
  * @author: Ye Kaitao
  * @create: 2021-10-18
  */
+@Api(tags = "手机中心")
 @RestController
 @RequestMapping("/mobile")
 public class MobileController {

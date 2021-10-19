@@ -7,6 +7,7 @@ import com.grgbanking.counter.app.vo.CusAgentVideoVo;
 import com.grgbanking.counter.bank.api.dubbo.RemoteCusAccountService;
 import com.grgbanking.counter.bank.api.dubbo.RemoteMobileService;
 import com.grgbanking.counter.bank.api.entity.CreditCardEntity;
+import com.grgbanking.counter.bank.api.vo.BankCardVo;
 import com.grgbanking.counter.bank.api.vo.MobileSmsVo;
 import com.grgbanking.counter.common.core.util.Resp;
 import com.grgbanking.counter.common.core.util.SocketParam;
@@ -106,5 +107,12 @@ public class CusBusiController {
         log.info("authCode接口报文: {}", JSON.toJSONString(param));
         broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, param);
         return Resp.success("验证码校验成功");
+    }
+
+    @ApiOperation("卡密校验")
+    @PostMapping("/verify/cardpwd")
+    public Resp<String> verifyCardPwd(@RequestBody BankCardVo bankCardVo) {
+        Boolean flag = remoteCusAccountService.verifyCardPwd(bankCardVo);
+        return flag? Resp.success("卡密校验成功"):Resp.failed("卡密校验失败");
     }
 }
