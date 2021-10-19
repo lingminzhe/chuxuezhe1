@@ -132,6 +132,7 @@ public class OssController {
         if (fileDto==null||fileDto.getFileDTO()==null){
             return Resp.failed("需传入文件和文件类型");
         }
+        List<FileDTO> list = new ArrayList();
 
         for (FileInfoDTO file:fileDto.getFileDTO()) {
             GrgFileMgrEntity grgFileMgrEntity = new GrgFileMgrEntity();
@@ -147,12 +148,13 @@ public class OssController {
 //            String sessionId = "1019";
             String sessionId = lineupAbstractService.findSessionId(fileDto.getCustomerId());
             grgFileMgrEntity.setSessionId(sessionId);
-            grgFileMgrEntity.setCustomerId(fileDto.getCustomerId());
-            //TODO 创建者
-            ossUploadFile(file1, grgFileMgrEntity, "");
+            //TODO 等到业务办理完成后再统一将customerId存入对应的数据库
+//            grgFileMgrEntity.setCustomerId(fileDto.getCustomerId());
+            FileDTO fileDTO = ossUploadFile(file1, grgFileMgrEntity, "");
+            list.add(fileDTO);
         }
 
-        return Resp.success("上传成功");
+        return Resp.success(fileDto,"上传成功");
     }
 
 
