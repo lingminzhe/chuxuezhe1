@@ -51,7 +51,6 @@ public class RemoteCsrOssServiceImpl implements RemoteCsrOssService {
             //根据customerId 找到对应的fileId
             List<FileDTO> list = fileManagerService.getBySessionIdAndType(sessionId,busiType);
             List<UploadFileDTO> fileList = getFileDTO(list);
-
             return fileList;
         }else {
             log.error("sessionId为空");

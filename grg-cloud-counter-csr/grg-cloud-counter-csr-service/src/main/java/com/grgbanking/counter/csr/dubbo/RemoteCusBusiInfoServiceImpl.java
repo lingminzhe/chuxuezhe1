@@ -1,8 +1,10 @@
 package com.grgbanking.counter.csr.dubbo;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.grgbanking.counter.csr.api.dubbo.RemoteBusiInfoService;
 import com.grgbanking.counter.csr.api.entity.GrgCusBusiInfoEntity;
+import com.grgbanking.counter.csr.dao.GrgCusBusiInfoDao;
 import com.grgbanking.counter.csr.entity.GrgBusiInfoEntity;
 import com.grgbanking.counter.csr.entity.GrgBusiOptEntity;
 import com.grgbanking.counter.csr.service.GrgBusiInfoService;
@@ -18,7 +20,7 @@ import java.util.List;
  * 银行业务增删改查
  */
 @DubboService
-public class RemoteCusBusiInfoServiceImpl implements RemoteBusiInfoService {
+public class RemoteCusBusiInfoServiceImpl extends ServiceImpl<GrgCusBusiInfoDao, GrgCusBusiInfoEntity> implements RemoteBusiInfoService {
 
     @Autowired
     GrgBusiInfoService grgBusiInfoService;
@@ -56,5 +58,12 @@ public class RemoteCusBusiInfoServiceImpl implements RemoteBusiInfoService {
         GrgCusBusiInfoEntity grgCusBusiInfoEntity = new GrgCusBusiInfoEntity();
         BeanUtils.copyProperties(busiOptEntity, grgCusBusiInfoEntity);
         return grgCusBusiInfoEntity;
+    }
+
+    @Override
+    public String getBusiNameByNo(String busiNo) {
+        GrgCusBusiInfoEntity entity = this.baseMapper.selectOne(new QueryWrapper<GrgCusBusiInfoEntity>().eq("busi_no", busiNo));
+
+        return entity.getBusiName();
     }
 }
