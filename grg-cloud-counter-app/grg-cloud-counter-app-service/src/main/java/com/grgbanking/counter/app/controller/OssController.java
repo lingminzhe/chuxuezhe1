@@ -154,7 +154,7 @@ public class OssController {
             list.add(fileDTO);
         }
 
-        return Resp.success(fileDto,"上传成功");
+        return Resp.success(list,"上传成功");
     }
 
 
