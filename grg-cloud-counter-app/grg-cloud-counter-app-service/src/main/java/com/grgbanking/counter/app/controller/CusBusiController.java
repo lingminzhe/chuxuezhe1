@@ -94,7 +94,7 @@ public class CusBusiController {
     public Resp<String> validateAuthCode(@RequestBody MobileSmsVo mobileSmsVo) {
         HashMap<Object, Object> map = new HashMap<>();
         boolean flag = remoteMobileService.verifySmsCode(mobileSmsVo);
-        if (false){
+        if (flag == false) {
             map.put("message", "验证码校验失败");
             SocketParam param = SocketParam.success(map);
             param.getHead().setApiNo(SocketApiNoConstants.AUTH_CHECK);
