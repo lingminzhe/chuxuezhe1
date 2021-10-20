@@ -1,11 +1,14 @@
 package com.grgbanking.counter.bank.controller;
 
+import com.grgbanking.counter.bank.api.SmsApi;
 import com.grgbanking.counter.bank.api.dubbo.RemoteMobileService;
 import com.grgbanking.counter.common.core.util.Resp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +26,9 @@ public class MobileController {
 	@DubboReference
 	private RemoteMobileService mobileService;
 
+	@Autowired
+	private SmsApi smsApi;
+
 	@ApiOperation(value = "发送短信")
 	@GetMapping("/{mobile}")
 	public Resp sendSmsCode(@PathVariable String mobile) {
@@ -34,6 +40,11 @@ public class MobileController {
 		}
 	}
 
-
+	@SneakyThrows
+	@GetMapping("/abc")
+	public Resp test() {
+		smsApi.getSmsApi("15767526746","测试");
+		return Resp.success();
+	}
 
 }

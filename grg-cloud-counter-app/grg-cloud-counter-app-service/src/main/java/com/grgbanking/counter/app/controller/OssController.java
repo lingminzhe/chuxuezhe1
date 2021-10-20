@@ -145,8 +145,8 @@ public class OssController {
             grgFileMgrEntity.setFileBusiType(fileBusiType);
             //3、获取sessionId
             // 开发时使用的假数据
-//            String sessionId = "1019";
-            String sessionId = lineupAbstractService.findSessionId(fileDto.getCustomerId());
+            String sessionId = "1020";
+//            String sessionId = lineupAbstractService.findSessionId(fileDto.getCustomerId());
             grgFileMgrEntity.setSessionId(sessionId);
             //TODO 等到业务办理完成后再统一将customerId存入对应的数据库
 //            grgFileMgrEntity.setCustomerId(fileDto.getCustomerId());
@@ -181,7 +181,13 @@ public class OssController {
         String md5 = FileUtil.getFileMd5(file);
         String original = file.getOriginalFilename();
         long size = file.getSize();
-        String contentType = file.getContentType();
+        //如果是签名的话 添加上svg后缀 才可以正常显示图片
+        String contentType = "";
+        if ("103".equals(grgFileMgrEntity.getFileBusiType())){
+            contentType = "svg";
+        }
+//        String contentType = file.getContentType();
+
         FileDTO upload = remoteOssService.upload(fileByte,md5, original, size, contentType, grgFileMgrEntity, createUser);
         return upload;
     }
