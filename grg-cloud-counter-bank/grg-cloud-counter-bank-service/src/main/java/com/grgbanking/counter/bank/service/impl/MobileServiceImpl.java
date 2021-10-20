@@ -1,5 +1,6 @@
 package com.grgbanking.counter.bank.service.impl;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.http.Header;
 import cn.hutool.http.HttpRequest;
@@ -16,8 +17,6 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -28,6 +27,7 @@ import java.util.concurrent.TimeUnit;
 @DubboService
 @AllArgsConstructor
 public class MobileServiceImpl implements RemoteMobileService {
+
 
 
 	private final RedisTemplate redisTemplate;
@@ -53,15 +53,13 @@ public class MobileServiceImpl implements RemoteMobileService {
 		String smsText = "短信验证码：" + code;
 		log.info("手机号生成验证码成功:{}",  code);
 		redisTemplate.opsForValue().set(CacheConstants.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + StringPool.AT + mobile, code, SecurityConstants.CODE_TIME, TimeUnit.SECONDS);
-		System.out.println(CacheConstants.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + StringPool.AT + mobile);
+//		System.out.println(CacheConstants.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + StringPool.AT + mobile);
 		//调用短信平台接口
 		try {
 			getSmsApi(mobile,smsText);
 		}catch (IOException e){
 			e.printStackTrace();
 		}
-		Map<String, Object> result = new HashMap<>(8);
-		result.put("code", code);
 		return true;
 	}
 
@@ -74,6 +72,20 @@ public class MobileServiceImpl implements RemoteMobileService {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public boolean sendBusiSms(String mobile, String name) {
+		//
+		String s = DateUtil.date().toStringDefaultTimeZone();
+		String smsText = "尊敬的客户，您于"+s+"办理的"+name+"业务已办理完成！";
+		//获取办理的业务类型
+		try {
+			getSmsApi(mobile,smsText);
+		}catch (IOException e){
+			e.printStackTrace();
+		}
+		return true;
 	}
 
 	/**

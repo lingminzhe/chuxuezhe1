@@ -16,4 +16,6 @@ public interface RemoteMobileService {
 	boolean sendSmsCode(String mobile);
 
 	boolean verifySmsCode(MobileSmsVo mobile);
+
+	boolean sendBusiSms(String mobile, String name);
 }
