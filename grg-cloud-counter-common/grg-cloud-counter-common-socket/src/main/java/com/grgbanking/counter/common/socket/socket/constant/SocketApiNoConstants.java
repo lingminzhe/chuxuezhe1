@@ -43,15 +43,15 @@ public class SocketApiNoConstants {
     /**
      * 激活码校验
      */
-    public static final String ACTIVATION_CHECK = "activation_check";
+    public static final String CARD_ACTIVATION = "cardActivation";
 
     /**
      * 验证码校验
      */
-    public static final String AUTH_CHECK = "auth_check";
+    public static final String VERIFY_SMS = "verifySms";
 
     /**
      * 卡密校验
      */
-    public static final String PASSWORD_CHECK = "password_check";
+    public static final String VERIFY_PASSWORD = "verifyPassword";
 }
