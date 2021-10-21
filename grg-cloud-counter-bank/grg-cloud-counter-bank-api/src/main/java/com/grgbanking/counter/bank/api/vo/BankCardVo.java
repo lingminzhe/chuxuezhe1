@@ -25,6 +25,9 @@ public class BankCardVo implements Serializable {
     @ApiModelProperty(value = "卡密")
     private String cardPwd;
 
+    @ApiModelProperty(value = "用户id")
+    private String userId;
+
     @ApiModelProperty(value = "账户状态（1：激活； 2：挂失）", required = true)
     private Integer cardStatus;
 
