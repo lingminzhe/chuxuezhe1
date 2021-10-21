@@ -98,7 +98,7 @@ public class GrgAccountServiceImpl extends ServiceImpl<GrgAccountDao, GrgAccount
     @Override
     public boolean updateByCardNo(GrgAccountEntity grgAccount) {
         UpdateWrapper<GrgAccountEntity> wrapper = new UpdateWrapper<GrgAccountEntity>().eq("card_no", grgAccount.getCardNo()).set("account_status",grgAccount.getAccountStatus());
-        int delete = this.baseMapper.update(null,wrapper);
+        int delete = this.baseMapper.update(grgAccount,wrapper);
         if( delete == 1){
             return true;
         }else {
