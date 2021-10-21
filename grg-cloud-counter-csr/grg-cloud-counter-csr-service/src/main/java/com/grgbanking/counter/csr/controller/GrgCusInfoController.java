@@ -79,24 +79,28 @@ public class GrgCusInfoController {
         }
     }
 
-    @ApiOperation("挂失银行卡")
+    @ApiOperation("银行卡状态更改")
     @PostMapping("/account/update")
     public Resp<String> updateCardStatus(@RequestBody BankCardVo bankCardVo, HttpServletRequest request) {
         Boolean isSuccess = remoteCusAccountService.updateCardStatus(bankCardVo);
         String token = request.getHeader("Authorization");
         SysUserEntity grgUser = remoteUserService.currentUser(token);
         //封装socketparam报文
+        Integer cardStatus = bankCardVo.getCardStatus();
         SocketParamHead paramHead = SocketParamHead.success("resultReportLoss", "110001");
         paramHead.setClientId(lineupService.findCustomer(String.valueOf(grgUser.getUserId())));
-        SocketParam param = SocketParam.success(paramHead);
+        if (cardStatus == 1){
+            paramHead.setApiNo("cardActivation");
+            paramHead.setBusiNo("120001");
+        }
+
         if (isSuccess){
             paramHead.setMsg("更新成功");
-            broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_APP, param);
+            broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_APP, SocketParam.success(paramHead));
             return Resp.success("更新成功");
         }
         paramHead.setMsg("更新失败");
-        paramHead.setCode(500);
-        broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_APP, param);
+        broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_APP, SocketParam.success(paramHead));
         return Resp.failed("更新失败");
     }
 

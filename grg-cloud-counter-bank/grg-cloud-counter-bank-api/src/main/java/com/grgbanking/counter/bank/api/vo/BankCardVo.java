@@ -17,8 +17,7 @@ public class BankCardVo implements Serializable {
     /**
      * 卡号
      */
-
-    @ApiModelProperty(value = "卡号")
+    @ApiModelProperty(value = "卡号", required = true)
     private String cardNo;
     /**
      * 卡密
@@ -26,6 +25,7 @@ public class BankCardVo implements Serializable {
     @ApiModelProperty(value = "卡密")
     private String cardPwd;
 
-    @NotNull(message = "userId不能为空")
-    private String userId;
+    @ApiModelProperty(value = "账户状态（1：激活； 2：挂失）", required = true)
+    private Integer cardStatus;
+
 }
