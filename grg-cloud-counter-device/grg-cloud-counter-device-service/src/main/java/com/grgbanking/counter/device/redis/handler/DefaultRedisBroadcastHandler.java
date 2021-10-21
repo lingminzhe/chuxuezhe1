@@ -23,7 +23,7 @@ public class DefaultRedisBroadcastHandler extends RedisBroadcastAbstractHandler 
     }
 
     /**
-     * 默认广播接收处
+     * 默认直接透传用户终端
      *
      * @param param 消息内容
      * @return

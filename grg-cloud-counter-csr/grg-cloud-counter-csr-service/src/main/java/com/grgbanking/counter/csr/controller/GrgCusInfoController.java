@@ -67,7 +67,7 @@ public class GrgCusInfoController {
         SysUserEntity sysUser = remoteUserService.currentUser(request.getHeader("Authorization"));
         //封装SocketParam报文
         String customerId = lineupService.findCustomer(String.valueOf(sysUser.getUserId()));
-        SocketParamHead socketParamHead = SocketParamHead.success("resultUserinfoChange", "100001");
+        SocketParamHead socketParamHead = SocketParamHead.success("businessResult", "100001");
         socketParamHead.setClientId(customerId);
 
         if (b){

@@ -1,21 +1,42 @@
 package com.grgbanking.counter.device.tencent.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.grgbanking.counter.common.core.constant.CommonConstants;
+import com.grgbanking.counter.common.core.util.Resp;
+import com.grgbanking.counter.common.core.util.SocketParam;
+import com.grgbanking.counter.common.core.util.SocketParamHead;
+import com.grgbanking.counter.common.socket.broadcast.constant.RedisBroadcastConstants;
+import com.grgbanking.counter.common.socket.broadcast.service.RedisBroadcastService;
+import com.grgbanking.counter.common.socket.lineup.service.LineupService;
+import com.grgbanking.counter.device.tencent.entity.IdCardOCRResponse;
+import com.grgbanking.counter.device.tencent.entity.ImageRecognitionv2Request;
 import com.grgbanking.counter.device.tencent.entity.TencentEidToken;
 import com.grgbanking.counter.device.tencent.entity.TencentUserInfo;
 import com.grgbanking.counter.device.tencent.service.TencentService;
-import com.grgbanking.counter.common.core.util.Resp;
 import com.tencentcloudapi.faceid.v20180301.models.*;
 import io.swagger.annotations.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 @Api(tags = "腾讯相关接口")
 @RestController
 @RequestMapping("/tencent")
+@Slf4j
 public class TencentController {
 
     @Autowired
     TencentService tencentService;
+
+    @Autowired
+    RedisBroadcastService broadcastService;
+
+    @Autowired
+    LineupService lineupService;
 
     /**
      * 活体人脸核身
@@ -78,8 +99,23 @@ public class TencentController {
             @ApiImplicitParam(name = "imageBase64", value = "人脸比对的照片", required = true)
     })
     @PostMapping("/image/recognition")
-    public Resp<ImageRecognitionResponse> imageRecognition(@RequestBody ImageRecognitionRequest req) {
-        return Resp.success(tencentService.imageRecognition(req));
+    public Resp<ImageRecognitionResponse> imageRecognition(@RequestBody ImageRecognitionv2Request req) {
+        //tencentService.imageRecognition(req);
+        ImageRecognitionResponse imageRecognitionResponse = new ImageRecognitionResponse();
+        imageRecognitionResponse.setResult("Success");
+        imageRecognitionResponse.setSim(80F);
+        SocketParamHead paramHead = SocketParamHead.success("faceIdentify", CommonConstants.SUCCESS, "人脸核身校验");
+        String customerId = req.getCustomerId();
+        String employeeId = lineupService.findEmployee(customerId);
+        paramHead.setClientId(employeeId);
+        //把结果封装
+        Map<String, Object> map = new HashMap<>();
+        map.put("result", imageRecognitionResponse.getResult());
+        map.put("sim", imageRecognitionResponse.getSim());
+        SocketParam param = SocketParam.success(paramHead, map);
+        log.info("recognition接口报文： {}", JSON.toJSONString(param));
+        broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, param);
+        return Resp.success(imageRecognitionResponse);
     }
 
     /**
@@ -175,7 +211,14 @@ public class TencentController {
     @ApiOperation("身份证识别及信息核验")
     @PostMapping("/id/card/ocr/veri")
     public Resp<IdCardOCRVerificationResponse> idCardOCRVeri(@RequestBody IdCardOCRVerificationRequest req) {
-        return Resp.success(tencentService.idCardOCRVeri(req));
+        IdCardOCRResponse response = new IdCardOCRResponse();
+        Calendar instance = Calendar.getInstance();
+        instance.set(2028, 12, 20);
+        response.setValidDate(instance.getTime());
+        response.setIdCard("440582199001156667");
+        response.setName("郑燕");
+        //return Resp.success(tencentService.idCardOCRVeri(req));
+        return Resp.success(response);
     }
 
 }
