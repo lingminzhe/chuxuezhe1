@@ -2,8 +2,11 @@ package com.grgbanking.counter.iam.dubbo;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.grgbanking.counter.common.core.constant.SecurityConstants;
 import com.grgbanking.counter.common.core.constant.enums.LoginTypeEnum;
+import com.grgbanking.counter.common.security.service.GrgUser;
 import com.grgbanking.counter.iam.api.dto.UserInfo;
 import com.grgbanking.counter.iam.api.dubbo.RemoteUserService;
 import com.grgbanking.counter.iam.api.entity.SysMenuEntity;
@@ -14,7 +17,12 @@ import com.grgbanking.counter.iam.service.SysMenuService;
 import com.grgbanking.counter.iam.service.SysRoleService;
 import com.grgbanking.counter.iam.service.SysUserService;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 
 import java.util.HashSet;
 import java.util.List;
@@ -40,6 +48,9 @@ public class RemoteUserServiceImpl implements RemoteUserService {
     @Autowired
     private SysMenuService sysMenuService;
 
+    @Autowired
+    private TokenStore tokenStore;
+
     @Override
     public UserInfo info(String username) {
         UserInfo userInfo = new UserInfo();
@@ -64,5 +75,17 @@ public class RemoteUserServiceImpl implements RemoteUserService {
     @Override
     public UserInfo social(LoginTypeEnum loginTypeEnum, String code) {
         return loginHandlerMap.get(loginTypeEnum.getType()).handle(code);
+    }
+
+    @Override
+    public SysUserEntity currentUser(String token) {
+        token = token.substring(7);
+        OAuth2Authentication auth2Authentication = tokenStore.readAuthentication(token);
+        GrgUser userDetails = (GrgUser) auth2Authentication.getUserAuthentication().getPrincipal();
+        System.out.println("当前token: " + JSON.toJSONString(userDetails));
+        //GrgUser principal = (GrgUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        SysUserEntity sysUserEntity = new SysUserEntity();
+        BeanUtils.copyProperties(userDetails, sysUserEntity);
+        return sysUserEntity;
     }
 }

@@ -3,6 +3,7 @@ package com.grgbanking.counter.iam.api.dubbo;
 
 import com.grgbanking.counter.common.core.constant.enums.LoginTypeEnum;
 import com.grgbanking.counter.iam.api.dto.UserInfo;
+import com.grgbanking.counter.iam.api.entity.SysUserEntity;
 
 public interface RemoteUserService {
 
@@ -22,5 +23,11 @@ public interface RemoteUserService {
      * @return
      */
     UserInfo social(LoginTypeEnum loginTypeEnum, String code);
+
+    /**
+     * 获取当前用户
+     * @return
+     */
+    SysUserEntity currentUser(String token);
 
 }

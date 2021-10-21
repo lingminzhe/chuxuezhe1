@@ -15,6 +15,8 @@ public interface RemoteCusInfoService {
 
     GrgCusInfoEntity getByCardNoOrIdNo(String no);
 
+    boolean updateCusInfo(GrgCusInfoEntity cusInfoEntity);
+
     boolean saveBankCard(GrgCusAccountEntity account);
 
     void deleteBankCard();

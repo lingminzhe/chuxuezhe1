@@ -35,6 +35,19 @@ public class RemoteCusInfoServiceImpl implements RemoteCusInfoService {
         return grgCusInfoEntiry;
     }
 
+    /**
+     * 信息修改
+     * @param cusInfoEntity
+     * @return
+     */
+    @Override
+    public boolean updateCusInfo(GrgCusInfoEntity cusInfoEntity) {
+        GrgCustomerEntity grgCustomerEntity = new GrgCustomerEntity();
+        BeanUtils.copyProperties(cusInfoEntity, grgCustomerEntity);
+        boolean b = grgCustomerService.updateById(grgCustomerEntity);
+        return b;
+    }
+
     @Override
     public List<GrgCusAccountEntity> findCusAccountList(String customerId) {
         QueryWrapper<GrgAccountEntity> wrapper = new QueryWrapper();

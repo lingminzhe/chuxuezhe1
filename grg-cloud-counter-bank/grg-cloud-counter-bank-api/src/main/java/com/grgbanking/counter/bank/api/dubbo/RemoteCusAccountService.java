@@ -9,4 +9,7 @@ public interface RemoteCusAccountService {
     Boolean acvCard(CreditCardEntity creditCardEntity);
 
     Boolean verifyCardPwd(BankCardVo bankCardVo);
+
+    Boolean updateCardStatus(BankCardVo bankCardVo);
+
 }

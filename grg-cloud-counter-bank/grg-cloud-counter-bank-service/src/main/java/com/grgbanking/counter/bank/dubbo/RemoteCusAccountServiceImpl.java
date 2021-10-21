@@ -40,4 +40,13 @@ public class RemoteCusAccountServiceImpl implements RemoteCusAccountService {
         }
         return true;
     }
+
+    @Override
+    public Boolean updateCardStatus(BankCardVo bankCardVo) {
+        GrgAccountEntity account = new GrgAccountEntity();
+        account.setCardNo(bankCardVo.getCardNo());
+        account.setAccountStatus(3);
+        boolean b = grgAccountService.updateByCardNo(account);
+        return b;
+    }
 }
