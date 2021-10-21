@@ -49,4 +49,9 @@ public class SocketApiNoConstants {
      * 验证码校验
      */
     public static final String AUTH_CHECK = "auth_check";
+
+    /**
+     * 卡密校验
+     */
+    public static final String PASSWORD_CHECK = "password_check";
 }
