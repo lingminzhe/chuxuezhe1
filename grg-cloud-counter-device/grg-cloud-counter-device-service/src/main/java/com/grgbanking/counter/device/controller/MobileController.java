@@ -4,6 +4,10 @@ import com.grgbanking.counter.device.dto.BusiSmsDTO;
 import com.grgbanking.counter.bank.api.dubbo.RemoteMobileService;
 import com.grgbanking.counter.bank.api.vo.MobileSmsVo;
 import com.grgbanking.counter.common.core.util.Resp;
+import com.grgbanking.counter.common.core.util.SocketParam;
+import com.grgbanking.counter.common.core.util.SocketParamHead;
+import com.grgbanking.counter.common.socket.broadcast.constant.RedisBroadcastConstants;
+import com.grgbanking.counter.common.socket.broadcast.service.RedisBroadcastService;
 import com.grgbanking.counter.common.socket.lineup.service.impl.LineupAbstractService;
 import com.grgbanking.counter.csr.api.dubbo.RemoteBusiInfoService;
 import io.swagger.annotations.Api;
@@ -30,6 +34,9 @@ public class MobileController {
     @Autowired
     private LineupAbstractService lineupAbstractService;
 
+    @Autowired
+    private RedisBroadcastService broadcastService;
+
 
     private final int length = 11;
 
@@ -52,9 +59,18 @@ public class MobileController {
     @PostMapping("/verifySmsCode")
     public Resp verifySmsCode(@RequestBody MobileSmsVo mobile) {
         boolean b = mobileService.verifySmsCode(mobile);
+        String employee = lineupAbstractService.findEmployee(mobile.getUserId());
         if (b) {
+            SocketParamHead success = SocketParamHead.success("verifySms", 0, "success");
+            success.setClientId(employee);
+            SocketParam socketParam = SocketParam.success(success);
+            broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, socketParam);
             return Resp.success("验证成功!");
         }else {
+            SocketParamHead success = SocketParamHead.success("verifySms", 500, "failed");
+            success.setClientId(employee);
+            SocketParam socketParam = SocketParam.failed(success);
+            broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, socketParam);
             return Resp.failed("短信验证码验证失败，请重试。");
         }
     }

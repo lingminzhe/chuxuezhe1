@@ -59,13 +59,18 @@ public class MobileController {
     @PostMapping("/verifySmsCode")
     public Resp verifySmsCode(@RequestBody MobileSmsVo mobile) {
         boolean b = mobileService.verifySmsCode(mobile);
+        String employee = lineupAbstractService.findEmployee(mobile.getUserId());
         if (b) {
             SocketParamHead success = SocketParamHead.success("verifySms", 0, "success");
-            success.setClientId(lineupAbstractService.findEmployee(mobile.getUserId()));
+            success.setClientId(employee);
             SocketParam socketParam = SocketParam.success(success);
             broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, socketParam);
             return Resp.success("验证成功!");
         }else {
+            SocketParamHead success = SocketParamHead.success("verifySms", 500, "failed");
+            success.setClientId(employee);
+            SocketParam socketParam = SocketParam.failed(success);
+            broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, socketParam);
             return Resp.failed("短信验证码验证失败，请重试。");
         }
     }
