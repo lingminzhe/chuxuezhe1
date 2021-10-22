@@ -4,6 +4,10 @@ import com.grgbanking.counter.app.dto.BusiSmsDTO;
 import com.grgbanking.counter.bank.api.dubbo.RemoteMobileService;
 import com.grgbanking.counter.bank.api.vo.MobileSmsVo;
 import com.grgbanking.counter.common.core.util.Resp;
+import com.grgbanking.counter.common.core.util.SocketParam;
+import com.grgbanking.counter.common.core.util.SocketParamHead;
+import com.grgbanking.counter.common.socket.broadcast.constant.RedisBroadcastConstants;
+import com.grgbanking.counter.common.socket.broadcast.service.RedisBroadcastService;
 import com.grgbanking.counter.common.socket.lineup.service.impl.LineupAbstractService;
 import com.grgbanking.counter.csr.api.dubbo.RemoteBusiInfoService;
 import io.swagger.annotations.Api;
@@ -30,6 +34,9 @@ public class MobileController {
     @Autowired
     private LineupAbstractService lineupAbstractService;
 
+    @Autowired
+    private RedisBroadcastService broadcastService;
+
 
     private final int length = 11;
 
@@ -53,6 +60,10 @@ public class MobileController {
     public Resp verifySmsCode(@RequestBody MobileSmsVo mobile) {
         boolean b = mobileService.verifySmsCode(mobile);
         if (b) {
+            SocketParamHead success = SocketParamHead.success("verifySms", 0, "success");
+            success.setClientId(lineupAbstractService.findEmployee(mobile.getUserId()));
+            SocketParam socketParam = SocketParam.success(success);
+            broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, socketParam);
             return Resp.success("验证成功!");
         }else {
             return Resp.failed("短信验证码验证失败，请重试。");
@@ -69,7 +80,6 @@ public class MobileController {
     public Resp sendBusiSms(@RequestBody BusiSmsDTO busiSmsDTO) {
         String mobile = busiSmsDTO.getMobile();
         String busiNo = busiSmsDTO.getBusiNo();
-        //业务类型
         String name = busiInfoService.getBusiNameByNo(busiNo);
 //        String sessionId = lineupAbstractService.findSessionId(grgCustomerVo.getCustomerId());
 
