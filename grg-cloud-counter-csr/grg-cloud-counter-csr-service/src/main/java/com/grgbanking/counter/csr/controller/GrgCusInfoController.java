@@ -87,7 +87,7 @@ public class GrgCusInfoController {
         SysUserEntity grgUser = remoteUserService.currentUser(token);
         //封装socketparam报文
         Integer cardStatus = bankCardVo.getCardStatus();
-        SocketParamHead paramHead = SocketParamHead.success("resultReportLoss", "110001");
+        SocketParamHead paramHead = SocketParamHead.success("businessResult", "110001");
         paramHead.setClientId(lineupService.findCustomer(String.valueOf(grgUser.getUserId())));
         if (cardStatus == 1){
             paramHead.setApiNo("cardActivation");
