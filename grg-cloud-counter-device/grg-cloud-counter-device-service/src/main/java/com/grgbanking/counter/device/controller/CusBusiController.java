@@ -101,7 +101,7 @@ public class CusBusiController {
         String employee = lineupService.findEmployee(mobileSmsVo.getUserId());
         if (flag == false) {
             map.put("result", "failed");
-            SocketParam param = SocketParam.success(map);
+            SocketParam param = SocketParam.failed(map);
             param.getHead().setApiNo(SocketApiNoConstants.VERIFY_SMS);
             param.getHead().setClientId(employee);
             log.info("authCode接口报文: {}", JSON.toJSONString(param));
@@ -132,7 +132,7 @@ public class CusBusiController {
             return Resp.failed("卡密校验失败");
         }
         map.put("result", "success");
-        SocketParam param = SocketParam.failed(map);
+        SocketParam param = SocketParam.success(map);
         param.getHead().setApiNo(SocketApiNoConstants.VERIFY_PASSWORD);
         param.getHead().setClientId(employee);
         broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, param);
