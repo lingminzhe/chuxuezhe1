@@ -11,5 +11,5 @@ import java.util.List;
 @Data
 public class UploadFileDTO {
     private List<FileInfoDTO> fileDTO;
-    private String customerId;
+    private String userId;
 }
