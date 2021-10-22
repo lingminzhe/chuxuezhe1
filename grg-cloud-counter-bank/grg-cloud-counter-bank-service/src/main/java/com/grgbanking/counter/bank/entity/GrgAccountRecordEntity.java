@@ -50,6 +50,11 @@ public class GrgAccountRecordEntity implements Serializable {
 	@ApiModelProperty(name = "amount", value = "金额")
 	private BigDecimal amount;
 	/**
+	 * 交易明细
+	 */
+	@ApiModelProperty(name = "tranDetail", value = "交易明细")
+	private Integer tranDetail;
+	/**
 	 * 交易状态
 	 */
 	@ApiModelProperty(name = "txnStatus", value = "交易状态")
@@ -71,7 +76,6 @@ public class GrgAccountRecordEntity implements Serializable {
 	/**
 	 * 
 	 */
-	       // 新增的时候填充数据
 	private String updateBy;
 
 }

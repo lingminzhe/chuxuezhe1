@@ -32,6 +32,6 @@ public class BankCardVo implements Serializable {
     private String userId;
 
     @ApiModelProperty(value = "账户状态（1：激活； 2：挂失）", required = true)
-    private Integer cardStatus;
+    private Integer accountStatus;
 
 }
