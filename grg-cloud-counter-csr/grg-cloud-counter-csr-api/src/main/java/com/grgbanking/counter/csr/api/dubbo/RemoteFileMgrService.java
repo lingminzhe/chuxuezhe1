@@ -8,9 +8,7 @@ public interface RemoteFileMgrService {
     /**
      * grg_file_manager文件上传存表
      */
-     default void save(GrgFileMgrEntity grgFileMgrEntity){
-
-     };
+    default void save(GrgFileMgrEntity grgFileMgrEntity){};
 
     default GrgFileMgrEntity getByFileName(String fileName){
         return null;

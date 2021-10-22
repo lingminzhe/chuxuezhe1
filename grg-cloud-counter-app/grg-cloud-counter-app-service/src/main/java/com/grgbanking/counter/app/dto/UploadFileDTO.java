@@ -1,5 +1,6 @@
 package com.grgbanking.counter.app.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -10,6 +11,9 @@ import java.util.List;
  */
 @Data
 public class UploadFileDTO {
+    @ApiModelProperty(value = "文件",required = true)
     private List<FileInfoDTO> fileDTO;
-    private String customerId;
+
+    @ApiModelProperty(required = true)
+    private String userId;
 }

@@ -59,6 +59,7 @@ public class OssController {
      * @param file
      * @return
      */
+    @Deprecated
     @SneakyThrows
     @ApiOperation(value = "文件上传接口")
     @PostMapping("/upload")
@@ -106,8 +107,8 @@ public class OssController {
             grgFileMgrEntity.setSessionId(sessionId);
         }else {
             //临时id
-            grgFileMgrEntity.setSessionId("4567890");
-//            return Resp.failed("sessionId为空，请联系管理员");
+//            grgFileMgrEntity.setSessionId("4567890");
+            return Resp.failed("sessionId为空，请联系管理员");
         }
         //身份证正面
         grgFileMgrEntity.setFileBusiType(FileBusiTypeConstants.ID_CARD_FRONT);
@@ -145,8 +146,8 @@ public class OssController {
             grgFileMgrEntity.setFileBusiType(fileBusiType);
             //3、获取sessionId
             // 开发时使用的假数据
-            String sessionId = "1020";
-//            String sessionId = lineupAbstractService.findSessionId(fileDto.getCustomerId());
+//            String sessionId = "1020";
+            String sessionId = lineupAbstractService.findSessionId(fileDto.getUserId());
             grgFileMgrEntity.setSessionId(sessionId);
             //TODO 等到业务办理完成后再统一将customerId存入对应的数据库
 //            grgFileMgrEntity.setCustomerId(fileDto.getCustomerId());
