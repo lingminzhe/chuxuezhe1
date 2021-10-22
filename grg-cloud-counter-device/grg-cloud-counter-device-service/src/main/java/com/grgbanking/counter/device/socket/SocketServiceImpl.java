@@ -1,13 +1,11 @@
 package com.grgbanking.counter.device.socket;
 
-import com.grgbanking.counter.device.lineup.service.impl.CustomerLineupServiceImpl;
 import com.grgbanking.counter.common.core.util.SocketParam;
+import com.grgbanking.counter.common.core.util.SocketParamHead;
 import com.grgbanking.counter.common.socket.broadcast.constant.RedisBroadcastConstants;
 import com.grgbanking.counter.common.socket.broadcast.service.RedisBroadcastService;
-import com.grgbanking.counter.common.socket.lineup.service.LineupService;
-import com.grgbanking.counter.common.socket.lineup.service.impl.LineupAbstractService;
-import com.grgbanking.counter.common.socket.socket.constant.SocketApiNoConstants;
 import com.grgbanking.counter.common.socket.socket.service.SocketAbstractService;
+import com.grgbanking.counter.device.lineup.service.impl.CustomerLineupServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,9 +27,11 @@ public class SocketServiceImpl extends SocketAbstractService {
     public void connected(String clientId) {
         log.info("用户终端上线:{}", clientId);
         Long rank = lineupService.rank(clientId);
+        SocketParam<Object> linUp = SocketParam.success(SocketParamHead.success("lineUp"));
         Map<String, Object> body = new HashMap<>();
         body.put("rank", rank);
-        sendMessage(clientId,SocketParam.success(body));
+        linUp.setBody(body);
+        sendMessage(clientId,linUp);
     }
 
     @Override

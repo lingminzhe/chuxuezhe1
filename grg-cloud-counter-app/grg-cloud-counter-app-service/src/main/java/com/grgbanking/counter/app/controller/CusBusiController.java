@@ -77,16 +77,16 @@ public class CusBusiController {
         Boolean tag = remoteCusAccountService.acvCard(creditCardEntity);
         String employee = lineupService.findEmployee(creditCardEntity.getUserId());
         if (!tag) {
-            map.put("message", "激活码校验失败");
+            map.put("result", "failed");
             SocketParam param = SocketParam.failed(map);
-            param.getHead().setApiNo(SocketApiNoConstants.ACTIVATION_CHECK);
+            param.getHead().setApiNo(SocketApiNoConstants.CARD_ACTIVATION);
             param.getHead().setClientId(employee);
             log.info("cvvCode接口报文: {}", JSON.toJSONString(param));
             return Resp.failed("激活码校验失败,激活码不匹配");
         }
-        map.put("message", "激活码校验成功");
+        map.put("result", "success");
         SocketParam param = SocketParam.success(map);
-        param.getHead().setApiNo(SocketApiNoConstants.ACTIVATION_CHECK);
+        param.getHead().setApiNo(SocketApiNoConstants.CARD_ACTIVATION);
         param.getHead().setClientId(employee);
         log.info("cvvCode接口报文: {}", JSON.toJSONString(param));
         broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, param);
@@ -100,18 +100,18 @@ public class CusBusiController {
         boolean flag = remoteMobileService.verifySmsCode(mobileSmsVo);
         String employee = lineupService.findEmployee(mobileSmsVo.getUserId());
         if (flag == false) {
-            map.put("message", "验证码校验失败");
-            SocketParam param = SocketParam.success(map);
-            param.getHead().setApiNo(SocketApiNoConstants.AUTH_CHECK);
+            map.put("result", "failed");
+            SocketParam param = SocketParam.failed(map);
+            param.getHead().setApiNo(SocketApiNoConstants.VERIFY_SMS);
             param.getHead().setClientId(employee);
             log.info("authCode接口报文: {}", JSON.toJSONString(param));
             broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, param);
             return Resp.failed("验证码校验失败");
         }
-        map.put("message", "验证码校验成功");
+        map.put("result", "success");
         SocketParam param = SocketParam.success(map);
         param.getHead().setClientId(employee);
-        param.getHead().setApiNo(SocketApiNoConstants.AUTH_CHECK);
+        param.getHead().setApiNo(SocketApiNoConstants.VERIFY_SMS);
         log.info("authCode接口报文: {}", JSON.toJSONString(param));
         broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, param);
         return Resp.success("验证码校验成功");
@@ -124,16 +124,16 @@ public class CusBusiController {
         Boolean flag = remoteCusAccountService.verifyCardPwd(bankCardVo);
         String employee = lineupService.findEmployee(bankCardVo.getUserId());
         if (!flag) {
-            map.put("message", "卡密校验失败");
+            map.put("result", "failed");
             SocketParam param = SocketParam.failed(map);
-            param.getHead().setApiNo(SocketApiNoConstants.PASSWORD_CHECK);
+            param.getHead().setApiNo(SocketApiNoConstants.VERIFY_PASSWORD);
             param.getHead().setClientId(employee);
             broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, param);
             return Resp.failed("卡密校验失败");
         }
-        map.put("message", "卡密校验成功");
-        SocketParam param = SocketParam.failed(map);
-        param.getHead().setApiNo(SocketApiNoConstants.PASSWORD_CHECK);
+        map.put("result", "success");
+        SocketParam param = SocketParam.success(map);
+        param.getHead().setApiNo(SocketApiNoConstants.VERIFY_PASSWORD);
         param.getHead().setClientId(employee);
         broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, param);
         return Resp.failed("卡密校验成功");

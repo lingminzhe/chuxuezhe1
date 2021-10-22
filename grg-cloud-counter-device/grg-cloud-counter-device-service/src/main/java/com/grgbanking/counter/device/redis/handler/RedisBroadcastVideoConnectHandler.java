@@ -1,8 +1,6 @@
 package com.grgbanking.counter.device.redis.handler;
 
-import com.grgbanking.counter.device.tencent.service.TencentService;
 import com.grgbanking.counter.common.core.util.SocketParam;
-import com.grgbanking.counter.common.socket.broadcast.constant.RedisBroadcastConstants;
 import com.grgbanking.counter.common.socket.socket.constant.SocketApiNoConstants;
 import com.grgbanking.counter.common.socket.socket.entity.EmployeeService;
 import com.grgbanking.counter.common.socket.socket.service.SocketAbstractService;
@@ -20,9 +18,6 @@ public class RedisBroadcastVideoConnectHandler extends RedisBroadcastAbstractHan
     @Autowired
     private SocketAbstractService socketService;
 
-    @Autowired
-    private TencentService tencentService;
-
     @Override
     public String setApiNo() {
         return SocketApiNoConstants.VIDEO_CMD;
@@ -34,7 +29,6 @@ public class RedisBroadcastVideoConnectHandler extends RedisBroadcastAbstractHan
         if (body instanceof EmployeeService){
             EmployeeService employeeService = (EmployeeService) body;
             String customerId = employeeService.getCustomerId();
-            employeeService.setUserSig(tencentService.getUserSig(customerId));
             log.info("报文内容{}", employeeService);
             socketService.sendMessage(customerId,param);
         }

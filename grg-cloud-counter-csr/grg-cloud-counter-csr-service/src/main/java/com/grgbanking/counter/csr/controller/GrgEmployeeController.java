@@ -7,6 +7,7 @@ import com.grgbanking.counter.csr.service.GrgEmployeeService;
 import com.grgbanking.counter.csr.vo.EmployeeCustomerVo;
 import com.grgbanking.counter.iam.api.dto.UserInfo;
 import com.grgbanking.counter.iam.api.dubbo.RemoteUserService;
+import com.grgbanking.counter.iam.api.entity.SysUserEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.config.annotation.DubboReference;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -128,7 +130,9 @@ public class GrgEmployeeController {
     @Transactional
     @PostMapping("/update")
     //@RequiresPermissions("csr:grgemployeeservice:update")
-    public Resp update(@RequestBody GrgEmployeeServiceEntity grgEmployeeService){
+    public Resp update(@RequestBody GrgEmployeeServiceEntity grgEmployeeService, HttpServletRequest request){
+        SysUserEntity sysUser = remoteUserService.currentUser(request.getHeader("Authorization"));
+        grgEmployeeService.setEmployeeId(String.valueOf(sysUser.getUserId()));
         int i = this.grgEmployeeService.updateByEmployeeId(grgEmployeeService);
         if (i==0){
             return Resp.failed(i,"更改失败");
