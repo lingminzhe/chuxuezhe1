@@ -8,6 +8,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 /**
  * socket配置类
  *
@@ -38,6 +42,15 @@ public class GrgSocketConfig {
 		config.setUpgradeTimeout(configProperties.getUpgradeTimeout());
 		config.setPingTimeout(configProperties.getPingTimeout());
 		config.setPingInterval(configProperties.getPingInterval());
+
+//		config.setKeyStorePassword("123456");
+//		InputStream stream = null;
+//		try {
+//			stream = new FileInputStream("C:\\keystore.jks");
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//		config.setKeyStore(stream);
 		return new SocketIOServer(config);
 	}
 

@@ -1,5 +1,6 @@
 package com.grgbanking.counter.csr.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.grgbanking.counter.bank.api.dubbo.RemoteCusAccountService;
 import com.grgbanking.counter.bank.api.dubbo.RemoteCusInfoService;
 import com.grgbanking.counter.bank.api.entity.GrgCusInfoEntity;
@@ -86,10 +87,11 @@ public class GrgCusInfoController {
         String token = request.getHeader("Authorization");
         SysUserEntity grgUser = remoteUserService.currentUser(token);
         //封装socketparam报文
-        Integer cardStatus = bankCardVo.getCardStatus();
+        Integer accountStatus = bankCardVo.getAccountStatus();
         SocketParamHead paramHead = SocketParamHead.success("businessResult", "110001");
         paramHead.setClientId(lineupService.findCustomer(String.valueOf(grgUser.getUserId())));
-        if (cardStatus == 1){
+        System.out.println("银行卡更新状态报文： " + JSON.toJSONString(paramHead));
+        if (accountStatus == 1){
             paramHead.setApiNo("cardActivation");
             paramHead.setBusiNo("120001");
         }
