@@ -1,5 +1,6 @@
 package com.grgbanking.counter.app.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.nacos.common.utils.StringUtils;
 import com.grgbanking.counter.app.dto.FileInfoDTO;
 import com.grgbanking.counter.app.dto.UploadFileDTO;
@@ -142,9 +143,12 @@ public class OssController {
         list.add(uploadFile1);
         list.add(uploadFile2);
         SocketParam param = SocketParam.success(map);
+        String employee = lineupService.findEmployee(grgCustomerVo.getCustomerId());
         param.getHead().setApiNo("idCard");
         param.getHead().setBusiNo("120001");
+        param.getHead().setClientId(employee);
         broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, param);
+        log.info("上传身份证接口报文: {}", JSON.toJSONString(param));
         return Resp.success(list, "上传成功");
     }
 
@@ -179,10 +183,12 @@ public class OssController {
             resultList.add(fileDTO.getFileName());
             list.add(fileDTO);
         }
+        String employee = lineupService.findEmployee(fileDto.getUserId());
         map.put("fileName",resultList);
         SocketParam param = SocketParam.success(map);
         param.getHead().setApiNo("vertifyTransaction");
         param.getHead().setBusiNo("120001");
+        param.getHead().setClientId(employee);
         broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, param);
         return Resp.success(list, "上传成功");
     }
