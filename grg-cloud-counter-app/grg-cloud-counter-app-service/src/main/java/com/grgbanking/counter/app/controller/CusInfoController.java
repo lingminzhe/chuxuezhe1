@@ -9,11 +9,14 @@ import com.grgbanking.counter.bank.api.dubbo.RemoteCusInfoService;
 import com.grgbanking.counter.bank.api.entity.GrgCusAccountEntity;
 import com.grgbanking.counter.bank.api.entity.GrgCusInfoEntity;
 import com.grgbanking.counter.common.core.util.Resp;
+import com.grgbanking.counter.iam.api.dubbo.RemoteUserService;
+import com.grgbanking.counter.iam.api.entity.SysUserEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -31,10 +34,14 @@ public class CusInfoController {
     @DubboReference
     RemoteBusiOptService remoteBusiOptService;
 
+    @DubboReference
+    RemoteUserService remoteUserService;
+
     @ApiOperation("个人详细")
     @PostMapping("/personal/info")
-    public Resp<GrgCusInfoEntity> getPersonalInfo(@RequestBody CusAccountDto cusAccountDto) {
-        GrgCusInfoEntity cusInfo = remoteCusInfoService.findCusInfo(cusAccountDto.getUserId());
+    public Resp<GrgCusInfoEntity> getPersonalInfo(@RequestBody CusAccountDto cusAccountDto, HttpServletRequest request) {
+        SysUserEntity sysUser = remoteUserService.currentUser(request.getHeader("Authorization"));
+        GrgCusInfoEntity cusInfo = remoteCusInfoService.findCusInfo(String.valueOf(sysUser.getUserId()));
         if (cusInfo != null) {
             return Resp.success(cusInfo);
         }
