@@ -185,6 +185,7 @@ public class OssController {
         }
         String employee = lineupService.findEmployee(fileDto.getUserId());
         map.put("fileName",resultList);
+        map.put("result","success");
         SocketParam param = SocketParam.success(map);
         param.getHead().setApiNo("vertifyTransaction");
         param.getHead().setBusiNo("120001");
