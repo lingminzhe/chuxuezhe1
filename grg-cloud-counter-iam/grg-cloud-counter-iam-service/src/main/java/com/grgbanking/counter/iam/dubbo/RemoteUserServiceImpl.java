@@ -82,7 +82,6 @@ public class RemoteUserServiceImpl implements RemoteUserService {
         token = token.substring(7);
         OAuth2Authentication auth2Authentication = tokenStore.readAuthentication(token);
         GrgUser userDetails = (GrgUser) auth2Authentication.getUserAuthentication().getPrincipal();
-        System.out.println("当前token: " + JSON.toJSONString(userDetails));
         //GrgUser principal = (GrgUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         SysUserEntity sysUserEntity = new SysUserEntity();
         BeanUtils.copyProperties(userDetails, sysUserEntity);
