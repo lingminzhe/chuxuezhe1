@@ -51,8 +51,11 @@ public class OssServiceImpl implements OssService {
         String fileName = FileUtil.randomFileName();
         fileDTO.setOriginalName(original);
         fileDTO.setFileMd5(md5);
+        if ("svg".equals(contentType)) {
+            fileName = fileName + ".svg";
+        }
         fileDTO.setFileName(fileName);
-        System.out.println("文件名:"+fileName);
+        System.out.println("文件名:" + fileName);
         fileDTO.setFileSize(size);
         fileDTO.setFileType(contentType);
         ObjectMetadata objectMetadata = new ObjectMetadata();
@@ -72,7 +75,7 @@ public class OssServiceImpl implements OssService {
 
         //先存进sys_file 生成id后与fileManager关联
         remoteSysFileService.save(fileDTO);
-        if (grgFileMgrEntity.getFileId()==null){
+        if (grgFileMgrEntity.getFileId() == null) {
             SysFileEntity sysFileEntity = remoteSysFileService.getFileIdByFileName(fileName);
             grgFileMgrEntity.setFileId(String.valueOf(sysFileEntity.getId()));
         }
@@ -114,18 +117,18 @@ public class OssServiceImpl implements OssService {
 
 
     @PostConstruct
-	public void init() {
-		ClientConfiguration clientConfiguration = new ClientConfiguration();
-		clientConfiguration.setMaxConnections(ossProperties.getMaxConnections());
-		AwsClientBuilder.EndpointConfiguration endpointConfiguration = new AwsClientBuilder.EndpointConfiguration(
-				ossProperties.getEndpoint(), ossProperties.getRegion());
-		AWSCredentials awsCredentials = new BasicAWSCredentials(ossProperties.getAccessKey(),
-				ossProperties.getSecretKey());
-		AWSCredentialsProvider awsCredentialsProvider = new AWSStaticCredentialsProvider(awsCredentials);
-		this.amazonS3 = AmazonS3Client.builder().withEndpointConfiguration(endpointConfiguration)
-				.withClientConfiguration(clientConfiguration).withCredentials(awsCredentialsProvider)
-				.disableChunkedEncoding().withPathStyleAccessEnabled(ossProperties.getPathStyleAccess()).build();
-	}
+    public void init() {
+        ClientConfiguration clientConfiguration = new ClientConfiguration();
+        clientConfiguration.setMaxConnections(ossProperties.getMaxConnections());
+        AwsClientBuilder.EndpointConfiguration endpointConfiguration = new AwsClientBuilder.EndpointConfiguration(
+                ossProperties.getEndpoint(), ossProperties.getRegion());
+        AWSCredentials awsCredentials = new BasicAWSCredentials(ossProperties.getAccessKey(),
+                ossProperties.getSecretKey());
+        AWSCredentialsProvider awsCredentialsProvider = new AWSStaticCredentialsProvider(awsCredentials);
+        this.amazonS3 = AmazonS3Client.builder().withEndpointConfiguration(endpointConfiguration)
+                .withClientConfiguration(clientConfiguration).withCredentials(awsCredentialsProvider)
+                .disableChunkedEncoding().withPathStyleAccessEnabled(ossProperties.getPathStyleAccess()).build();
+    }
 
 
 }
