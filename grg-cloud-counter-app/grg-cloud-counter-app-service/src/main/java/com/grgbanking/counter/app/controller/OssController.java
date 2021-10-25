@@ -109,15 +109,11 @@ public class OssController {
         if (null == grgCustomerVo.getFile1() || null == grgCustomerVo.getFile2()) {
             return Resp.failed("需上传身份证正反面");
         }
-        //获取身份证正反面、文件名
+        //获取身份证正反面
         byte[] decode1 = Base64.getDecoder().decode(grgCustomerVo.getFile1());
         MultipartFile file1 = getMultipartFile(decode1);
         byte[] decode2 = Base64.getDecoder().decode(grgCustomerVo.getFile2());
         MultipartFile file2 = getMultipartFile(decode2);
-        returnlist.add(file1.getName());
-        returnlist.add(file2.getName());
-        map.put("fileName", returnlist);
-        map.put("result","success");
         //获取sessionId
         // 开发时使用的假数据
         GrgFileMgrEntity grgFileMgrEntity = new GrgFileMgrEntity();
@@ -131,17 +127,21 @@ public class OssController {
 //            grgFileMgrEntity.setSessionId("4567890");
             return Resp.failed("sessionId为空，请联系管理员");
         }
-        //身份证正面
+        //身份证正面、文件名
         grgFileMgrEntity.setFileBusiType(FileBusiTypeConstants.ID_CARD_FRONT);
 //        grgFileMgrEntity.setCustomerId(grgCustomerVo.getCustomerId());
         FileDTO uploadFile1 = ossUploadFile(file1, grgFileMgrEntity, grgCustomerVo.getCreateUser());
-        //身份证反面
+        returnlist.add(uploadFile1.getFileName());
+        //身份证反面、文件名
         grgFileMgrEntity.setFileBusiType(FileBusiTypeConstants.ID_CARD_BEHIND);
         FileDTO uploadFile2 = ossUploadFile(file2, grgFileMgrEntity, grgCustomerVo.getCreateUser());
+        returnlist.add(uploadFile2.getFileName());
         log.info("文件上传成功,文件名为:{}{}" + uploadFile1.getFileName(), uploadFile2.getFileName());
         List<FileDTO> list = new ArrayList();
         list.add(uploadFile1);
         list.add(uploadFile2);
+        map.put("fileName", returnlist);
+        map.put("result","success");
         SocketParam param = SocketParam.success(map);
         String employee = lineupService.findEmployee(grgCustomerVo.getCustomerId());
         param.getHead().setApiNo("idCard");
