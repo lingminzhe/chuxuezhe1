@@ -7,6 +7,8 @@ import com.grgbanking.counter.common.core.util.SocketParamHead;
 import com.grgbanking.counter.common.socket.broadcast.constant.RedisBroadcastConstants;
 import com.grgbanking.counter.common.socket.broadcast.service.RedisBroadcastService;
 import com.grgbanking.counter.common.socket.lineup.service.LineupService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +22,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("app")
 @Slf4j
+@Api(tags = "socket测试接口")
 public class SocketController {
 
     @Autowired
@@ -33,6 +36,7 @@ public class SocketController {
      * @param param  用户端的id
      * @return
      */
+    @ApiOperation(value = "挂断")
     @PostMapping("finish")
     public Resp finish(@RequestBody Map<String, String> param){
         // TODO 端开视频
