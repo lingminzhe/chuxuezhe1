@@ -1,11 +1,14 @@
 package com.grgbanking.counter.device.socket;
 
+import com.grgbanking.counter.device.lineup.service.impl.CustomerLineupServiceImpl;
 import com.grgbanking.counter.common.core.util.SocketParam;
 import com.grgbanking.counter.common.core.util.SocketParamHead;
 import com.grgbanking.counter.common.socket.broadcast.constant.RedisBroadcastConstants;
 import com.grgbanking.counter.common.socket.broadcast.service.RedisBroadcastService;
+import com.grgbanking.counter.common.socket.lineup.service.LineupService;
+import com.grgbanking.counter.common.socket.lineup.service.impl.LineupAbstractService;
+import com.grgbanking.counter.common.socket.socket.constant.SocketApiNoConstants;
 import com.grgbanking.counter.common.socket.socket.service.SocketAbstractService;
-import com.grgbanking.counter.device.lineup.service.impl.CustomerLineupServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

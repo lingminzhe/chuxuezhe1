@@ -85,7 +85,6 @@ public class MobileController {
     public Resp sendBusiSms(@RequestBody BusiSmsDTO busiSmsDTO) {
         String mobile = busiSmsDTO.getMobile();
         String busiNo = busiSmsDTO.getBusiNo();
-        //业务类型
         String name = busiInfoService.getBusiNameByNo(busiNo);
 //        String sessionId = lineupAbstractService.findSessionId(grgCustomerVo.getCustomerId());
 

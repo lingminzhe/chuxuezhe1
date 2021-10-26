@@ -1,18 +1,16 @@
 package com.grgbanking.counter.device.tencent.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.grgbanking.counter.device.tencent.entity.*;
+import com.grgbanking.counter.device.tencent.service.TencentService;
 import com.grgbanking.counter.common.core.constant.CommonConstants;
 import com.grgbanking.counter.common.core.util.Resp;
 import com.grgbanking.counter.common.core.util.SocketParam;
 import com.grgbanking.counter.common.core.util.SocketParamHead;
 import com.grgbanking.counter.common.socket.broadcast.constant.RedisBroadcastConstants;
 import com.grgbanking.counter.common.socket.broadcast.service.RedisBroadcastService;
+import com.grgbanking.counter.common.socket.lineup.constant.LineupConstants;
 import com.grgbanking.counter.common.socket.lineup.service.LineupService;
-import com.grgbanking.counter.device.tencent.entity.IdCardOCRResponse;
-import com.grgbanking.counter.device.tencent.entity.ImageRecognitionv2Request;
-import com.grgbanking.counter.device.tencent.entity.TencentEidToken;
-import com.grgbanking.counter.device.tencent.entity.TencentUserInfo;
-import com.grgbanking.counter.device.tencent.service.TencentService;
 import com.tencentcloudapi.faceid.v20180301.models.*;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
