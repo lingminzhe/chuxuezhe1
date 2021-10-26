@@ -174,8 +174,8 @@ public class OssController {
             grgFileMgrEntity.setFileBusiType(fileBusiType);
             //3、获取sessionId
             // 开发时使用的假数据
-//            String sessionId = "1020";
-            String sessionId = lineupAbstractService.findSessionId(fileDto.getUserId());
+            String sessionId = "1020";
+//            String sessionId = lineupAbstractService.findSessionId(fileDto.getUserId());
             grgFileMgrEntity.setSessionId(sessionId);
             //TODO 等到业务办理完成后再统一将customerId存入对应的数据库
 //            grgFileMgrEntity.setCustomerId(fileDto.getCustomerId());

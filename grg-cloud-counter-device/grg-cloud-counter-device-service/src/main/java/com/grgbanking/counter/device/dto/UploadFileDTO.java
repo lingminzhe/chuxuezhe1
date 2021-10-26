@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Data
 public class UploadFileDTO {
-    @ApiModelProperty(value = "ÎÄ¼þ",required = true)
+    @ApiModelProperty(value = "æ–‡ä»¶",required = true)
     private List<FileInfoDTO> fileDTO;
 
     @ApiModelProperty(required = true)
