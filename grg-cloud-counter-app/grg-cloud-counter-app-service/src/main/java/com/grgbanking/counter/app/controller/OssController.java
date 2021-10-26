@@ -117,8 +117,8 @@ public class OssController {
         //获取sessionId
         // 开发时使用的假数据
         GrgFileMgrEntity grgFileMgrEntity = new GrgFileMgrEntity();
-//        grgFileMgrEntity.setSessionId("100001");
 
+//      String sessionId ="1000";
         String sessionId = lineupAbstractService.findSessionId(grgCustomerVo.getCustomerId());
         if (StringUtils.isNotBlank(sessionId)) {
             grgFileMgrEntity.setSessionId(sessionId);
@@ -142,11 +142,8 @@ public class OssController {
         list.add(uploadFile2);
         map.put("fileName", returnlist);
         map.put("result","success");
-        SocketParam param = SocketParam.success(map);
         String employee = lineupService.findEmployee(grgCustomerVo.getCustomerId());
-        param.getHead().setApiNo("idCard");
-        param.getHead().setBusiNo("120001");
-        param.getHead().setClientId(employee);
+        SocketParam param = lineupService.successParam(employee, "idCard", "120001",map);
         broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, param);
         log.info("上传身份证接口报文: {}", JSON.toJSONString(param));
         return Resp.success(list, "上传成功");
@@ -175,7 +172,7 @@ public class OssController {
             //3、文件类型
             String fileType = file.getFileType();
 
-            //3、获取sessionId
+            //4、获取sessionId
             // 开发时使用的假数据
 //            String sessionId = "1020";
             String sessionId = lineupAbstractService.findSessionId(fileDto.getUserId());
@@ -186,13 +183,11 @@ public class OssController {
             resultList.add(fileDTO.getFileName());
             list.add(fileDTO);
         }
-        String employee = lineupService.findEmployee(fileDto.getUserId());
         map.put("fileName",resultList);
         map.put("result","success");
-        SocketParam param = SocketParam.success(map);
-        param.getHead().setApiNo("vertifyTransaction");
-        param.getHead().setBusiNo("120001");
-        param.getHead().setClientId(employee);
+        map.put("server","app");
+        String employee = lineupService.findEmployee(fileDto.getUserId());
+        SocketParam param = lineupService.successParam(employee, "vertifyTransaction", "120001",map);
         broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, param);
         return Resp.success(list, "上传成功");
     }
