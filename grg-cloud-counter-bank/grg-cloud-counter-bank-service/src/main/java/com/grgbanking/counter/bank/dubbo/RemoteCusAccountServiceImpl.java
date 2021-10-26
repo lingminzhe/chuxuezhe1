@@ -20,7 +20,7 @@ public class RemoteCusAccountServiceImpl implements RemoteCusAccountService {
         GrgAccountEntity grgAccountEntity = grgAccountService.getOne(new QueryWrapper<GrgAccountEntity>().
                 eq("card_no", creditCardEntity.getAccountId()));
         if (grgAccountEntity == null) {
-            return null;
+            return false;
         } else {
             if (grgAccountEntity.getCvvCode().equals(creditCardEntity.getCvvCode())) {
                 return true;
