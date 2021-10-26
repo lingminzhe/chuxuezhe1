@@ -118,8 +118,8 @@ public class OssController {
         // 开发时使用的假数据
         GrgFileMgrEntity grgFileMgrEntity = new GrgFileMgrEntity();
 
-      String sessionId ="1000";
-//        String sessionId = lineupAbstractService.findSessionId(grgCustomerVo.getCustomerId());
+//      String sessionId ="1000";
+        String sessionId = lineupAbstractService.findSessionId(grgCustomerVo.getCustomerId());
         if (StringUtils.isNotBlank(sessionId)) {
             grgFileMgrEntity.setSessionId(sessionId);
         } else {
