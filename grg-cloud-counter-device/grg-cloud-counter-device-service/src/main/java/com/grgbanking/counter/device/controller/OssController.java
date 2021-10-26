@@ -85,7 +85,7 @@ public class OssController {
 //            grgFileMgrEntity.setSessionId("123456789");
             return Resp.failed("sessionId为空，请联系管理员");
         }
-        FileDTO fileDTO = ossUploadFile(file, grgFileMgrEntity, createUser);
+        FileDTO fileDTO = ossUploadFile(file, grgFileMgrEntity, createUser,"");
 
         return Resp.success(fileDTO, "文件上传成功");
 
@@ -130,11 +130,11 @@ public class OssController {
         //身份证正面、文件名
         grgFileMgrEntity.setFileBusiType(FileBusiTypeConstants.ID_CARD_FRONT);
 //        grgFileMgrEntity.setCustomerId(grgCustomerVo.getCustomerId());
-        FileDTO uploadFile1 = ossUploadFile(file1, grgFileMgrEntity, grgCustomerVo.getCreateUser());
+        FileDTO uploadFile1 = ossUploadFile(file1, grgFileMgrEntity, grgCustomerVo.getCreateUser(),"");
         returnlist.add(uploadFile1.getFileName());
         //身份证反面、文件名
         grgFileMgrEntity.setFileBusiType(FileBusiTypeConstants.ID_CARD_BEHIND);
-        FileDTO uploadFile2 = ossUploadFile(file2, grgFileMgrEntity, grgCustomerVo.getCreateUser());
+        FileDTO uploadFile2 = ossUploadFile(file2, grgFileMgrEntity, grgCustomerVo.getCreateUser(),"");
         returnlist.add(uploadFile2.getFileName());
         log.info("文件上传成功,文件名为:{}{}" + uploadFile1.getFileName(), uploadFile2.getFileName());
         List<FileDTO> list = new ArrayList();
@@ -169,17 +169,20 @@ public class OssController {
             String fileBase64 = file.getFile();
             byte[] decode1 = Base64.getDecoder().decode(fileBase64);
             MultipartFile file1 = getMultipartFile(decode1);
-            //2、获取文件类型
+            //2、获取文件业务类型
             String fileBusiType = file.getFileBusiType();
             grgFileMgrEntity.setFileBusiType(fileBusiType);
+            //3、文件类型
+            String fileType = file.getFileType();
+
             //3、获取sessionId
             // 开发时使用的假数据
-            String sessionId = "1020";
-//            String sessionId = lineupAbstractService.findSessionId(fileDto.getUserId());
+//            String sessionId = "1020";
+            String sessionId = lineupAbstractService.findSessionId(fileDto.getUserId());
             grgFileMgrEntity.setSessionId(sessionId);
             //TODO 等到业务办理完成后再统一将customerId存入对应的数据库
 //            grgFileMgrEntity.setCustomerId(fileDto.getCustomerId());
-            FileDTO fileDTO = ossUploadFile(file1, grgFileMgrEntity, "");
+            FileDTO fileDTO = ossUploadFile(file1, grgFileMgrEntity, "",fileType);
             resultList.add(fileDTO.getFileName());
             list.add(fileDTO);
         }
@@ -215,14 +218,14 @@ public class OssController {
      * @param createUser
      */
     @SneakyThrows
-    public FileDTO ossUploadFile(MultipartFile file, GrgFileMgrEntity grgFileMgrEntity, String createUser) {
+    public FileDTO ossUploadFile(MultipartFile file, GrgFileMgrEntity grgFileMgrEntity, String createUser,String fileType) {
         byte[] fileByte = IOUtils.toByteArray(file.getInputStream());
         String md5 = FileUtil.getFileMd5(file);
         String original = file.getOriginalFilename();
         long size = file.getSize();
         //如果是签名的话 添加上svg后缀 才可以正常显示图片
         String contentType = "";
-        if ("103".equals(grgFileMgrEntity.getFileBusiType())) {
+        if ("svg".equals(fileType)) {
             contentType = "svg";
         }
 //        String contentType = file.getContentType();
