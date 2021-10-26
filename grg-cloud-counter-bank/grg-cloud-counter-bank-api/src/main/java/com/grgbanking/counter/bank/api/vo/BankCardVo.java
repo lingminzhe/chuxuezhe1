@@ -4,7 +4,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -31,7 +30,7 @@ public class BankCardVo implements Serializable {
     @ApiModelProperty(value = "用户id")
     private String userId;
 
-    @ApiModelProperty(value = "账户状态（1：激活； 2：挂失）", required = true)
+    @ApiModelProperty(value = "账户状态（1：激活； 2：挂失）修改银行卡状态必填、卡密校验不需要填", required = true)
     private Integer accountStatus;
 
 }
