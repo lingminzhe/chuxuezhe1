@@ -10,12 +10,12 @@ import lombok.Data;
 @Data
 public class FileInfoDTO {
 
-    @ApiModelProperty(value = "文件,Base64格式",required = true)
+    @ApiModelProperty(value = "鏂囦欢,Base64鏍煎紡",required = true)
     private String file;
     /**
      *
      */
-    @ApiModelProperty(value = "文件业务类型,身份证正面：101，反面：102，签名：103",required = true,example = "101")
+    @ApiModelProperty(value = "鏂囦欢涓氬姟绫诲瀷,韬唤璇佹闈細101锛屽弽闈細102锛岀鍚嶏細103",required = true,example = "101")
     private String fileBusiType;
 
 
