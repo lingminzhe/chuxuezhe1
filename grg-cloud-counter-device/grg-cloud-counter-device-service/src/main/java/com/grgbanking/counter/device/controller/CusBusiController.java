@@ -136,6 +136,6 @@ public class CusBusiController {
         param.getHead().setApiNo(SocketApiNoConstants.VERIFY_PASSWORD);
         param.getHead().setClientId(employee);
         broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, param);
-        return Resp.failed("卡密校验成功");
+        return Resp.success("卡密校验成功");
     }
 }
