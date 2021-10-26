@@ -25,6 +25,24 @@ public abstract class LineupAbstractService implements LineupService {
     private RedisBroadcastService broadcastService;
 
     @Override
+    public SocketParam failedParam(String employee,String apiNo,String busiNo,Map map){
+        SocketParam param = SocketParam.failed(map);
+        param.getHead().setApiNo(apiNo);
+        param.getHead().setBusiNo(busiNo);
+        param.getHead().setClientId(employee);
+        return param;
+    }
+
+    @Override
+    public SocketParam successParam(String employee,String apiNo,String busiNo,Map map){
+        SocketParam param = SocketParam.success(map);
+        param.getHead().setApiNo(apiNo);
+        param.getHead().setBusiNo(busiNo);
+        param.getHead().setClientId(employee);
+        return param;
+    }
+
+    @Override
     public Long rank() {
         return redisTemplate.opsForZSet().zCard(LineupConstants.CUSTOMER_VIDEO_QUEUE_KEY);
     }

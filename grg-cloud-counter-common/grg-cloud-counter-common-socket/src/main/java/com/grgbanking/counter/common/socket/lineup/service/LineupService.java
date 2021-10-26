@@ -1,11 +1,24 @@
 package com.grgbanking.counter.common.socket.lineup.service;
 
+import com.grgbanking.counter.common.core.util.SocketParam;
 import com.grgbanking.counter.common.socket.socket.constant.SocketConnectStatusEnum;
+
+import java.util.Map;
 
 /**
  * 排队处理Service
  */
 public interface LineupService {
+
+    /**
+     * 公共失败param
+     */
+    SocketParam failedParam(String employee, String apiNo, String busiNo, Map map);
+
+    /**
+     * 公共成功param
+     */
+    SocketParam successParam(String employee, String apiNo, String busiNo, Map map);
 
     /**
      * 终端登录
