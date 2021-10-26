@@ -24,13 +24,13 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 @DubboService
-@AllArgsConstructor
 public class MobileServiceImpl implements RemoteMobileService {
 
 	@Autowired
 	private SmsApi smsApi;
 
-	private final RedisTemplate redisTemplate;
+	@Autowired
+	private RedisTemplate redisTemplate;
 
 	/**
 	 * 发送手机验证码
@@ -51,7 +51,7 @@ public class MobileServiceImpl implements RemoteMobileService {
 		String code = RandomUtil.randomNumbers(Integer.parseInt(SecurityConstants.CODE_SIZE));
 		//短信文本
 		String smsText = "短信验证码：" + code;
-		log.info("手机号生成验证码成功:{}",  code);
+		log.debug("手机号生成验证码成功:{}",  code);
 		redisTemplate.opsForValue().set(CacheConstants.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + StringPool.AT + mobile, code, SecurityConstants.CODE_TIME, TimeUnit.SECONDS);
 //		System.out.println(CacheConstants.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + StringPool.AT + mobile);
 		//调用短信平台接口
