@@ -67,7 +67,7 @@ public class MobileController {
             SocketParamHead success = SocketParamHead.success("verifySms", 0, "success");
             success.setClientId(employee);
             Map<String, Object> map = new HashMap<>();
-            map.put("result", true);
+            map.put("result", "success");
             SocketParam socketParam = SocketParam.success(success, map);
             broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, socketParam);
             return Resp.success("验证成功!");
