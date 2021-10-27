@@ -92,7 +92,7 @@ public class GrgCusInfoController {
         paramHead.setClientId(lineupService.findCustomer(String.valueOf(grgUser.getUserId())));
         System.out.println("银行卡更新状态报文： " + JSON.toJSONString(paramHead));
         if (accountStatus == 1){
-            paramHead.setApiNo("cardActivation");
+            paramHead.setApiNo("businessResult");
             paramHead.setBusiNo("120001");
         }
 
