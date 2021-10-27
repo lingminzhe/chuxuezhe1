@@ -50,7 +50,7 @@ public class MobileController {
 			SysUserEntity authorization = remoteUserService.currentUser(request.getHeader("Authorization"));
 			String customerId = lineupService.findCustomer(String.valueOf(authorization.getUserId()));
 			map.put("phone",mobile);
-			SocketParam param = lineupService.successParam("customerId", "verifySms", "100001", map);
+			SocketParam param = lineupService.successParam(customerId, "verifySms", "100001", map);
 			broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_APP, param);
 			return Resp.success("短信发送成功");
 		}else {
