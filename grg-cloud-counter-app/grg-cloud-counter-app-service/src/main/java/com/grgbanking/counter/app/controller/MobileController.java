@@ -16,6 +16,9 @@ import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author: Ye Kaitao
  * @create: 2021-10-18
@@ -63,7 +66,9 @@ public class MobileController {
         if (b) {
             SocketParamHead success = SocketParamHead.success("verifySms", 0, "success");
             success.setClientId(employee);
-            SocketParam socketParam = SocketParam.success(success);
+            Map<String, Object> map = new HashMap<>();
+            map.put("result", success);
+            SocketParam socketParam = SocketParam.success(success, map);
             broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, socketParam);
             return Resp.success("验证成功!");
         }else {

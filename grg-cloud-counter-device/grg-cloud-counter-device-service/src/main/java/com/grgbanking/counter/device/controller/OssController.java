@@ -185,6 +185,7 @@ public class OssController {
         }
         map.put("fileName",resultList);
         map.put("result","success");
+        map.put("server","device");
         String employee = lineupService.findEmployee(fileDto.getUserId());
         SocketParam param = lineupService.successParam(employee, "vertifyTransaction", "120001",map);
         broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, param);
