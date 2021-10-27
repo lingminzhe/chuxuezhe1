@@ -44,14 +44,14 @@ public class MobileServiceImpl implements RemoteMobileService {
 		if (codeObj != null) {
 			//TODO 过期时间查询
 			Long expire = redisTemplate.opsForValue().getOperations().getExpire(key, TimeUnit.SECONDS);
-			log.info("手机号验证码未过期:{}，{}", mobile, codeObj);
+			log.info("手机号验证码未过期！");
 			return false;
 		}
 		//验证码
 		String code = RandomUtil.randomNumbers(Integer.parseInt(SecurityConstants.CODE_SIZE));
 		//短信文本
-		String smsText = "短信验证码：" + code;
-		log.info("手机号生成验证码成功:{}",  code);
+		String smsText = "短信验证码：" + code + " , 5分钟内有效";
+		log.debug("手机号生成验证码成功！" );
 		redisTemplate.opsForValue().set(CacheConstants.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + StringPool.AT + mobile, code, SecurityConstants.CODE_TIME, TimeUnit.SECONDS);
 //		System.out.println(CacheConstants.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + StringPool.AT + mobile);
 		//调用短信平台接口
