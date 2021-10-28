@@ -123,14 +123,14 @@ public class CusBusiController {
         HashMap<Object, Object> map = new HashMap<>();
         Boolean flag = remoteCusAccountService.verifyCardPwd(bankCardVo);
         String employee = lineupService.findEmployee(bankCardVo.getUserId());
-//        if (!flag) {
-//            map.put("result", "failed");
-//            SocketParam param = SocketParam.failed(map);
-//            param.getHead().setApiNo(SocketApiNoConstants.VERIFY_PASSWORD);
-//            param.getHead().setClientId(employee);
-//            broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, param);
-//            return Resp.failed("卡密校验失败");
-//        }
+        if (!flag) {
+            map.put("result", "failed");
+            SocketParam param = SocketParam.failed(map);
+            param.getHead().setApiNo(SocketApiNoConstants.VERIFY_PASSWORD);
+            param.getHead().setClientId(employee);
+            broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, param);
+            return Resp.failed("卡密校验失败");
+        }
         map.put("result", "success");
         SocketParam param = SocketParam.success(map);
         param.getHead().setApiNo(SocketApiNoConstants.VERIFY_PASSWORD);
