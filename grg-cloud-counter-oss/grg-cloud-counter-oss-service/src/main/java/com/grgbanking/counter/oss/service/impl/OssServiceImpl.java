@@ -47,6 +47,7 @@ public class OssServiceImpl implements OssService {
     @Transactional
     @Override
     public FileDTO upload(byte[] fileByte, String md5, String original, long size, String contentType, GrgFileMgrEntity grgFileMgrEntity, String createUser) {
+        log.info("调用了OssServiceImpl的upload()方法");
         FileDTO fileDTO = new FileDTO();
         String fileName = FileUtil.randomFileName();
         fileDTO.setOriginalName(original);

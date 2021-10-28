@@ -54,7 +54,7 @@ public class MobileController {
 			broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_APP, param);
 			return Resp.success("短信发送成功");
 		}else {
-			return Resp.failed("短信发送失败");
+			return Resp.failed("短信发送失败,验证码未过期！");
 		}
 	}
 
