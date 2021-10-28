@@ -138,7 +138,6 @@ public class TencentController {
      * @param userId
      * @return
      */
-    @CrossOrigin
     @ApiOperation("获取视频通讯userSig")
     @ApiImplicitParam(name = "userId", value = "用户Id", required = true)
     @PostMapping("/getUserSig")
