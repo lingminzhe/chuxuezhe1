@@ -111,6 +111,8 @@ public class EmployeeLineupServiceImpl extends LineupAbstractService {
         employeeService.setUserSig(tencentService.getUserSig(employeeId));
         param.setBody(employeeService);
         socketService.sendMessage(employeeId, param);
+        /**广播所有坐席，当前排队数据以及业务量等**/
+        broadcastService.sendBroadcast(RedisBroadcastConstants.BROADCAST_CHANNEL_CSR, SocketParam.success(SocketParamHead.success(SocketApiNoConstants.BUSI_OPT)));
         log.info("接入视频、绑定当前会话{}", customerId);
         //接入视频、绑定当前会话
         redisTemplate.opsForHash().put(LineupConstants.BUSI_SESSION_KEY, customerId, String.valueOf(UUIDUtils.idNumber()));

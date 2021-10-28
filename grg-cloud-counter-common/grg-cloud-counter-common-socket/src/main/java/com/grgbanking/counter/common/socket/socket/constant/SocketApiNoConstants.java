@@ -21,6 +21,11 @@ public class SocketApiNoConstants {
     public static final String VIDEO_CMD = "video_cmd";
 
     /**
+     * 数据统计
+     */
+    public static final String BUSI_OPT = "busi_opt";
+
+    /**
      * 用于检查是否有用户正在排队视频呼叫
      */
     public static final String CUSTOMER_VIDEO_LINEUP_CHECK = "customer_video_lineup_check";
