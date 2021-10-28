@@ -131,8 +131,8 @@ public class GrgEmployeeController {
     @PostMapping("/update")
     //@RequiresPermissions("csr:grgemployeeservice:update")
     public Resp update(@RequestBody GrgEmployeeServiceEntity grgEmployeeService, HttpServletRequest request){
-        SysUserEntity sysUser = remoteUserService.currentUser(request.getHeader("Authorization"));
-        grgEmployeeService.setEmployeeId(String.valueOf(sysUser.getUserId()));
+        //SysUserEntity sysUser = remoteUserService.currentUser(request.getHeader("Authorization"));
+        //grgEmployeeService.setEmployeeId(String.valueOf(sysUser.getUserId()));
         int i = this.grgEmployeeService.updateByEmployeeId(grgEmployeeService);
         if (i==0){
             return Resp.failed(i,"更改失败");
