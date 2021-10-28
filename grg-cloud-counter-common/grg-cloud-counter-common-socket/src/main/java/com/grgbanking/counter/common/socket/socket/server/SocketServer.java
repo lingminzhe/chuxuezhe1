@@ -135,6 +135,10 @@ public class SocketServer implements ApplicationContextAware {
         return clientMap.get(clientId);
     }
 
+    public static Map<String, SocketIOClient> getClientMap() {
+        return clientMap;
+    }
+
     /**
      * 收集Socket消息处理的handlers
      *
