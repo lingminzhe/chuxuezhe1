@@ -51,13 +51,12 @@ public class SysDictController {
         return Resp.success(list," page");
     }
 
+    @Deprecated
     @ApiOperation(value = "查询数据字典字段")
     @GetMapping("/listAll")
     public Resp listAll(){
-
         //查询所有
         List<Map<String, Map<String, String>>> list = sysDictService.listDictWithItem();
-
         return Resp.success(list," 数据字典");
     }
 
@@ -67,6 +66,7 @@ public class SysDictController {
      * @return
      */
 
+    @Deprecated
     @PostMapping("/根据字典type 找到对应的字典列表")
     public Resp getDictItemByType(@RequestBody DictWithItemVo dict){
         String type = dict.getType();
@@ -75,13 +75,12 @@ public class SysDictController {
             return Resp.success(entities);
         }
         return Resp.failed("查不到当前字段,请联系管理员添加");
-
-
     }
 
     /**
      * 查找某个数据字典
      */
+    @Deprecated
     @ApiOperation(value = "查找数据字典")
     @PostMapping("/getDictByType")
     public Resp getDictByType(@RequestBody SysDictEntity sysDict){
