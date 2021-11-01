@@ -52,7 +52,6 @@ public class MobileServiceImpl implements RemoteMobileService {
 		//短信文本
 		String smsText = "短信验证码：" + code + " , 5分钟内有效";
 		log.debug("手机号生成验证码成功！" );
-		redisTemplate.opsForValue().set(CacheConstants.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + StringPool.AT + mobile, code, SecurityConstants.CODE_TIME, TimeUnit.SECONDS);
 //		System.out.println(CacheConstants.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + StringPool.AT + mobile);
 		//调用短信平台接口
 		try {
@@ -60,6 +59,9 @@ public class MobileServiceImpl implements RemoteMobileService {
 		}catch (IOException e){
 			e.printStackTrace();
 		}
+		//短信发送成功后再将短信验证码存入
+		redisTemplate.opsForValue().set(CacheConstants.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + StringPool.AT + mobile, code, SecurityConstants.CODE_TIME, TimeUnit.SECONDS);
+
 		return true;
 	}
 

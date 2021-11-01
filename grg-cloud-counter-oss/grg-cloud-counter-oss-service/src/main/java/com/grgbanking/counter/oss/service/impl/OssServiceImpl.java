@@ -91,7 +91,6 @@ public class OssServiceImpl implements OssService {
         return null;
     }
 
-    // TODO 从数据库查询
     @Override
     public FileDTO queryFileInfo(String fileName) {
         FileDTO result = new FileDTO();

@@ -93,7 +93,6 @@ public class OssController {
 
     /**
      * 上传身份证正反面 及识别到的身份证信息
-     *
      * @param grgCustomerVo
      * @return
      */
@@ -176,6 +175,7 @@ public class OssController {
             // 开发时使用的假数据
 //            String sessionId = "1020";
             String sessionId = lineupAbstractService.findSessionId(fileDto.getUserId());
+            log.info("sessionId:",sessionId);
             grgFileMgrEntity.setSessionId(sessionId);
             //TODO 等到业务办理完成后再统一将customerId存入对应的数据库
 //            grgFileMgrEntity.setCustomerId(fileDto.getCustomerId());
@@ -195,7 +195,6 @@ public class OssController {
 
     /**
      * Base64转MultipartFile
-     *
      * @param decode1
      * @return
      * @throws IOException

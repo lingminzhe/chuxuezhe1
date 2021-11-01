@@ -2,7 +2,6 @@ package com.grgbanking.counter.csr.controller;
 
 import com.grgbanking.counter.common.core.util.PageUtils;
 import com.grgbanking.counter.common.core.util.Resp;
-import com.grgbanking.counter.csr.api.dubbo.RemoteFileMgrService;
 import com.grgbanking.counter.csr.entity.GrgFileManagerEntity;
 import com.grgbanking.counter.csr.service.GrgFileManagerService;
 import com.grgbanking.counter.oss.api.dto.FileDTO;
@@ -28,11 +27,6 @@ public class GrgFileManagerController {
     @DubboReference
     private GrgFileManagerService grgFileManagerService;
 
-    /**
-     * 远程调用接口
-     */
-    @DubboReference
-    private RemoteFileMgrService remoteFileMgrService;
 
     /**
      * 列表
@@ -57,12 +51,6 @@ public class GrgFileManagerController {
         return Resp.success(grgFileManager, "grgFileManager");
     }
 
-    //RemoteFileMgrService
-    @PostMapping("/getByFileName")
-    public Resp getByCustomerName(@RequestBody String fileName){
-//        GrgFileMgrEntity entity = remoteFileMgrService.getByFileName(fileName);
-        return Resp.success();
-    }
 
     /**
      * 保存

@@ -12,6 +12,7 @@ import java.io.IOException;
 /**
  * @author: Ye Kaitao
  * @create: 2021-10-20
+ * 短信接口平台
  */
 @Slf4j
 @Component
