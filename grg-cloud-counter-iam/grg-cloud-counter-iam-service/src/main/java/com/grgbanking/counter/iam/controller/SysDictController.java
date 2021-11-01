@@ -9,6 +9,7 @@ import com.grgbanking.counter.iam.api.entity.SysDictItemEntity;
 import com.grgbanking.counter.iam.service.SysDictItemService;
 import com.grgbanking.counter.iam.service.SysDictService;
 import com.grgbanking.counter.iam.vo.DictWithItemVo;
+import com.grgbanking.counter.iam.vo.ItemVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +66,8 @@ public class SysDictController {
      * @param dict
      * @return
      */
-    @PostMapping("/getDictItemByType")
+
+    @PostMapping("/根据字典type 找到对应的字典列表")
     public Resp getDictItemByType(@RequestBody DictWithItemVo dict){
         String type = dict.getType();
         if (StrUtil.isNotEmpty(type)) {
@@ -123,6 +125,33 @@ public class SysDictController {
 
         return Resp.success();
     }
+
+    /**
+     * 获取所有字典字段
+     * @return
+     */
+    @ApiOperation(value = "获取所有字典字段")
+    @GetMapping("/getAllDict")
+    public Resp getAllDict(){
+        List<ItemVo> itemVos = sysDictService.listDictWithItem1();
+
+        return Resp.success(itemVos,"数据字典");
+    }
+
+    /**
+     * 根据类型获取字典字段
+     * @param type
+     * @return
+     */
+    @ApiOperation(value = "根据类型获取字典字段")
+    @GetMapping("/getByType")
+    public Resp getByType(@RequestParam String type){
+        List<ItemVo> itemVos = sysDictService.getByType(type);
+
+        return Resp.success(itemVos,"数据字典");
+    }
+
+
 
 
 }

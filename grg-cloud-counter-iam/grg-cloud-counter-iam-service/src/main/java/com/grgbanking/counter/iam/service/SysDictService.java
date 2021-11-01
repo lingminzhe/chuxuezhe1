@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.grgbanking.counter.common.core.util.PageUtils;
 import com.grgbanking.counter.iam.api.entity.SysDictEntity;
 import com.grgbanking.counter.iam.vo.DictWithItemVo;
+import com.grgbanking.counter.iam.vo.ItemVo;
 
 import java.util.List;
 import java.util.Map;
@@ -28,4 +29,8 @@ public interface SysDictService extends IService<SysDictEntity> {
     void removeDictById(List<Long> asList);
 
     int updateDictById(SysDictEntity sysDict);
+
+    List<ItemVo> listDictWithItem1();
+
+    List<ItemVo> getByType(String type);
 }

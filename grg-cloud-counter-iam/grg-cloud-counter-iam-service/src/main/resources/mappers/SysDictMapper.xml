@@ -21,7 +21,7 @@
     </sql>
 
     <select id="getDictAndItem" resultType="com.grgbanking.counter.iam.vo.DictWithItemVo">
-        select dict.*,item.* from sys_dict dict,sys_dict_item item where dict.dict_id=item.dict_id
+        select dict.dict_id,dict.type,item.value,item.label from sys_dict dict,sys_dict_item item where dict.dict_id=item.dict_id
     </select>
 
 

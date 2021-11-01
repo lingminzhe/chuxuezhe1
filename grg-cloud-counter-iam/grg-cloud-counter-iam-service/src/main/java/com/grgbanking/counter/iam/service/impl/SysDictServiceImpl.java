@@ -11,6 +11,7 @@ import com.grgbanking.counter.iam.dao.SysDictDao;
 import com.grgbanking.counter.iam.service.SysDictItemService;
 import com.grgbanking.counter.iam.service.SysDictService;
 import com.grgbanking.counter.iam.vo.DictWithItemVo;
+import com.grgbanking.counter.iam.vo.ItemVo;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -134,4 +135,67 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictDao, SysDictEntity> i
         redisTemplate.opsForValue().set(CacheConstants.DICT_DEFAULT_KEY, collect);
         log.info("字典存入缓存成功");
     }
+
+    /**
+     * 改进数据字典代码结构
+     * @return
+     */
+    @Override
+    public List<ItemVo> listDictWithItem1() {
+
+        Object codeObj = redisTemplate.opsForValue().get(CacheConstants.DICT_DEFAULT_KEY );
+        if (codeObj != null) {
+            log.info("字典缓存已存在");
+            return (List<ItemVo>)codeObj;
+        }
+        //将dict写入缓存中
+        saveDictInRedis1();
+        Object obj = redisTemplate.opsForValue().get(CacheConstants.DICT_DEFAULT_KEY );
+
+        return (List<ItemVo>) obj;
+    }
+
+    @Override
+    public List<ItemVo> getByType(String type) {
+        List<ItemVo> codeObj = (List<ItemVo>) redisTemplate.opsForValue().get(CacheConstants.DICT_DEFAULT_KEY );
+        if (codeObj != null) {
+            //字典缓存已存在,从缓存里查找
+            List<ItemVo> collect = codeObj.stream().filter( list -> list.getType().equals(type)).collect(Collectors.toList());
+            return collect;
+        }else {
+            log.info("字典缓存不存在，先载入缓存");
+            saveDictInRedis1();
+            List<ItemVo> byType = getByType(type);
+            return byType;
+        }
+
+
+    }
+
+    /**
+     * 查数据库
+     * （新）存入redis
+     */
+    public List<ItemVo> saveDictInRedis1(){
+        //获取根据type字段保存字典信息
+        List<DictWithItemVo> dictAndItem = dictDao.getDictAndItem();
+
+        List<ItemVo> list = dictAndItem.stream().map((vo) -> {
+            ItemVo itemVo = new ItemVo();
+            HashMap<String, String> map = new HashMap<>();
+            itemVo.setId(vo.getDictId());
+            //type
+            itemVo.setType(vo.getType());
+            //value:label
+            map.put(vo.getValue(), vo.getLabel());
+            itemVo.setValue(map);
+
+            return itemVo;
+        }).collect(Collectors.toList());
+        redisTemplate.opsForValue().set(CacheConstants.DICT_DEFAULT_KEY, list);
+
+        return list;
+
+    }
+
 }
