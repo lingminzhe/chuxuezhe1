@@ -17,6 +17,7 @@ import com.grgbanking.counter.csr.service.GrgEmployeeService;
 import com.grgbanking.counter.csr.vo.EmployeeCustomerVo;
 import com.grgbanking.counter.iam.api.dubbo.RemoteUserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -32,7 +33,7 @@ import java.util.Map;
 @Service("grgEmployeeServiceService")
 public class GrgEmployeeServiceImpl extends ServiceImpl<GrgEmployeeServiceDao, GrgEmployeeServiceEntity> implements GrgEmployeeService {
 
-    @Autowired
+    @DubboReference
     private RemoteUserService remoteUserService;
 
     @Autowired
