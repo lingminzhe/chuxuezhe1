@@ -97,7 +97,9 @@ public class OssServiceImpl implements OssService {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, 7); // url有效期最多7天
         String url = amazonS3.generatePresignedUrl(ossProperties.getBucketName(), fileName, calendar.getTime()).toString();
-        result.setUrl(url);
+        //返回https链接
+        String urls = ossProperties.getUrl() + url.substring(url.indexOf("counter"));
+        result.setUrl(urls);
         return result;
     }
 

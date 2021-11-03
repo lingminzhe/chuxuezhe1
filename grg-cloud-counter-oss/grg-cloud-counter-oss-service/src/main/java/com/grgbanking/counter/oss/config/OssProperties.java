@@ -1,6 +1,7 @@
 package com.grgbanking.counter.oss.config;
 
 import lombok.Data;
+import lombok.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -63,5 +64,10 @@ public class OssProperties {
 	 * 最大线程数，默认： 100
 	 */
 	private Integer maxConnections = 1000;
+
+	/**
+	 * 默认返回的url前缀
+	 */
+	private String url;
 
 }
