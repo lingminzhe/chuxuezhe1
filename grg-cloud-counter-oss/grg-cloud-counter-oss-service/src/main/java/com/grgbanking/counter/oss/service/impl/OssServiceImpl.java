@@ -18,6 +18,7 @@ import com.grgbanking.counter.oss.api.dto.FileDTO;
 import com.grgbanking.counter.oss.config.OssProperties;
 import com.grgbanking.counter.oss.service.OssService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -98,8 +99,10 @@ public class OssServiceImpl implements OssService {
         calendar.add(Calendar.DAY_OF_MONTH, 7); // url有效期最多7天
         String url = amazonS3.generatePresignedUrl(ossProperties.getBucketName(), fileName, calendar.getTime()).toString();
         //返回https链接
-        String urls = ossProperties.getUrl() + url.substring(url.indexOf("counter"));
-        result.setUrl(urls);
+        if (!StringUtils.isBlank(ossProperties.getUrl())) {
+            url = ossProperties.getUrl() + url.substring(url.indexOf("counter"));
+        }
+        result.setUrl(url);
         return result;
     }
 
