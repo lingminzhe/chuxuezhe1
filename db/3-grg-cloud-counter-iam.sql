@@ -661,26 +661,31 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user` (
-  `user_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-  `user_name` varchar(50) DEFAULT NULL COMMENT '用户名',
-  `nick_name` varchar(64) DEFAULT NULL COMMENT '昵称',
-  `password` varchar(255) DEFAULT NULL COMMENT '密码',
-  `phone` varchar(20) DEFAULT NULL COMMENT '手机号',
-  `avatar` varchar(255) DEFAULT NULL COMMENT '头像',
-  `dept_id` bigint(20) DEFAULT NULL COMMENT '部门ID',
+  `user_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '主键ID',
+  `user_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '用户名',
+  `nick_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '昵称',
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '密码',
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '手机号',
+  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '头像',
+  `dept_id` bigint DEFAULT NULL COMMENT '部门ID',
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `lock_flag` int(1) DEFAULT '0' COMMENT '0-未锁定，1-已锁定',
-  `enabled` int(1) DEFAULT '1' COMMENT '1-可用；0-禁用',
-  PRIMARY KEY (`user_id`) USING BTREE,
-  KEY `user_idx1_username` (`nick_name`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
+  `lock_flag` int DEFAULT '0' COMMENT '0-未锁定，1-已锁定',
+  `enabled` int DEFAULT '1' COMMENT '1-可用；0-禁用',
+PRIMARY KEY (`user_id`) USING BTREE,
+KEY `user_idx1_username` (`nick_name`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='用户表';
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
 BEGIN;
 INSERT INTO `sys_user` VALUES (1, 'admin', '管理员', '$2a$10$H3p/ptZ9U8LoR1kwF5CF/eGn92yFTPO6ma0jgeOhVJMsw/oFyez.6', '13800138000', '', 1, '2018-04-20 07:15:18', '2021-09-04 17:44:34', 0, 1);
+INSERT INTO `sys_user` VALUES ('101', '1001', '坐席1号', '$2a$10$7Zw8ZCQiRsnLs7xIumMEaOJvCoLirFjUMz089vQbHjdV0nzZ38fuq', '13138001380', NULL, 2, '2021-09-16 14:34:19', '2021-10-21 14:26:12', 0, 1);
+INSERT INTO `sys_user` VALUES ('102', '1002', '坐席2号', '$2a$10$7Zw8ZCQiRsnLs7xIumMEaOJvCoLirFjUMz089vQbHjdV0nzZ38fuq', '13138001380', NULL, 2, '2021-09-16 14:34:42', '2021-10-21 14:26:17', 0, 1);
+INSERT INTO `sys_user` VALUES ('103', '1003', '坐席3号', '$2a$10$7Zw8ZCQiRsnLs7xIumMEaOJvCoLirFjUMz089vQbHjdV0nzZ38fuq', '13138001380', NULL, 2, '2021-10-16 14:21:45', '2021-10-21 14:26:23', 0, 1);
+INSERT INTO `sys_user` VALUES ('104', '1004', '坐席4号', '$2a$10$7Zw8ZCQiRsnLs7xIumMEaOJvCoLirFjUMz089vQbHjdV0nzZ38fuq', '13138001380', NULL, 2, '2021-10-16 14:36:43', '2021-10-26 16:04:15', 0, 1);
+INSERT INTO `sys_user` VALUES ('105', '1005', '坐席5号', '$2a$10$7Zw8ZCQiRsnLs7xIumMEaOJvCoLirFjUMz089vQbHjdV0nzZ38fuq', '13138001380', NULL, 2, '2021-10-21 17:55:17', '2021-10-21 17:55:43', 0, 1);
 COMMIT;
 
 -- ----------------------------
