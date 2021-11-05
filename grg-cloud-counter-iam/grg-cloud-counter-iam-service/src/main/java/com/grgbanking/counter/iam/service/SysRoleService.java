@@ -20,6 +20,6 @@ public interface SysRoleService extends IService<SysRoleEntity> {
      * @param userId
      * @return
      */
-    List<SysRoleEntity> findRolesByUserId(Long userId);
+    List<SysRoleEntity> findRolesByUserId(String userId);
 
 }

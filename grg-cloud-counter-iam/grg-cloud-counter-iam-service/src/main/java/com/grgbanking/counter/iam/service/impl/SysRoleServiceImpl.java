@@ -20,7 +20,7 @@ import java.util.List;
 public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao, SysRoleEntity> implements SysRoleService {
 
     @Override
-    public List<SysRoleEntity> findRolesByUserId(Long userId) {
+    public List<SysRoleEntity> findRolesByUserId(String userId) {
         return baseMapper.listRolesByUserId(userId);
     }
 }

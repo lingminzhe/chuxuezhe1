@@ -22,6 +22,6 @@ public interface SysRoleDao extends BaseMapper<SysRoleEntity> {
      * @param userId
      * @return
      */
-    List<SysRoleEntity> listRolesByUserId(Long userId);
+    List<SysRoleEntity> listRolesByUserId(String userId);
 
 }
