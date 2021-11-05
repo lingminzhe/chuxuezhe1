@@ -18,7 +18,7 @@ public class GrgUser extends User implements Serializable{
      * 用户ID
      */
     @Getter
-    private Long userId;
+    private String userId;
 
     /**
      * 部门ID
@@ -45,7 +45,7 @@ public class GrgUser extends User implements Serializable{
     private LoginTypeEnum loginTypeEnum;
 
     @JsonCreator
-    public GrgUser(@JsonProperty("loginTypeEnum") LoginTypeEnum loginTypeEnum,@JsonProperty("userId") Long userId, @JsonProperty("deptId") Long deptId,
+    public GrgUser(@JsonProperty("loginTypeEnum") LoginTypeEnum loginTypeEnum,@JsonProperty("userId") String userId, @JsonProperty("deptId") Long deptId,
                     @JsonProperty("phone") String phone, @JsonProperty("avatar") String avatar,
                     @JsonProperty("username") String userName, @JsonProperty("password") String password,
                     @JsonProperty("enabled") boolean enabled, @JsonProperty("accountNonExpired") boolean accountNonExpired,

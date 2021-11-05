@@ -32,7 +32,7 @@ public class SysUserEntity extends Model<SysUserEntity> {
      * 主键ID
      */
     @TableId(value = "user_id", type = IdType.AUTO)
-    private Long userId;
+    private String userId;
 
     /**
      * 用户名
