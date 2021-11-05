@@ -32,9 +32,9 @@ public class MobileController {
 	public Resp sendSmsCode(@PathVariable String mobile) {
 		boolean b = mobileService.sendSmsCode(mobile);
 		if (b){
-			return Resp.success("短信发送成功");
+			return Resp.success().setMsg("短信发送成功");
 		}else {
-			return Resp.failed("短信发送失败");
+			return Resp.failed().setMsg("短信发送失败");
 		}
 	}
 
