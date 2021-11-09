@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : 39
  Source Server Type    : MySQL
- Source Server Version : 50731
- Source Host           : localhost:3306
+ Source Server Version : 80027
+ Source Host           : 10.252.21.39:3306
  Source Schema         : grg-cloud-counter-nacos
 
  Target Server Type    : MySQL
- Target Server Version : 50731
+ Target Server Version : 80027
  File Encoding         : 65001
 
- Date: 04/09/2021 20:36:07
+ Date: 09/11/2021 16:03:09
 */
 
 SET NAMES utf8mb4;
@@ -21,360 +21,369 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- Table structure for app_configdata_relation_pubs
 -- ----------------------------
 DROP TABLE IF EXISTS `app_configdata_relation_pubs`;
-CREATE TABLE `app_configdata_relation_pubs` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `app_name` varchar(128) NOT NULL,
-  `data_id` varchar(255) NOT NULL,
-  `group_id` varchar(128) NOT NULL,
-  `gmt_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `uk_app_pub_config_datagroup` (`app_name`,`data_id`,`group_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `app_configdata_relation_pubs`  (
+                                                 `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                                                 `app_name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                                                 `data_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                                                 `group_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                                                 `gmt_modified` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+                                                 PRIMARY KEY (`id`) USING BTREE,
+                                                 UNIQUE INDEX `uk_app_pub_config_datagroup`(`app_name`, `data_id`, `group_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of app_configdata_relation_pubs
 -- ----------------------------
-BEGIN;
-COMMIT;
 
 -- ----------------------------
 -- Table structure for app_configdata_relation_subs
 -- ----------------------------
 DROP TABLE IF EXISTS `app_configdata_relation_subs`;
-CREATE TABLE `app_configdata_relation_subs` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `app_name` varchar(128) NOT NULL,
-  `data_id` varchar(255) NOT NULL,
-  `group_id` varchar(128) NOT NULL,
-  `gmt_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `uk_app_sub_config_datagroup` (`app_name`,`data_id`,`group_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `app_configdata_relation_subs`  (
+                                                 `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                                                 `app_name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                                                 `data_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                                                 `group_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                                                 `gmt_modified` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+                                                 PRIMARY KEY (`id`) USING BTREE,
+                                                 UNIQUE INDEX `uk_app_sub_config_datagroup`(`app_name`, `data_id`, `group_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of app_configdata_relation_subs
 -- ----------------------------
-BEGIN;
-COMMIT;
 
 -- ----------------------------
 -- Table structure for app_list
 -- ----------------------------
 DROP TABLE IF EXISTS `app_list`;
-CREATE TABLE `app_list` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `app_name` varchar(128) NOT NULL,
-  `is_dynamic_collect_disabled` smallint(6) DEFAULT '0',
-  `last_sub_info_collected_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `sub_info_lock_owner` varchar(128) DEFAULT NULL,
-  `sub_info_lock_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `uk_appname` (`app_name`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `app_list`  (
+                             `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                             `app_name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                             `is_dynamic_collect_disabled` smallint(0) NULL DEFAULT 0,
+                             `last_sub_info_collected_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0),
+                             `sub_info_lock_owner` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                             `sub_info_lock_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+                             PRIMARY KEY (`id`) USING BTREE,
+                             UNIQUE INDEX `uk_appname`(`app_name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of app_list
 -- ----------------------------
-BEGIN;
-COMMIT;
 
 -- ----------------------------
 -- Table structure for config_info
 -- ----------------------------
 DROP TABLE IF EXISTS `config_info`;
-CREATE TABLE `config_info` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `data_id` varchar(255) NOT NULL,
-  `group_id` varchar(128) NOT NULL,
-  `tenant_id` varchar(128) DEFAULT '',
-  `app_name` varchar(128) DEFAULT NULL,
-  `content` text,
-  `md5` varchar(32) DEFAULT NULL,
-  `gmt_create` timestamp NOT NULL DEFAULT '2010-05-05 00:00:00',
-  `gmt_modified` timestamp NOT NULL DEFAULT '2010-05-05 00:00:00',
-  `src_user` varchar(128) DEFAULT NULL,
-  `src_ip` varchar(20) DEFAULT NULL,
-  `c_desc` varchar(256) DEFAULT NULL,
-  `c_use` varchar(64) DEFAULT NULL,
-  `effect` varchar(64) DEFAULT NULL,
-  `type` varchar(64) DEFAULT NULL,
-  `c_schema` mediumtext,
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `uk_configinfo_datagrouptenant` (`data_id`,`group_id`,`tenant_id`) USING BTREE,
-  KEY `configinfo_dataid_key_idx` (`data_id`) USING BTREE,
-  KEY `configinfo_groupid_key_idx` (`group_id`) USING BTREE,
-  KEY `configinfo_dataid_group_key_idx` (`data_id`,`group_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `config_info`  (
+                                `id` bigint(0) NOT NULL AUTO_INCREMENT,
+                                `data_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                                `group_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                                `tenant_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+                                `app_name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                                `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+                                `md5` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                                `gmt_create` timestamp(0) NOT NULL DEFAULT '2010-05-05 00:00:00',
+                                `gmt_modified` timestamp(0) NOT NULL DEFAULT '2010-05-05 00:00:00',
+                                `src_user` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                                `src_ip` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                                `c_desc` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                                `c_use` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                                `effect` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                                `type` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                                `c_schema` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+                                PRIMARY KEY (`id`) USING BTREE,
+                                UNIQUE INDEX `uk_configinfo_datagrouptenant`(`data_id`, `group_id`, `tenant_id`) USING BTREE,
+                                INDEX `configinfo_dataid_key_idx`(`data_id`) USING BTREE,
+                                INDEX `configinfo_groupid_key_idx`(`group_id`) USING BTREE,
+                                INDEX `configinfo_dataid_group_key_idx`(`data_id`, `group_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 194 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of config_info
 -- ----------------------------
-BEGIN;
-INSERT INTO `config_info` VALUES (1, 'application.yml', 'DEFAULT_GROUP', '', '', '# 本配置为所有项目所公用，配置对所有项目均生效\n#配置文件密文加密的密钥\njasypt:\n  encryptor:\n    # 不能修改此值\n    password: d5fr9gJZJSd7xqD4CHnLKv3qbz5lHQyb\n    algorithm: PBEWithMD5AndDES\n    iv-generator-classname: org.jasypt.iv.NoIvGenerator	\n\ndubbo:\n  application:\n    id: ${spring.application.name}\n  registry:\n    # 指定 Dubbo 服务注册中心的地址\n    address: spring-cloud://${spring.cloud.nacos.discovery.server-addr}\n  scan:\n    base-packages: com.grgbanking.counter\n  protocol:\n    # 协议名称, 指明是 dubbo\n    name: dubbo\n    # 协议端口，-1 表示自增端口，从 20880 开始\n    port: -1\n  consumer:\n    # 启动时不检查引用服务是否可用\n    check: false\n\n# mybatis-plus 配置\nmybatis-plus:\n  tenant-enable: ture\n  mapper-locations: classpath:/mappers/**.xml\n  global-config:\n    banner: false\n    db-config:\n      db-type: mysql\n      id-type: auto\n      select-strategy: not_empty\n      insert-strategy: not_empty\n      update-strategy: not_empty\n  type-handlers-package: com.grgbanking.counter.common.data.handler\n  configuration:\n    jdbc-type-for-null: null\n\nmanagement:\n  endpoints:\n    web:\n      exposure:\n        include: \"*\"\n  endpoint:\n    health:\n      show-details: ALWAYS\n\n# swagger统一配置\nswagger:\n  enabled: true\n  title: ${spring.application.name}\n  license: Powered By Grgbanking\n  licenseUrl: https://www.grgbanking.com/\n  terms-of-service-url: https://www.grgbanking.com/\n  contact:\n    email: admin@grgbanking.com\n    url: https://www.grgbanking.com/about.html\n  authorization:\n    name: GrgCloudCounter OAuth\n    auth-regex: ^.*$\n    authorization-scope-list:\n      - scope: server\n        description: server all\n    token-url-list:\n      - http://gateway:9999/iam/oauth/token\n', 'ea57cd151d7bba97a211e3669445f543', '2021-08-26 07:00:04', '2021-08-30 08:10:26', '', '127.0.0.1', '', '', '', 'yaml', '');
-INSERT INTO `config_info` VALUES (2, 'grg-cloud-counter-gateway.yml', 'DEFAULT_GROUP', '', '', 'spring:\n  cloud:\n    gateway:\n      globalcors:\n        corsConfigurations:\n          \'[/**]\':\n            allowedOriginPatterns: \'*\'\n            allowed-methods: \'*\'\n            allowed-headers: \'*\'\n            allow-credentials: true\n            exposedHeaders: \'Content-Disposition,Content-Type,Cache-Control\'\n      # Filters definitions that are applied to every route\n      default-filters:\n        - StripPrefix=1\n      # List of Routes.\n      # - id：路由id     uri：路由转发地址或者服务     - Path：请求uri匹配规则\n      routes:\n        # =============认证服务========================\n        - id: grg-cloud-counter-iam\n          uri: lb://grg-cloud-counter-iam\n          predicates:\n            - Path=/iam/**\n          filters:\n            - name: ValidateCodeGatewayFilter\n        # =============坐席服务========================\n        - id: grg-cloud-counter-csr\n          uri: lb://grg-cloud-counter-csr\n          predicates:\n            - Path=/csr/**\n        # =============视频服务========================\n        - id: grg-cloud-counter-video\n          uri: lb://grg-cloud-counter-video\n          predicates:\n            - Path=/video/**\n        # =============云柜台APP后台服务========================\n        - id: grg-cloud-counter-app\n          uri: lb://grg-cloud-counter-app\n          predicates:\n            - Path=/app/**\n        # =============云柜台文件后台服务========================\n        - id: grg-cloud-counter-oss\n          uri: lb://grg-cloud-counter-oss\n          predicates:\n            - Path=/oss/**\n        # =============监控服务========================\n        - id: grg-cloud-counter-monitor\n          uri: lb://grg-cloud-counter-monitor\n          predicates:\n            - Path=/monitor/**', '3ed98d6338edb8469b7a5147643b6a06', '2021-08-26 07:07:56', '2021-09-03 14:07:06', 'nacos', '0:0:0:0:0:0:0:1', '', '', '', 'yaml', '');
-INSERT INTO `config_info` VALUES (3, 'grg-cloud-counter-iam.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n\n\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://localhost:3306/grg-cloud-counter-iam?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    # url: jdbc:mysql://10.252.21.20:3306/grg-cloud-counter-iam?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: root123@\n    # password: ENC(icJbl9/sr7qFO53QMkqOwTEf42CBi9NfXhEQEGYxNAg=)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\n\n  freemarker:\n    allow-request-override: false\n    allow-session-override: false\n    cache: true\n    charset: UTF-8\n    check-template-location: true\n    content-type: text/html\n    enabled: true\n    expose-request-attributes: false\n    expose-session-attributes: false\n    expose-spring-macro-helpers: true\n    prefer-file-system-access: true\n    suffix: .ftl\n    template-loader-path: classpath:/templates/\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'\'\n\n', '96b6505074c8518a851ba7649746b56d', '2021-08-26 07:32:56', '2021-09-03 13:41:34', 'nacos', '0:0:0:0:0:0:0:1', '', '', '', 'yaml', '');
-INSERT INTO `config_info` VALUES (11, 'redis.yml', 'DEFAULT_GROUP', '', '', 'spring: \n  redis:\n    # password: ENC(3YIjfd4q53aJPlOow+9mgA==)\n    lettuce:\n      pool:\n        max-active: 1000  # 连接池最大连接数（使用负值表示没有限制）\n        max-wait: -1     # 连接池最大阻塞等待时间（使用负值表示没有限制）\n        max-idle: 10      # 连接池中的最大空闲连接\n        min-idle: 5       # 连接池中的最小空闲连接\n\n    # 单机模式\n    host: localhost\n    port: 6379\n\n    #哨兵模式\n    #    sentinel:\n    #      master: mymaster # redis哨兵名称，在sentinel配置文件配置\n    #      nodes:\n    #        - 10.1.231.60:7001\n    #        - 10.1.231.60:7002\n    #        - 10.1.231.60:7003\n\n    # cluster模式\n    # cluster:\n    #   max-redirects: 100\n    #   nodes:\n    #     - 10.1.231.13:7001\n    #     - 10.1.231.13:7002\n    #     - 10.1.231.13:7003\n    #     - 10.1.231.13:7004\n    #     - 10.1.231.13:7005\n    #     - 10.1.231.13:7006\n', 'c96d7f7967f84d349b81d0931902143d', '2021-08-26 08:40:46', '2021-09-03 13:40:37', 'nacos', '0:0:0:0:0:0:0:1', '', '', '', 'yaml', '');
-INSERT INTO `config_info` VALUES (14, 'grg-cloud-counter-csr.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /tencent/**\n        - /grg_account/**\n        \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://127.0.0.1/grg-cloud-counter-csr?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: grg@123\n    driver-class-name: com.mysql.cj.jdbc.Driver\n#     password: ENC(icJbl9/sr7qFO53QMkqOwTEf42CBi9NfXhEQEGYxNAg=)\n\n\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-iam\'\n\n# Socket相关属性配置\nsocket:\n  enabled: true\n  host: localhost\n  port: 9843\n  # socket连接数大小（如只监听一个端口boss线程组为1即可）\n  bossCount: 1\n  workCount: 100\n  allowCustomRequests: true\n  # 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间\n  upgradeTimeout: 30000\n  # Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件\n  pingTimeout: 60000\n  # Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔\n  pingInterval: 25000\n\n#腾讯人脸核身api\ntencent:\n  face:\n    version: 1.0.0\n    appId: TIDAoMBH\n    secret: R0O2HAq90Wp1JnnU8YJ4YlfAhEGvBAvM5gVpi85tU1QnjosoKvvY9eLZEOB1yLGf\n    access_token_url: https://miniprogram-kyc.tencentcloudapi.com/api/oauth2/access_token\n    ticket_url: https://miniprogram-kyc.tencentcloudapi.com/api/oauth2/api_ticket\n    geth5faceid_url: https://miniprogram-kyc.tencentcloudapi.com/api/server/h5/geth5faceid\n    certification_url: https://{optimalDomain}/api/pc/login', 'cd587d3dcfb03073c716b6405764178d', '2021-08-27 08:31:03', '2021-09-01 08:20:57', 'nacos', '0:0:0:0:0:0:0:1', '', '', '', 'yaml', '');
-INSERT INTO `config_info` VALUES (16, 'grg-cloud-counter-video.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /query\n        \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.20:3306/grg-cloud-counter-video?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(icJbl9/sr7qFO53QMkqOwTEf42CBi9NfXhEQEGYxNAg=)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-iam,grg-cloud-counter-csr\'', 'b63047fe65fe7c4d5e0c8dc655ec0ec9', '2021-08-27 08:32:36', '2021-08-31 00:37:25', 'nacos', '0:0:0:0:0:0:0:1', '', '', '', 'yaml', '');
-INSERT INTO `config_info` VALUES (17, 'grg-cloud-counter-app.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /grg_account/**\n        - //tencent/**\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.20:3306/grg-cloud-counter-app?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(icJbl9/sr7qFO53QMkqOwTEf42CBi9NfXhEQEGYxNAg=)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-oss\'\n\n# Socket相关属性配置\nsocket:\n  enabled: true\n  host: localhost\n  port: 9843\n  # socket连接数大小（如只监听一个端口boss线程组为1即可）\n  bossCount: 1\n  workCount: 100\n  allowCustomRequests: true\n  # 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间\n  upgradeTimeout: 30000\n  # Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件\n  pingTimeout: 60000\n  # Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔\n  pingInterval: 25000\n\ntencent:\n  # 腾讯e证通接入 用于小程序、h5身份核验\n  e-certification:\n    secretId: AKIDxiDSQ8ZjdHfndFax6yZuylIabLq41h6E\n    secretKey: tWsynLcdOt74kAKEsGNDn68tOcZFE1Xp\n    merchantId: 0NSJ2108191435178974\n  # 腾讯视频密钥获取  \n  video:\n    sdkAppId: 1400563240\n    secretKey: 12c61a9fade38ebf4a786f258dad3b2654a6ab92234635b13d396a996025e797', '1938bd530b64b54ac50fdfb1a81f9cb0', '2021-08-31 08:39:57', '2021-09-02 08:37:49', '', '127.0.0.1', '', '', '', 'yaml', '');
-INSERT INTO `config_info` VALUES (35, 'grg-cloud-counter-oss.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.20:3306/grg-cloud-counter-iam?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(icJbl9/sr7qFO53QMkqOwTEf42CBi9NfXhEQEGYxNAg=)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'\'\n\n\n\n# 文件系统\noss:\n  endpoint: http://10.252.37.58:9000\n  access-key: minioadmin\n  secret-key: minioadmin\n  bucket-name: counter', 'a82f7456c0c113ac39bf96ac20fbe493', '2021-09-01 08:48:37', '2021-09-02 00:57:30', 'nacos', '0:0:0:0:0:0:0:1', '', '', '', 'yaml', '');
-INSERT INTO `config_info` VALUES (52, 'grg-cloud-counter-bank.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.20/grg-cloud-counter-bank?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(icJbl9/sr7qFO53QMkqOwTEf42CBi9NfXhEQEGYxNAg=)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'\'\n', '3edc3973dcf1ab7cc876012e224d62eb', '2021-09-03 05:18:34', '2021-09-03 05:20:00', 'nacos', '0:0:0:0:0:0:0:1', '', '', '', 'yaml', '');
-COMMIT;
+INSERT INTO `config_info` VALUES (1, 'application.yml', 'DEFAULT_GROUP', '', '', '# 本配置为所有项目所公用，配置对所有项目均生效\n#配置文件密文加密的密钥\njasypt:\n  encryptor:\n    # 不能修改此值\n    password: d5fr9gJZJSd7xqD4CHnLKv3qbz5lHQyb\n    algorithm: PBEWithMD5AndDES\n    iv-generator-classname: org.jasypt.iv.NoIvGenerator	\n\ndubbo:\n  application:\n    id: ${spring.application.name}\n  registry:\n    # 指定 Dubbo 服务注册中心的地址\n    address: spring-cloud://${spring.cloud.nacos.discovery.server-addr}\n  scan:\n    base-packages: com.grgbanking.counter\n  protocol:\n    # 协议名称, 指明是 dubbo\n    name: dubbo\n    # 协议端口，-1 表示自增端口，从 20880 开始\n    port: -1\n  consumer:\n    # 启动时不检查引用服务是否可用\n    check: false\n    # 超时配置\n    timeout: 3000\n  provider:\n    # 超时配置\n    timeout: 3000\n\n# mybatis-plus 配置\nmybatis-plus:\n  tenant-enable: ture\n  mapper-locations: classpath:/mappers/**.xml\n  global-config:\n    banner: false\n    db-config:\n      db-type: mysql\n      id-type: auto\n      select-strategy: not_empty\n      insert-strategy: not_empty\n      update-strategy: not_empty\n  type-handlers-package: com.grgbanking.counter.common.data.handler\n  configuration:\n    jdbc-type-for-null: null\n    map-underscore-to-camel-case: true\n\nmanagement:\n  endpoints:\n    web:\n      exposure:\n        include: \"*\"\n  endpoint:\n    health:\n      show-details: ALWAYS\n\n# swagger统一配置\nswagger:\n  enabled: true\n  title: ${spring.application.name}\n  license: Powered By Grgbanking\n  licenseUrl: https://www.grgbanking.com/\n  terms-of-service-url: https://www.grgbanking.com/\n  contact:\n    email: admin@grgbanking.com\n    url: https://www.grgbanking.com/about.html\n  authorization:\n    name: GrgCloudCounter OAuth\n    auth-regex: ^.*$\n    authorization-scope-list:\n      - scope: server\n        description: server all\n    token-url-list:\n      - http://gateway:9999/iam/oauth/token\n', '2fce7176e3726137ddd2000401dc7cf7', '2021-08-26 07:00:04', '2021-10-26 07:34:06', 'nacos', '10.1.127.2', '', '', '', 'yaml', '');
+INSERT INTO `config_info` VALUES (2, 'grg-cloud-counter-gateway.yml', 'DEFAULT_GROUP', '', '', 'spring:\n  cloud:\n    gateway:\n      globalcors:\n        corsConfigurations:\n          \'[/**]\':\n            allowedOriginPatterns: \'*\'\n            allowed-methods: \'*\'\n            allowed-headers: \'*\'\n            allow-credentials: true\n            exposedHeaders: \'Content-Disposition,Content-Type,Cache-Control\'\n      # Filters definitions that are applied to every route\n      default-filters:\n        - StripPrefix=1\n      # List of Routes.\n      # - id：路由id     uri：路由转发地址或者服务     - Path：请求uri匹配规则\n      routes:\n        # =============认证服务========================\n        - id: grg-cloud-counter-iam\n          uri: lb://grg-cloud-counter-iam\n          predicates:\n            - Path=/iam/**\n        #   filters:\n            # - name: ValidateCode\n        # =============坐席服务========================\n        - id: grg-cloud-counter-csr\n          uri: lb://grg-cloud-counter-csr\n          predicates:\n            - Path=/csr/**\n        # =============视频服务========================\n        - id: grg-cloud-counter-video\n          uri: lb://grg-cloud-counter-video\n          predicates:\n            - Path=/video/**\n        # =============云柜台APP后台服务========================\n        - id: grg-cloud-counter-app\n          uri: lb://grg-cloud-counter-app\n          predicates:\n            - Path=/app/**\n        # =============云柜台文件后台服务========================\n        - id: grg-cloud-counter-oss\n          uri: lb://grg-cloud-counter-oss\n          predicates:\n            - Path=/oss/**\n        # =============监控服务========================\n        - id: grg-cloud-counter-monitor\n          uri: lb://grg-cloud-counter-monitor\n          predicates:\n            - Path=/monitor/**\n        # =============对接行内服务========================\n        - id: grg-cloud-counter-bank\n          uri: lb://grg-cloud-counter-bank\n          predicates:\n            - Path=/bank/**\n        # =============device服务========================\n        - id: grg-cloud-counter-device\n          uri: lb://grg-cloud-counter-device\n          predicates:\n            - Path=/device/**', 'ea96a36b6a58b0102144ec99df234cfa', '2021-08-26 07:07:56', '2021-10-11 03:41:19', 'nacos', '10.1.44.12', '', '', '', 'yaml', '');
+INSERT INTO `config_info` VALUES (3, 'grg-cloud-counter-iam.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /mobile/**\n        - /oauth/**\n\n\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://127.0.0.1:3306/grg-cloud-counter-iam?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\n\n  freemarker:\n    allow-request-override: false\n    allow-session-override: false\n    cache: true\n    charset: UTF-8\n    check-template-location: true\n    content-type: text/html\n    enabled: true\n    expose-request-attributes: false\n    expose-session-attributes: false\n    expose-spring-macro-helpers: true\n    prefer-file-system-access: true\n    suffix: .ftl\n    template-loader-path: classpath:/templates/\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'\'\n\n', 'c60d8d085326bd4438242bcac0edd13a', '2021-08-26 07:32:56', '2021-10-21 06:13:15', 'nacos', '10.1.127.5', '', '', '', 'yaml', '');
+INSERT INTO `config_info` VALUES (11, 'redis.yml', 'DEFAULT_GROUP', '', '', 'spring: \n  redis:\n    password: ENC(3YIjfd4q53aJPlOow+9mgA==)\n    lettuce:\n      pool:\n        max-active: 1000  # 连接池最大连接数（使用负值表示没有限制）\n        max-wait: -1     # 连接池最大阻塞等待时间（使用负值表示没有限制）\n        max-idle: 10      # 连接池中的最大空闲连接\n        min-idle: 5       # 连接池中的最小空闲连接\n\n    # 单机模式\n    host: 10.252.21.39\n    port: 6379\n\n    #哨兵模式\n    #    sentinel:\n    #      master: mymaster # redis哨兵名称，在sentinel配置文件配置\n    #      nodes:\n    #        - 10.1.231.60:7001\n    #        - 10.1.231.60:7002\n    #        - 10.1.231.60:7003\n    max-redirects: 100\n    # cluster模式\n    # cluster:\n    #   nodes:\n    #     - 10.1.231.13:7001\n    #     - 10.1.231.13:7002\n    #     - 10.1.231.13:7003\n    #     - 10.1.231.13:7004\n    #     - 10.1.231.13:7005\n    #     - 10.1.231.13:7006\n', 'c3ad4a1f1289975e19ebbc4453404bcb', '2021-08-26 08:40:46', '2021-11-02 02:35:54', 'nacos', '10.1.44.20', '', '', '', 'yaml', '');
+INSERT INTO `config_info` VALUES (14, 'grg-cloud-counter-csr.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /tencent/**\n        - /grg_account/**\n        \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://127.0.0.1:3306/grg-cloud-counter-csr?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n    \n\n\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-iam,grg-cloud-counter-bank,grg-cloud-counter-oss\'\n\n# Socket相关属性配置\nsocket:\n  enabled: true\n  host: 10.252.21.39\n  port: 9844\n  # socket连接数大小（如只监听一个端口boss线程组为1即可）\n  bossCount: 1\n  workCount: 100\n  allowCustomRequests: true\n  # 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间\n  upgradeTimeout: 30000\n  # Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件\n  pingTimeout: 60000\n  # Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔\n  pingInterval: 25000\n\ntencent:\n  # 腾讯e证通接入 用于小程序、h5身份核验\n  e-certification:\n    secretId: AKIDxiDSQ8ZjdHfndFax6yZuylIabLq41h6E\n    secretKey: tWsynLcdOt74kAKEsGNDn68tOcZFE1Xp\n    merchantId: 0NSJ2108191435178974\n  # 腾讯视频密钥获取  \n  video:\n    sdkAppId: 1400580080\n    secretKey: 2add8f6f5b6f04e51bd40cb01bb163580ee123767c3ef09b502c3cee1beda5d1', 'cd841ef417d7446bb5b8d5aa4c62927d', '2021-08-27 08:31:03', '2021-11-02 02:44:45', 'nacos', '10.1.44.20', '', '', '', 'yaml', '');
+INSERT INTO `config_info` VALUES (16, 'grg-cloud-counter-video.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /query\n        \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://127.0.0.1:3306/grg-cloud-counter-video?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-iam,grg-cloud-counter-csr\'', '5b08cf0cafd03dee8614b8a50790887d', '2021-08-27 08:32:36', '2021-10-21 06:13:46', 'nacos', '10.1.127.5', '', '', '', 'yaml', '');
+INSERT INTO `config_info` VALUES (17, 'grg-cloud-counter-app.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /grg_account/**\n        ##- /tencent/**\n        - /app/**\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://127.0.0.1:3306/grg-cloud-counter-app?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-oss,grg-cloud-counter-csr,grg-cloud-counter-bank,grg-cloud-counter-iam\'\n\n# Socket相关属性配置\nsocket:\n  enabled: true\n  host: 10.252.21.39\n  port: 9843\n  # socket连接数大小（如只监听一个端口boss线程组为1即可）\n  bossCount: 1\n  workCount: 100\n  allowCustomRequests: true\n  # 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间\n  upgradeTimeout: 30000\n  # Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件\n  pingTimeout: 60000\n  # Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔\n  pingInterval: 25000\n\ntencent:\n  # 腾讯e证通接入 用于小程序、h5身份核验\n  e-certification:\n    secretId: AKIDxiDSQ8ZjdHfndFax6yZuylIabLq41h6E\n    secretKey: tWsynLcdOt74kAKEsGNDn68tOcZFE1Xp\n    merchantId: 0NSJ2108191435178974\n  # 腾讯视频密钥获取  \n  video:\n    sdkAppId: 1400580080\n    secretKey: 2add8f6f5b6f04e51bd40cb01bb163580ee123767c3ef09b502c3cee1beda5d1', '65b61a1269c9dd976c5b9a59395c214e', '2021-08-31 08:39:57', '2021-11-04 05:57:26', 'nacos', '10.1.44.20', '', '', '', 'yaml', '');
+INSERT INTO `config_info` VALUES (35, 'grg-cloud-counter-oss.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://127.0.0.1:3306/grg-cloud-counter-iam?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-csr,grg-cloud-counter-iam\'\n\n# 文件系统\noss:\n  endpoint: http://10.252.21.39:9000\n  url: https://cloudcounter.grgbanking.com/\n  access-key: minioadmin\n  secret-key: minioadmin\n  bucket-name: counter', 'b90c1d4351d93bc0a5a41ac3b8514ce5', '2021-09-01 08:48:37', '2021-11-03 07:12:34', 'nacos', '10.1.44.13', '', '', '', 'yaml', '');
+INSERT INTO `config_info` VALUES (52, 'grg-cloud-counter-bank.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://127.0.0.1:3306/grg-cloud-counter-bank?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'\'\n', 'addbb5eb66c749a41ad2967af7af3a66', '2021-09-03 05:18:34', '2021-10-21 06:14:16', 'nacos', '10.1.127.5', '', '', '', 'yaml', '');
+INSERT INTO `config_info` VALUES (97, 'grg-cloud-counter-device.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /grg_account/**\n        ##- /tencent/**\n        - /app/**\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://127.0.0.1:3306/grg-cloud-counter-app?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-oss,grg-cloud-counter-csr,grg-cloud-counter-bank,grg-cloud-counter-iam\'\n\n# Socket相关属性配置\nsocket:\n  enabled: true\n  host: 10.252.21.39\n  port: 9853\n  # socket连接数大小（如只监听一个端口boss线程组为1即可）\n  bossCount: 1\n  workCount: 100\n  allowCustomRequests: true\n  # 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间\n  upgradeTimeout: 30000\n  # Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件\n  pingTimeout: 60000\n  # Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔\n  pingInterval: 25000\n\ntencent:\n  # 腾讯e证通接入 用于小程序、h5身份核验\n  e-certification:\n    secretId: AKIDxiDSQ8ZjdHfndFax6yZuylIabLq41h6E\n    secretKey: tWsynLcdOt74kAKEsGNDn68tOcZFE1Xp\n    merchantId: 0NSJ2108191435178974\n  # 腾讯视频密钥获取  \n  video:\n    sdkAppId: 1400580080\n    secretKey: 2add8f6f5b6f04e51bd40cb01bb163580ee123767c3ef09b502c3cee1beda5d1', 'caa9adcf480cb65ac8aeeaf5dbca9917', '2021-09-22 06:45:38', '2021-11-04 07:55:33', 'nacos', '10.1.44.1', '', '', '', 'yaml', '');
 
 -- ----------------------------
 -- Table structure for config_info_aggr
 -- ----------------------------
 DROP TABLE IF EXISTS `config_info_aggr`;
-CREATE TABLE `config_info_aggr` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `data_id` varchar(255) NOT NULL,
-  `group_id` varchar(128) NOT NULL,
-  `tenant_id` varchar(128) DEFAULT '',
-  `datum_id` varchar(255) NOT NULL,
-  `app_name` varchar(128) DEFAULT NULL,
-  `content` text,
-  `gmt_modified` timestamp NOT NULL DEFAULT '2010-05-05 00:00:00',
+CREATE TABLE `config_info_aggr`  (
+  `id` bigint(0) NOT NULL AUTO_INCREMENT,
+  `data_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `group_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `tenant_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+  `datum_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `app_name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `gmt_modified` timestamp(0) NOT NULL DEFAULT '2010-05-05 00:00:00',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `uk_configinfoaggr_datagrouptenantdatum` (`data_id`,`group_id`,`tenant_id`,`datum_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  UNIQUE INDEX `uk_configinfoaggr_datagrouptenantdatum`(`data_id`, `group_id`, `tenant_id`, `datum_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of config_info_aggr
 -- ----------------------------
-BEGIN;
-COMMIT;
 
 -- ----------------------------
 -- Table structure for config_info_beta
 -- ----------------------------
 DROP TABLE IF EXISTS `config_info_beta`;
-CREATE TABLE `config_info_beta` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `data_id` varchar(255) NOT NULL,
-  `group_id` varchar(128) NOT NULL,
-  `tenant_id` varchar(128) DEFAULT '',
-  `app_name` varchar(128) DEFAULT NULL,
-  `content` text,
-  `beta_ips` varchar(1024) DEFAULT NULL,
-  `md5` varchar(32) DEFAULT NULL,
-  `gmt_create` timestamp NOT NULL DEFAULT '2010-05-05 00:00:00',
-  `gmt_modified` timestamp NOT NULL DEFAULT '2010-05-05 00:00:00',
-  `src_user` varchar(128) DEFAULT NULL,
-  `src_ip` varchar(20) DEFAULT NULL,
+CREATE TABLE `config_info_beta`  (
+  `id` bigint(0) NOT NULL AUTO_INCREMENT,
+  `data_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `group_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `tenant_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+  `app_name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `beta_ips` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `md5` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `gmt_create` timestamp(0) NOT NULL DEFAULT '2010-05-05 00:00:00',
+  `gmt_modified` timestamp(0) NOT NULL DEFAULT '2010-05-05 00:00:00',
+  `src_user` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `src_ip` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `uk_configinfobeta_datagrouptenant` (`data_id`,`group_id`,`tenant_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  UNIQUE INDEX `uk_configinfobeta_datagrouptenant`(`data_id`, `group_id`, `tenant_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of config_info_beta
 -- ----------------------------
-BEGIN;
-COMMIT;
 
 -- ----------------------------
 -- Table structure for config_info_tag
 -- ----------------------------
 DROP TABLE IF EXISTS `config_info_tag`;
-CREATE TABLE `config_info_tag` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `data_id` varchar(255) NOT NULL,
-  `group_id` varchar(128) NOT NULL,
-  `tenant_id` varchar(128) DEFAULT '',
-  `tag_id` varchar(128) NOT NULL,
-  `app_name` varchar(128) DEFAULT NULL,
-  `content` text,
-  `md5` varchar(32) DEFAULT NULL,
-  `gmt_create` timestamp NOT NULL DEFAULT '2010-05-05 00:00:00',
-  `gmt_modified` timestamp NOT NULL DEFAULT '2010-05-05 00:00:00',
-  `src_user` varchar(128) DEFAULT NULL,
-  `src_ip` varchar(20) DEFAULT NULL,
+CREATE TABLE `config_info_tag`  (
+  `id` bigint(0) NOT NULL AUTO_INCREMENT,
+  `data_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `group_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `tenant_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+  `tag_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `app_name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `md5` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `gmt_create` timestamp(0) NOT NULL DEFAULT '2010-05-05 00:00:00',
+  `gmt_modified` timestamp(0) NOT NULL DEFAULT '2010-05-05 00:00:00',
+  `src_user` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `src_ip` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `uk_configinfotag_datagrouptenanttag` (`data_id`,`group_id`,`tenant_id`,`tag_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  UNIQUE INDEX `uk_configinfotag_datagrouptenanttag`(`data_id`, `group_id`, `tenant_id`, `tag_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of config_info_tag
 -- ----------------------------
-BEGIN;
-COMMIT;
 
 -- ----------------------------
 -- Table structure for config_tags_relation
 -- ----------------------------
 DROP TABLE IF EXISTS `config_tags_relation`;
-CREATE TABLE `config_tags_relation` (
-  `id` bigint(20) NOT NULL,
-  `tag_name` varchar(128) NOT NULL,
-  `tag_type` varchar(64) DEFAULT NULL,
-  `data_id` varchar(255) NOT NULL,
-  `group_id` varchar(128) NOT NULL,
-  `tenant_id` varchar(128) DEFAULT '',
-  `nid` bigint(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `config_tags_relation`  (
+  `id` bigint(0) NOT NULL,
+  `tag_name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `tag_type` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `data_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `group_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `tenant_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+  `nid` bigint(0) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`nid`) USING BTREE,
-  UNIQUE KEY `uk_configtagrelation_configidtag` (`id`,`tag_name`,`tag_type`) USING BTREE,
-  KEY `config_tags_tenant_id_idx` (`tenant_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  UNIQUE INDEX `uk_configtagrelation_configidtag`(`id`, `tag_name`, `tag_type`) USING BTREE,
+  INDEX `config_tags_tenant_id_idx`(`tenant_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of config_tags_relation
 -- ----------------------------
-BEGIN;
-COMMIT;
 
 -- ----------------------------
 -- Table structure for group_capacity
 -- ----------------------------
 DROP TABLE IF EXISTS `group_capacity`;
-CREATE TABLE `group_capacity` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `group_id` varchar(128) DEFAULT '',
-  `quota` int(11) DEFAULT '0',
-  `usage` int(11) DEFAULT '0',
-  `max_size` int(11) DEFAULT '0',
-  `max_aggr_count` int(11) DEFAULT '0',
-  `max_aggr_size` int(11) DEFAULT '0',
-  `max_history_count` int(11) DEFAULT '0',
-  `gmt_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `gmt_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+CREATE TABLE `group_capacity`  (
+  `id` bigint(0) NOT NULL AUTO_INCREMENT,
+  `group_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+  `quota` int(0) NULL DEFAULT 0,
+  `usage` int(0) NULL DEFAULT 0,
+  `max_size` int(0) NULL DEFAULT 0,
+  `max_aggr_count` int(0) NULL DEFAULT 0,
+  `max_aggr_size` int(0) NULL DEFAULT 0,
+  `max_history_count` int(0) NULL DEFAULT 0,
+  `gmt_create` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+  `gmt_modified` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `uk_group_id` (`group_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  UNIQUE INDEX `uk_group_id`(`group_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of group_capacity
 -- ----------------------------
-BEGIN;
-COMMIT;
 
 -- ----------------------------
 -- Table structure for his_config_info
 -- ----------------------------
 DROP TABLE IF EXISTS `his_config_info`;
-CREATE TABLE `his_config_info` (
-  `id` bigint(20) NOT NULL,
-  `nid` bigint(20) NOT NULL AUTO_INCREMENT,
-  `data_id` varchar(255) NOT NULL,
-  `group_id` varchar(128) NOT NULL,
-  `tenant_id` varchar(128) DEFAULT '',
-  `app_name` varchar(128) DEFAULT NULL,
-  `content` text,
-  `md5` varchar(32) DEFAULT NULL,
-  `gmt_create` timestamp NOT NULL DEFAULT '2010-05-05 00:00:00',
-  `gmt_modified` timestamp NOT NULL DEFAULT '2010-05-05 00:00:00',
-  `src_user` varchar(128) DEFAULT NULL,
-  `src_ip` varchar(20) DEFAULT NULL,
-  `op_type` char(10) DEFAULT NULL,
+CREATE TABLE `his_config_info`  (
+  `id` bigint(0) NOT NULL,
+  `nid` bigint(0) NOT NULL AUTO_INCREMENT,
+  `data_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `group_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `tenant_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+  `app_name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `md5` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `gmt_create` timestamp(0) NOT NULL DEFAULT '2010-05-05 00:00:00',
+  `gmt_modified` timestamp(0) NOT NULL DEFAULT '2010-05-05 00:00:00',
+  `src_user` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `src_ip` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `op_type` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`nid`) USING BTREE,
-  KEY `hisconfiginfo_dataid_key_idx` (`data_id`) USING BTREE,
-  KEY `hisconfiginfo_gmt_create_idx` (`gmt_create`) USING BTREE,
-  KEY `hisconfiginfo_gmt_modified_idx` (`gmt_modified`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+  INDEX `hisconfiginfo_dataid_key_idx`(`data_id`) USING BTREE,
+  INDEX `hisconfiginfo_gmt_create_idx`(`gmt_create`) USING BTREE,
+  INDEX `hisconfiginfo_gmt_modified_idx`(`gmt_modified`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of his_config_info
 -- ----------------------------
-BEGIN;
-COMMIT;
+INSERT INTO `his_config_info` VALUES (11, 1, 'redis.yml', 'DEFAULT_GROUP', '', '', 'spring: \n  redis:\n    password: ENC(3YIjfd4q53aJPlOow+9mgA==)\n    lettuce:\n      pool:\n        max-active: 1000  # 连接池最大连接数（使用负值表示没有限制）\n        max-wait: -1     # 连接池最大阻塞等待时间（使用负值表示没有限制）\n        max-idle: 10      # 连接池中的最大空闲连接\n        min-idle: 5       # 连接池中的最小空闲连接\n\n    # 单机模式\n    host: 10.1.7.16\n    port: 6379\n\n    #哨兵模式\n    #    sentinel:\n    #      master: mymaster # redis哨兵名称，在sentinel配置文件配置\n    #      nodes:\n    #        - 10.1.231.60:7001\n    #        - 10.1.231.60:7002\n    #        - 10.1.231.60:7003\n    max-redirects: 100\n    # cluster模式\n    # cluster:\n    #   nodes:\n    #     - 10.1.231.13:7001\n    #     - 10.1.231.13:7002\n    #     - 10.1.231.13:7003\n    #     - 10.1.231.13:7004\n    #     - 10.1.231.13:7005\n    #     - 10.1.231.13:7006\n', '87abcc3bc2f2a4867d3fd9394ea50485', '2010-05-05 00:00:00', '2021-10-21 03:27:06', 'nacos', '10.1.127.5', 'U');
+INSERT INTO `his_config_info` VALUES (3, 2, 'grg-cloud-counter-iam.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /mobile/**\n        - /oauth/**\n\n\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.20:3306/grg-cloud-counter-iam?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(icJbl9/sr7qFO53QMkqOwTEf42CBi9NfXhEQEGYxNAg=)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\n\n  freemarker:\n    allow-request-override: false\n    allow-session-override: false\n    cache: true\n    charset: UTF-8\n    check-template-location: true\n    content-type: text/html\n    enabled: true\n    expose-request-attributes: false\n    expose-session-attributes: false\n    expose-spring-macro-helpers: true\n    prefer-file-system-access: true\n    suffix: .ftl\n    template-loader-path: classpath:/templates/\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'\'\n\n', '6b1562fb1bdc4c177fe856a92583540b', '2010-05-05 00:00:00', '2021-10-21 03:30:39', 'nacos', '10.1.127.5', 'U');
+INSERT INTO `his_config_info` VALUES (14, 3, 'grg-cloud-counter-csr.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /tencent/**\n        - /grg_account/**\n        \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.20:3306/grg-cloud-counter-csr?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ESoxa3kXR3IsFgKZ\n    #password: grg@123\n    driver-class-name: com.mysql.cj.jdbc.Driver\n    \n\n\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-iam,grg-cloud-counter-bank\'\n\n# Socket相关属性配置\nsocket:\n  enabled: true\n  host: 10.252.21.39\n  port: 9844\n  # socket连接数大小（如只监听一个端口boss线程组为1即可）\n  bossCount: 1\n  workCount: 100\n  allowCustomRequests: true\n  # 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间\n  upgradeTimeout: 30000\n  # Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件\n  pingTimeout: 60000\n  # Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔\n  pingInterval: 25000\n\ntencent:\n  # 腾讯e证通接入 用于小程序、h5身份核验\n  e-certification:\n    secretId: AKIDxiDSQ8ZjdHfndFax6yZuylIabLq41h6E\n    secretKey: tWsynLcdOt74kAKEsGNDn68tOcZFE1Xp\n    merchantId: 0NSJ2108191435178974\n  # 腾讯视频密钥获取  \n  video:\n    sdkAppId: 1400580080\n    secretKey: 2add8f6f5b6f04e51bd40cb01bb163580ee123767c3ef09b502c3cee1beda5d1', '911040d2bd24437ab648b85a98f49532', '2010-05-05 00:00:00', '2021-10-21 03:31:12', 'nacos', '10.1.127.5', 'U');
+INSERT INTO `his_config_info` VALUES (61, 4, 'grg-cloud-counter-app.yml', 'lzan2', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /grg_account/**\n        - /tencent/**\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.20:3306/grg-cloud-counter-app?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(icJbl9/sr7qFO53QMkqOwTEf42CBi9NfXhEQEGYxNAg=)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-oss\'\n\n# Socket相关属性配置\nsocket:\n  enabled: true\n  host: 10.1.45.25\n  port: 9843\n  # socket连接数大小（如只监听一个端口boss线程组为1即可）\n  bossCount: 1\n  workCount: 100\n  allowCustomRequests: true\n  # 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间\n  upgradeTimeout: 30000\n  # Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件\n  pingTimeout: 60000\n  # Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔\n  pingInterval: 25000\n\ntencent:\n  # 腾讯e证通接入 用于小程序、h5身份核验\n  e-certification:\n    secretId: AKIDxiDSQ8ZjdHfndFax6yZuylIabLq41h6E\n    secretKey: tWsynLcdOt74kAKEsGNDn68tOcZFE1Xp\n    merchantId: 0NSJ2108191435178974\n  # 腾讯视频密钥获取  \n  video:\n    sdkAppId: 1400563240\n    secretKey: 12c61a9fade38ebf4a786f258dad3b2654a6ab92234635b13d396a996025e797', 'b8df6f890fa45ec9477f68bb8293bdbc', '2010-05-05 00:00:00', '2021-10-21 03:31:22', NULL, '10.1.127.5', 'D');
+INSERT INTO `his_config_info` VALUES (86, 5, 'grg-cloud-counter-csr.yml', 'cgl', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /tencent/**\n        - /grg_account/**\n        \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.20:3306/grg-cloud-counter-csr?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ESoxa3kXR3IsFgKZ\n    #password: grg@123\n    driver-class-name: com.mysql.cj.jdbc.Driver\n    \n\n\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \n      - \'grg-cloud-counter-iam\'\n      - \'grg-cloud-counter-bank\'\n# Socket相关属性配置\nsocket:\n  enabled: true\n  host: 10.1.44.1\n  port: 9844\n  # socket连接数大小（如只监听一个端口boss线程组为1即可）\n  bossCount: 1\n  workCount: 100\n  allowCustomRequests: true\n  # 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间\n  upgradeTimeout: 30000\n  # Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件\n  pingTimeout: 60000\n  # Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔\n  pingInterval: 25000\n\ntencent:\n  # 腾讯e证通接入 用于小程序、h5身份核验\n  e-certification:\n    secretId: AKIDxiDSQ8ZjdHfndFax6yZuylIabLq41h6E\n    secretKey: tWsynLcdOt74kAKEsGNDn68tOcZFE1Xp\n    merchantId: 0NSJ2108191435178974\n  # 腾讯视频密钥获取  \n  video:\n    sdkAppId: 1400580080\n    secretKey: 2add8f6f5b6f04e51bd40cb01bb163580ee123767c3ef09b502c3cee1beda5d1', '02dd569cbdbd5c54a19642578ec62b8d', '2010-05-05 00:00:00', '2021-10-21 03:31:35', NULL, '10.1.127.5', 'D');
+INSERT INTO `his_config_info` VALUES (87, 6, 'grg-cloud-counter-app.yml', 'cgl', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /grg_account/**\n        ##- /tencent/**\n        - /app/**\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.20:3306/grg-cloud-counter-app?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(icJbl9/sr7qFO53QMkqOwTEf42CBi9NfXhEQEGYxNAg=)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \n      - \'grg-cloud-counter-oss\'\n      - \'grg-cloud-counter-csr\'\n      - \'grg-cloud-counter-bank\'\n\n# Socket相关属性配置\nsocket:\n  enabled: true\n  host: 10.1.44.1\n  port: 9843\n  # socket连接数大小（如只监听一个端口boss线程组为1即可）\n  bossCount: 1\n  workCount: 100\n  allowCustomRequests: true\n  # 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间\n  upgradeTimeout: 30000\n  # Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件\n  pingTimeout: 60000\n  # Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔\n  pingInterval: 25000\n\ntencent:\n  # 腾讯e证通接入 用于小程序、h5身份核验\n  e-certification:\n    secretId: AKIDxiDSQ8ZjdHfndFax6yZuylIabLq41h6E\n    secretKey: tWsynLcdOt74kAKEsGNDn68tOcZFE1Xp\n    merchantId: 0NSJ2108191435178974\n  # 腾讯视频密钥获取  \n  video:\n    sdkAppId: 1400580080\n    secretKey: 2add8f6f5b6f04e51bd40cb01bb163580ee123767c3ef09b502c3cee1beda5d1', '7fd2dd3e7b38ee9996d353fc9c7c24c0', '2010-05-05 00:00:00', '2021-10-21 03:31:35', NULL, '10.1.127.5', 'D');
+INSERT INTO `his_config_info` VALUES (91, 7, 'redis-cgl.yml', 'cgl', '', '', 'spring: \n  redis:\n    password: ENC(3YIjfd4q53aJPlOow+9mgA==)\n    lettuce:\n      pool:\n        max-active: 1000  # 连接池最大连接数（使用负值表示没有限制）\n        max-wait: -1     # 连接池最大阻塞等待时间（使用负值表示没有限制）\n        max-idle: 10      # 连接池中的最大空闲连接\n        min-idle: 5       # 连接池中的最小空闲连接\n\n    # 单机模式\n    #host: 127.0.0.1\n    #port: 6379\n    max-redirects: 100\n    cluster:\n      nodes:\n        - 10.1.231.13:7001\n        - 10.1.231.13:7002\n        - 10.1.231.13:7003\n        - 10.1.231.13:7004\n        - 10.1.231.13:7005\n        - 10.1.231.13:7006', 'ed03a2be416862b12781df0fb60ef7a7', '2010-05-05 00:00:00', '2021-10-21 03:31:35', NULL, '10.1.127.5', 'D');
+INSERT INTO `his_config_info` VALUES (63, 8, 'grg-cloud-counter-csr.yml', 'lzan2', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /tencent/**\n        - /grg_account/**\n        \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.20:3306/grg-cloud-counter-csr?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(icJbl9/sr7qFO53QMkqOwTEf42CBi9NfXhEQEGYxNAg=)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n#     \n\n\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-iam\'\n\n# Socket相关属性配置\nsocket:\n  enabled: true\n  host: 10.1.45.25\n  port: 9844\n  # socket连接数大小（如只监听一个端口boss线程组为1即可）\n  bossCount: 1\n  workCount: 100\n  allowCustomRequests: true\n  # 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间\n  upgradeTimeout: 30000\n  # Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件\n  pingTimeout: 60000\n  # Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔\n  pingInterval: 25000\n\n#腾讯人脸核身api\ntencent:\n  face:\n    version: 1.0.0\n    appId: TIDAoMBH\n    secret: R0O2HAq90Wp1JnnU8YJ4YlfAhEGvBAvM5gVpi85tU1QnjosoKvvY9eLZEOB1yLGf\n    access_token_url: https://miniprogram-kyc.tencentcloudapi.com/api/oauth2/access_token\n    ticket_url: https://miniprogram-kyc.tencentcloudapi.com/api/oauth2/api_ticket\n    geth5faceid_url: https://miniprogram-kyc.tencentcloudapi.com/api/server/h5/geth5faceid\n    certification_url: https://{optimalDomain}/api/pc/login\n\n  video:\n    sdkAppId: 1400563240\n    secretKey: 12c61a9fade38ebf4a786f258dad3b2654a6ab92234635b13d396a996025e797', '6b07e5ce6d032cfd856281c772308193', '2010-05-05 00:00:00', '2021-10-21 03:31:40', NULL, '10.1.127.5', 'D');
+INSERT INTO `his_config_info` VALUES (97, 9, 'grg-cloud-counter-device.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /grg_account/**\n        ##- /tencent/**\n        - /app/**\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.20:3306/grg-cloud-counter-app?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(icJbl9/sr7qFO53QMkqOwTEf42CBi9NfXhEQEGYxNAg=)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-oss,grg-cloud-counter-csr,grg-cloud-counter-bank\'\n\n# Socket相关属性配置\nsocket:\n  enabled: true\n  host: localhost\n  port: 9853\n  # socket连接数大小（如只监听一个端口boss线程组为1即可）\n  bossCount: 1\n  workCount: 100\n  allowCustomRequests: true\n  # 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间\n  upgradeTimeout: 30000\n  # Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件\n  pingTimeout: 60000\n  # Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔\n  pingInterval: 25000\n\ntencent:\n  # 腾讯e证通接入 用于小程序、h5身份核验\n  e-certification:\n    secretId: AKIDxiDSQ8ZjdHfndFax6yZuylIabLq41h6E\n    secretKey: tWsynLcdOt74kAKEsGNDn68tOcZFE1Xp\n    merchantId: 0NSJ2108191435178974\n  # 腾讯视频密钥获取  \n  video:\n    sdkAppId: 1400563240\n    secretKey: 12c61a9fade38ebf4a786f258dad3b2654a6ab92234635b13d396a996025e797', '92be188948afeb13ee2e87604884a3aa', '2010-05-05 00:00:00', '2021-10-21 03:32:29', 'nacos', '10.1.127.5', 'U');
+INSERT INTO `his_config_info` VALUES (52, 10, 'grg-cloud-counter-bank.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.20/grg-cloud-counter-bank?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(icJbl9/sr7qFO53QMkqOwTEf42CBi9NfXhEQEGYxNAg=)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'\'\n', '3edc3973dcf1ab7cc876012e224d62eb', '2010-05-05 00:00:00', '2021-10-21 03:33:04', 'nacos', '10.1.127.5', 'U');
+INSERT INTO `his_config_info` VALUES (35, 11, 'grg-cloud-counter-oss.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.20:3306/grg-cloud-counter-iam?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(icJbl9/sr7qFO53QMkqOwTEf42CBi9NfXhEQEGYxNAg=)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-csr,grg-cloud-counter-iam\'\n\n# 文件系统\noss:\n  endpoint: http://10.252.37.58:9000\n  access-key: minioadmin\n  secret-key: minioadmin\n  bucket-name: counter', '32fc60c52153dbb87e67fa92559dfa17', '2010-05-05 00:00:00', '2021-10-21 03:33:30', 'nacos', '10.1.127.5', 'U');
+INSERT INTO `his_config_info` VALUES (17, 12, 'grg-cloud-counter-app.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /grg_account/**\n        ##- /tencent/**\n        - /app/**\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.20:3306/grg-cloud-counter-app?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(icJbl9/sr7qFO53QMkqOwTEf42CBi9NfXhEQEGYxNAg=)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-oss,grg-cloud-counter-csr,grg-cloud-counter-bank\'\n\n# Socket相关属性配置\nsocket:\n  enabled: true\n  host: 10.252.21.39\n  port: 30307\n  # socket连接数大小（如只监听一个端口boss线程组为1即可）\n  bossCount: 1\n  workCount: 100\n  allowCustomRequests: true\n  # 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间\n  upgradeTimeout: 30000\n  # Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件\n  pingTimeout: 60000\n  # Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔\n  pingInterval: 25000\n\ntencent:\n  # 腾讯e证通接入 用于小程序、h5身份核验\n  e-certification:\n    secretId: AKIDxiDSQ8ZjdHfndFax6yZuylIabLq41h6E\n    secretKey: tWsynLcdOt74kAKEsGNDn68tOcZFE1Xp\n    merchantId: 0NSJ2108191435178974\n  # 腾讯视频密钥获取  \n  video:\n    sdkAppId: 1400580080\n    secretKey: 2add8f6f5b6f04e51bd40cb01bb163580ee123767c3ef09b502c3cee1beda5d1', '86f4e4286a859283cffd4f8993b0216a', '2010-05-05 00:00:00', '2021-10-21 03:33:52', 'nacos', '10.1.127.5', 'U');
+INSERT INTO `his_config_info` VALUES (16, 13, 'grg-cloud-counter-video.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /query\n        \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.20:3306/grg-cloud-counter-video?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(icJbl9/sr7qFO53QMkqOwTEf42CBi9NfXhEQEGYxNAg=)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-iam,grg-cloud-counter-csr\'', 'b63047fe65fe7c4d5e0c8dc655ec0ec9', '2010-05-05 00:00:00', '2021-10-21 03:34:17', 'nacos', '10.1.127.5', 'U');
+INSERT INTO `his_config_info` VALUES (14, 14, 'grg-cloud-counter-csr.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /tencent/**\n        - /grg_account/**\n        \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.39:3306/grg-cloud-counter-csr?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: Grg@123456\n    #password: grg@123\n    driver-class-name: com.mysql.cj.jdbc.Driver\n    \n\n\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-iam,grg-cloud-counter-bank\'\n\n# Socket相关属性配置\nsocket:\n  enabled: true\n  host: 10.252.21.39\n  port: 9844\n  # socket连接数大小（如只监听一个端口boss线程组为1即可）\n  bossCount: 1\n  workCount: 100\n  allowCustomRequests: true\n  # 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间\n  upgradeTimeout: 30000\n  # Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件\n  pingTimeout: 60000\n  # Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔\n  pingInterval: 25000\n\ntencent:\n  # 腾讯e证通接入 用于小程序、h5身份核验\n  e-certification:\n    secretId: AKIDxiDSQ8ZjdHfndFax6yZuylIabLq41h6E\n    secretKey: tWsynLcdOt74kAKEsGNDn68tOcZFE1Xp\n    merchantId: 0NSJ2108191435178974\n  # 腾讯视频密钥获取  \n  video:\n    sdkAppId: 1400580080\n    secretKey: 2add8f6f5b6f04e51bd40cb01bb163580ee123767c3ef09b502c3cee1beda5d1', '99949183749351f4ee59000efeb6d322', '2010-05-05 00:00:00', '2021-10-21 03:34:33', 'nacos', '10.1.127.5', 'U');
+INSERT INTO `his_config_info` VALUES (11, 15, 'redis.yml', 'DEFAULT_GROUP', '', '', 'spring: \n  redis:\n    password: ENC(3YIjfd4q53aJPlOow+9mgA==)\n    lettuce:\n      pool:\n        max-active: 1000  # 连接池最大连接数（使用负值表示没有限制）\n        max-wait: -1     # 连接池最大阻塞等待时间（使用负值表示没有限制）\n        max-idle: 10      # 连接池中的最大空闲连接\n        min-idle: 5       # 连接池中的最小空闲连接\n\n    # 单机模式\n    host: 10.252.21.39\n    port: 6379\n\n    #哨兵模式\n    #    sentinel:\n    #      master: mymaster # redis哨兵名称，在sentinel配置文件配置\n    #      nodes:\n    #        - 10.1.231.60:7001\n    #        - 10.1.231.60:7002\n    #        - 10.1.231.60:7003\n    max-redirects: 100\n    # cluster模式\n    # cluster:\n    #   nodes:\n    #     - 10.1.231.13:7001\n    #     - 10.1.231.13:7002\n    #     - 10.1.231.13:7003\n    #     - 10.1.231.13:7004\n    #     - 10.1.231.13:7005\n    #     - 10.1.231.13:7006\n', 'c3ad4a1f1289975e19ebbc4453404bcb', '2010-05-05 00:00:00', '2021-10-21 06:09:58', 'nacos', '10.1.127.5', 'U');
+INSERT INTO `his_config_info` VALUES (35, 16, 'grg-cloud-counter-oss.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.39:3306/grg-cloud-counter-iam?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-csr,grg-cloud-counter-iam\'\n\n# 文件系统\noss:\n  endpoint: http://10.252.21.39:9000\n  access-key: minioadmin\n  secret-key: minioadmin\n  bucket-name: counter', '48a51a380e44fd60d8c69fe7845c82d0', '2010-05-05 00:00:00', '2021-10-21 06:11:30', 'nacos', '10.1.127.5', 'U');
+INSERT INTO `his_config_info` VALUES (35, 17, 'grg-cloud-counter-oss.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.39:3306/grg-cloud-counter-iam?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-csr,grg-cloud-counter-iam\'\n\n# 文件系统\noss:\n  endpoint: http://127.0.0.1:9000\n  access-key: minioadmin\n  secret-key: minioadmin\n  bucket-name: counter', 'da8e58c245bbc3a0ac445265db710297', '2010-05-05 00:00:00', '2021-10-21 06:12:41', 'nacos', '10.1.127.5', 'U');
+INSERT INTO `his_config_info` VALUES (35, 18, 'grg-cloud-counter-oss.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.39:3306/grg-cloud-counter-iam?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-csr,grg-cloud-counter-iam\'\n\n# 文件系统\noss:\n  endpoint: http://127.0.0.1:9000\n  access-key: minioadmin\n  secret-key: minioadmin\n  bucket-name: counter', 'da8e58c245bbc3a0ac445265db710297', '2010-05-05 00:00:00', '2021-10-21 06:12:55', 'nacos', '10.1.127.5', 'U');
+INSERT INTO `his_config_info` VALUES (3, 19, 'grg-cloud-counter-iam.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /mobile/**\n        - /oauth/**\n\n\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.39:3306/grg-cloud-counter-iam?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\n\n  freemarker:\n    allow-request-override: false\n    allow-session-override: false\n    cache: true\n    charset: UTF-8\n    check-template-location: true\n    content-type: text/html\n    enabled: true\n    expose-request-attributes: false\n    expose-session-attributes: false\n    expose-spring-macro-helpers: true\n    prefer-file-system-access: true\n    suffix: .ftl\n    template-loader-path: classpath:/templates/\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'\'\n\n', 'b678be09dd342047264e2877ebfc2382', '2010-05-05 00:00:00', '2021-10-21 06:13:15', 'nacos', '10.1.127.5', 'U');
+INSERT INTO `his_config_info` VALUES (14, 20, 'grg-cloud-counter-csr.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /tencent/**\n        - /grg_account/**\n        \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.39:3306/grg-cloud-counter-csr?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    #password: grg@123\n    driver-class-name: com.mysql.cj.jdbc.Driver\n    \n\n\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-iam,grg-cloud-counter-bank\'\n\n# Socket相关属性配置\nsocket:\n  enabled: true\n  host: 10.252.21.39\n  port: 9844\n  # socket连接数大小（如只监听一个端口boss线程组为1即可）\n  bossCount: 1\n  workCount: 100\n  allowCustomRequests: true\n  # 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间\n  upgradeTimeout: 30000\n  # Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件\n  pingTimeout: 60000\n  # Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔\n  pingInterval: 25000\n\ntencent:\n  # 腾讯e证通接入 用于小程序、h5身份核验\n  e-certification:\n    secretId: AKIDxiDSQ8ZjdHfndFax6yZuylIabLq41h6E\n    secretKey: tWsynLcdOt74kAKEsGNDn68tOcZFE1Xp\n    merchantId: 0NSJ2108191435178974\n  # 腾讯视频密钥获取  \n  video:\n    sdkAppId: 1400580080\n    secretKey: 2add8f6f5b6f04e51bd40cb01bb163580ee123767c3ef09b502c3cee1beda5d1', '9f7626fdf9b6e4a7c1dfbc8b233afafa', '2010-05-05 00:00:00', '2021-10-21 06:13:34', 'nacos', '10.1.127.5', 'U');
+INSERT INTO `his_config_info` VALUES (16, 21, 'grg-cloud-counter-video.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /query\n        \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.39:3306/grg-cloud-counter-video?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-iam,grg-cloud-counter-csr\'', '13f8e599078ef5a8304015d548e59422', '2010-05-05 00:00:00', '2021-10-21 06:13:46', 'nacos', '10.1.127.5', 'U');
+INSERT INTO `his_config_info` VALUES (17, 22, 'grg-cloud-counter-app.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /grg_account/**\n        ##- /tencent/**\n        - /app/**\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.39:3306/grg-cloud-counter-app?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-oss,grg-cloud-counter-csr,grg-cloud-counter-bank\'\n\n# Socket相关属性配置\nsocket:\n  enabled: true\n  host: 10.252.21.39\n  port: 30307\n  # socket连接数大小（如只监听一个端口boss线程组为1即可）\n  bossCount: 1\n  workCount: 100\n  allowCustomRequests: true\n  # 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间\n  upgradeTimeout: 30000\n  # Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件\n  pingTimeout: 60000\n  # Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔\n  pingInterval: 25000\n\ntencent:\n  # 腾讯e证通接入 用于小程序、h5身份核验\n  e-certification:\n    secretId: AKIDxiDSQ8ZjdHfndFax6yZuylIabLq41h6E\n    secretKey: tWsynLcdOt74kAKEsGNDn68tOcZFE1Xp\n    merchantId: 0NSJ2108191435178974\n  # 腾讯视频密钥获取  \n  video:\n    sdkAppId: 1400580080\n    secretKey: 2add8f6f5b6f04e51bd40cb01bb163580ee123767c3ef09b502c3cee1beda5d1', 'a01f37532a91bb54f24e8513102a20f2', '2010-05-05 00:00:00', '2021-10-21 06:13:58', 'nacos', '10.1.127.5', 'U');
+INSERT INTO `his_config_info` VALUES (52, 23, 'grg-cloud-counter-bank.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.39:3306/grg-cloud-counter-bank?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'\'\n', 'cb744d450ae858e1c41aa07b968d68ed', '2010-05-05 00:00:00', '2021-10-21 06:14:16', 'nacos', '10.1.127.5', 'U');
+INSERT INTO `his_config_info` VALUES (97, 24, 'grg-cloud-counter-device.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /grg_account/**\n        ##- /tencent/**\n        - /app/**\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://10.252.21.39:3306/grg-cloud-counter-app?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-oss,grg-cloud-counter-csr,grg-cloud-counter-bank\'\n\n# Socket相关属性配置\nsocket:\n  enabled: true\n  host: 10.252.21.39\n  port: 9853\n  # socket连接数大小（如只监听一个端口boss线程组为1即可）\n  bossCount: 1\n  workCount: 100\n  allowCustomRequests: true\n  # 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间\n  upgradeTimeout: 30000\n  # Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件\n  pingTimeout: 60000\n  # Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔\n  pingInterval: 25000\n\ntencent:\n  # 腾讯e证通接入 用于小程序、h5身份核验\n  e-certification:\n    secretId: AKIDxiDSQ8ZjdHfndFax6yZuylIabLq41h6E\n    secretKey: tWsynLcdOt74kAKEsGNDn68tOcZFE1Xp\n    merchantId: 0NSJ2108191435178974\n  # 腾讯视频密钥获取  \n  video:\n    sdkAppId: 1400563240\n    secretKey: 12c61a9fade38ebf4a786f258dad3b2654a6ab92234635b13d396a996025e797', '1267e4f4e232c6bde85dd7c85e388f43', '2010-05-05 00:00:00', '2021-10-21 06:14:28', 'nacos', '10.1.127.5', 'U');
+INSERT INTO `his_config_info` VALUES (1, 25, 'application.yml', 'DEFAULT_GROUP', '', '', '# 本配置为所有项目所公用，配置对所有项目均生效\n#配置文件密文加密的密钥\njasypt:\n  encryptor:\n    # 不能修改此值\n    password: d5fr9gJZJSd7xqD4CHnLKv3qbz5lHQyb\n    algorithm: PBEWithMD5AndDES\n    iv-generator-classname: org.jasypt.iv.NoIvGenerator	\n\ndubbo:\n  application:\n    id: ${spring.application.name}\n  registry:\n    # 指定 Dubbo 服务注册中心的地址\n    address: spring-cloud://${spring.cloud.nacos.discovery.server-addr}\n  scan:\n    base-packages: com.grgbanking.counter\n  protocol:\n    # 协议名称, 指明是 dubbo\n    name: dubbo\n    # 协议端口，-1 表示自增端口，从 20880 开始\n    port: -1\n  consumer:\n    # 启动时不检查引用服务是否可用\n    check: false\n\n# mybatis-plus 配置\nmybatis-plus:\n  tenant-enable: ture\n  mapper-locations: classpath:/mappers/**.xml\n  global-config:\n    banner: false\n    db-config:\n      db-type: mysql\n      id-type: auto\n      select-strategy: not_empty\n      insert-strategy: not_empty\n      update-strategy: not_empty\n  type-handlers-package: com.grgbanking.counter.common.data.handler\n  configuration:\n    jdbc-type-for-null: null\n    map-underscore-to-camel-case: true\n\nmanagement:\n  endpoints:\n    web:\n      exposure:\n        include: \"*\"\n  endpoint:\n    health:\n      show-details: ALWAYS\n\n# swagger统一配置\nswagger:\n  enabled: true\n  title: ${spring.application.name}\n  license: Powered By Grgbanking\n  licenseUrl: https://www.grgbanking.com/\n  terms-of-service-url: https://www.grgbanking.com/\n  contact:\n    email: admin@grgbanking.com\n    url: https://www.grgbanking.com/about.html\n  authorization:\n    name: GrgCloudCounter OAuth\n    auth-regex: ^.*$\n    authorization-scope-list:\n      - scope: server\n        description: server all\n    token-url-list:\n      - http://gateway:9999/iam/oauth/token\n', '73e4e2878a2ac5869b6e94a2027e3d30', '2010-05-05 00:00:00', '2021-10-26 07:34:06', 'nacos', '10.1.127.2', 'U');
+INSERT INTO `his_config_info` VALUES (17, 26, 'grg-cloud-counter-app.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /grg_account/**\n        ##- /tencent/**\n        - /app/**\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://127.0.0.1:3306/grg-cloud-counter-app?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-oss,grg-cloud-counter-csr,grg-cloud-counter-bank\'\n\n# Socket相关属性配置\nsocket:\n  enabled: true\n  host: 10.252.21.39\n  port: 30307\n  # socket连接数大小（如只监听一个端口boss线程组为1即可）\n  bossCount: 1\n  workCount: 100\n  allowCustomRequests: true\n  # 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间\n  upgradeTimeout: 30000\n  # Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件\n  pingTimeout: 60000\n  # Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔\n  pingInterval: 25000\n\ntencent:\n  # 腾讯e证通接入 用于小程序、h5身份核验\n  e-certification:\n    secretId: AKIDxiDSQ8ZjdHfndFax6yZuylIabLq41h6E\n    secretKey: tWsynLcdOt74kAKEsGNDn68tOcZFE1Xp\n    merchantId: 0NSJ2108191435178974\n  # 腾讯视频密钥获取  \n  video:\n    sdkAppId: 1400580080\n    secretKey: 2add8f6f5b6f04e51bd40cb01bb163580ee123767c3ef09b502c3cee1beda5d1', 'e488babb0edf0083051b442cd97f18f3', '2010-05-05 00:00:00', '2021-10-27 07:07:48', 'nacos', '10.1.44.20', 'U');
+INSERT INTO `his_config_info` VALUES (14, 27, 'grg-cloud-counter-csr.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /tencent/**\n        - /grg_account/**\n        \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://127.0.0.1:3306/grg-cloud-counter-csr?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    #password: grg@123\n    driver-class-name: com.mysql.cj.jdbc.Driver\n    \n\n\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-iam,grg-cloud-counter-bank\'\n\n# Socket相关属性配置\nsocket:\n  enabled: true\n  host: 10.252.21.39\n  port: 9844\n  # socket连接数大小（如只监听一个端口boss线程组为1即可）\n  bossCount: 1\n  workCount: 100\n  allowCustomRequests: true\n  # 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间\n  upgradeTimeout: 30000\n  # Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件\n  pingTimeout: 60000\n  # Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔\n  pingInterval: 25000\n\ntencent:\n  # 腾讯e证通接入 用于小程序、h5身份核验\n  e-certification:\n    secretId: AKIDxiDSQ8ZjdHfndFax6yZuylIabLq41h6E\n    secretKey: tWsynLcdOt74kAKEsGNDn68tOcZFE1Xp\n    merchantId: 0NSJ2108191435178974\n  # 腾讯视频密钥获取  \n  video:\n    sdkAppId: 1400580080\n    secretKey: 2add8f6f5b6f04e51bd40cb01bb163580ee123767c3ef09b502c3cee1beda5d1', 'a0e60cd41befd73982ce2b5698ba4850', '2010-05-05 00:00:00', '2021-10-29 03:23:51', 'nacos', '10.1.44.13', 'U');
+INSERT INTO `his_config_info` VALUES (35, 28, 'grg-cloud-counter-oss.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://127.0.0.1:3306/grg-cloud-counter-iam?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-csr,grg-cloud-counter-iam\'\n\n# 文件系统\noss:\n  endpoint: http://127.0.0.1:9000\n  access-key: minioadmin\n  secret-key: minioadmin\n  bucket-name: counter', '959cb10359cf3c1da9a9e1de48291b5a', '2010-05-05 00:00:00', '2021-10-29 03:35:39', 'nacos', '10.1.44.13', 'U');
+INSERT INTO `his_config_info` VALUES (14, 29, 'grg-cloud-counter-csr.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /tencent/**\n        - /grg_account/**\n        \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://127.0.0.1:3306/grg-cloud-counter-csr?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    #password: grg@123\n    driver-class-name: com.mysql.cj.jdbc.Driver\n    \n\n\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-iam,grg-cloud-counter-bank,grg-cloud-counter-oss\'\n\n# Socket相关属性配置\nsocket:\n  enabled: true\n  host: 10.252.21.39\n  port: 9844\n  # socket连接数大小（如只监听一个端口boss线程组为1即可）\n  bossCount: 1\n  workCount: 100\n  allowCustomRequests: true\n  # 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间\n  upgradeTimeout: 30000\n  # Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件\n  pingTimeout: 60000\n  # Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔\n  pingInterval: 25000\n\ntencent:\n  # 腾讯e证通接入 用于小程序、h5身份核验\n  e-certification:\n    secretId: AKIDxiDSQ8ZjdHfndFax6yZuylIabLq41h6E\n    secretKey: tWsynLcdOt74kAKEsGNDn68tOcZFE1Xp\n    merchantId: 0NSJ2108191435178974\n  # 腾讯视频密钥获取  \n  video:\n    sdkAppId: 1400580080\n    secretKey: 2add8f6f5b6f04e51bd40cb01bb163580ee123767c3ef09b502c3cee1beda5d1', '5faa12c43ebed002c4a9ceebc2c7ab5f', '2010-05-05 00:00:00', '2021-11-02 02:34:17', 'nacos', '10.1.44.20', 'U');
+INSERT INTO `his_config_info` VALUES (14, 30, 'grg-cloud-counter-csr.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /tencent/**\n        - /grg_account/**\n        \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://127.0.0.1:3306/grg-cloud-counter-csr?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    #password: grg@123\n    driver-class-name: com.mysql.cj.jdbc.Driver\n    \n\n\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-iam,grg-cloud-counter-bank,grg-cloud-counter-oss\'\n\n# Socket相关属性配置\nsocket:\n  enabled: true\n  host: 10.1.44.20\n  port: 9844\n  # socket连接数大小（如只监听一个端口boss线程组为1即可）\n  bossCount: 1\n  workCount: 100\n  allowCustomRequests: true\n  # 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间\n  upgradeTimeout: 30000\n  # Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件\n  pingTimeout: 60000\n  # Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔\n  pingInterval: 25000\n\ntencent:\n  # 腾讯e证通接入 用于小程序、h5身份核验\n  e-certification:\n    secretId: AKIDxiDSQ8ZjdHfndFax6yZuylIabLq41h6E\n    secretKey: tWsynLcdOt74kAKEsGNDn68tOcZFE1Xp\n    merchantId: 0NSJ2108191435178974\n  # 腾讯视频密钥获取  \n  video:\n    sdkAppId: 1400580080\n    secretKey: 2add8f6f5b6f04e51bd40cb01bb163580ee123767c3ef09b502c3cee1beda5d1', '3115a686d7107f14d4c2baf71765fcee', '2010-05-05 00:00:00', '2021-11-02 02:34:26', 'nacos', '10.1.44.20', 'U');
+INSERT INTO `his_config_info` VALUES (11, 31, 'redis.yml', 'DEFAULT_GROUP', '', '', 'spring: \n  redis:\n    password: ENC(3YIjfd4q53aJPlOow+9mgA==)\n    lettuce:\n      pool:\n        max-active: 1000  # 连接池最大连接数（使用负值表示没有限制）\n        max-wait: -1     # 连接池最大阻塞等待时间（使用负值表示没有限制）\n        max-idle: 10      # 连接池中的最大空闲连接\n        min-idle: 5       # 连接池中的最小空闲连接\n\n    # 单机模式\n    host: 127.0.0.1\n    port: 6379\n\n    #哨兵模式\n    #    sentinel:\n    #      master: mymaster # redis哨兵名称，在sentinel配置文件配置\n    #      nodes:\n    #        - 10.1.231.60:7001\n    #        - 10.1.231.60:7002\n    #        - 10.1.231.60:7003\n    max-redirects: 100\n    # cluster模式\n    # cluster:\n    #   nodes:\n    #     - 10.1.231.13:7001\n    #     - 10.1.231.13:7002\n    #     - 10.1.231.13:7003\n    #     - 10.1.231.13:7004\n    #     - 10.1.231.13:7005\n    #     - 10.1.231.13:7006\n', '2daf57300f126aa34ad5dfae5a951435', '2010-05-05 00:00:00', '2021-11-02 02:35:54', 'nacos', '10.1.44.20', 'U');
+INSERT INTO `his_config_info` VALUES (14, 32, 'grg-cloud-counter-csr.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /tencent/**\n        - /grg_account/**\n        \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://127.0.0.1:3306/grg-cloud-counter-csr?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n    \n\n\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-iam,grg-cloud-counter-bank,grg-cloud-counter-oss\'\n\n# Socket相关属性配置\nsocket:\n  enabled: true\n  host: 10.1.44.20\n  port: 9844\n  # socket连接数大小（如只监听一个端口boss线程组为1即可）\n  bossCount: 1\n  workCount: 100\n  allowCustomRequests: true\n  # 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间\n  upgradeTimeout: 30000\n  # Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件\n  pingTimeout: 60000\n  # Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔\n  pingInterval: 25000\n\ntencent:\n  # 腾讯e证通接入 用于小程序、h5身份核验\n  e-certification:\n    secretId: AKIDxiDSQ8ZjdHfndFax6yZuylIabLq41h6E\n    secretKey: tWsynLcdOt74kAKEsGNDn68tOcZFE1Xp\n    merchantId: 0NSJ2108191435178974\n  # 腾讯视频密钥获取  \n  video:\n    sdkAppId: 1400580080\n    secretKey: 2add8f6f5b6f04e51bd40cb01bb163580ee123767c3ef09b502c3cee1beda5d1', '19ac03fc16a2dac114923748d1b774c8', '2010-05-05 00:00:00', '2021-11-02 02:44:45', 'nacos', '10.1.44.20', 'U');
+INSERT INTO `his_config_info` VALUES (35, 33, 'grg-cloud-counter-oss.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://127.0.0.1:3306/grg-cloud-counter-iam?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-csr,grg-cloud-counter-iam\'\n\n# 文件系统\noss:\n  endpoint: http://10.252.21.39:9000\n  access-key: minioadmin\n  secret-key: minioadmin\n  bucket-name: counter', '5f2a07a53eb862b0b718f09c95b07890', '2010-05-05 00:00:00', '2021-11-03 03:02:57', 'nacos', '10.1.44.13', 'U');
+INSERT INTO `his_config_info` VALUES (35, 34, 'grg-cloud-counter-oss.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://127.0.0.1:3306/grg-cloud-counter-iam?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-csr,grg-cloud-counter-iam\'\n\n# 文件系统\noss:\n  endpoint: https://cloudcounter.grgbanking.com\n  # endpoint: http://10.252.21.39:9000\n  access-key: minioadmin\n  secret-key: minioadmin\n  bucket-name: counter', 'da69176a3d7db9d10aedd3445ea99b12', '2010-05-05 00:00:00', '2021-11-03 05:51:39', 'nacos', '10.1.44.1', 'U');
+INSERT INTO `his_config_info` VALUES (35, 35, 'grg-cloud-counter-oss.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://127.0.0.1:3306/grg-cloud-counter-iam?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-csr,grg-cloud-counter-iam\'\n\n# 文件系统\noss:\n  endpoint: http://10.252.21.39:9000\n  url: https://cloudcounter.grgbanking.com\n  access-key: minioadmin\n  secret-key: minioadmin\n  bucket-name: counter', 'bf48391b63ac26066139f3f594ef3256', '2010-05-05 00:00:00', '2021-11-03 07:12:34', 'nacos', '10.1.44.13', 'U');
+INSERT INTO `his_config_info` VALUES (97, 36, 'grg-cloud-counter-device.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /grg_account/**\n        ##- /tencent/**\n        - /app/**\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://127.0.0.1:3306/grg-cloud-counter-app?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-oss,grg-cloud-counter-csr,grg-cloud-counter-bank\'\n\n# Socket相关属性配置\nsocket:\n  enabled: true\n  host: 10.252.21.39\n  port: 9853\n  # socket连接数大小（如只监听一个端口boss线程组为1即可）\n  bossCount: 1\n  workCount: 100\n  allowCustomRequests: true\n  # 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间\n  upgradeTimeout: 30000\n  # Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件\n  pingTimeout: 60000\n  # Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔\n  pingInterval: 25000\n\ntencent:\n  # 腾讯e证通接入 用于小程序、h5身份核验\n  e-certification:\n    secretId: AKIDxiDSQ8ZjdHfndFax6yZuylIabLq41h6E\n    secretKey: tWsynLcdOt74kAKEsGNDn68tOcZFE1Xp\n    merchantId: 0NSJ2108191435178974\n  # 腾讯视频密钥获取  \n  video:\n    sdkAppId: 1400563240\n    secretKey: 12c61a9fade38ebf4a786f258dad3b2654a6ab92234635b13d396a996025e797', 'e5aec777c51286a8208d6a5671947523', '2010-05-05 00:00:00', '2021-11-04 05:57:21', 'nacos', '10.1.44.20', 'U');
+INSERT INTO `his_config_info` VALUES (17, 37, 'grg-cloud-counter-app.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /grg_account/**\n        ##- /tencent/**\n        - /app/**\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://127.0.0.1:3306/grg-cloud-counter-app?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-oss,grg-cloud-counter-csr,grg-cloud-counter-bank\'\n\n# Socket相关属性配置\nsocket:\n  enabled: true\n  host: 10.252.21.39\n  port: 9843\n  # socket连接数大小（如只监听一个端口boss线程组为1即可）\n  bossCount: 1\n  workCount: 100\n  allowCustomRequests: true\n  # 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间\n  upgradeTimeout: 30000\n  # Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件\n  pingTimeout: 60000\n  # Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔\n  pingInterval: 25000\n\ntencent:\n  # 腾讯e证通接入 用于小程序、h5身份核验\n  e-certification:\n    secretId: AKIDxiDSQ8ZjdHfndFax6yZuylIabLq41h6E\n    secretKey: tWsynLcdOt74kAKEsGNDn68tOcZFE1Xp\n    merchantId: 0NSJ2108191435178974\n  # 腾讯视频密钥获取  \n  video:\n    sdkAppId: 1400580080\n    secretKey: 2add8f6f5b6f04e51bd40cb01bb163580ee123767c3ef09b502c3cee1beda5d1', '2965587936375f2cc47b9d7277bf842b', '2010-05-05 00:00:00', '2021-11-04 05:57:26', 'nacos', '10.1.44.20', 'U');
+INSERT INTO `his_config_info` VALUES (97, 38, 'grg-cloud-counter-device.yml', 'DEFAULT_GROUP', '', '', '## spring security 配置，配置本服务不需要权限即可访问的接口列表\nsecurity:\n  oauth2:\n    client:\n      ignore-urls:\n        - /error\n        - /actuator/**\n        - /webjars/**\n        - /swagger**/** \n        - /doc.html\n        - /v3/api-docs\n        - /grg_account/**\n        ##- /tencent/**\n        - /app/**\n   \n# 数据源\nspring:\n  datasource:\n    url: jdbc:mysql://127.0.0.1:3306/grg-cloud-counter-app?useUnicode=true&characterEncoding=UTF-8&useSSL=false\n    username: root\n    password: ENC(s7KzA9F9rrCBWVEoXRIgt9kNYPBmlyzf)\n    driver-class-name: com.mysql.cj.jdbc.Driver\n\ndubbo:\n  cloud:\n    # 设置订阅的应用列表，多个服务以英文逗号分隔\n    subscribed-services: \'grg-cloud-counter-oss,grg-cloud-counter-csr,grg-cloud-counter-bank,grg-cloud-counter-iam\'\n\n# Socket相关属性配置\nsocket:\n  enabled: true\n  host: 10.252.21.39\n  port: 9853\n  # socket连接数大小（如只监听一个端口boss线程组为1即可）\n  bossCount: 1\n  workCount: 100\n  allowCustomRequests: true\n  # 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间\n  upgradeTimeout: 30000\n  # Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件\n  pingTimeout: 60000\n  # Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔\n  pingInterval: 25000\n\ntencent:\n  # 腾讯e证通接入 用于小程序、h5身份核验\n  e-certification:\n    secretId: AKIDxiDSQ8ZjdHfndFax6yZuylIabLq41h6E\n    secretKey: tWsynLcdOt74kAKEsGNDn68tOcZFE1Xp\n    merchantId: 0NSJ2108191435178974\n  # 腾讯视频密钥获取  \n  video:\n    sdkAppId: 1400563240\n    secretKey: 12c61a9fade38ebf4a786f258dad3b2654a6ab92234635b13d396a996025e797', 'da92b6efa6437a19f38e568f2771c335', '2010-05-05 00:00:00', '2021-11-04 07:55:33', 'nacos', '10.1.44.1', 'U');
 
 -- ----------------------------
 -- Table structure for permissions
 -- ----------------------------
 DROP TABLE IF EXISTS `permissions`;
-CREATE TABLE `permissions` (
-  `role` varchar(50) NOT NULL,
-  `resource` varchar(512) NOT NULL,
-  `action` varchar(8) NOT NULL,
-  UNIQUE KEY `uk_role_permission` (`role`,`resource`,`action`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `permissions`  (
+  `role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `resource` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `action` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  UNIQUE INDEX `uk_role_permission`(`role`, `resource`, `action`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of permissions
 -- ----------------------------
-BEGIN;
-COMMIT;
 
 -- ----------------------------
 -- Table structure for roles
 -- ----------------------------
 DROP TABLE IF EXISTS `roles`;
-CREATE TABLE `roles` (
-  `username` varchar(50) NOT NULL,
-  `role` varchar(50) NOT NULL,
-  UNIQUE KEY `uk_username_role` (`username`,`role`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `roles`  (
+  `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  UNIQUE INDEX `uk_username_role`(`username`, `role`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of roles
 -- ----------------------------
-BEGIN;
 INSERT INTO `roles` VALUES ('nacos', 'ROLE_ADMIN');
-COMMIT;
 
 -- ----------------------------
 -- Table structure for tenant_capacity
 -- ----------------------------
 DROP TABLE IF EXISTS `tenant_capacity`;
-CREATE TABLE `tenant_capacity` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `tenant_id` varchar(128) DEFAULT '',
-  `quota` int(11) DEFAULT '0',
-  `usage` int(11) DEFAULT '0',
-  `max_size` int(11) DEFAULT '0',
-  `max_aggr_count` int(11) DEFAULT '0',
-  `max_aggr_size` int(11) DEFAULT '0',
-  `max_history_count` int(11) DEFAULT '0',
-  `gmt_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `gmt_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+CREATE TABLE `tenant_capacity`  (
+  `id` bigint(0) NOT NULL AUTO_INCREMENT,
+  `tenant_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+  `quota` int(0) NULL DEFAULT 0,
+  `usage` int(0) NULL DEFAULT 0,
+  `max_size` int(0) NULL DEFAULT 0,
+  `max_aggr_count` int(0) NULL DEFAULT 0,
+  `max_aggr_size` int(0) NULL DEFAULT 0,
+  `max_history_count` int(0) NULL DEFAULT 0,
+  `gmt_create` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+  `gmt_modified` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `uk_tenant_id` (`tenant_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  UNIQUE INDEX `uk_tenant_id`(`tenant_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tenant_capacity
 -- ----------------------------
-BEGIN;
-COMMIT;
 
 -- ----------------------------
 -- Table structure for tenant_info
 -- ----------------------------
 DROP TABLE IF EXISTS `tenant_info`;
-CREATE TABLE `tenant_info` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `kp` varchar(128) NOT NULL,
-  `tenant_id` varchar(128) DEFAULT '',
-  `tenant_name` varchar(128) DEFAULT '',
-  `tenant_desc` varchar(256) DEFAULT NULL,
-  `create_source` varchar(32) DEFAULT NULL,
-  `gmt_create` bigint(20) NOT NULL,
-  `gmt_modified` bigint(20) NOT NULL,
+CREATE TABLE `tenant_info`  (
+  `id` bigint(0) NOT NULL AUTO_INCREMENT,
+  `kp` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `tenant_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+  `tenant_name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+  `tenant_desc` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `create_source` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `gmt_create` bigint(0) NOT NULL,
+  `gmt_modified` bigint(0) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `uk_tenant_info_kptenantid` (`kp`,`tenant_id`) USING BTREE,
-  KEY `tenant_info_tenant_id_idx` (`tenant_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  UNIQUE INDEX `uk_tenant_info_kptenantid`(`kp`, `tenant_id`) USING BTREE,
+  INDEX `tenant_info_tenant_id_idx`(`tenant_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tenant_info
 -- ----------------------------
-BEGIN;
-COMMIT;
 
 -- ----------------------------
 -- Table structure for users
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
-  `username` varchar(50) NOT NULL,
-  `password` varchar(500) NOT NULL,
-  `enabled` tinyint(1) NOT NULL DEFAULT '1',
+CREATE TABLE `users`  (
+  `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `enabled` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`username`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-BEGIN;
 INSERT INTO `users` VALUES ('nacos', '$2a$10$EuWPZHzz32dJN7jexM34MOeYirDdFAZm2kuWj7VEOJhhZkDrxfvUu', 1);
-COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
