@@ -1,6 +1,7 @@
 package com.grgbanking.counter.csr.lineup.impl;
 
 import cn.hutool.core.util.RandomUtil;
+import com.corundumstudio.socketio.SocketIOClient;
 import com.grgbanking.counter.common.core.constant.CommonConstants;
 import com.grgbanking.counter.common.core.util.SocketParam;
 import com.grgbanking.counter.common.core.util.SocketParamHead;
@@ -13,6 +14,7 @@ import com.grgbanking.counter.common.socket.lineup.service.impl.LineupAbstractSe
 import com.grgbanking.counter.common.socket.socket.constant.SocketApiNoConstants;
 import com.grgbanking.counter.common.socket.socket.constant.SocketConnectStatusEnum;
 import com.grgbanking.counter.common.socket.socket.entity.EmployeeService;
+import com.grgbanking.counter.common.socket.socket.server.SocketServer;
 import com.grgbanking.counter.common.socket.socket.service.SocketAbstractService;
 import com.grgbanking.counter.csr.service.TencentService;
 import lombok.extern.slf4j.Slf4j;
@@ -91,6 +93,11 @@ public class EmployeeLineupServiceImpl extends LineupAbstractService {
         }
         /**随机选取其中一个坐席*/
         String employeeId = employeeIds.get(RandomUtil.randomInt(0, employeeIds.size()));
+        SocketIOClient client = SocketServer.getClient(employeeId);
+        if (client == null){
+            log.info("当前坐席不在线: {}", employeeId);
+            return;
+        }
         log.info("已经分配到坐席: {}", employeeId);
         String customerId = accept(employeeId);
         if (!StringUtils.hasText(customerId)){
