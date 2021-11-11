@@ -54,12 +54,12 @@ public class MobileServiceImpl implements RemoteMobileService {
 		log.debug("手机号生成验证码成功！" );
 //		System.out.println(CacheConstants.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + StringPool.AT + mobile);
 		//调用短信平台接口
-//		try {
-//			//短信接口
-//			smsApi.getSmsApi(mobile,smsText);
-//		}catch (IOException e){
-//			e.printStackTrace();
-//		}
+		try {
+			//短信接口
+			smsApi.getSmsApi(mobile,smsText);
+		}catch (IOException e){
+			e.printStackTrace();
+		}
 		//短信发送成功后再将短信验证码存入
 		redisTemplate.opsForValue().set(CacheConstants.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + StringPool.AT + mobile, code, SecurityConstants.CODE_TIME, TimeUnit.SECONDS);
 
@@ -71,11 +71,11 @@ public class MobileServiceImpl implements RemoteMobileService {
 		Object codeObj = redisTemplate.opsForValue().get(CacheConstants.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + StringPool.AT + mobile.getMobile());
 		if (codeObj != null) {
 			//短信平台正常使用时
-//			if (mobile.getMobile()!=null && mobile.getCode().equals(codeObj) ) {
-//				return true;
-//			}
+			if (mobile.getMobile()!=null && mobile.getCode().equals(codeObj) ) {
+				return true;
+			}
 			//短信平台使用不了  用假数据
-			return "1234".equals(mobile.getCode());
+//			return "1234".equals(mobile.getCode());
 		}
 		return false;
 	}
